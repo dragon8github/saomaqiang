@@ -1,0 +1,293 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="renderer" content="ie-comp">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+<title>集和堂</title>
+<link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
+<link rel="stylesheet" type="text/css" href="css/My_css/global.css"/>
+</head>
+<style type="text/css">
+.mainlist
+{
+	height:50%;
+	float:left;
+}
+.mui-content img
+{
+	display: block; 
+    height: 100%;
+    width: 100%;	
+}	
+.mui-table-view-inverted .mui-table-view-cell:after,.mui-table-view-inverted:before,.mui-table-view-inverted:after
+{
+	height:0px;
+} 
+</style> 
+
+<body>
+	
+    
+<!--侧滑菜单容器-->
+<div id="Main" class="mui-off-canvas-wrap mui-draggable">
+    
+	<div class="mui-content mui-inner-wrap mui-scroll-wrapper" id="mui-content">
+		
+	    <div id="shoujichongzhi" class="mui-col-xs-3 mui-col-sm-3  mainlist"><img  src="Images/main_01.gif" /></div>
+		<div id="saomazhifu" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img src="Images/main_02.gif" /></div>
+		<div id="weixizhaoling" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img src="Images/main_03.gif" /></div>
+		<div id="daijiaoweizhang" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img  src="Images/main_04.gif" /></div>
+
+		<div id="huochepiao" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img  src="Images/main_05.gif" /></div>
+		<div id="shoujibao" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img  src="Images/main_06.gif" /></div>
+		<div id="zhanghuchaxun" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img  src="Images/main_07.gif" /></div>
+		<div id="guanli" class="mui-col-xs-3 mui-col-sm-3 mainlist"><img  src="Images/main_08.gif" /></div>
+		  
+		
+		<div class="assistive-wrap" id="assistiveTouch">
+	        <div class="assistive-touch" id="assistive-touch">
+	            <span></span>
+	        </div>     
+		</div> 
+
+	 
+	 
+		<!-- 这个东西不能删，利用他还原界面 -->
+		<div class="mui-off-canvas-backdrop"></div>
+		 
+	</div> 
+         
+	  
+		 
+	<!--菜单部分-->
+	<aside id="offCanvasSide" class="mui-off-canvas-right">
+					<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+						 <div class="mui-scroll">
+                            
+                            <div class="content" style="margin:20px 0px 20px 20px">
+                    			<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left head-img" id="head-img" width="50px" style="margin-right: 10px;" src="Images/logo.png">
+									<div class="mui-media-body" style="margin-left: 20px;">
+										<h3  style="color:#fff"><span id="username"></span><span id="quit" class="mui-pull-right mui-h6" style="color:#fff;margin-right: 10px;;"><i class="iconfont">&#xe605;</i></span></h3>	
+										<p class='mui-ellipsis' style="color:#fff"> 金额: ￥ 00.00</p>
+									</div>
+								</a>
+                           </div>   
+							 <p style="margin: 10px 15px;">
+                                <button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭侧滑菜单</button>
+                            </p>
+							<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										 <i class="iconfont">&#xe61f;</i> 手机充值
+									</a>
+								</li> 
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61c;</i> 扫码支付
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61a;</i> 微信找零
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe600;</i> 代缴违章
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe619;</i> 火车票
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61e;</i> 收寄宝
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe602;</i> 账户查询
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe617;</i> 管理
+									</a>
+								</li>								
+							</ul>
+							    <style>
+
+								.footer {
+								    padding: 20px;
+								    text-align: center;							   
+								   	color: #FFf;
+								}
+								    </style>
+								
+								<div  class="footer">
+								    <div class="container">
+								        <p>企业合作 | 合作事宜 | 版权投诉</p>
+								        <p>粤ICP备12345678. © 2009-2016 彩洋科技. Powered by Lee.</p>
+								    </div>
+								</div>
+						</div>
+						
+					</div>
+					
+	</aside>
+</div>
+	 
+	 
+	 
+ 
+	 
+	 
+	 
+	 
+	 
+	
+<script type="text/template" id="htmlval">		
+	        <ul class="mui-table-view mui-grid-view mui-grid-9">
+	           <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+		                <i class="iconfont">&#xe61f;</i>
+		                <div class="mui-media-body">手机充值</div></a></li>	         
+	           <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                   <i class="iconfont">&#xe61c;</i>	
+	                    <div class="mui-media-body">扫码支付</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                     <i class="iconfont">&#xe61a;</i>
+	                    <div class="mui-media-body">微信找零</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe600;</i>
+	                    <div class="mui-media-body">代缴违章</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe619;</i>
+	                    <div class="mui-media-body">火车票</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe61e;</i>
+	                    <div class="mui-media-body">收寄宝</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                   <i class="iconfont">&#xe602;</i>
+	                    <div class="mui-media-body">账户查询</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe617;</i>
+	                    <div class="mui-media-body">管理</div></a></li>  
+	                     
+	          <li class="clear"></li>
+	          
+	           <li  class="Menu_back mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+		                <span class="mui-icon mui-icon-undo"></span>
+		                <div class="mui-media-body">返回</div></a> 
+              </li>  
+	           <li class="Menu_home mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+	                    <span class=" mui-icon mui-icon-home-filled"></span>
+	                    <div class=" mui-media-body">主页</div></a></li>
+               <li  class="Menu_refresh mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"><a href="#">
+		                <span class="mui-icon mui-icon-loop"></span>
+		                <div class="mui-media-body">刷新</div></a>
+               </li> 
+	        </ul>   	    
+</script>   
+<script src="js/jquery/jquery.min.js"></script>  
+<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
+<script type="text/javascript"> 
+
+
+mui.init
+({ 	
+	swipeBack: false 	//目前好像没有效果	 
+});
+ 
+ 
+mui.preload({
+		url:'wx.html',	//好像没有效果。毕竟是h5+		
+}); 
+
+
+	
+
+ 	
+ 
+$(function()
+{	
+	var shoujichongzhi  = document.getElementById("shoujichongzhi");
+	var saomazhifu  =document.getElementById("saomazhifu");
+	var weixizhaoling = document.getElementById("weixizhaoling");
+	var daijiaoweizhang = document.getElementById("daijiaoweizhang");
+	var huochepiao = document.getElementById("huochepiao");
+	var shoujibao = document.getElementById("shoujibao");
+	var zhanghuchaxun = document.getElementById("zhanghuchaxun");
+	var guanli = document.getElementById("guanli");
+	var assistiveTouch =  document.getElementById("assistiveTouch");
+	
+	
+
+	
+	 
+	
+
+
+/* 导航区 */
+	
+	saomazhifu.addEventListener('tap',function()
+	{
+			layer.load(1,{time:3000});
+			mui.openWindow
+			({
+				url:"SweepYard.html",
+				id:"SweepYard",
+				popGesture:"close"
+			});
+	})     
+	
+	weixizhaoling.addEventListener('tap',function()
+	{
+			layer.load(1,{time:3000});
+			mui.openWindow
+			({
+				url:"wx.html",
+				id:"wx",
+				popGesture:"close"
+			}); 
+	})  
+	
+	 
+	
+	
+	
+	
+		
+	/* Test */
+   //InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":"2016-1-1","截止时间":"2016-2-29","订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值")
+	
+	
+	  
+	 
+	
+})
+
+
+//	CYAPI_获取返回值 = function(str)
+//	{
+//		//str转换为json
+//		alert(str);
+//		var jsonobj = JSON.Parse(str);	  
+//	} 
+		
+
+</script>

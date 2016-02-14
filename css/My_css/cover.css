@@ -1,0 +1,13 @@
+﻿
+.mui-bar-nav ~ .mui-content
+{	
+	 padding-top: 0px;
+	margin-top:44px;	
+}
+
+
+*
+{
+     -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+}

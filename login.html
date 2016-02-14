@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
+  <title></title> 
+  <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" /> 
+ </head> 
+ <body> 
+  <header class="mui-bar mui-bar-nav"> 
+   <h1 class="mui-title">登录</h1> 
+  </header> 
+  <div class="mui-content" style="margin-top:20px;"> 
+   <form class="mui-input-group"> 
+    <div class="mui-input-row"> 
+     <label>账号</label> 
+     <input id="username" type="text" value="MailAddress_004" placeholder="input" class="mui-input-clear" /> 
+    </div> 
+    <div class="mui-input-row"> 
+     <label>密码</label> 
+     <input id="password" type="password" value="666666" placeholder="input" class="mui-input-clear" /> 
+    </div> 
+   </form> 
+   <form class="mui-input-group" style="margin-top:20px;"> 
+    <ul class="mui-table-view mui-table-view-chevron"> 
+     <li class="mui-table-view-cell"> 自动登录 
+      <div id="autoLogin" class="mui-switch"> 
+       <div class="mui-switch-handle"></div> 
+      </div> </li> 
+    </ul> 
+   </form> 
+  </div> 
+  <div class="mui-content-padded" align="center" style="margin-top:20px;"> 
+   <button id="login" class="mui-btn mui-btn-block mui-btn-primary">登录</button> 
+   <div class="link-area" style="margin-top:20px;">
+    <a id="reg">注册账号</a> 
+    <span class="spliter">|</span> 
+    <a id="forgetPassword">忘记密码</a> 
+   </div> 
+  </div> 
+  <script src="js/mui/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+ </body>
+ 
+ 
+ <script type="text/javascript">
+  
+	 
+	login.addEventListener('tap',function()
+	{
+	 		var login = document.getElementById("#login");
+	 		var username = document.getElementById("username");
+	 		var password = document.getElementById("password");
+	 				
+						
+			if(username.value.length == 0)
+			{
+				alert("您的账号不可为空！");
+				return;
+			} 
+			if (password.value.length == 0) 
+			{
+				alert("您的密码不可为空!");
+				return;
+			}
+			  
+			  
+			 localStorage.登录帐号 = username.value;
+			 
+			 mui.openWindow({ 
+					url:"index.html",
+					id:"index"
+			});
+		
+			
+			
+			 
+			/* Test */
+		   InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":"MailAddress_004","密码":"666666"}, "CYAPI_获取返回值")
+			
+			
+	})    
+	
+	
+	 
+
+	CYAPI_获取返回值 = function(str)
+	{
+		//str转换为json
+		alert(str);
+		var jsonobj = JSON.Parse(str);	  
+	} 
+ 
+
+ </script>
+ 
+</html>

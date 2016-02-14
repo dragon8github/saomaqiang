@@ -1,0 +1,128 @@
+/* Custom tools class*/
+
+.clearpadding {
+	padding: 0px;
+}
+
+.clearmargin {
+	margin: 0px;
+}
+
+.auto {
+	margin: 0px auto;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/* Global style configuration */
+
+.mui-off-canvas-left,
+.mui-off-canvas-right {
+	color: #fff;
+}
+
+.title {
+	margin: 35px 15px 10px;
+}
+
+.title+.content {
+	margin: 10px 15px 35px;
+	color: #bbb;
+	text-indent: 1em;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+input {
+	color: #000;
+}
+
+
+/* assistive AND the menu */
+
+.assistive-wrap {
+	width: 58px;
+	height: 58px;
+	position: fixed;
+	top: 50%;
+	margin-top: -29px;
+	left: 1px;
+	z-index: 9999;
+}
+
+.assistive-touch {
+	width: 100%;
+	height: 100%;
+	background: #343434;
+	border-radius: 10px;
+	opacity: .3;
+	position: relative;
+}
+
+.assistive-touch:before,
+.assistive-touch:after,
+.assistive-touch span {
+	content: '';
+	position: absolute;
+	border-radius: 100%;
+	box-shadow: 0 0 2px rgba(30, 30, 30, .5);
+	display: block;
+	background: rgba(255, 255, 255, .6);
+}
+
+.assistive-touch:before {
+	width: 42px;
+	height: 42px;
+	left: 8px;
+	top: 8px;
+	opacity: .5;
+}
+
+.assistive-touch span {
+	width: 34px;
+	height: 34px;
+	left: 12px;
+	top: 12px;
+}
+
+.assistive-touch:after {
+	width: 26px;
+	height: 26px;
+	left: 16px;
+	top: 16px;
+	background: #fff;
+}
+
+.assistiveTouch .mui-grid-view.mui-grid-9 {
+	border: 0px;
+	background: transparent;
+}
+
+.assistiveTouch .mui-grid-view.mui-grid-9 .mui-media,
+.assistiveTouch .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+	border: 0px;
+	color: #fff;
+}
+
+.assistiveTouch .mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active {
+	background: #000;
+}
+
+/* 左滑返回提醒箭筒 */
+#leftpage
+	{
+		background: rgba(0,0,0,0.6);
+		color:#ffffff;		
+		position:fixed;
+		left:-66px;
+		top:50%;
+		z-index: 9999;		
+		padding: 10px;
+	}
+	#leftpage .mui-icon
+	{
+		font-size:46px;
+	}
