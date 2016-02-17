@@ -1,3 +1,73 @@
+
+/* 涟漪特效 */ 
+
+.dot {
+  display: block;
+  height: 20px;
+  width: 20px;  
+  background: transparent;
+  border-radius: 100%;  
+  position: absolute;
+  animation: sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -ms-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    background: transparent;  
+  z-index:9999;    
+  
+} 
+
+
+@keyframes sploosh
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(66, 166, 223, 0.7);
+    background: rgba(66, 166, 223, 0.7); 
+  }
+  100% {
+    box-shadow: 0 0 0 300px rgba(66, 166, 223, 0);
+    background: rgba(66, 166, 223, 0);
+  }
+} 
+
+@-webkit-keyframes sploosh
+{
+  0% { 
+    -webkit-box-shadow: 0 0 0 0px rgba(66, 166, 223, 0.7);
+    -webkit-background: rgba(66, 166, 223, 0.7);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 300px rgba(66, 166, 223, 0);
+    -webkit-background: rgba(66, 166, 223, 0);
+  }
+}
+
+
+@-ms-keyframes sploosh
+{
+  0% {  
+    -ms-box-shadow: 0 0 0 0px rgba(66, 166, 223, 0.7);
+    background: rgba(66, 166, 223, 0.7);
+  }
+  100% {
+    -ms-box-shadow: 0 0 0 300px rgba(66, 166, 223, 0);
+    background: rgba(66, 166, 223, 0);
+  }
+}
+
+
+@-moz-keyframes sploosh
+{  
+  0% { 
+    box-shadow: 0 0 0 0px rgba(66, 166, 223, 0.7);
+    background: rgba(66, 166, 223, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 300px rgba(66, 166, 223, 0);
+    background: rgba(66, 166, 223, 0);
+  }
+}
+
 /* Custom tools class*/
 
 .clearpadding {
@@ -18,7 +88,18 @@
 
 
 /* Global style configuration */
+.footer {
+	padding: 20px;
+	text-align: center;                               
+	color: #FFf;
+}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell
+{
+	padding:11px 0px;
+	margin: 0px 0px 0px -3px; 	/* 兼容安卓机 */
+}
 
+ 
 .mui-off-canvas-left,
 .mui-off-canvas-right {
 	color: #fff;
@@ -126,3 +207,18 @@ input {
 	{
 		font-size:46px;
 	}
+	
+
+/* 优化 */
+*{ 
+	-webkit-touch-callout: none; /* 禁止长按下载图片 */
+	-webkit-user-select: none;  /* 禁止用户选中文字 */	
+}
+
+body 
+{
+	-webkit-overflow-scrolling: touch;
+}
+
+
+

@@ -1,0 +1,222 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="renderer" content="ie-comp">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+<title>订单详情</title>
+ 
+<link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
+<link rel="stylesheet" href="css/bootstrap/bootstrap-combined.min.css" />
+<link rel="stylesheet" href="css/My_css/global.css" />
+<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
+</head>
+<body style="padding:0px" class="mui-content">
+	
+	
+	
+<div id="Main" class="mui-off-canvas-wrap mui-draggable">	
+
+
+		<div class="mui-content container-fluid mui-inner-wrap mui-scroll-wrapper" id="content" style="padding-top:60px;">
+			
+			
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">详情</h1>
+		</header>
+		
+
+		
+		
+	  	<!--单页面结束-->
+		<div id="account" class="mui-page" >
+			
+						<ul class="mui-table-view clearmargin">
+							<li class="mui-table-view-cell">
+								<a id="head" class="">业务类型
+								<span class="mui-pull-right head">
+									支付扫码
+								</span>
+							</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>业务号码<span class="mui-pull-right">Hbuilder</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>订单金额<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view clearmargin" style="margin-top: 20px;">
+							<li class="mui-table-view-cell">
+								<a>下单时间<span class="mui-pull-right">88888888</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>处理时间<span class="mui-pull-right">18601234567</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>状态<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
+							</li>
+						</ul>
+		</div>
+		  	
+			<!-- 小光点 -->
+			<div class="assistive-wrap" id="assistiveTouch">
+		        <div class="assistive-touch">
+		            <span></span>
+		        </div> 
+	   		</div>  	
+			<!-- 这个东西不能删，利用他还原界面 -->
+			<div class="mui-off-canvas-backdrop"></div>
+		
+		</div>
+		
+		
+		
+	<!--菜单部分-->
+	<aside id="offCanvasSide" class="mui-off-canvas-right">
+					<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+						 <div class="mui-scroll">
+                            
+                            <div class="content" style="margin:20px 0px 20px 20px">
+                    			<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left head-img" id="head-img" width="50px" style="margin-right: 10px;" src="Images/logo.png">
+									<div class="mui-media-body" style="margin-left: 20px;">
+										<h3  style="color:#fff"><span id="username"></span><span id="quit" class="mui-pull-right mui-h6" style="color:#fff;margin-right: 10px;;"><i class="iconfont">&#xe605;</i></span></h3>	
+										<p class='mui-ellipsis' style="color:#fff"> 金额: ￥ 00.00</p>
+									</div>
+								</a>
+                           </div>   
+							 <p style="margin: 10px 15px;">
+                                <button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭侧滑菜单</button>
+                            </p>
+							<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										 <i class="iconfont">&#xe61f;</i> 手机充值
+									</a>
+								</li> 
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61c;</i> 扫码支付
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61a;</i> 微信找零
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe600;</i> 代缴违章
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe619;</i> 火车票
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe61e;</i> 收寄宝
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe602;</i> 账户查询
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										<i class="iconfont">&#xe617;</i> 管理
+									</a>
+								</li>								
+							</ul>
+							    <style>
+
+								.footer {
+								    padding: 20px;
+								    text-align: center;							   
+								   	color: #FFf;
+								}
+								    </style>
+								
+								<div  class="footer">
+								    <div class="container">
+								        <p>企业合作 | 合作事宜 | 版权投诉</p>
+								        <p>粤ICP备12345678. © 2009-2016 彩洋科技. Powered by Lee.</p>
+								    </div>
+								</div>
+						</div>
+						
+					</div>
+					
+	</aside>
+</div>
+	
+
+<script type="text/template" id="htmlval">		
+	        <ul class="mui-table-view mui-grid-view mui-grid-9">
+	           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                <i class="iconfont">&#xe61f;</i>
+		                <div class="mui-media-body">手机充值</div></a></li>	         
+	           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                   <i class="iconfont">&#xe61c;</i>	
+	                    <div class="mui-media-body">扫码支付</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                     <i class="iconfont">&#xe61a;</i>
+	                    <div class="mui-media-body">微信找零</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe600;</i>
+	                    <div class="mui-media-body">代缴违章</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe619;</i>
+	                    <div class="mui-media-body">火车票</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe61e;</i>
+	                    <div class="mui-media-body">收寄宝</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                   <i class="iconfont">&#xe602;</i>
+	                    <div class="mui-media-body">账户查询</div></a></li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+	                    <i class="iconfont">&#xe617;</i>
+	                    <div class="mui-media-body">管理</div></a></li>
+	          
+	          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="#">
+	                    <span class=" mui-icon mui-icon-home-filled"></span>
+	                    <div class="mui-media-body">主页</div></a></li>
+               <li on class="back mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="#">
+		                <span class="mui-icon mui-icon-loop"></span>
+		                <div class="mui-media-body">刷新</div></a>
+               </li> 
+               <li on class="back mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="#">
+		                <span class="mui-icon mui-icon-undo"></span>
+		                <div class="mui-media-body">返回</div></a> 
+               </li> 
+	        </ul>   	    
+</script>    
+<script src="js/jquery/jquery.min.js"></script>  
+<script src="js/mui/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mTouch/mTouch.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){ 
+		
+	
+		
+	})
+	
+	
+	
+	
+	
+</script>

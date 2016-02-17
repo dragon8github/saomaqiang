@@ -1,6 +1,4 @@
 
-
-
 /* 核心业务处理函数 */
 
 GetApiUrl = function(ModuleName)
@@ -14,8 +12,8 @@ GetApiUrl = function(ModuleName)
 		alert("没有找到对应URL，【ModuleName】：【" + ModuleName + "】");
 	}
 }
- 
-
+   
+  
 
 
 InvokeApi = function(apiUrl, ApiPath, MethodName, bodyJson , callBackFunctionName)

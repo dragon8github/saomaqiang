@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>订单列表</title>
+
+		<link href="css/mui/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mui/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css" />
+		<link rel="stylesheet" type="text/css" href="css/My_css/global.css" />
+
+		<style>
+			/* The custom style */
+				.mui-table .Lee_time
+				{
+					vertical-align: middle;				
+				}
+				.mui-table .Lee_time .iconfont
+				{
+					color:#007AFF;
+					font-size:26px; 
+				}			
+				.mui-table .Lee_Order
+				{
+					margin:8px 0px;
+					color:#333;
+				}			
+				.mui-table .Lee_Phone
+				{
+					color:#333;
+				}			
+				.mui-table .Lee_Money
+				{
+					font-weight: 700;
+				}			
+				/* Cover the style */
+				.mui-bar .mui-segmented-control
+				{
+					top:6px;
+					right:10px
+				}			
+				.mui-segmented-control .mui-control-item
+				{
+					line-height:30px;
+				}
+				.mui-pull-bottom-pocket
+				{
+					margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
+				}
+				
+		</style>
+		<!--
+        这里是无缝跳转的css
+        -->
+		<style>
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				top: 46px;
+				height: auto;
+			}
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		
+		
+		
+		<!--
+			页面主结构开始：	
+			
+			一个容器（.mui-page） = 一个标题(.mui-navbar-inner) + 一个内容(.mui-page-content)
+		-->
+		
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		
+		
+			
+	<!--下拉刷新容器-->
+	<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+		
+		<div class="mui-scroll">
+			<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+				<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 10.00</h4>
+								<h5 class="Lee_Order">订单号 ：6264184415221 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe604;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 100.00</h4>
+								<h5 class="Lee_Order">订单号 ：848451511 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe603;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 52.10</h4>
+								<h5 class="Lee_Order">订单号 ：848451511 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652 </p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe604;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 512.10</h4>
+								<h5 class="Lee_Order">订单号 ：59598915166 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe603;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+										<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 512.10</h4>
+								<h5 class="Lee_Order">订单号 ：59598915166 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe603;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+										<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 512.10</h4>
+								<h5 class="Lee_Order">订单号 ：59598915166 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe603;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+										<li class="mui-table-view-cell">
+					<a>
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-9">
+								<h4 class="mui-ellipsis-2 Lee_Money">￥ 512.10</h4>
+								<h5 class="Lee_Order">订单号 ：59598915166 </h5>
+								<p class="mui-h5 mui-ellipsis Lee_Phone">手机号码：137-13332652</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+								<span class="mui-h5">今天  16:30</span>
+								<span class="mui-h5"><i class="iconfont">&nbsp;&#xe603;</i></span>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>	
+
+<span style="display: none;">
+	<input type="hidden" name="page" id="page" value="1" />  	
+</span>  
+
+<script type="text/template" id="temple">
+	{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
+		<li class="mui-table-view-cell">
+			<a class="goto_subpage">
+				<div class="mui-table">
+					<div class="mui-table-cell mui-col-xs-9">
+						<h4 class="mui-ellipsis-2 Lee_Money">￥ {{d[i].OrderAmount}}</h4>
+						<h5 class="Lee_Order">订单号 ：{{d[i].OrderNo }}</h5>
+						<p class="mui-h5 mui-ellipsis Lee_Phone">业务类型：{{d[i].ProductName}}</p>
+					</div>
+					<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+						<span class="mui-h5">  {{d[i].OrderTime}}</span>
+						<span class="mui-h5"><i class="iconfont">&nbsp;{{d[i].OrderState}}</i></span>
+					</div>
+				</div>
+			</a>
+		</li>
+	{{#     }	 }}
+</script>
+
+<script src="js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layer/laytpl.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/Lee.js" type="text/javascript" charset="utf-8"></script>
+
+
+		<script type="text/javascript" charset="UTF-8">
+		 
+			/* 初始化公共数据 */ 
+			
+			var username = localStorage.登录帐号;	
+			
+			var rows = "10";		//每次加载的行数	
+		
+			var ResultJson = null;	//获取的列表数据 
+			
+			var cnt = 0; 			//数据总条数
+		
+			
+			
+			
+				 
+		
+			
+			
+			//初始化单页view
+			var viewApi = mui('#app').view
+			({
+				defaultPage: '#Main'
+			});
+				
+				
+		
+		
+		
+			mui.init
+			({
+				pullRefresh: 
+				{
+					container: '#pullrefresh',
+					down: 
+					{
+						callback: pulldownRefresh
+					},
+					up: 
+					{
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+		          
+		          
+		          
+		            
+		            
+		            
+		     $(function()
+		     {
+		     	
+		     		bind_绑定子页面(); //正式环境不需要在这里使用
+		     		
+		     		初始化数据(); //初始化数据   
+		     })
+		     
+		     
+		     
+		     
+		     
+		      
+		     
+		   
+		     初始化数据 = function()
+		     {
+		     	/* 初始化dipicker的默认参数 */
+		     	var opt = {};
+		     	var now = new Date(); 	//当前时间
+		     	opt.value = now.format("yyyy-MM-dd"); 
+		     	opt.type = "date";
+		     	opt.beginYear =  now.getFullYear() - 1;		     	
+		     	opt.endYear =  now.getFullYear();		     
+		     	var str_json = JSON.stringify(opt);		     			     	
+		     	$("#dipicker").attr("data-options",str_json);	
+		     	
+		     	
+		     
+		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
+		     	var end = now.format("yyyy-MM-dd"); //今天 		     	
+		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
+			    InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
+		     }
+		     
+		     
+		     
+		    /*
+			 * 下拉刷新具体业务实现 
+			 */
+			function pulldownRefresh() 
+			{
+				//模拟更新数据
+				setTimeout(function() 
+				{											
+					layer.msg("刷新成功");
+				
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+		
+				}, 1500);
+			}        
+		    
+		 	 
+		     
+		    /**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() 
+			{
+				//加载数据
+				setTimeout(function() 
+				{
+						var count = cnt; //数据库总数
+				 
+						var num =  $(".mui-table-view-cell").size(); //列表总数
+		
+						if(num >= count)
+						{		
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+							return false;
+						}
+					
+						ResultJson = null; //清空
+						var html = $("#temple").html();			
+						/* 获取dipicker的时间参数  */	
+						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
+						var end = JSON.parse(optionsJson).value;	
+						var pass = new Date(end);
+						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
+						var page = parseInt($("#page").val()) + 1;						
+						$("#page").val(page); //分页标识+1						
+					    InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值2")
+						
+				}, 1500);
+			}  
+			
+			
+			
+			
+			 
+			
+			
+			
+			
+			
+			 
+			CYAPI_获取返回值 = function(str)
+			{
+
+				ResultJson = eval('('+ str +')')["dtOrderDetail"] || {};
+				
+				//替换美化文本
+				$.each(ResultJson,function(i,o)
+				{
+					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderTime = timeFormat(o.OrderTime);
+				})		
+				
+				cnt = ResultJson[0].cnt; //记录总条数
+				
+				var temple_html = $("#temple").html();								
+				
+				laytpl(temple_html).render(ResultJson, function (html)
+		        {        		   
+		            $("#mui-table-view").append(html);      //填充初始化数据     
+		        });    	
+		        
+		        bind_绑定子页面();
+			}  
+			
+			   
+			  
+			
+			CYAPI_获取返回值2 = function(str)
+			{
+
+				ResultJson = eval('('+ str +')')["dtOrderDetail"] || {};
+				
+				//替换
+				$.each(ResultJson,function(i,o)
+				{
+					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderTime = timeFormat(o.OrderTime);
+				})			
+				
+				var temple_html = $("#temple").html();								
+				
+				laytpl(temple_html).render(ResultJson, function (html)
+		        {        		   
+		            $("#mui-table-view").append(html);      //填充初始化数据     
+		        }); 
+		              
+				var count = cnt; //数据库总数
+				 
+				var num =  $(".mui-table-view-cell").size();	//列表总数
+		
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+					
+				bind_绑定子页面();	
+			}  
+			
+			
+			
+			CYAPI_获取返回值3 = function(str)
+			{
+				//alert(str);
+				 
+				str = {};
+				
+				var json = JSON.parse(str);
+				$("#sub_page .yewuleixing").text(json.aaaaaa);
+				$("#sub_page .yewuhaoma").text(json.aaaaaa);
+				$("#sub_page .dingdanjine").text(json.aaaaaa);
+				
+				$("#sub_page .xiadanshijian").text(json.aaaaaa);
+				$("#sub_page .chulishijian").text(json.aaaaaa);
+				$("#sub_page .zhuangtai").text(json.aaaaaa);
+				
+				$("#sub_page .goto_subpage").attr("href","#info");
+				$("#sub_page .goto_subpage").trigger("tap");
+				layer.closeAll();
+				
+			}
+			 
+			  
+			   
+			 bind_绑定子页面 = function()
+			 {			 	 
+			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function () 
+	     		{		     			  
+	     			layer.load(1);  
+	     			$(this).find("a").attr("href","#info");
+					$("#sub_page .goto_subpage").trigger("tap");
+					layer.closeAll();	     			
+     			})  
+			 } 
+			  
+			  
+			  
+			  
+			
+			
+			
+			
+			
+			var view = viewApi.view;
+			(function($) {
+				//处理view的后退与webview后退
+				var oldBack = $.back;
+				$.back = function() {
+					if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+						viewApi.back();
+					} else { //执行webview后退
+						oldBack();
+					}
+				};
+				//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+				//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+				view.addEventListener('pageBeforeShow', function(e) {
+					//				console.log(e.detail.page.id + ' beforeShow');
+				});
+				view.addEventListener('pageShow', function(e) {
+					//				console.log(e.detail.page.id + ' show');
+				});
+				view.addEventListener('pageBeforeBack', function(e) {
+					//				console.log(e.detail.page.id + ' beforeBack');
+				});
+				view.addEventListener('pageBack', function(e) {
+					//				console.log(e.detail.page.id + ' back');
+				});
+			})(mui);
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

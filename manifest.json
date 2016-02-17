@@ -1,4 +1,4 @@
-﻿{
+{
     "@platforms": ["android", "iPhone", "iPad"],
     "id": "H5B4E6628",/*应用的标识，创建应用时自动生成，勿手动修改*/
     "name": "微信找零界面",/*应用名称，程序桌面图标名称*/
@@ -101,7 +101,7 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        },"Push":{}
+        }
     },
     "plus": {
         "splashscreen": {
@@ -126,7 +126,7 @@
                 "keystore": "",/*Android应用打包使用的密钥库文件*/
                 "password": "",/*Android应用打包使用密钥库中证书的密码*/
                 "aliasname": "",/*Android应用打包���用密钥库中证书的别名*/
-               "permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+               "permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
 				/*使用Native.js调用原生安卓API需要使用到的系统权限*/
             },
             "orientation": [
@@ -199,5 +199,181 @@
                 }
             }
         }
-    }
+    },
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/My_Js/global.js",
+					"Images/main_01.gif",
+					"Images/main_06.gif",
+					"css/My_css/ico.css",
+					"js/layer/layer.js",
+					"js/mui/mui.min.lee.js",
+					"css/My_css/global.css",
+					"Images/main_02.gif",
+					"Images/main_05.gif",
+					"Images/logo.png",
+					"js/My_Js/API.js",
+					"Images/main_07.gif",
+					"Images/main_04.gif",
+					"js/jquery/jquery.min.js",
+					"Images/main_03.gif",
+					"Images/main_08.gif",
+					"css/fonts/mui.ttf",
+					"css/mui/mui.min.css",
+					"js/layer/skin/layer.css",
+					"js/layer/skin/default/loading-1.gif",
+					"css/fonts/tb_ico/iconfont.ttf"
+				],
+				"refer": [
+					"wx.html"
+				],
+				"priority": 0
+			},
+			"wx.html": {
+				"resources": [
+					"js/My_Js/Lee.js",
+					"js/jcalculator/js/min/jcalculator.min.js",
+					"css/jcalculator/jcalculator.css",
+					"css/bootstrap/bootstrap.min.css",
+					"css/My_css/cover.css",
+					"js/My_Js/global.js",
+					"css/My_css/ico.css",
+					"css/My_css/global.css",
+					"js/mui/mui.min.lee.js",
+					"js/layer/layer.js",
+					"Images/logo.png",
+					"js/jquery/jquery.min.js",
+					"css/fonts/mui.ttf",
+					"css/mui/mui.min.css",
+					"js/layer/skin/layer.css"
+				],
+				"refer": [
+					"list.html"
+				],
+				"priority": 0
+			},
+			"list.html": {
+				"resources": [
+					"css/mui/mui.picker.min.css",
+					"js/mui/mui.picker.min.js",
+					"js/layer/laytpl.js",
+					"js/mui/mui.view.js",
+					"js/My_Js/global.js",
+					"css/My_css/ico.css",
+					"css/My_css/global.css",
+					"js/mui/mui.min.lee.js",
+					"js/layer/layer.js",
+					"Images/logo.png",
+					"js/My_Js/API.js",
+					"css/fonts/tb_ico/iconfont.ttf",
+					"js/jquery/jquery.min.js",
+					"css/fonts/mui.ttf",
+					"css/mui/mui.min.css",
+					"js/layer/skin/layer.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"HuiShouZhan/SweepYard.html",
+				"login.html",
+				"js/layer/skin/default/icon-ext.png",
+				"SweepYard.html",
+				"js/Less/less.min.js",
+				"Images/muwu.jpg",
+				"Images/avatar-1.png",
+				"css/fonts/glyphicons-halflings-regular.woff2",
+				"js/jquerymobile/jquerymobile.js",
+				"js/mui/mui.locker.js",
+				"js/laydate/skins/default/icon.png",
+				"js/mui/mui.poppicker.js",
+				"Active.html",
+				"js/layer/skin/default/icon.png",
+				"css/mui/mui.indexedlist.css",
+				"js/mui/city.data-3.js",
+				"css/bootstrap/bootstrap-combined.min.css",
+				"js/layermobile/need/layer.css",
+				"js/mTouch/mTouch.js",
+				"css/animate/animate.min.css",
+				"css/mui/app.css",
+				"css/mui/mui.listpicker.css",
+				"css/fonts/glyphicons-halflings-regular.eot",
+				"js/mui/arttmpl.js",
+				"Images/cbd.jpg",
+				"HuiShouZhan/main.html",
+				"js/laydate/skins/molv/icon.png",
+				"css/mui/mui.picker.all.css",
+				"js/laydate/need/laydate.css",
+				"js/IScroll/iscroll-infinite.js",
+				"js/bootstrap/bootstrap.min.js",
+				"js/mui/Mui_For_Web.js",
+				"css/My_css/style.css",
+				"js/moment/moment.js",
+				"js/mui/mui.indexedlist.js",
+				"js/mui/city.data.js",
+				"css/fonts/glyphicons-halflings-regular.ttf",
+				"js/mui/mui.previewimage.js",
+				"js/laydate/laydate.js",
+				"Images/avatar.png",
+				"js/mui/mui.pullToRefresh.js",
+				"js/laydate/skins/dahong/icon.png",
+				"js/layer/extend/layer.ext.js",
+				"js/jquery/jquery1.9.1.min.js",
+				"js/layer/skin/layer.ext.css",
+				"js/mui/feedback.js",
+				"js/mui/ad.js",
+				"css/fonts/glyphicons-halflings-regular.woff",
+				"js/mui/mui.zoom.js",
+				"js/mui/mui.picker.js",
+				"Images/ajax-loader.gif",
+				"Images/shuijiao.jpg",
+				"Images/calculator.jpg",
+				"js/mui/mui.imageViewer.js",
+				"js/IScroll/iscroll-zoom.js",
+				"js/mui/update.js",
+				"css/mui/feedback-page.css",
+				"Images/Thumbs.db",
+				"js/jcalculator/css/jcalculator.css",
+				"Images/60x60.gif",
+				"web.config",
+				"css/jquerymobile/jquerymobile.css",
+				"js/laydate/skins/dahong/laydate.css",
+				"css/mui/mui.dtpicker.css",
+				"js/mui/mui.pullToRefresh.material.js",
+				"js/IScroll/iscroll.js",
+				"css/fonts/glyphicons-halflings-regular.svg",
+				"HuiShouZhan/GeneralBusinessQueries.html",
+				"js/laydate/skins/default/laydate.css",
+				"js/mui/mui.min.js",
+				"js/jcalculator/js/jcalculator.js",
+				"js/My_Js/ajax.js",
+				"css/mui/mui.poppicker.css",
+				"js/layermobile/layer.js",
+				"js/mui/mui.lazyload.img.js",
+				"js/mui/mui.picker.all.js",
+				"js/mui/mui.dtpicker.js",
+				"js/mui/mui.lazyload.js",
+				"js/mui/mui.js",
+				"js/jquery.ui.touch-punch/jquery.ui.touch-punch.js",
+				"HuiShouZhan/WeChatChangeQuery.html",
+				"js/mui/feedback-page.js",
+				"Images/login-1.png",
+				"css/mui/mui.imageviewer.css",
+				"js/IScroll/iscroll-probe.js",
+				"js/layer/skin/default/loading-2.gif",
+				"OrderInfo.html",
+				"css/mui/mui.picker.css",
+				"js/mui/mui.listpicker.js",
+				"Images/iconfont-tianjia.png",
+				"js/IScroll/iscroll-lite.js",
+				"Images/yuantiao.jpg",
+				"js/layer/skin/default/loading-0.gif",
+				"js/laydate/skins/molv/laydate.css"
+			]
+		}
+	}
 }

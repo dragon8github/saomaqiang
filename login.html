@@ -2,10 +2,13 @@
 <html>
  <head> 
   <meta charset="utf-8" /> 
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="renderer" content="ie-comp">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
   <title></title> 
   <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" /> 
- </head> 
+ </head>  
  <body> 
   <header class="mui-bar mui-bar-nav"> 
    <h1 class="mui-title">登录</h1> 
@@ -45,52 +48,163 @@
  
  <script type="text/javascript">
   
+  
+	var usernamed = localStorage.登录帐号 || "";
+	var autoed = localStorage.auto || "";
+	if (usernamed != ""  && autoed != "" && autoed != "false") 
+	{ 
+		
+		//需要提示一下
+		
+		mui.openWindow({
+			url: "index.html",  
+			id: "index"
+		});    
+		 
+	}  
+	
+  
+  	var login = document.getElementById("login");
+  	var reg = document.getElementById("reg");
+  	var forgetPassword = document.getElementById("forgetPassword");
+	 
+	forgetPassword.addEventListener('tap',function()
+	{	
+		window.location.reload();
+	})
+	
+	  
+    reg.addEventListener('tap',function()
+	{
+		window.location.reload();
+	})
+    
+    
 	 
 	login.addEventListener('tap',function()
 	{
-	 		var login = document.getElementById("#login");
-	 		var username = document.getElementById("username");
-	 		var password = document.getElementById("password");
-	 				
-						
-			if(username.value.length == 0)
+	 		
+	 		var username = document.getElementById("username").value;
+	 		var password = document.getElementById("password").value;
+
+
+		 
+			if(username.length == 0)
 			{
-				alert("您的账号不可为空！");
+				mui.toast("您的账号不可为空！"); 
 				return;
 			} 
-			if (password.value.length == 0) 
+			if (password.length == 0) 
 			{
-				alert("您的密码不可为空!");
+				mui.toast("您的密码不可为空!");
 				return;
 			}
-			  
-			  
-			 localStorage.登录帐号 = username.value;
+			
+			
+ 			login.innerHTML = "登陆中...";
+ 			 
 			 
-			 mui.openWindow({ 
-					url:"index.html",
-					id:"index"
-			});
+			 
+//			localStorage.登录帐号 = document.getElementById("username").value;  
+//			localStorage.CustomerCode = "d8706f2b61cd40018d4444c542b51edb";
+//			mui.openWindow
+//			 ({ 
+//					url:"index.html",
+//					id:"index" 
+//			});
+		  
+	
+	    InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":username,"密码":password}, "CYAPI_获取返回值")
+		 
 		
-			
-			
+		 
+		
+	  // InvokeApi(GetApiUrl("Global_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":"2016-1-1","截止时间":"2016-2-29","门店编号":"d8706f2b61cd40018d4444c542b51edb","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值_test")		
+     // InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":"2016-1-1","截止时间":"2016-2-29","订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值")
+					
+				
 			 
-			/* Test */
-		   InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":"MailAddress_004","密码":"666666"}, "CYAPI_获取返回值")
 			
+					 	
+		  
 			
 	})    
 	
 	
+	
 	 
-
+	//str转换为json	
 	CYAPI_获取返回值 = function(str)
 	{
-		//str转换为json
-		alert(str);
-		var jsonobj = JSON.Parse(str);	  
-	} 
+		
+		var jsonobj = JSON.parse(str);
+		var dt = JSON.parse(str)["dtCustomer"];
+		
+		
+		if(jsonobj.errMsg == "用户登录验证通过" && jsonobj.success == true)
+		{
+			var isActive = document.getElementById("autoLogin").classList.contains("mui-active");
+			if(isActive)
+			{
+			 	console.log("打开状态");
+			 	localStorage.auto = "true";
+			} 
+			else
+			{
+			  	console.log("关闭状态");
+			  	localStorage.auto = "false";
+			}
  
+		    localStorage.登录帐号 = document.getElementById("username").value;   
+		    localStorage.MID  = dt[0].MID;
+			localStorage.MerchantCode  = dt[0].MerchantCode;
+			localStorage.MerchantName  = dt[0].MerchantName;
+			localStorage.MerchantState  = dt[0].MerchantState;
+			localStorage.MerchantAPIKey  = dt[0].MerchantAPIKey;
+			localStorage.CID  = dt[0].CID;
+			localStorage.CustomerCode  = dt[0].CustomerCode; //门店号
+			localStorage.CustomerName  = dt[0].CustomerName;
+			localStorage.CustomerState  = dt[0].CustomerState;
+			localStorage.CustomerType  = dt[0].CustomerType;
+			localStorage.ParentCode  = dt[0].ParentCode;
+			localStorage.CustomerMobile = dt[0].CustomerMobile;
+			localStorage.CustomerAddress = dt[0].CustomerAddress;
+			localStorage.EID  = dt[0].EID;
+			localStorage.EmployeeCode = dt[0].EmployeeCode;
+			localStorage.EmployeeName = dt[0].EmployeeName;
+			localStorage.EmployeeState  = dt[0].EmployeeState;
+			localStorage.EmployeeMobile  = dt[0].EmployeeMobile;
+			localStorage.EmployeeWeiXinNo  = dt[0].EmployeeWeiXinNo;
+			localStorage.EmployeeMailAddress = dt[0].EmployeeMailAddress;
+			localStorage.EmployeeRegName = dt[0].EmployeeRegName;
+			localStorage.EmployeeLoginPWD = dt[0].EmployeeLoginPWD;
+			localStorage.EmployeeIdentity  = dt[0].EmployeeIdentity;
+ 
+ 			
+ 
+			 mui.openWindow
+			 ({
+					url:"index.html",
+					id:"index" 
+			});
+		}
+		else
+		{
+			login.innerHTML = "登陆";
+			mui.toast(jsonobj.errMsg); 
+		}
+	}
+	
+	
+	
+	CYAPI_获取返回值_test = function(str)
+	{
+		alert(str);
+	}
+	
+	
+	
+	
 
  </script>
  

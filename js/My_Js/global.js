@@ -46,19 +46,28 @@ mui.init({
 });
 
 
+
+
+
 //╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 公共加载模块  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
-$(function() {
-	Init_初始化();
+$(function() 
+{
+	Init_初始化();	
 
 	assistive_mTouch(); //小光点以及菜单
 
 	QQ_offCanvas(); //QQ侧滑菜单	
 
-	quit(); //退出登录
+	
+	涟漪特效(); 
+	
+	
+	
+	
 })
 
 
-
+ 
 
 
 //╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 计算器大小监视 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
@@ -76,18 +85,7 @@ calculator_winresize = function(e) {
 			$(".jcalculator").hide();
 			计算器_autolineheight();
 		}
-		if (Lee.sm_小屏幕如ipad平板大于等于768px()) {
-			e.calculator();
-			$(".jcalculator").css({
-				"top": "40px",
-				"height": "200px",
-				"width": "200px",
-				"line-height": "50px",
-				"right": "0",
-				"display": "none",
-				"z-index": "9999"
-			});
-		}
+		
 	})
 }
 
@@ -124,29 +122,22 @@ Init_初始化 = function() {
 	}
 
 
-	//var wv = plus.webview.currentWebview();
-	// 关闭侧滑返回功能
-	//wv.setStyle({'popGesture':'none'});
-	// 侧滑返回后关闭webview
-	//wv.setStyle({'popGesture':'close'});
-	// 侧滑返回后隐藏webview
-	//wv.setStyle({'popGesture':'hide'});
-
-	//	plus.webview.currentWebview().setStyle({
-	//                      'popGesture': 'none'
-	// });  
 
 
 	var username = localStorage.登录帐号;
 
-	if (typeof(username) == "undefined" || username == "undefined") {
-		alert("请先登录账户");
-		mui.openWindow({
-			url: "login.html",
-			id: "login"
-		});
-		return;
-	} else {
+	if (typeof(username) == "undefined" || username == "undefined" ) 
+	{
+//		mui.toast("请先登陆账号");
+//		$("#username").text("请先登陆账号");
+//		mui.openWindow({
+//			url: "login.html", 
+//			id: "login"
+//		});
+//		return;
+	} 
+	else
+	{ 
 		$("#username").text(username);
 	}
 
@@ -256,11 +247,13 @@ $.fn.autoheight = function(opt) {
 	$("#calculator span").css("line-height", height + "px");
 
 
-
-
-	$("#calculator .calculator span").bind('tap', function() {
-		if ($('input:focus').length == 0) {
-			layer.tips("请先选择输入框", $("#money,#yard"), {
+	$("#calculator .calculator span,#go_form").bind('tap', function() {
+		
+		var text = $(this).text();
+		 
+		if ($('input:focus').length == 0 && text != "提交" && text != "Go!")
+		{
+			layer.tips("请先选择输入框", $("#money"), {
 				tipsMore: true,
 				time: 4000,
 				tips: [1, '#000'],
@@ -274,9 +267,10 @@ $.fn.autoheight = function(opt) {
 			return false;
 		}
 
-		var text = $(this).text();
-
-		if (text != "C" && text != "提交") {
+		
+		 var regex = /^[0-9]+.?[0-9]*$/;
+		if (regex.test(text)) 
+		{
 			var v = $('input:focus').val();
 			$('input:focus').val(v + text);
 		}
@@ -285,16 +279,16 @@ $.fn.autoheight = function(opt) {
 			$('input:focus').val('');
 		}
 
-		if (text == "提交") {
-			layer.confirm('你确定要提交订单吗？', {
-				btn: ['确定', '取消'] //按钮
-			}, function() {
-
-				// $("form").submit();
-
-			}, function() {
-				layer.closeAll();
-			});
+		if (text == "提交" || text == "Go!")
+		{
+			var btnArray = ['否', '是'];
+			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) {
+				if (e.index == 1) {
+					mui.toast("正在提交表单...");
+				} else {
+					return false;
+				}
+			})
 		}
 	})
 
@@ -318,74 +312,8 @@ money_click = function() {
 
 
 
-// <summary>
-// 时间Javascript类库
-// </summary>
-Date.prototype.format = function(format) {
-	var o = {
-		"M+": this.getMonth() + 1, //month
-		"d+": this.getDate(), //day
-		"h+": this.getHours(), //hour
-		"m+": this.getMinutes(), //minute
-		"s+": this.getSeconds(), //second
-		"q+": Math.floor((this.getMonth() + 3) / 3), //quarter
-		"S": this.getMilliseconds() //millisecond
-	}
-	if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-	for (var k in o)
-		if (new RegExp("(" + k + ")").test(format))
-			format = format.replace(RegExp.$1,
-				RegExp.$1.length == 1 ? o[k] :
-				("00" + o[k]).substr(("" + o[k]).length));
-	return format;
-}
 
-
-
-/*
-1、< 60s, 显示为“刚刚”
-2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
-3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
-4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
-5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
-*/
-function timeFormat(time) {
-	var date = new Date(time),
-		curDate = new Date(),
-		year = date.getFullYear(),
-		month = date.getMonth() + 10,
-		day = date.getDate(),
-		hour = date.getHours(),
-		minute = date.getMinutes(),
-		curYear = curDate.getFullYear(),
-		curHour = curDate.getHours(),
-		timeStr;
-
-	if (year < curYear) {
-		timeStr = year + '年' + month + '月' + day + '日 ' + hour + ':' + minute;
-	} else {
-		var pastTime = curDate - date,
-			pastH = pastTime / 3600000;
-
-		if (pastH > curHour) {
-			timeStr = month + '月' + day + '日 ' + hour + ':' + minute;
-		} else if (pastH >= 1) {
-			timeStr = '今天 ' + hour + ':' + minute + '分';
-		} else {
-			var pastM = curDate.getMinutes() - minute;
-			if (pastM > 1) {
-				timeStr = pastM + '分钟前';
-			} else {
-				timeStr = '刚刚';
-			}
-		}
-	}
-	return timeStr;
-}
-
-
-
-
+ 
 //悬浮球
 assistive_mTouch = function() {
 	var assistiveLeft, assistiveTop, timerid;
@@ -460,12 +388,14 @@ assistive_mTouch = function() {
 // </summary>
 Show_Menu = function() {
 
+	小光点菜单(); 
+
 	layer.open({
 		skin: "assistiveTouch",
 		closeBtn: 0,
 		title: false,
 		shadeClose: true,
-		content: $("#htmlval").html(),
+		content: $("#xiaoguangdiancaidan").html(),
 		btn: 0, //默认底部不显示任何按钮
 		end: function() {
 			layer.closeAll()
@@ -487,6 +417,7 @@ Show_Menu = function() {
 		"left": "22%"
 	})
 
+ 
 	mui(".mui-table-view").on('tap', '.Menu_back', function() {
 		layer.load(1, {
 			time: 2000
@@ -505,30 +436,49 @@ Show_Menu = function() {
 		});
 		mui.openWindow({
 			url: "index.html",
-			id: "index"
+			id: "index"			
 		});
-
 	})
 
 }
 
 
 /*侧滑菜单*/
-QQ_offCanvas = function() {
+QQ_offCanvas = function() 
+{
+	菜单部分();
+	
 	var Main = mui('#Main'); //侧滑容器父节点
 	Main[0].classList.add('mui-scalable'); //动画效果的类
 	Main.offCanvas().refresh();
 	document.getElementById('offCanvasHide').addEventListener('tap', function() {
 		Main.offCanvas('close');
 	});
+	
 	//支持区域滚动，需要添加.mui-scroll-wrapper
 	mui('#offCanvasSideScroll').scroll();
+	
+	
+	quit(); //退出登录
+	
+	//钱包流水
+	$("#qianbaoliushui").bind("tap",function()
+	{
+		layer.load(1);
+		mui.openWindow({
+			url: "QiangBao_list.html",
+			id: "QiangBao_list"			
+		});
+	})
+	
 
 }
 
 
 /* 左滑返回的箭头 */
-LeftPageGOBack = function() {
+LeftPageGOBack = function() 
+{
+	  
 	var Touch_Hold_X = null; //起始坐标
 
 	var Native_left = $("#leftpage").offset().left;
@@ -542,14 +492,7 @@ LeftPageGOBack = function() {
 		var left = $("#leftpage").offset().left;
 
 		if (left >= 0) {
-
-			//			mui.openWindow({
-			//				url:"index.html",
-			//				id:"index"
-			//			});	
 			mui.back();
-
-
 		}
 
 		$("#leftpage").animate({
@@ -564,43 +507,296 @@ LeftPageGOBack = function() {
 	document.addEventListener("drag", function(e) {
 
 		var x = e.detail.center.x - Touch_Hold_X; //拖拉的距离	
-
-		if (x > 0) {
+		
+	 
+		
+		if (x > 30) //向右拉30px才可以看出效果
+		{ 
 			var left = Native_left + x;
+			
 
 			if (left < 0) //越趋近于0越大，当对象的left为0时完全展开  
 			{
 				$("#leftpage").css({
 					"left": left
 				});
-			} else {
+			}
+			else
+			{
 				$("#leftpage").css({
 					"left": "0px"
 				});
 			}
+		} 
+		else 
+		{
+			$("#leftpage").css({
+					"left": "-66px"
+			});
 		}
+		
+	
 	})
 
 }
 
 
 /* 退出 */
-quit = function() {
+quit = function() 
+{
 	var quit = document.getElementById("quit");
 
 	quit.addEventListener("tap", function() {
+		
 
-		layer.confirm('你确定要退出吗？', {
-			btn: ['确定', '取消'] //按钮
-		}, function() {
-			layer.load(1, {
-				time: 3000
-			});
-			window.location.href = "login.html";
-		}, function() {
-			layer.closeAll();
-		});
+		var btnArray = ['否', '是'];
+		mui.confirm('你确定要退出？', '温馨提示', btnArray, function(e) {
+			if (e.index == 1) 
+			{
+				localStorage.removeItem("登录帐号");
+				localStorage.removeItem("auto");
+				 
+				mui.openWindow
+				 ({ 
+						url:"login.html",
+						id:"login"  
+				}); 
+			} 
+			else
+			{
+				 
+			}
+		})
+
 
 	})
+ 
+}
+
+
+
+
+
+ 
+
+// <summary>
+// 时间Javascript类库
+// </summary>
+Date.prototype.format = function(format) {
+	var o = {
+		"M+": this.getMonth() + 1, //month
+		"d+": this.getDate(), //day
+		"h+": this.getHours(), //hour
+		"m+": this.getMinutes(), //minute
+		"s+": this.getSeconds(), //second
+		"q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+		"S": this.getMilliseconds() //millisecond
+	}
+	if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	for (var k in o)
+		if (new RegExp("(" + k + ")").test(format))
+			format = format.replace(RegExp.$1,
+				RegExp.$1.length == 1 ? o[k] :
+				("00" + o[k]).substr(("" + o[k]).length));
+	return format;
+}
+
+
+
+/*
+1、< 60s, 显示为“刚刚”
+2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
+3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
+4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
+5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
+*/
+function timeFormat(time) {
+	var date = new Date(time),
+		curDate = new Date(),
+		year = date.getFullYear(),
+		month = date.getMonth() + 10,
+		day = date.getDate(),
+		hour = date.getHours(),
+		minute = date.getMinutes(),
+		curYear = curDate.getFullYear(),
+		curHour = curDate.getHours(),
+		timeStr;
+
+	if (year < curYear) {
+		timeStr = year + '年' + month + '月' + day + '日 ' + hour + ':' + minute;
+	} else {
+		var pastTime = curDate - date,
+			pastH = pastTime / 3600000;
+
+		if (pastH > curHour) {
+			timeStr = month + '月' + day + '日 ' + hour + ':' + minute;
+		} else if (pastH >= 1) {
+			timeStr = '今天 ' + hour + ':' + minute + '分';
+		} else {
+			var pastM = curDate.getMinutes() - minute;
+			if (pastM > 1) {
+				timeStr = pastM + '分钟前';
+			} else {
+				timeStr = '刚刚';
+			}
+		}
+	}
+	return timeStr;
+}
+ 
+
+
+
+涟漪特效 = function()
+{
+    $('body').on('tap', function (e) 
+    {  
+            var left = e.originalEvent.detail.center.x;
+            var top = e.originalEvent.detail.center.y;
+              
+            $("body").append('<div class="dot" style="top:' + top + 'px;left:' + left + 'px;"></div>')
+            setTimeout(function () {
+                $('.dot:first').remove();
+            }, 1500);              
+    });  
+}
+
+
+
+菜单部分 = function()
+{
+	var caidan = "<!--菜单部分-->"+
+"			<aside id=\"offCanvasSide\" class=\"mui-off-canvas-right\">"+
+"							<div id=\"offCanvasSideScroll\" class=\"mui-scroll-wrapper\">"+
+"								 <div class=\"mui-scroll\">"+
+"		                            "+
+"		                            <div class=\"content\" style=\"margin:20px 0px 20px 20px\">"+
+"		                    			<a class=\"mui-navigate-right\">"+
+"											<img class=\"mui-media-object mui-pull-left head-img\" id=\"head-img\" width=\"50px\" style=\"margin-right: 10px;\" src=\"Images/logo.png\">"+
+"											<div class=\"mui-media-body\" style=\"margin-left: 20px;\">"+
+"												<h3  style=\"color:#fff\"><span id=\"username\"></span><span id=\"quit\" class=\"mui-pull-right mui-h6\" style=\"color:#fff;margin-right: 10px;display: block;width: 100px;text-align: right;\"><i class=\"iconfont\">&#xe605;</i></span></h3>	"+
+"												<p class=\'mui-ellipsis\' style=\"color:#fff\"> 金额: ￥ 00.00</p>"+
+"											</div>"+
+"										</a>"+
+"		                           </div>   "+
+"									 <p style=\"margin: 10px 15px;\">"+
+"		                                <button id=\"offCanvasHide\" type=\"button\" class=\"mui-btn mui-btn-danger mui-btn-block\" style=\"padding: 5px 20px;\">关闭侧滑菜单</button>"+
+"		                            </p>"+
+"									<ul class=\"mui-table-view mui-table-view-chevron mui-table-view-inverted\">"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												 <i class=\"iconfont\">&#xe61f;</i> 手机充值"+
+"											</a>"+
+"										</li> "+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe61c;</i> 扫码支付"+
+"											</a>"+
+"										</li>"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe61a;</i> 微信找零"+
+"											</a>"+
+"										</li>"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe600;</i> 代缴违章"+
+"											</a>"+
+"										</li>"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe619;</i> 火车票"+
+"											</a>"+
+"										</li>"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe61e;</i> 收寄宝"+
+"											</a>"+
+"										</li>"+
+"										<li class=\"mui-table-view-cell\" id=\"qianbaoliushui\">"+
+"									<a class=\"mui-navigate-right\">"+
+"										<i class=\"iconfont\">&#xe602;</i> 钱包流水"+
+"									</a>"+
+"								</li>"+
+"										<li class=\"mui-table-view-cell\">"+
+"											<a class=\"mui-navigate-right\">"+
+"												<i class=\"iconfont\">&#xe617;</i> 管理"+
+"											</a>"+
+"										</li>								"+
+"									</ul>	"+
+"										<div  class=\"footer\">"+
+"										    <div class=\"container\">"+
+"										        <p>企业合作 | 合作事宜 | 版权投诉</p>"+
+"										        <p>粤ICP备12345678. © 2009-2016 彩洋科技. Powered by Lee.</p>"+
+"										    </div>"+
+"										</div>"+
+"								</div>"+
+"								"+
+"							</div>"+
+"							"+
+"			</aside>";
+
+
+	var size = $("asign").size();
+	if(size == 0)
+	{
+		$("#Main").append(caidan);
+	}
+
+}
+
+
+小光点菜单 = function()
+{
+	var caidan = "<div style=\"display:none\" id=\"xiaoguangdiancaidan\">		"+
+"	        <ul class=\"mui-table-view mui-grid-view mui-grid-9\">"+
+"	           <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"		                <i class=\"iconfont\">&#xe61f;</i>"+
+"		                <div class=\"mui-media-body\">手机充值</div></a></li>	         "+
+"	           <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                   <i class=\"iconfont\">&#xe61c;</i>	"+
+"	                    <div class=\"mui-media-body\">扫码支付</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                     <i class=\"iconfont\">&#xe61a;</i>"+
+"	                    <div class=\"mui-media-body\">微信找零</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                    <i class=\"iconfont\">&#xe600;</i>"+
+"	                    <div class=\"mui-media-body\">代缴违章</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                    <i class=\"iconfont\">&#xe619;</i>"+
+"	                    <div class=\"mui-media-body\">火车票</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                    <i class=\"iconfont\">&#xe61e;</i>"+
+"	                    <div class=\"mui-media-body\">收寄宝</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                   <i class=\"iconfont\">&#xe602;</i>"+
+"	                    <div class=\"mui-media-body\">账户查询</div></a></li>"+
+"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	                    <i class=\"iconfont\">&#xe617;</i>"+
+"	                    <div class=\"mui-media-body\">管理</div></a></li>  "+
+"	                     "+
+"	          <li class=\"clear\" style=\"height:1px;width:100%;background: #fff;\"></li>"+
+"	           "+
+"	           <li  class=\"Menu_back mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4\"><a href=\"#\">"+
+"		                <span class=\"mui-icon mui-icon-undo\"></span>"+
+"		                <div class=\"mui-media-body\">返回</div></a> "+
+"              </li>  "+
+"	           <li class=\"Menu_home mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4\"><a href=\"#\">"+
+"	                    <span class=\" mui-icon mui-icon-home-filled\"></span>"+
+"	                    <div class=\" mui-media-body\">主页</div></a></li>"+
+"               <li  class=\"Menu_refresh mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4\"><a href=\"#\">"+
+"		                <span class=\"mui-icon mui-icon-loop\"></span>"+
+"		                <div class=\"mui-media-body\">刷新</div></a>"+
+"               </li>  "+
+"	        </ul>   	    "+
+"</div>   ";
+
+	
+	var size = $("#xiaoguangdiancaidan").size();
+	
+	if(size == 0)
+	{
+		$("body").append(caidan);
+	}
 
 }
