@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="css/My_css/cover.css" />
 <link rel="stylesheet" href="css/My_css/global.css" />
 <link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
-</head>
+</head> 
 
 <style type="text/css">
 		.lead{
@@ -31,6 +31,19 @@
 		{
 			background: #fff;
 		}
+		#money
+		{
+			font-size: 23px;
+			font-family: 黑体;
+			z-index: 9999;
+		}		
+		/* 醒目提醒  */
+		.form-control:focus
+		{
+			box-shadow: 0px 0px 25px #00BFFF;
+			-moz-box-shadow: 0px 0px 25px #00BFFF;
+			-webkit-box-shadow: 0px 0px 25px #00BFFF;	
+		}
 </style>
 
 <body> 
@@ -39,14 +52,15 @@
 <div id="Main" class="mui-off-canvas-wrap mui-draggable"> 
 	
 	<div class="mui-content mui-inner-wrap mui-scroll-wrapper" id="mui-content">
-	     <div class="col-xs-7 col-md-12">
-			<form id="main" class="text-left">
+	     <div class="col-xs-7">
+	     	
+			<form id="form" class="text-left">
 					<div class="form-group"><h4>请输入找零金额</h4></div>		
 					<div class="input-group" >
 						  <div class="input-group-addon">￥</div>
-						  <input type="text" id="money" readonly="readonly" class="form-control" placeholder="Input Some Money...">
-						  <span class="input-group-btn">
-							<button class="btn btn-default" id="go_form" style="padding:9px 12px;" type="button">Go!</button>
+						  <input type="text" id="money" readonly="readonly"  class="form-control target_input" placeholder="Input Some Money...">
+						  <span class="input-group-btn"> 
+							<button class="btn btn-default"  id="go_form" style="padding:9px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
 						  </span>
 					</div>					
 			</form>
@@ -56,22 +70,23 @@
                         1、找零不可撤销，请确保输入正确金额
                    </p> 
                     <p class="lead">
-                        2、找零金额在0.0001 - 99元
+                        2、找零金额在￥0.01 - ￥99.00元
                     </p>                   
            </div>    
            
+            <button type="button" id="tijiaodingdan" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
 			<button type="button" id="chaxunmingxi" class="mui-btn mui-btn-warning mui-btn-block">查询明细</button>
 
         </div> 
 		
-        <div class="col-xs-5 hidden-md hidden-lg"  id="calculator">	
+        <div class="col-xs-5"  id="calculator">	
 			<div class="calculator" >
 			  	<span>7</span><span>8</span><span>9</span>
 			  	<span>4</span><span>5</span><span>6</span>
 			  	<span>1</span><span>2</span><span>3</span>
-			  	<span class="clear operation">C</span>
+			  	<span class="operation">C</span>
 			  	<span>0</span>
-			  	<span class="equal operation active">提交</span>			  	
+			  	<span class="operation">.</span>	
        		</div>
 		</div>
 		
@@ -100,26 +115,53 @@
 <script src="js/jquery/jquery.min.js"></script>  
 <script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jcalculator/js/min/jcalculator.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/My_Js/Lee.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html> 
 <script type="text/javascript">
 
-
 	
-	$(function(){ 
+	
+	if(false)
+	{
+		var v = newGuid(); 
+		var CustomerCode = localStorage.CustomerCode; 
+		var Operator = localStorage.EmployeeCode;
 		
-		$("#main").autoheight({n:4})
-		$("#well").autoheight({n:4}) 
-		$("#chaxunmingxi").autoheight({n:4,m:"margin"})
+		 
+//		alert("订单号:" + v);
+//		alert("CustomerCode:" + CustomerCode);
+//		alert("Operator:" + Operator); 
+		 
+//		e217a962100c156650d5e0c341e7a8c0
+//		68c5df65517c2731e1ba0bb0b6ef37a9
+//		ab6a759af8bfe16d7a3bf9da15097317
+
+		var opt = {"Operator":Operator,"CustomerOrderNo":"ab6a759af8bfe16d7a3bf9da15097317","CustomerCode":CustomerCode};
+		
+		alert(JSON.stringify(opt));  
+		
+		  
+		InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "QueryOrder", opt, "CYAPI_微信找零获取返回值");
+    		//InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
+	}	  
+
+	$(function() 
+	{
+		
+		$("#form").autoheight({n:3.5});
+		$("#well").autoheight({n:3.5});
+		
+		$("#tijiaodingdan").autoheight({n:2.5,m:"margin"});
+		$("#chaxunmingxi").autoheight({n:2.5,m:"margin"});
+		
 		$("#calculator").autoheight({n:12,m:"height"}) 
 		 
 		
 		
 		计算器_autolineheight();
-		calculator_winresize($("#money"));
+		 
 		
 	
 		document.getElementById("chaxunmingxi").addEventListener('tap',function(){
@@ -129,11 +171,51 @@
 			});
 		})
 		
-		
+		 
 		LeftPageGOBack();	//右滑箭头 
 		
+		
+		 
+		
+		$("#tijiaodingdan").bind('tap',function(){
+			
+			var btnArray = ['否', '是'];
+			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) {
+				if (e.index == 1) 
+				{
+					
+					var CustomerOrderNo = $("#money").val(); 
+					var Amount = localStorage.CustomerCode;
+					
+//					d8706f2b61cd40018d4444c542b51edb
+					
+					if(CustomerOrderNo.length == 0 || Amount.length == 0)
+					{
+						layer.msg("请输入金额");
+						
+						return false;
+					}
+					
+					
+	  			     InvokeApi(GetApiUrl("Global_5un29"), "ApiClass", "SubmitOrder", {"CustomerOrderNo":CustomerOrderNo,"Amount":Amount}, "CYAPI_微信找零获取返回值")
+		 
+				} else {
+					return false;
+				}
+			}) 
+		})
+	
+		
 	}) 
-	 
-	    
+
+
+/* 微信找零From提交 */
+CYAPI_微信找零获取返回值 = function(str)
+{
+		alert(str);
+		
+		mui.toast("正在提交表单...");
+}
+
 	
 </script>

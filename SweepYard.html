@@ -30,6 +30,13 @@
 		fieldset[disabled] .form-control {
 			background: #fff;
 		}
+
+		.form-control:focus
+		{
+			box-shadow: 0px 0px 25px #00BFFF;
+			-moz-box-shadow: 0px 0px 25px #00BFFF;
+			-webkit-box-shadow: 0px 0px 25px #00BFFF;	
+		}
 	</style>
 
 	<body>
@@ -38,8 +45,8 @@
 		<div id="Main" class="mui-off-canvas-wrap mui-draggable" >
 		
 			<div class="mui-content mui-inner-wrap mui-scroll-wrapper" id="mui-content">
-				<div class="col-xs-7 col-md-12">
-					<form id="main" class="text-left">
+				<div class="col-xs-7">
+					<form id="form" class="text-left">
 
 						<div class="form-group">
 							<h4>请输入金额</h4></div>
@@ -48,11 +55,11 @@
 
 							<div class="input-group-addon">￥</div>
 
-							<input type="text" id="money" style="z-index: 10;" readonly="readonly" class="form-control" placeholder="Input Some Money..." />
+							<input type="text" id="money" style="z-index: 10;" readonly="readonly" class="form-control target_input" placeholder="Input Some Money..." />
 
 							<span class="input-group-btn">
 				
-				<button class="btn btn-default" id="go_form" style="padding:9px 12px;" type="button">Go!</button>
+				<button class="btn btn-default" id="go_form" style="padding:9px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
 				
 				  </span>
 
@@ -66,9 +73,9 @@
 
 							<span class="input-group-btn">
 				 
-				<button class="btn btn-default" id="go_form" style="padding:9px 12px;" type="button">Go!</button>
+								<button class="btn btn-default" id="go_form2" style="padding:9px 12px;" type="button"><i class="iconfont icon-suo" style="font-size:12px"></i></button>
 				
-				  </span>
+				  			</span>
 
 						</div>
 
@@ -84,19 +91,22 @@
 						</p>
 					</div>
 
+							
+		            <button type="button" id="tijiaodingdan" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
 					<button type="button" id="chaxunmingxi" class="mui-btn mui-btn-warning mui-btn-block">查询明细</button>
+		
 
 				</div>
 
-				<div class="col-xs-5 hidden-md hidden-lg" id="calculator">
-					<div class="calculator">
-						<span>7</span><span>8</span><span>9</span>
-						<span>4</span><span>5</span><span>6</span>
-						<span>1</span><span>2</span><span>3</span>
-						<span class="clear operation">C</span>
-						<span>0</span>
-						<span class="equal operation active">提交</span>
-					</div>
+				<div class="col-xs-5"  id="calculator">	
+					<div class="calculator" >
+					  	<span>7</span><span>8</span><span>9</span>
+					  	<span>4</span><span>5</span><span>6</span>
+					  	<span>1</span><span>2</span><span>3</span>
+					  	<span class="operation">C</span>
+					  	<span>0</span>
+					  	<span class="operation">.</span>	
+		       		</div>
 				</div>
  
 				<div class="assistive-wrap" id="assistiveTouch">
@@ -120,38 +130,30 @@
 	<span class="mui-icon mui-icon-arrowleft"></span>
 </div>	 
 
- 
-		<script src="js/jquery/jquery.min.js"></script>
-		<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jcalculator/js/min/jcalculator.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/My_Js/Lee.js" type="text/javascript" charset="utf-8"></script>
-	</body>
 
-</html>
+<script src="js/jquery/jquery.min.js"></script>  
+<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html> 
 <script type="text/javascript">
 	
 	
 	
-	$(function() {
-		$("#main").autoheight({
-			n: 5
-		})
-		$("#well").autoheight({
-			n: 4
-		})
-		$("#chaxunmingxi").autoheight({
-			n: 3,
-			m: "margin" 
-		})
-		$("#calculator").autoheight({
-			n: 12,
-			m: "height"
-		})
+	$(function() 
+	{
+		$("#form").autoheight({n:4});
+		$("#well").autoheight({n:4.2,m:"margin"}); 
+		
+		$("#tijiaodingdan").autoheight({n:2.2,m:"margin"});
+		$("#chaxunmingxi").autoheight({n:2,m:"margin"});
+		
+		$("#calculator").autoheight({n:12,m:"height"}) 
+		 
+		
 		计算器_autolineheight();
-		calculator_winresize($("#money"));
-		calculator_winresize($("#yard"));
 		$("#chaxunmingxi").click(function() {
 			window.location.href = "list.html";
 		})

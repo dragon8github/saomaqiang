@@ -48,7 +48,6 @@
  
  <script type="text/javascript">
   
-  
 	var usernamed = localStorage.登录帐号 || "";
 	var autoed = localStorage.auto || "";
 	if (usernamed != ""  && autoed != "" && autoed != "false") 
@@ -87,8 +86,7 @@
 	 		var username = document.getElementById("username").value;
 	 		var password = document.getElementById("password").value;
 
-
-		 
+		
 			if(username.length == 0)
 			{
 				mui.toast("您的账号不可为空！"); 
@@ -112,8 +110,8 @@
 //					url:"index.html",
 //					id:"index" 
 //			});
-		  
-	
+		   
+	 
 	    InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":username,"密码":password}, "CYAPI_获取返回值")
 		 
 		
@@ -136,6 +134,9 @@
 	//str转换为json	
 	CYAPI_获取返回值 = function(str)
 	{
+		
+		//alert(str);
+		
 		
 		var jsonobj = JSON.parse(str);
 		var dt = JSON.parse(str)["dtCustomer"];
@@ -170,7 +171,7 @@
 			localStorage.CustomerMobile = dt[0].CustomerMobile;
 			localStorage.CustomerAddress = dt[0].CustomerAddress;
 			localStorage.EID  = dt[0].EID;
-			localStorage.EmployeeCode = dt[0].EmployeeCode;
+			localStorage.EmployeeCode = dt[0].EmployeeCode; //EmployeeCode
 			localStorage.EmployeeName = dt[0].EmployeeName;
 			localStorage.EmployeeState  = dt[0].EmployeeState;
 			localStorage.EmployeeMobile  = dt[0].EmployeeMobile;
@@ -180,7 +181,8 @@
 			localStorage.EmployeeLoginPWD = dt[0].EmployeeLoginPWD;
 			localStorage.EmployeeIdentity  = dt[0].EmployeeIdentity;
  
- 			
+ 
+ 			alert(dt[0].CustomerCode);
  
 			 mui.openWindow
 			 ({

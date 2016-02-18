@@ -17,7 +17,10 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 .icon-settings:before { content: "\e617"; }
+.icon-suo:before { content: "\e609"; }
 .icon-huochepiao:before { content: "\e619"; }
 .icon-tuichu:before { content: "\e605"; }
 .icon-fanhui:before { content: "\e601"; }
@@ -29,10 +32,9 @@
 .icon-shibai:before { content: "\e603"; }
 .icon-iconchenggong:before { content: "\e604"; }
 .icon-time:before { content: "\e606"; }
-.icon-icondaichuli:before { content: "\e608"; }
 .icon-weizhang:before { content: "\e600"; }
-.icon-qunfengtixianchulizhong:before { content: "\e609"; }
 .icon-che:before { content: "\e61d"; }
+.icon-jiesuo:before { content: "\e608"; }
 .icon-kuaidi:before { content: "\e61e"; }
 .icon-shoujichongzhi:before { content: "\e61f"; }
 .icon-shouzhiliushuizhang:before { content: "\e60a"; }

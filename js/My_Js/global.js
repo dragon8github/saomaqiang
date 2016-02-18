@@ -49,7 +49,7 @@ mui.init({
 
 
 
-//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 公共加载模块  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 我的公共加载模块  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 $(function() 
 {
 	Init_初始化();	
@@ -57,91 +57,48 @@ $(function()
 	assistive_mTouch(); //小光点以及菜单
 
 	QQ_offCanvas(); //QQ侧滑菜单	
-
 	
 	涟漪特效(); 
 	
-	
-	
-	
 })
-
-
- 
-
-
-//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 计算器大小监视 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
-
-calculator_winresize = function(e) {
-	$(window).resize(function() {
-
-		Init_初始化();
-
-		if (Lee.xs_超小屏幕如所有手机小于768px()) {
-			$("#calculator").autoheight({
-				n: 12,
-				m: "height"
-			});
-			$(".jcalculator").hide();
-			计算器_autolineheight();
-		}
-		
-	})
-}
-
 
 
 
 // <summary>
 // Init_初始化
 // </summary>
-Init_初始化 = function() {
-	$("#mui-content").height(Get_获取容器高度()).css({
-		"overflow": "hidden"
-	}); //固定高度	
-
-
-
-
-	window.onorientationchange = function() {
-		switch (window.orientation) {
-			case -90:
-			case 90:
-				// alert("横屏:" + window.orientation);
-				$("#mui-content").height(Get_获取容器高度()).css({
-					"overflow": "hidden"
-				}); //固定高度	
-			case 0:
-			case 180:
-				//  alert("竖屏:" + window.orientation);
-				$("#mui-content").height(Get_获取容器高度()).css({
-					"overflow": "hidden"
-				}); //固定高度	
-				break;
-		}
-	}
-
-
-
-
+Init_初始化 = function() 
+{
+	
+	//验证是否登录
 	var username = localStorage.登录帐号;
-
 	if (typeof(username) == "undefined" || username == "undefined" ) 
 	{
-//		mui.toast("请先登陆账号");
-//		$("#username").text("请先登陆账号");
-//		mui.openWindow({
-//			url: "login.html", 
-//			id: "login"
-//		});
-//		return;
-	} 
-	else
-	{ 
-		$("#username").text(username);
+		mui.toast("请先登陆账号");
+		$("#username").text("请先登陆账号");
+		mui.openWindow({
+			url: "login.html", 
+			id: "login"
+		});
+		return;
 	}
+	
+	//固定界面的高度	
+	$("#mui-content").height(Get_获取容器高度()).css({
+		"overflow": "hidden"
+	}); 
 
+	//当旋转屏幕的时候，重新计算并固定界面的高度
+	window.onorientationchange = function() 
+	{
+			$("#mui-content").height(Get_获取容器高度()).css({
+					"overflow": "hidden"
+			}); //固定高度		
+	}
 }
+
+
+
 
 
 
@@ -246,69 +203,77 @@ $.fn.autoheight = function(opt) {
 	var height = Get_获取容器高度() / 4;
 	$("#calculator span").css("line-height", height + "px");
 
+ 	
+	$("#go_form,#money").bind('tap',function()
+	{
+		$("#money").addClass("target_input"); //作为键盘输入的目标
+		$("#yard").removeClass("target_input");
+		$("#go_form").find(".iconfont").addClass("icon-jiesuo"); //添加提示
+		$("#go_form2").find(".iconfont").removeClass("icon-jiesuo").addClass("icon-suo");
+		mui.toast("您可以输入金额了");
+		return false;   
+	}) 
+	   
+	$("#go_form2,#yard").bind('tap',function(){ 
+		$("#yard").addClass("target_input");  //作为键盘输入的目标
+		$("#money").removeClass("target_input");
+		$("#go_form2").find(".iconfont").addClass("icon-jiesuo");
+		$("#go_form").find(".iconfont").removeClass("icon-jiesuo").addClass("icon-suo");
+		mui.toast("您可以输入识别码了");
+		return false;  
+	})
+		
+	
 
-	$("#calculator .calculator span,#go_form").bind('tap', function() {
+
+
+	$("#calculator .calculator span").bind('tap', function() 
+	{
 		
 		var text = $(this).text();
+		var myinput = $("input.target_input").eq(0);
 		 
-		if ($('input:focus').length == 0 && text != "提交" && text != "Go!")
+		if ($('.target_input').size() == 0 && text != "提交订单" && text != "Go!")
 		{
-			layer.tips("请先选择输入框", $("#money"), {
+			layer.tips("点我输入金额", $("#go_form"), { 
 				tipsMore: true,
 				time: 4000,
-				tips: [1, '#000'],
+				tips: [4, '#000'],
 			})
-			layer.tips("请先选择输入框", $("#yard"), {
+			
+			layer.tips("点我输入识别码", $("#go_form2"), {
 					tipsMore: true,
 					time: 4000,
-					tips: [3, '#000'],
+					tips: [4, 'red'], 
 				})
 				//alert("请先聚焦输入框");
 			return false;
 		}
+		
+		var regex = /^[0-9]+.?[0-9]|\.*$/; //数字	
+		if (regex.test(text)) 
+		{			
+			var v = myinput.val() + text;
+			
+			myinput.val(v); 
+			
+			var reg = /^\d+\.?\d{0,2}$/;	//只能输入小数点和金额
+			 	 
+			if (!reg.test(v))  
+			{
+                 myinput.val(v.substr(0,v.length - 1));
+            } 			
+		}
+
+		if (text == "C") 
+		{
+			myinput.val('');
+		}
 
 		
-		 var regex = /^[0-9]+.?[0-9]*$/;
-		if (regex.test(text)) 
-		{
-			var v = $('input:focus').val();
-			$('input:focus').val(v + text);
-		}
-
-		if (text == "C") {
-			$('input:focus').val('');
-		}
-
-		if (text == "提交" || text == "Go!")
-		{
-			var btnArray = ['否', '是'];
-			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) {
-				if (e.index == 1) {
-					mui.toast("正在提交表单...");
-				} else {
-					return false;
-				}
-			})
-		}
 	})
 
 }
-
-
-// <summary>
-// 当窗口大于等于992px时，点击money窗口会弹出计算器 
-// </summary>
-money_click = function() {
-
-	$("#money").click(function() {
-		if (Lee.md_中等屏幕如桌面大于等于992px()) {
-
-
-		}
-	})
-}
-
-
 
 
 
@@ -446,13 +411,16 @@ Show_Menu = function() {
 /*侧滑菜单*/
 QQ_offCanvas = function() 
 {
-	菜单部分();
+	菜单部分(); //html
+	
+	
 	
 	var Main = mui('#Main'); //侧滑容器父节点
 	Main[0].classList.add('mui-scalable'); //动画效果的类
-	Main.offCanvas().refresh();
-	document.getElementById('offCanvasHide').addEventListener('tap', function() {
-		Main.offCanvas('close');
+	Main.offCanvas().refresh();	
+	document.getElementById('offCanvasHide').addEventListener('tap', function()
+	{
+		Main.offCanvas('close');//关闭侧滑菜单
 	});
 	
 	//支持区域滚动，需要添加.mui-scroll-wrapper
@@ -663,6 +631,22 @@ function timeFormat(time) {
 
 
 
+function newGuid()
+{
+    var guid = "";
+    for (var i = 1; i <= 32; i++){
+      var n = Math.floor(Math.random()*16.0).toString(16);
+      guid +=   n;
+      if((i==8)||(i==12)||(i==16)||(i==20))
+        guid += "-";
+    }
+    return guid.replace(/-/g,"");     
+}
+
+
+
+
+
 菜单部分 = function()
 {
 	var caidan = "<!--菜单部分-->"+
@@ -797,6 +781,7 @@ function timeFormat(time) {
 	if(size == 0)
 	{
 		$("body").append(caidan);
+		$("#username").text(username);	//绑定用户名
 	}
 
 }
