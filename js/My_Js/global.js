@@ -289,10 +289,22 @@ assistive_mTouch = function() {
 		var left = obj.offsetLeft,
 			Top = obj.offsetTop,
 			width = obj.outerWidth,
+			height = obj.offsetHeight,
 			windowWith = (document.documentElement || document.body).offsetWidth;
-
-
-
+			windowheight = Get_获取容器高度();
+			
+		//开启以下让小光点无法超出屏幕外	
+		if(Top < 0)
+		{
+			Top = height;
+			
+		}
+		else if(Top > parseInt(windowheight - height))
+		{
+			
+			Top = parseInt(windowheight - height);
+		}
+		
 
 		//开启以下代码段可以让小光点贴墙黏
 		if (left > (windowWith - width) / 2) {
@@ -304,6 +316,7 @@ assistive_mTouch = function() {
 		el.style.transition = 'all .2s';
 		el.style['-webkit-transition'] = 'all .2s';
 		el.style.left = left + 'px';
+		el.style.top = Top + 'px';
 		timerid = setTimeout(function() {
 			el.style.transition = 'all .5s';
 			el.style['-webkit-transition'] = 'all .5s';
