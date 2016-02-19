@@ -58,7 +58,7 @@ $(function()
 
 	QQ_offCanvas(); //QQ侧滑菜单	
 	
-	涟漪特效(); 
+	//涟漪特效(); 
 	
 })
 
@@ -360,7 +360,6 @@ Show_Menu = function() {
 		closeBtn: 0,
 		title: false,
 		shadeClose: true,
-		shift:4, 
 		content: $("#xiaoguangdiancaidan").html(),
 		btn: 0, //默认底部不显示任何按钮
 		end: function() {
