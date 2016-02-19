@@ -30,11 +30,14 @@
 .icon-saomazhifu:before { content: "\e61c"; }
 .icon-repair:before { content: "\e618"; }
 .icon-shibai:before { content: "\e603"; }
+.icon-chongdiao1:before { content: "\e60b"; }
 .icon-iconchenggong:before { content: "\e604"; }
 .icon-time:before { content: "\e606"; }
 .icon-weizhang:before { content: "\e600"; }
 .icon-che:before { content: "\e61d"; }
 .icon-jiesuo:before { content: "\e608"; }
+.icon-jine:before { content: "\e60c"; }
 .icon-kuaidi:before { content: "\e61e"; }
 .icon-shoujichongzhi:before { content: "\e61f"; }
 .icon-shouzhiliushuizhang:before { content: "\e60a"; }
+

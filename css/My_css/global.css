@@ -11,11 +11,11 @@
   background: transparent;
   border-radius: 100%;  
   position: absolute;
-  animation: sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  -webkit-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  -ms-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  -moz-animation:sploosh 2s cubic-bezier(0.165, 0.84, 0.44, 1); 
-    background: transparent;  
+  animation: sploosh 1.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-animation:sploosh 1.25s cubic-bezier(0.165, 0.84, 0.44, 1);  
+  -ms-animation:sploosh 1.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-animation:sploosh 1.25s cubic-bezier(0.165, 0.84, 0.44, 1); 
+   background: transparent;   
   z-index:9999;    
   
 } 

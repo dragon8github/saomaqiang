@@ -154,8 +154,8 @@
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
-						<!--<li class="mui-table-view-cell">
-							<a href="#info">
+						<li class="mui-table-view-cell">
+							<a> 
 								<div class="mui-table">
 									<div class="mui-table-cell mui-col-xs-9">
 										<h4 class="mui-ellipsis-2 Lee_Money">￥ -12.10 </h4>
@@ -170,7 +170,7 @@
 								</div>
 							</a>
 						</li>
-						-->
+						
 					</ul>
 				</div>
 
@@ -549,11 +549,8 @@
 			 bind_绑定子页面 = function()
 			 {			 	 
 			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function () 
-	     		{		     			  
-	     			layer.load(1);  
+	     		{		    		
 	     			$(this).find("a").attr("href","#info");
-					$("#sub_page .goto_subpage").trigger("tap");
-					layer.closeAll();	     			
      			})  
 			 } 
 			  

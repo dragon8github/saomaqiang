@@ -102,16 +102,17 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
+			 if(false)
+			 {
+				localStorage.登录帐号 = document.getElementById("username").value;  
+				localStorage.CustomerCode = "d8706f2b61cd40018d4444c542b51edb";
+				mui.openWindow
+				 ({ 
+						url:"index.html",
+						id:"index" 
+				});		   
+			 }
 			 
-//			localStorage.登录帐号 = document.getElementById("username").value;  
-//			localStorage.CustomerCode = "d8706f2b61cd40018d4444c542b51edb";
-//			mui.openWindow
-//			 ({ 
-//					url:"index.html",
-//					id:"index" 
-//			});
-		   
-	 
 	    InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":username,"密码":password}, "CYAPI_获取返回值")
 		 
 		
@@ -181,8 +182,6 @@
 			localStorage.EmployeeLoginPWD = dt[0].EmployeeLoginPWD;
 			localStorage.EmployeeIdentity  = dt[0].EmployeeIdentity;
  
- 
- 			alert(dt[0].CustomerCode);
  
 			 mui.openWindow
 			 ({

@@ -360,6 +360,7 @@ Show_Menu = function() {
 		closeBtn: 0,
 		title: false,
 		shadeClose: true,
+		shift:4, 
 		content: $("#xiaoguangdiancaidan").html(),
 		btn: 0, //默认底部不显示任何按钮
 		end: function() {
@@ -404,6 +405,16 @@ Show_Menu = function() {
 			id: "index"			
 		});
 	})
+	mui(".mui-table-view").on('tap', '.guanli', function() {
+		layer.load(1, {
+			time: 2000
+		});
+		mui.openWindow({
+			url: "error.html",
+			id: "error"			
+		});
+	})
+	
 
 }
 
@@ -436,6 +447,17 @@ QQ_offCanvas = function()
 		mui.openWindow({
 			url: "QiangBao_list.html",
 			id: "QiangBao_list"			
+		});
+	})
+	
+	
+	//业务流水
+	$("#yewuliusuhi").bind("tap",function()
+	{
+		layer.load(1);
+		mui.openWindow({
+			url: "list.html",
+			id: "list"			
 		});
 	})
 	
@@ -529,10 +551,6 @@ quit = function()
 						url:"login.html",
 						id:"login"  
 				}); 
-			} 
-			else
-			{
-				 
 			}
 		})
 
@@ -702,9 +720,9 @@ function newGuid()
 "										<i class=\"iconfont\">&#xe602;</i> 钱包流水"+
 "									</a>"+
 "								</li>"+
-"										<li class=\"mui-table-view-cell\">"+
+"										<li id=\"yewuliusuhi\" class=\"mui-table-view-cell\">"+
 "											<a class=\"mui-navigate-right\">"+
-"												<i class=\"iconfont\">&#xe617;</i> 管理"+
+"												<i class=\"iconfont\">&#xe60a;</i> 业务流水"+
 "											</a>"+
 "										</li>								"+
 "									</ul>	"+
@@ -725,6 +743,7 @@ function newGuid()
 	if(size == 0)
 	{
 		$("#Main").append(caidan);
+		$("#username").text(localStorage.登录帐号);	//绑定用户名 
 	}
 
 }
@@ -755,7 +774,7 @@ function newGuid()
 "	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                   <i class=\"iconfont\">&#xe602;</i>"+
 "	                    <div class=\"mui-media-body\">账户查询</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li  class=\"guanli mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                    <i class=\"iconfont\">&#xe617;</i>"+
 "	                    <div class=\"mui-media-body\">管理</div></a></li>  "+
 "	                     "+
@@ -780,8 +799,7 @@ function newGuid()
 	
 	if(size == 0)
 	{
-		$("body").append(caidan);
-		$("#username").text(username);	//绑定用户名
+		$("body").append(caidan);		
 	}
 
 }
