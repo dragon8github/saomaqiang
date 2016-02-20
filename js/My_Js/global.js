@@ -289,7 +289,7 @@ assistive_mTouch = function() {
 		var left = obj.offsetLeft,
 			Top = obj.offsetTop,
 			width = obj.outerWidth,
-			height = obj.offsetHeight,
+			height = obj.offsetHeight / 2,
 			windowWith = (document.documentElement || document.body).offsetWidth;
 			windowheight = Get_获取容器高度();
 			

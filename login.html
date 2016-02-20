@@ -102,10 +102,14 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
-			 if(false)
+			 if(false) 
 			 {
 				localStorage.登录帐号 = document.getElementById("username").value;  
-				localStorage.CustomerCode = "d8706f2b61cd40018d4444c542b51edb";
+				localStorage.CustomerCode = "7b759a354ea94683ba603019f842c5b5";
+				localStorage.EmployeeCode = "JHT_0001_002";
+				
+				
+				
 				mui.openWindow
 				 ({ 
 						url:"index.html",
@@ -181,6 +185,8 @@
 			localStorage.EmployeeRegName = dt[0].EmployeeRegName;
 			localStorage.EmployeeLoginPWD = dt[0].EmployeeLoginPWD;
 			localStorage.EmployeeIdentity  = dt[0].EmployeeIdentity;
+ 
+ 			//alert(dt[0].CustomerCode);
  
  
 			 mui.openWindow
