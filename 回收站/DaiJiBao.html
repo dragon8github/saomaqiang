@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
+		<link rel="stylesheet" type="text/css" href="css/jcalculator/jcalculator.css"/>
+		<style>
+			
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				top: 46px;
+				height: auto;
+			}
+			
+			
+			
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			
+			
+			
+		
+			
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			
+			
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			/* my */
+			 .jcalculator span, .calculator span
+			 {
+			 	    width: 100%;
+				    padding-top: 7%;
+				    line-height: 100%;
+				    color:#fff;
+			 } 
+			  .calculator span > p
+			  {
+			  	color:#FFF000;
+			  }
+			 .mui-col-xs-3,.mui-col-xs-9
+			 {
+			 	float:left;
+			 	height:100%;
+			 	
+			 }
+			
+		</style>
+
+	</head>
+
+	<body >
+		
+		
+		
+		
+		
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		
+		
+		
+		
+		
+		<!--主页开始-->
+		<div id="setting" class="mui-page">
+			
+			<!--标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">代寄宝</h1>
+			</div> 
+			<!--标题栏结束-->
+			
+			<!-- 左边开始 -->  
+		   <div class="mui-col-xs-3"  id="calculator">	
+				<div class="calculator" > 
+				  	<a id="woyaodaishou" href="#DaiShou"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p>我要代收</p></span></a>
+				  	<a id="woyaodaiji" href="#DaiJi"><span><i class="icon-unie606 iconfont"></i><p>我要代寄</p></span></a>
+				  	<a id="woyaozancun" href="#Save"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p>我要暂存</p></span></a>
+				  	<a id="woyaohuijia" href="/index.html"><span><span class="mui-icon mui-icon-home" style="font-size:56px"></span></span></a>
+	     	 	</div>   
+			</div> 
+			<!-- 左边结束 -->
+			 
+			
+			<!-- 右边开始 -->
+			 <div class="mui-col-xs-9" style="background: #ccc;">	
+				<a  id="index">主页</a>
+			</div> 
+			<!-- 右边结束 -->
+			
+			
+		</div>
+		<!--主页结束-->
+		
+		
+		
+		
+		<!-- 代收单页开始 -->
+		<div id="DaiShou" class="mui-page">
+			
+			<!--标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<h1 class="mui-center mui-title">我要代收</h1>
+			</div>
+			<!--标题栏结束-->
+			
+			<!-- 左边开始 -->  
+		   <div class="mui-col-xs-3"  id="calculator">	
+				<div class="calculator" > 
+				  	<a class="woyaodaishou" href="#DaiShou"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p>我要代收</p></span></a>
+				  	<a class="woyaodaiji" href="#DaiJi"><span><i class="icon-unie606 iconfont"></i><p>我要代寄</p></span></a>
+				  	<a class="woyaozancun" href="#Save"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p>我要暂存</p></span></a>
+				  	<a href="/index.html"><span><span class="mui-icon mui-icon-home"></span></span></a>
+	       		</div>
+			</div> 
+			<!-- 左边结束 -->
+			
+			
+			<!-- 右边开始 -->
+			 <div class="mui-col-xs-9" style="background: #ccc;">	
+				我要代收
+			</div> 
+			<!-- 右边结束 -->
+		</div>
+		<!-- 代收单页结束 -->
+		
+		
+		
+		<!-- 代寄单页开始 -->
+		<div id="DaiJi" class="mui-page">
+			
+			<!--标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<h1 class="mui-center mui-title">我要代寄</h1>
+			</div>
+			<!--标题栏结束-->
+			
+			<!-- 左边开始 -->  
+		   <div class="mui-col-xs-3"  id="calculator">	
+				<div class="calculator" > 
+				  	<a class="woyaodaishou" href="#DaiShou"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p>我要代收</p></span></a>
+				  	<a class="woyaodaiji" href="#DaiJi"><span><i class="icon-unie606 iconfont"></i><p>我要代寄</p></span></a>
+				  	<a class="woyaozancun" href="#Save"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p>我要暂存</p></span></a>
+				  	<a class="woyaohuijia" href="/index.html"><span><span class="mui-icon mui-icon-home"></span></span></a>
+	       		</div>
+			</div> 
+			<!-- 左边结束 -->
+			
+			
+			<!-- 右边开始 -->
+			 <div class="mui-col-xs-9" style="background: #ccc;">	
+				我要代寄
+			</div> 
+			<!-- 右边结束 -->
+		</div>
+		<!-- 代寄单页结束 -->
+		
+		
+		
+		
+		<!-- 暂存单页开始 -->
+		<div id="Save" class="mui-page">
+			
+			<!--标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<h1 class="mui-center mui-title">我要暂存</h1>
+			</div>
+			<!--标题栏结束-->
+			
+			<!-- 左边开始 -->  
+		   <div class="mui-col-xs-3"  id="calculator">	
+				<div class="calculator" > 
+				  	<a class="woyaodaishou" href="#DaiShou"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p>我要代收</p></span></a>
+				  	<a class="woyaodaiji" href="#DaiJi"><span><i class="icon-unie606 iconfont"></i><p>我要代寄</p></span></a>
+				  	<a class="woyaozancun" href="#Save"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p>我要暂存</p></span></a>
+				  	<a class="woyaohuijia" href="/index.html"><span><span class="mui-icon mui-icon-home"></span></span></a>
+	       		</div>
+			</div> 
+			<!-- 左边结束 -->
+			
+			
+			<!-- 右边开始 -->
+			 <div class="mui-col-xs-9" style="background: #ccc;">	
+				我要暂存
+			</div> 
+			<!-- 右边结束 -->
+		</div>
+		<!-- 暂存单页结束 -->
+		
+		
+	</body>
+	
+	<script src="js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui/mui.min.lee.js"></script>
+	<script src="js/mui/mui.view.js"></script>
+	<!--<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>-->
+	<script>
+	
+		
+		
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+		
+		$(function(){ 
+		
+		
+			$("#index").bind("tap",function(e){  
+				
+				
+				$("#woyaodaishou").trigger("tap");
+				
+			
+			})
+			
+			//我要代收
+			$(".woyaodaishou").bind("tap",function(e)
+			{
+				mui.back();
+				$("#woyaodaishou").trigger("tap");
+				return false;
+			}) 
+			 
+			//我要代寄
+			$(".woyaodaiji").bind("tap",function(e){ 
+				$("#woyaodaiji").trigger("tap");
+				return false;
+			})  
+			
+			//暂存
+			$(".woyaozancun").bind("tap",function(e){ 
+				$("#woyaozancun").trigger("tap");
+				return false;
+			}) 
+			
+			
+			//$("#calculator").autoheight({n:12,m:"height"}) 
+			
+			//计算器_autolineheight();
+		 
+		})
+		  
+		
+		
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
+	
+	</script>
+
+</html>

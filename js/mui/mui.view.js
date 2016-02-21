@@ -160,6 +160,7 @@
 		},
 		_tap: function(event) {
 			var target = event.target;
+			
 			for (; target && target !== document; target = target.parentNode) {
 				if (target.tagName === 'A' && target.hash) {
 					var page = document.getElementById(target.hash.replace('#', ''));

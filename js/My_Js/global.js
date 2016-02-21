@@ -201,6 +201,7 @@ $.fn.autoheight = function(opt) {
 // </summary>
 计算器_autolineheight = function() {
 	var height = Get_获取容器高度() / 4;
+	
 	$("#calculator span").css("line-height", height + "px");
 
  	
