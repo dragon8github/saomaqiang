@@ -61,16 +61,16 @@
         <div class="mui-col-xs-3"  id="calculator">	
 			<div class=""  id="calculator">	
 				<div class="calculator" > 
-				  	<a href="#"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p class="iconfont_p">我要代收</p></span></a>
-				  	<a href="#"><span><i class="icon-unie606 iconfont"></i><p class="iconfont_p">我要代寄</p></span></a>
-				  	<a href="#"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p class="iconfont_p">我要暂存</p></span></a>
+				  	<a id="DaiShou" href="ShouJiBao/DaiShou.html" target="right_iframe"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p class="iconfont_p">我要代收</p></span></a>
+				  	<a id="DaiJi" href="ShouJiBao/DaiJi.html" target="right_iframe"><span><i class="icon-unie606 iconfont"></i><p class="iconfont_p">我要代寄</p></span></a>
+				  	<a id="Save" href="ShouJiBao/Save.html" target="right_iframe"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p class="iconfont_p">我要暂存</p></span></a>
 				  	<a href="index.html"><span class="gobackhome"><i class="mui-icon mui-icon-home" style="font-size:46px;position:relative;top:15%;"></i></span></a>
 	       		</div> 
 			</div>  
-		</div>
+		</div> 
 		
 		<div class="mui-col-xs-9" style="">
-	    		<iframe height="100%" width="100%" frameborder="0" src="ShouJiBao/WelCome.html"></iframe> 
+	    		<iframe height="100%" width="100%" name="right_iframe" id="right_iframe" frameborder="0" src="ShouJiBao/WelCome.html"></iframe> 
         </div> 
 		
 		<!-- 小光点 -->
@@ -84,7 +84,7 @@
 		<!-- 这个东西不能删，利用他还原界面 -->
 		<div class="mui-off-canvas-backdrop"></div>
 		 
-    </div>   
+   </div>    
      
 </div>	 
 	 
@@ -111,6 +111,16 @@
 		  	"padding-top":h / 4
 		  })
 		  
+		  
+		  
+		  
+		    var iframe = document.getElementById("right_iframe");  
+			 $("#DaiShou,#DaiJi,#Save").bind("tap",function(){  
+			 	layer.load(1);
+			 })
+			 iframe.onload = function() {
+	               layer.closeAll();
+			 };  
 	})
 
 	
