@@ -18,6 +18,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-settings:before { content: "\e617"; }
 .icon-suo:before { content: "\e609"; }
 .icon-unie606:before { content: "\e60d"; }
@@ -36,9 +37,12 @@
 .icon-time:before { content: "\e606"; }
 .icon-weizhang:before { content: "\e600"; }
 .icon-che:before { content: "\e61d"; }
+.icon-qujian:before { content: "\e610"; }
 .icon-jiesuo:before { content: "\e608"; }
 .icon-jine:before { content: "\e60c"; }
 .icon-woyaodaishoucainiao:before { content: "\e60f"; }
 .icon-kuaidi:before { content: "\e61e"; }
+.icon-dianpu:before { content: "\e611"; }
+.icon-chabingzheng:before { content: "\e612"; }
 .icon-shoujichongzhi:before { content: "\e61f"; }
 .icon-shouzhiliushuizhang:before { content: "\e60a"; }

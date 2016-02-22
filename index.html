@@ -139,13 +139,13 @@
                             
                                       
                             <p style="margin:20px 0px 0px 0px;text-align:center;">
-					            <a href="#" id="Cy-Tp-Agree" style="margin-right: 10px;color:#fff"  class="mui-btn mui-btn-outlined" data-rel="back"  data-transition="flow">同 意</a>  
-					            <a href="#" id="Cy-Tp-cannel" style="color:#fff"  class="mui-btn mui-btn-outlined" data-rel="back" data-transition="flow">取 消</a>  
+					            <a  id="Cy_Tp_Agree" onclick="Cy_Tp_Agree()" style="margin-right: 10px;color:#fff"  class="mui-btn mui-btn-outlined" >同 意</a>  
+					            <a  id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="color:#fff"  class="mui-btn mui-btn-outlined" >取 消</a>  
                             </p>
 				        </div>
 </div>
 
-
+ 
 
 	 
 <script src="js/jquery/jquery.min.js"></script>  
@@ -233,29 +233,27 @@ $(function()
 			"border-radius": "20px",
 			"left": "22%",
 			"color":"#fff"
-			})
+			});
 			
-			document.getElementById("Cy-Tp-Agree").addEventListener("tap",function()
-			{
+			
+	})  
+	
+	  Cy_Tp_Agree = function(){
+	  	layer.closeAll(); 
 				return false;
 				layer.load(1,{time:3000});
 				mui.openWindow
 				({
 					url:"ShouJiBao.html",
-					id:"ShouJiBao",
+					id:"ShouJiBao", 
 					popGesture:"close"
-				}); 
-			})
-			document.getElementById("Cy-Tp-cannel").addEventListener("tap",function()
-			{
-				layer.closeAll();
-				return false;
-			})
-			
-	})  
-	
-	  
+				});
+	  }
 	 
+	 Cy_Tp_cannel = function(){	 			
+				layer.closeAll(); 
+				return false;
+	 }
 	
 })
 

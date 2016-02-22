@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="css/My_css/cover.css" />
 <link rel="stylesheet" href="css/My_css/global.css" />
 <link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
-</head> 
+</head>  
 
 <style type="text/css">
 		
@@ -37,14 +37,17 @@
 			 .iconfont_p
 			  {
 			  	color:#FFF;
-			  	margin-top:10px;
+			  	margin-top:15px;
 			  }
 			 .mui-col-xs-3,.mui-col-xs-9
 			 {
 			 	float:left;
 			 	height:100%;	
 			 }
-			
+			#offCanvasSide 
+			{
+				margin-top:44px; 
+			}
 </style>
 
 <body> 
@@ -64,12 +67,12 @@
 				  	<a id="DaiShou" href="ShouJiBao/DaiShou.html" target="right_iframe"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p class="iconfont_p">我要代收</p></span></a>
 				  	<a id="DaiJi" href="ShouJiBao/DaiJi.html" target="right_iframe"><span><i class="icon-unie606 iconfont"></i><p class="iconfont_p">我要代寄</p></span></a>
 				  	<a id="Save" href="ShouJiBao/Save.html" target="right_iframe"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p class="iconfont_p">我要暂存</p></span></a>
-				  	<a href="index.html"><span class="gobackhome"><i class="mui-icon mui-icon-home" style="font-size:46px;position:relative;top:15%;"></i></span></a>
+				  	<a href="index.html"><span class="gobackhome"><i class="mui-icon mui-icon-home" style="font-size:66px;position:relative;top:15%;"></i></span></a>
 	       		</div> 
-			</div>  
+			</div>    
 		</div> 
 		
-		<div class="mui-col-xs-9" style="">
+		<div class="mui-col-xs-9">
 	    		<iframe height="100%" width="100%" name="right_iframe" id="right_iframe" frameborder="0" src="ShouJiBao/WelCome.html"></iframe> 
         </div> 
 		
@@ -85,7 +88,7 @@
 		<div class="mui-off-canvas-backdrop"></div>
 		 
    </div>    
-     
+      
 </div>	 
 	 
 	
@@ -100,7 +103,7 @@
 <script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
-</body>
+</body> 
 </html> 
 <script type="text/javascript">
 
@@ -108,10 +111,8 @@
 		  var h = $(".calculator span").eq(0).outerHeight();
 		 
 		  $(".calculator span").not(".gobackhome").css({ 
-		  	"padding-top":h / 4
+		  	"padding-top":h / 3.5
 		  })
-		  
-		  
 		  
 		  
 		    var iframe = document.getElementById("right_iframe");  

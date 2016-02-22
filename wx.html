@@ -50,7 +50,7 @@
 		{
 			box-shadow: 0px 0px 25px #00BFFF;
 			-moz-box-shadow: 0px 0px 25px #00BFFF;
-			-webkit-box-shadow: 0px 0px 25px #00BFFF;	
+			-webkit-box-shadow: 0px 0px 25px #00BFFF;	 
 		}
 </style>
 
@@ -131,8 +131,8 @@
 <script type="text/javascript">
 
 	
-	if(false) 
-	{ 
+	if(true) 
+	{  
 		var v = newGuid(); 
 		var CustomerCode = localStorage.CustomerCode; 
 		var Operator = localStorage.EmployeeCode;
@@ -142,12 +142,13 @@
 		var opt = {"Operator":Operator,"CustomerOrderNo":CustomerOrderNo,"CustomerCode":CustomerCode};
 		
 		console.log(JSON.stringify(opt));  
-		alert(JSON.stringify(opt));
-		InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "QueryOrder", opt, "CYAPI_微信找零查询"); 
+		//alert(JSON.stringify(opt)); 
 		
-		//InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正"); 
+		InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "QueryOrder", opt, "CYAPI_微信找零查询"); 
 		
-		//InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正"); 
+		
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
 	}	  
 
 	$(function() 

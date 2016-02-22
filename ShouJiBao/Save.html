@@ -1,10 +1,185 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/mui/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/My_css/ico.css"/>
+		<style>
+			
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				/*top: 46px;*/
+				height: auto;
+			}
+			
+			
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			
+			
+			
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			
+			
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			/* my */
+			 	.mybtn
+		 	{ 
+		 		width:50%;
+		 		height:100px;
+		 		text-align: center;
+		 		margin: 30px auto; 
+				font-family: "微软雅黑";
+		 	}
+		 	.xingweiname
+		 	{
+		 		position: relative;
+		 		top:-5px;		 		
+		 	}
+			
+		</style>
 	</head>
+
 	<body>
-		暂存
+		 
+		 
+		 
+		 
+		 
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-pages">
+					
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束--> 
+		
+		 
+		
+		<!--主页开始-->
+		<div id="Index" class="mui-page">			
+			<div class="mui-content">
+					<a href=""><button style="border-radius: 10px;font-size:24px;" class="mybtn mui-btn mui-btn-block"  id="Save" ><i class="iconfont">&#xe611;</i>&nbsp;&nbsp;<span class="xingweiname">存放物品</span></button></a>
+					<a href="#Get"><button style="border-radius: 10px;font-size:24px;" class="mybtn mui-btn mui-btn-block"  id="Get"><i class="iconfont">&#xe610;</i>&nbsp;&nbsp;<span class="xingweiname">取回物品</span></button></a>
+					<a href="#Save"><button style="border-radius: 10px;font-size:24px;" class="mybtn mui-btn mui-btn-block" id="Look" ><i class="iconfont">&#xe612;</i>&nbsp;&nbsp;<span class="xingweiname">记录查询</span></button></a>
+			</div> 
+		</div>
+		<!--主页结束--> 
+		
+		
+		  
+		  
+		 <!--单页开始-->
+		<div id="Get" class="mui-page">
+			<div class="mui-content">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label>手机号码</label>
+							<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号码">
+						</div>
+					</form>
+					<div class="mui-content-padded">
+						<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
+					</div>
+					<div class="mui-content-padded">
+						<p>务必输入真实可用的手机号码，下单成功后，用户需根据号码进行核对取回物品</p>
+					</div> 				
+					<!--<img id="barcode2"/>-->
+			</div> 
+		</div>
+		<!--单页结束-->
+		
+		<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui/mui.view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/JsBarcode/CODE39.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/JsBarcode/JsBarcode.js" type="text/javascript" charset="utf-8"></script>
+	
+		
+		<script type="text/javascript">
+			 
+			   
+							
+				//初始化单页view
+				var viewApi = mui('#app').view({
+					defaultPage: '#Index'
+				});
+			
+			
+				$("#barcode2").JsBarcode("8008208820",{format:"CODE39", width:1, displayValue: true});
+			 
+
+				var view = viewApi.view;
+				(function($) {
+					//处理view的后退与webview后退
+					var oldBack = $.back;
+					$.back = function() {
+						if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+							viewApi.back();
+						} else { //执行webview后退
+							oldBack();
+						}
+					};
+					//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+					//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+					view.addEventListener('pageBeforeShow', function(e) {
+						//				console.log(e.detail.page.id + ' beforeShow');
+					});
+					view.addEventListener('pageShow', function(e) {
+						//				console.log(e.detail.page.id + ' show');
+					});
+					view.addEventListener('pageBeforeBack', function(e) {
+						//				console.log(e.detail.page.id + ' beforeBack');
+					});
+					view.addEventListener('pageBack', function(e) {
+						//				console.log(e.detail.page.id + ' back');
+					});
+				})(mui);
+ 
+			 
+			</script>
 	</body>
+
 </html>

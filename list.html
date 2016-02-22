@@ -368,7 +368,7 @@
 		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
 		     	var end = now.format("yyyy-MM-dd"); //今天 		     	
 		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			    InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
+			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
 		     }
 		     
 		     
@@ -417,7 +417,7 @@
 						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
 						var page = parseInt($("#page").val()) + 1;						
 						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
 						
 				}, 1500);
 			}  
@@ -447,13 +447,13 @@
 			     	ResultJson = null; //清空		
 			     	$("#mui-table-view").html(""); //清空所有的li	
 			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-				   InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					 
 				}) 
 			})
 			 
 			 
-			
+			 
 			//专门用来初始化的函数 
 			CYAPI_获取返回值 = function(str)
 			{
@@ -503,12 +503,11 @@
 				$("#sub_page .zhuangtai").text(json.OrderState);  //状态
 				
 				
-     			$(this).find(".goto_subpage").trigger("tap");
 				layer.closeAll();
 				
 			}
 			  
-			  
+			   
 			//  支付宝扫码
 			//	微信扫码
 			//	翼支付
@@ -522,7 +521,7 @@
  					
  					
  					//根据不同的业务调用不同的API
-	     			InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
+	     			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
 	     			
      			})   
 			 } 

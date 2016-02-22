@@ -56,7 +56,7 @@ $(function()
 
 	assistive_mTouch(); //小光点以及菜单
 
-	QQ_offCanvas(); //QQ侧滑菜单	
+	QQ_offCanvas(); //QQ侧滑菜单		
 	
 	//涟漪特效(); 
 	
@@ -281,23 +281,32 @@ $.fn.autoheight = function(opt) {
 
  
 //悬浮球
-assistive_mTouch = function() {
+assistive_mTouch = function() 
+{
+	
+	小光点菜单(); 
+	
 	var assistiveLeft, assistiveTop, timerid;
 
 	var obj = document.getElementById("assistiveTouch")
 
 	var stickEdge = function(el) {
-		var left = obj.offsetLeft,
+		var 
+			header = $("#header").height() || 0, //可能有头部元素
+			left = obj.offsetLeft,
 			Top = obj.offsetTop,
 			width = obj.outerWidth,
 			height = obj.offsetHeight / 2,
 			windowWith = (document.documentElement || document.body).offsetWidth;
-			windowheight = Get_获取容器高度();
+			windowheight = Get_获取容器高度() + header;
+			
+			
+			
 			
 		//开启以下让小光点无法超出屏幕外	
-		if(Top < 0)
+		if(Top < header)
 		{
-			Top = height;
+			Top = height + header; 
 			
 		}
 		else if(Top > parseInt(windowheight - height))
@@ -325,11 +334,12 @@ assistive_mTouch = function() {
 	};
 
 
-	obj.addEventListener('tap', function() {
+	obj.addEventListener('tap', function() 
+	{		
 		Show_Menu();
 	})
 
-
+ 
 
 	obj.addEventListener('hold', function(e) {
 		clearTimeout(timerid);
@@ -346,13 +356,13 @@ assistive_mTouch = function() {
 	})
 
 	obj.addEventListener('drag', function(e) {
-		this.style.left = assistiveLeft + (e.detail.center.x - assistiveLeft) + 'px';
-		this.style.top = assistiveTop + (e.detail.center.y - assistiveTop) + 'px';
+		this.style.left =(e.detail.center.x ) + 'px';
+		this.style.top = (e.detail.center.y) + 'px'; 
 
 		e.stopPropagation();
 	})
 
-	obj.addEventListener('dragend', function(e) {
+	obj.addEventListener('dragend', function(e) { 
 		stickEdge(this);
 		e.stopPropagation();
 	});
@@ -366,49 +376,42 @@ assistive_mTouch = function() {
 // 展示小光点菜单
 // </summary>
 Show_Menu = function() {
-
-	小光点菜单(); 
-
-	layer.open({
+ 
+ 
+	layer.open({ 
 		skin: "assistiveTouch",
 		closeBtn: 0,
 		title: false,
 		shadeClose: true,
 		content: $("#xiaoguangdiancaidan").html(),
 		btn: 0, //默认底部不显示任何按钮
-		end: function() {
-			layer.closeAll()
+		success: function() 
+		{
+			$(".assistiveTouch").css({
+				"width": "60%",
+				"background": "rgba(0,0, 0, .6)",
+				"border-radius": "20px",
+				"left": "22%"		 
+			})
 		}
 	});
 
 
-	$(".layui-layer-shade").unbind("click"); //源生的click太慢了
-
-	$(".layui-layer-shade").bind("tap", function() {
-		layer.closeAll(); //重新绑定tap事件最快了
-	})
-
-
-	$(".assistiveTouch").css({
-		"width": "60%",
-		"background": "rgba(0,0, 0, .6)",
-		"border-radius": "20px",
-		"left": "22%"
-	})
-
- 
+	//返回
 	mui(".mui-table-view").on('tap', '.Menu_back', function() {
 		layer.load(1, {
 			time: 2000
 		});
 		mui.back();
 	})
+	//刷新
 	mui(".mui-table-view").on('tap', '.Menu_refresh', function() {
 		layer.load(1, {
 			time: 2000
 		});
 		window.location.reload();
 	})
+	//主页
 	mui(".mui-table-view").on('tap', '.Menu_home', function() {
 		layer.load(1, {
 			time: 2000
@@ -418,6 +421,17 @@ Show_Menu = function() {
 			id: "index"			
 		});
 	})
+	//手机充值
+	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() {
+		layer.load(1, {
+			time: 2000
+		});
+		mui.openWindow({
+			url: "test.html",
+			id: "test"		 	
+		});
+	}) 
+	//管理
 	mui(".mui-table-view").on('tap', '.guanli', function() {
 		layer.load(1, {
 			time: 2000
@@ -427,6 +441,9 @@ Show_Menu = function() {
 			id: "error"			
 		});
 	})
+
+	
+	
 	
 
 }
@@ -766,7 +783,7 @@ function newGuid()
 {
 	var caidan = "<div style=\"display:none\" id=\"xiaoguangdiancaidan\">		"+
 "	        <ul class=\"mui-table-view mui-grid-view mui-grid-9\">"+
-"	           <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	           <li id=\"Menu_shoujichongzhi\" class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "		                <i class=\"iconfont\">&#xe61f;</i>"+
 "		                <div class=\"mui-media-body\">手机充值</div></a></li>	         "+
 "	           <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
@@ -812,7 +829,7 @@ function newGuid()
 	
 	if(size == 0)
 	{
-		$("body").append(caidan);		
+		$("body").append(caidan);			
 	}
 
 }

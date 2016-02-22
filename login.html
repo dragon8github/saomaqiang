@@ -6,7 +6,16 @@
   <meta http-equiv="pragma" content="no-cache">
   <meta name="renderer" content="ie-comp">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
+  
   <title></title> 
+  
+  <style type="text/css">
+  	.mui-input-row label
+  	{
+ 		 font-family: "微软雅黑"; 
+ 	}
+  </style>
+  
   <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" /> 
  </head>  
  <body> 
@@ -114,16 +123,20 @@
 				 ({ 
 						url:"index.html",
 						id:"index" 
-				});		   
+				});		
+				
+				return false;
 			 }
+			
+			//console.log(JSON.stringify({"登录账号":username,"密码":password}));
+				 
+		    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_Customer", "Login", {"登录账号":username,"密码":password}, "CYAPI_获取返回值")
 			 
-	    InvokeApi(GetApiUrl("Global_5un29"), "G001_Customer", "Login", {"登录账号":username,"密码":password}, "CYAPI_获取返回值")
-		 
 		
-		 
+		  
 		
-	  // InvokeApi(GetApiUrl("Global_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":"2016-1-1","截止时间":"2016-2-29","门店编号":"d8706f2b61cd40018d4444c542b51edb","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值_test")		
-     // InvokeApi(GetApiUrl("Global_5un29"), "G002_Order", "OrderDetail", {"开始时间":"2016-1-1","截止时间":"2016-2-29","订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值")
+	  // InvokeApi(GetApiUrl("Global_V0001_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":"2016-1-1","截止时间":"2016-2-29","门店编号":"d8706f2b61cd40018d4444c542b51edb","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值_test")		
+     // InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":"2016-1-1","截止时间":"2016-2-29","订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":"10","当前页码":"1"} , "CYAPI_获取返回值")
 					
 				
 			 

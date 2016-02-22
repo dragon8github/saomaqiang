@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>订单列表</title>
+
+		<link rel="stylesheet" type="text/css" href="../css/mui/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/My_css/ico.css" />
+		<link rel="stylesheet" type="text/css" href="../css/My_css/global.css" />
+ 
+		<style>
+			/* The custom style */
+				.iconfont
+				{
+					font-size:30px
+				}
+				.mui-table .Lee_time
+				{
+					vertical-align: middle;				
+				}
+				.mui-table .Lee_time .iconfont
+				{
+					color:#007AFF;
+					font-size:26px; 
+				}			
+				.mui-table .Lee_Order
+				{
+					margin:8px 0px;
+					color:#333;
+				}			
+				.mui-table .Lee_Phone
+				{
+					color:#333;
+				}			
+				.mui-table .Lee_Money
+				{
+					font-weight: 700;
+				}			
+				/* Cover the style */
+				.mui-bar .mui-segmented-control
+				{
+					top:6px;
+					right:10px
+				}			
+				.mui-segmented-control .mui-control-item
+				{
+					line-height:30px;
+				}
+				.mui-pull-bottom-pocket
+				{
+					margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
+				}
+				
+		</style>
+		<!--
+        这里是无缝跳转的css
+        -->
+		<style>
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				/*top: 46px;*/
+				height: auto;
+			}
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;				
+			}
+			
+		 
+		</style>
+
+	</head>
+
+	<body>
+
+		<!--
+			页面主结构开始：
+			一个容器（.mui-page）
+			包含一个标题(.mui-navbar-inner)
+			和一个内容(.mui-page-content)
+		-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+
+		<!--侧滑菜单容器   -->
+		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
+
+			<!-- 兼容 -->
+			<style type="text/css">
+				.mui-off-canvas-wrap .mui-bar
+			  	{
+		  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
+			  	}
+			  	.mui-off-canvas-wrap
+				{
+					z-index: 0; 
+				}
+			</style>
+
+ 
+			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						<li class="mui-table-view-cell">							
+								<div class="mui-slider-right mui-disabled">
+									<a class="mui-btn mui-btn-red">删除</a>
+								</div> 
+								<a class="goto_subpage">
+									<div class="mui-slider-handle">
+										<div class="mui-table">									
+											<div class="mui-table-cell mui-col-xs-9">
+												<h4 class="mui-ellipsis-2 Lee_Money">联系人：李四</h4>
+												<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;电话号码 ：6264184415221 </h5>
+												<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：137-13332652</p>
+											</div>
+											<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+												<!--<span class="mui-h5">今天  16:30</span>--> 
+												<p><img src="../Images/快递公司/sf.jpg" width="60"/></p>  
+												<span class="mui-h5" style="color:#000">顺丰快递</span>
+											</div>
+										</div>
+									</div>
+								</a>  
+						</li>
+					</ul>
+				</div>
+
+				<!-- 小光球 -->
+				<div class="assistive-wrap" id="assistiveTouch">
+					<div class="assistive-touch" id="assistive-touch">
+						<span></span>
+					</div>
+				</div>
+
+				<!-- 这个东西不能删，利用他还原界面 -->
+				<div class="mui-off-canvas-backdrop"></div>
+
+			</div>
+
+		
+		</div>
+
+
+
+
+			
+		<!--快递详情页-->
+	  	<div id="info" class="mui-page">
+			
+			<div class="mui-page-content" id="sub_page">
+				<div class="mui-scroll-wrapper">	 
+						
+						<ul class="mui-table-view mui-action-back" id="form_info" >														
+							<!--<li class="mui-table-view-cell">
+								<a id="head" class="yewuleixing">快递公司<span class="mui-pull-right head">未知</span></a>
+							</li>-->
+							<li class="mui-table-view-cell">
+								<a>快递员<span class="mui-pull-right yewuhaoma">未知</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>快递电话<span class="mui-pull-right dingdanjine">未知</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>联系人<span class="mui-pull-right dingdanjine">未知</span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>联系电话<span class="mui-pull-right dingdanjine">未知</span></a>
+							</li>  
+						</ul> 
+									 
+						
+						 
+						 <form class="mui-input-group" id="update" style="display: none;" > 
+						    <!--<div class="mui-input-row"> 
+						     <label>快递公司</label> 
+						     <input id="username" type="text" value="未知" placeholder="请输入快递公司" class="mui-input-clear" /> 
+						    </div> -->
+						    <div class="mui-input-row"> 
+						     <label>快递员</label> 
+						     <input id="password" type="text" value="未知" placeholder="请输入快递员" class="mui-input-clear" /> 
+						    </div> 
+						     <div class="mui-input-row"> 
+						     <label>快递电话</label> 
+						     <input id="username" type="text" value="未知" placeholder="请输入快递电话" class="mui-input-clear" /> 
+						    </div> 
+						    <div class="mui-input-row"> 
+						     <label>联系人</label> 
+						     <input id="password" type="text" value="未知" placeholder="请输入联系人" class="mui-input-clear" /> 
+						    </div> 
+						    <div class="mui-input-row"> 
+						     <label>联系电话</label> 
+						     <input id="password" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" /> 
+						    </div> 
+					    </form> 
+						
+						
+						
+						
+						<button type="button" style="margin-top:20px" id="bianji" class="mui-btn mui-btn-warning mui-btn-block">编辑快递员</button>
+						<button type="button" id="shoufeibiaozhun" class="mui-btn mui-btn-primary mui-btn-block">查看收费标准</button>
+						<button type="button" id="shanchu" class="mui-btn mui-btn-danger mui-btn-block">删除快递员</button>
+											
+			</div>
+		 
+		
+		
+		
+		
+		
+
+		<div id="leftpage">
+			<span class="mui-icon mui-icon-arrowleft"></span>
+		</div>
+
+<span style="display: none;">
+	<input type="hidden" name="page" id="page" value="1" />  
+	<button id='dipicker' data-options='{"type":"date","beginYear":2015,"endYear":2016}' class="btn hidden mui-btn mui-btn-block">选择日期 ...</button>
+</span>
+
+
+
+		
+
+ <div data-role="popup"  id="Cy-Tp-XieYi" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="min-width:300px;display:none">
+                  
+				       
+				        <div role="main" class="ui-content" >
+                                
+                            <div class="col-xs-12 well"  id="Div1" style=" max-height: 300px;overflow: auto;">
+	                            <div>
+                            <div style="text-align:center"><span style="font-size:24px">《收寄宝服务协议》</span></div>
+                            <span>&nbsp;</span><br/>
+                            收寄宝服务协议（以下简称“本协议”）是东莞市糖酒集团美宜佳便利店有限公司下辖特许加盟商户(以下简称“商户”)向东莞市彩洋信息科技有限公司（以下简称“我公司”）申请便民预存款额度服授信服务（以下简称“本服务”）所订立的有效合约。
+                            <br/><br/>在接受本协议之前，请商户仔细阅读本协议的全部内容（特别是粗体字的内容）。商户通过网络页面点击确认或以其他方式选择接受本协议，即表示商户与我公司已达成本协议并同意接受本协议的全部约定内容。<br/>
+                            <br/>
+                            第一条 信用评级<br/>
+                            我公司有权根据商户日常业务开展情况，结合第三方评估意见，对商户的信用等级进行评级。此评级作为我公司判断是否批准商户申请预存款额度的标准之一。<br/>
+                            <br/>
+                            第二条 预存款额度授信<br/>
+                            商户通过我公司指定的渠道申请办理收寄宝，我公司根据本协议相关约定予以批复。<br/>
+                            <br/>
+                            第三条 服务费标准及收取<br/>
+                            在商户使用本服务时，我公司有权向商户收取相关服务费用和免抵押担保费用。服务费用和免抵押担保费用明细详见本协议附件上所列的收费方式说明。相关服务费和免抵押担保费用自商户在我公司的预存款账户额度中直接扣除。<br/>
+                            <br/>
+                            第四条 预存款额度发放<br/>
+                            商户申请的便民预存款额度由我公司直接划入商户在我公司预存款账户后，由商户用于开展便民服务业务。<br/>
+                            <br/>
+                            第五条 预存款额度适用范围<br/>
+                            商户仅可用以开展便民服务业务，不挪作他用。<br/>
+                            <br/>
+                            第六条 商户还款日计算<br/>
+                            按照商户申请账期，自商户成功申请预存款额度时点（以时间点算）起，至成功扣取商户预存款时点，商户需确保在约定还款时点时，预存款账户余额足以抵扣商户申请的额度。本协议项下款项商户可以提前存入商户在我公司的预存款账户，待本协议时间到期，我公司即从商户预存款账户中扣除。<br/>
+                            <br/>
+                            第七条 预存款额度逾期归还<br/>
+                            商户同意并确认我公司如商户未在约定时点前归还的本金与服务费，视为违约，需要承担逾期违约金和罚金。逾期违约金计算如下：<br/>
+                            逾期违约金按照每日应还本金的0.25%计算，不低于2元，每日单独计算。<br/>
+                            商户同意并确认如商户逾期15日仍未向我公司偿还申请额度全部本金与服务费，我公司在征得东莞市糖酒集团美宜佳便利店有限公司同意的情况下有权优先扣除该商户在东莞市糖酒集团美宜佳便利店有限公司保留的相应加盟保证金，作为额度授信服务本金、违约金的偿还，并通知东莞市糖酒集团美宜佳便利店有限公司停止向商户供货。 <br/>
+                            <br/>
+                            第八条 商户的义务和权利<br/>
+                            1、商户承诺绝不为任何非法目的或以任何非法方式使用我公司便民服务平台，也不将便民预存款额度申请服务用于禁止或限制物品的交易，并承诺遵守中华人民共和国相关法律、法规及一切使用互联网及支付服务的惯例。<br/>
+                            2、商户同意并保证不得利用便民预存款额度申请服务从事下列任何侵害他人合法权益或违法的行为，若有违反者，商户应自行承担所有法律责任：<br/>
+                            A、违反依法律或本协议所应负的保密义务；<br/>
+                            B、 冒用他人名义使用收寄宝服务；<br/>
+                            C.、涉嫌洗钱、恐怖融资、套现或进行传销活动的；<br/>
+                            D、 使用无效银行账户或他人银行账户交易；<br/>
+                            E、从事任何可能侵害我公司便民服务系统的行为；<br/>
+                            F、其他我司有正当理由认为不适当的行为。<br/>
+                            3、商户可利用我公司各种渠道来查询自己的信用额度、预存款额度授信的进度以及还款情况等。我公司有义务协助商户对账目有异议的部分的进行查询。<br/>
+                            <br/>
+                            第九条 我公司的权利和义务<br/>
+                            1、有权检查、监督商户额度资金的使用情况；<br/>
+                            2、按本协议约定在商户额度授信申请通过后及时发放相应额度；<br/>
+                            3、在额度使用期限到期时有权从商户的预存款账户内直接划款。<br/>
+                            <br/>
+                            第十条 协议的变更和解除　<br/>
+                            我公司有权对本协议内容进行单方面的变更，并以本公司公告的方式予以公布，无需另行单独通知商户；若商户在本协议内容公告变更后继续使用本服务的，表示商户已充分阅读、理解并接受修改后的协议内容，也将遵循修改后的协议内容使用本服务；若商户不同意修改后的协议内容，商户应停止使用本服务并将停止使用本服务前申请的额度一次性支付给我公司。<br/>
+                            <br/>
+                            第十一条　本协议争议的解决方式<br/>
+                            商户在履行本合同中发生的争议，由双方协商或者通过调解解决。协商或调解不成，可以向东莞市人民法院起诉，或者向东莞市仲裁机构申请仲裁。在协商和诉讼期间，本协议不涉及争议部分的条款，双方仍需履行。<br/>
+                            <br/>
+                            第十二条　协议生效和终止<br/>
+                            本协议经商户确认申请服务或以其他方式选择接受本协议后生效，至协议项下额度与服务费用全部清偿完毕后终止。<br/>
+                            <br/>
+                            第十三条　协议附件<br/>
+                            《收寄宝服务费标准》<br/> 
+                            </div>
+
+			                                </div>		        
+            
+                            
+                                      
+                            <p style="margin:20px 0px 0px 0px;text-align:center;">
+					            <a  id="Cy_Tp_Agree" onclick="Cy_Tp_cannel()" style="margin-right: 10px;color:#fff"  class="mui-btn mui-btn-outlined" >确 认</a>  
+					            <a  id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="color:#fff"  class="mui-btn mui-btn-outlined" >取 消</a>  
+                            </p>
+				        </div>
+</div>
+		
+
+
+
+
+<script type="text/template" id="temple">
+	
+	
+
+{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
+		<div class="mui-slider-right mui-disabled">
+			<a class="mui-btn mui-btn-red mui-del">删除</a>
+		</div> 
+		<a class="goto_subpage">
+			<div class="mui-slider-handle">
+				<div class="mui-table">									
+					<div class="mui-table-cell mui-col-xs-9">
+						<h4 class="mui-ellipsis-2 Lee_Money">联系人：{{d[i].OrderAmount}}</h4>
+						<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;电话号码 ：{{d[i].OrderAmount}} </h5>
+						<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：{{d[i].OrderAmount}}</p>
+					</div>
+					<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+						<!--<span class="mui-h5">今天  16:30</span>--> 
+						<p><img src="../Images/快递公司/sf.jpg" width="60"/></p>  
+						<span class="mui-h5" style="color:#000">{{d[i].OrderAmount}}</span>
+					</div>
+				</div>
+			</div>
+		</a>  
+	{{#     }	 }}
+	
+	
+	
+	
+</script>
+
+		
+
+		<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui/mui.view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/layer/laytpl.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript" charset="UTF-8">
+		
+			/* 初始化公共数据 */
+			
+			var username = localStorage.登录帐号;	
+			
+			var rows = "10";		//每次加载的行数	
+		
+			var ResultJson = null;	//获取的列表数据
+			
+			var cnt = null; 	//数据总条数
+		 
+			
+			
+			
+			 
+			//初始化单页view
+			var viewApi = mui('#app').view
+			({
+				defaultPage: '#Main'
+			});
+				
+				
+		
+			mui.init
+			({
+				pullRefresh: 
+				{
+					container: '#pullrefresh',
+					down: 
+					{
+						callback: pulldownRefresh
+					},
+					up: 
+					{
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+		          
+		          
+		            
+		     $(function()
+		     {
+		     	
+		     		var urlinfo=window.location.href; //获取当前页面的url
+					var len=urlinfo.length;//获取url的长度
+					var offset=urlinfo.indexOf("?");//设置参数字符串开始的位置
+					var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+					var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
+					var newsid=newsids[1];//得到参数值
+					var newsname=newsids[0];//得到参数名字
+					
+					
+					//newsid
+					
+					
+					$("#assistiveTouch").hide();
+					
+					
+		     	
+		     		LeftPageGOBack();	//右滑箭头 
+		     		
+		     		bind_绑定子页面(); //测试阶段需要，正式环境可以去掉,不去也没关系
+		     		
+		     		初始化数据(); //初始化数据   
+		     })
+		     
+		     
+		     
+		     /* 这是简单的取消 */
+		      Cy_Tp_cannel = function()
+			  {
+					layer.closeAll();
+			  }
+				
+		     	/* 编辑按钮 */
+		     	$("#bianji").bind("tap",function() 
+				{
+					var speed = 500;	//动画速度 
+				
+					if($("#bianji").text() == "保存/返回")
+					{
+						var btnArray = ['取消保存', '确定保存'];
+						mui.confirm('你确定要保存修改吗？', '温馨提示', btnArray, function(e) {
+							if (e.index == 1)  
+							{
+								if(true)
+								{ 
+									//保存成功
+									mui.toast("保存成功");									
+								}
+								else
+								{
+									//保存失败
+									mui.toast("保存失败，失败原因：你没有编辑权限");
+								}
+							}
+							$("#bianji").text("编辑快递员"); 
+							$("#update").slideUp(speed); 								
+							setTimeout(function(){$("#form_info").slideDown(speed); },speed)
+						})
+					}
+					else if($("#bianji").text() == "编辑快递员")
+					{
+						$("#bianji").text("保存/返回");
+						$("#form_info").slideUp(speed);
+						setTimeout(function(){$("#update").slideDown(speed); },speed)
+						
+					}
+				}) 
+				
+				
+				/* 删除 */
+				$("#shanchu").bind("tap",function(){ 
+					
+						var btnArray = ['否', '是'];
+						mui.confirm('你确定要删除该快递员吗？', '温馨提示', btnArray, function(e) {
+							if (e.index == 1) 
+							{
+								//是
+								mui.back();
+								$("#bianji").text("编辑快递员"); 
+								$("#update").hide(); 								
+								$("#form_info").show();
+							}
+							else 
+							{
+								//否
+								return false;
+							}
+						})
+				})
+				
+				
+				/* 显示金额条款 */
+				$("#shoufeibiaozhun").bind("tap",function(){ 
+					
+						layer.open({
+						skin: "shoujibaoxieyi",
+						closeBtn: 0,
+						title: false,
+						shadeClose: true,
+						content: $("#Cy-Tp-XieYi").html(),
+						btn: 0, //默认底部不显示任何按钮
+						end: function()
+						{
+							layer.closeAll() 
+						},
+						success:function(){							
+								$(".shoujibaoxieyi").css({
+								"width": "60%",			
+								"background": "rgba(0,0, 0, .6)",
+								"border-radius": "20px",
+								"left": "22%",
+								"color":"#fff"  
+								});							
+						}			
+					}); 
+	
+				})
+			
+		     
+		     
+		     初始化数据 = function()
+		     {
+		     	layer.load(1,{time:2000}); 
+		     	
+		     	/* 初始化dipicker的默认参数 */
+		     	var opt = {};
+		     	var now = new Date(); 	//当前时间
+		     	opt.value = now.format("yyyy-MM-dd"); 
+		     	opt.type = "date";
+		     	opt.beginYear =  now.getFullYear() - 1;		     	
+		     	opt.endYear =  now.getFullYear();		     
+		     	var str_json = JSON.stringify(opt);		     			     	
+		     	$("#dipicker").attr("data-options",str_json);	
+		     	
+		     
+		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
+		     	var end = now.format("yyyy-MM-dd"); //今天 		     	
+		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
+			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
+		     }
+		     
+		     
+		     
+		    /*
+			 * 下拉刷新具体业务实现 
+			 */
+			function pulldownRefresh() 
+			{
+				//模拟更新数据
+				setTimeout(function() 
+				{											
+					layer.msg("刷新成功");
+				
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+		
+				}, 1500);
+			}        
+		    
+		 	 
+		     
+		    /**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() 
+			{
+				//加载数据
+				setTimeout(function() 
+				{
+						var count = cnt; //数据库总数
+				 
+						var num =  $(".mui-table-view-cell").size(); //列表总数
+		
+						if(num >= count)
+						{		
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+							return false;
+						}
+					
+						ResultJson = null; //清空
+						var html = $("#temple").html();			
+						/* 获取dipicker的时间参数  */	
+						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
+						var end = JSON.parse(optionsJson).value;	
+						var pass = new Date(end);
+						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
+						var page = parseInt($("#page").val()) + 1;						
+						$("#page").val(page); //分页标识+1						
+					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+						
+				}, 1500);
+			}  
+			 
+			
+			
+			 
+			 
+			 
+			//专门用来初始化的函数 
+			CYAPI_获取返回值 = function(str)
+			{
+				//alert(str);
+				
+				layer.closeAll();
+
+				ResultJson = eval('('+ str +')')["dtOrderDetail"] || {};
+				
+				//替换美化文本
+				$.each(ResultJson,function(i,o)
+				{
+					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderTime = timeFormat(o.OrderTime);
+				})		
+								
+				var temple_html = $("#temple").html();								
+				
+				laytpl(temple_html).render(ResultJson, function (html)
+		        {        		   
+		            $("#mui-table-view").append(html);      //填充初始化数据     
+		        });    	
+		        		        
+				var count = cnt; //数据库总数
+				 
+				var num =  $(".mui-table-view-cell").size();	//列表总数
+		
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+							        
+		        bind_绑定子页面();
+			}  
+			
+			   
+			  
+			//进入详情界面
+			CYAPI_详情 = function(str)
+			{
+				//alert(str);				 							
+				var json = JSON.parse(str);
+				
+				$("#sub_page .yewuleixing").text(json.ProductName);	//业务类型
+				$("#sub_page .yewuhaoma").text(json.CustomerOrderNo);	//订单号
+				$("#sub_page .dingdanjine").text(json.OrderAmount);	//订单金额
+				
+				$("#sub_page .xiadanshijian").text(json.OrderTime);//下单时间
+				$("#sub_page .chulishijian").text(json.OrderTime);//处理时间
+				$("#sub_page .zhuangtai").text(json.OrderState);  //状态
+				
+				
+//   			$(this).find(".goto_subpage").trigger("tap"); //依靠气泡就实现了
+				layer.closeAll(); 
+				
+			}
+			  
+			   
+			//  支付宝扫码
+			//	微信扫码
+			//	翼支付
+			//	微信找零
+			 bind_绑定子页面 = function()
+			 {			 	 
+			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function (e) 
+	     		{	
+	     			//根据不同的业务绑定不同的单页	     			
+ 					$(this).find(".goto_subpage").attr("href","#info");
+										
+ 				 	
+ 					//根据不同的业务调用不同的API
+	     			//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
+	     			
+     			})   
+			 } 
+			  
+			 
+			  
+			  
+			if (mui.os.plus) 
+			{
+					mui.plusReady(function() {
+						setTimeout(function() {
+							mui('#pullrefresh').pullRefresh().pullupLoading();
+						}, 1000);
+		
+					}); 
+			} 
+			else
+			{
+					mui.ready(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					});
+			}
+			
+			
+			
+			
+			var view = viewApi.view;
+			(function($) {
+				//处理view的后退与webview后退
+				var oldBack = $.back;
+				$.back = function() {
+					if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+						viewApi.back();
+					} else { //执行webview后退
+						oldBack();
+					}
+				};
+				//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+				//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+				view.addEventListener('pageBeforeShow', function(e) {
+					//				console.log(e.detail.page.id + ' beforeShow');
+				});
+				view.addEventListener('pageShow', function(e) {
+					//				console.log(e.detail.page.id + ' show');
+				});
+				view.addEventListener('pageBeforeBack', function(e) {
+					//				console.log(e.detail.page.id + ' beforeBack');
+				});
+				view.addEventListener('pageBack', function(e) {
+					//				console.log(e.detail.page.id + ' back');
+				});
+			})(mui);
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
