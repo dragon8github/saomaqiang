@@ -130,8 +130,8 @@
 </html> 
 <script type="text/javascript">
 
-	
-	if(true) 
+	/* terst */
+	if(false) 
 	{  
 		var v = newGuid(); 
 		var CustomerCode = localStorage.CustomerCode; 
@@ -150,24 +150,33 @@
 		
 		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
 	}	  
+	
+	
+	
 
 	$(function() 
 	{
+		/* 加载功能 */
+		assistive_mTouch(); //小光点以及菜单
+		QQ_offCanvas(); //QQ侧滑菜单	 
+		计算器_autolineheight();	//垂直居中
+		LeftPageGOBack();	//右滑箭头 
 		
+		
+		
+		/* 响应式布局 */
 		$("#form").autoheight({n:3.5});
-		$("#well").autoheight({n:3.5});
-		
+		$("#well").autoheight({n:3.5});		
 		$("#tijiaodingdan").autoheight({n:2.5,m:"margin"});
-		$("#chaxunmingxi").autoheight({n:2.5,m:"margin"});
-		
+		$("#chaxunmingxi").autoheight({n:2.5,m:"margin"});		
 		$("#calculator").autoheight({n:12,m:"height"}) 
 		 
 		
 		
-		计算器_autolineheight();
+		
 		 
 		
-	
+		/* 查询明细 */
 		document.getElementById("chaxunmingxi").addEventListener('tap',function(){
 			mui.openWindow({
 				url:"list.html",
@@ -175,50 +184,43 @@
 			});
 		})
 		
-		 
-		LeftPageGOBack();	//右滑箭头 
-		
-		
-		 
-		
+		/* 提交订单 */
 		$("#tijiaodingdan").bind('tap',function(){
 			
 			var btnArray = ['否', '是'];
 			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) {
-				if (e.index == 1) 
-				{
-					
-					var Amount = $("#money").val(); //金额
-					var CustomerCode = localStorage.CustomerCode;	 //门店号
-					var CustomerOrderNo = newGuid(); //guid订单号
-					var Operator = localStorage.EmployeeCode;	//员工号
-					
-//					alert(Amount);
-//					alert(CustomerCode);
-//					alert(CustomerOrderNo);
-//					alert(Operator); 
-					
-					if(Amount.length == 0)
+					if (e.index == 1) 
 					{
-						layer.msg("请输入金额");
 						
+							var Amount = $("#money").val(); //金额
+							var CustomerCode = localStorage.CustomerCode;	 //门店号
+							var CustomerOrderNo = newGuid(); //guid订单号
+							var Operator = localStorage.EmployeeCode;	//员工号
+							
+							
+							if(Amount.length == 0)
+							{
+								layer.msg("请输入金额");
+								
+								return false;
+							}
+							 
+							mui.toast("正在提交表单..."); 
+							
+							layer.load(0);
+							
+			  			    InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":CustomerOrderNo,"Amount":Amount}, "CYAPI_微信找零获取返回值");
+				 
+					} 
+					else
+					{
 						return false;
 					}
-					 
-					mui.toast("正在提交表单..."); 
-					
-					layer.load(0);
-					
-	  			    InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":CustomerOrderNo,"Amount":Amount}, "CYAPI_微信找零获取返回值");
-		 
-				} 
-				else
-				{
-					return false;
-				}
-			}) 
+				}) 
+			})
 		})
-	}) 
+	
+	/* $结束 */
 
 
 /* 微信找零From提交 */

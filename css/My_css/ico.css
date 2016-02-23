@@ -22,15 +22,18 @@
 .icon-settings:before { content: "\e617"; }
 .icon-suo:before { content: "\e609"; }
 .icon-unie606:before { content: "\e60d"; }
+.icon-cainiaoyizhanlogo:before { content: "\e615"; }
 .icon-huochepiao:before { content: "\e619"; }
 .icon-tuichu:before { content: "\e605"; }
 .icon-fanhui:before { content: "\e601"; }
 .icon-qianbao:before { content: "\e602"; }
 .icon-weixin:before { content: "\e61a"; }
 .icon-jijian:before { content: "\e60e"; }
+.icon-yijujue:before { content: "\e613"; }
 .icon-yuyuechulizhong:before { content: "\e607"; }
 .icon-saomazhifu:before { content: "\e61c"; }
 .icon-repair:before { content: "\e618"; }
+.icon-tiaoxingma:before { content: "\e614"; }
 .icon-shibai:before { content: "\e603"; }
 .icon-chongdiao1:before { content: "\e60b"; }
 .icon-iconchenggong:before { content: "\e604"; }
@@ -46,3 +49,4 @@
 .icon-chabingzheng:before { content: "\e612"; }
 .icon-shoujichongzhi:before { content: "\e61f"; }
 .icon-shouzhiliushuizhang:before { content: "\e60a"; }
+.icon-qita:before { content: "\e616"; }

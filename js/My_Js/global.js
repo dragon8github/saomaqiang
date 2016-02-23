@@ -54,9 +54,9 @@ $(function()
 {
 	Init_初始化();	
 
-	assistive_mTouch(); //小光点以及菜单
+	//assistive_mTouch(); //小光点以及菜单
 
-	QQ_offCanvas(); //QQ侧滑菜单		
+	//QQ_offCanvas(); //QQ侧滑菜单		
 	
 	//涟漪特效(); 
 	
@@ -501,23 +501,27 @@ LeftPageGOBack = function()
 	  
 	var Touch_Hold_X = null; //起始坐标
 
-	var Native_left = $("#leftpage").offset().left;
+	var Native_left = $("#leftpage").offset().left || -66;	//-66
+		
+	var prev_x = 0; //上一次拖动的坐标
 
 	document.addEventListener("hold", function(e) {
 		Touch_Hold_X = e.detail.center.x;
 		//console.log(Touch_Hold_X); 
 	});
 
-	document.addEventListener("dragend", function(e) {
+	document.addEventListener("dragend", function(e) 
+	{
 		var left = $("#leftpage").offset().left;
 
-		if (left >= 0) {
+		if (left >= 0) 
+		{
 			mui.back();
 		}
-
 		$("#leftpage").animate({
-			"left": "-66px"
-		}, "fast");
+			"left": Native_left + "px"
+		}, "fast");  
+		
 		return;
 	});
 
@@ -528,14 +532,13 @@ LeftPageGOBack = function()
 
 		var x = e.detail.center.x - Touch_Hold_X; //拖拉的距离	
 		
-	 
-		
-		if (x > 30) //向右拉30px才可以看出效果
+				
+		if (x > 0) //向右拉30px才可以看出效果
 		{ 
-			var left = Native_left + x;
+			var left = Native_left + x;  
 			
 
-			if (left < 0) //越趋近于0越大，当对象的left为0时完全展开  
+			if (left < 0) //当对象的left为0时完全展开  
 			{
 				$("#leftpage").css({
 					"left": left
@@ -543,6 +546,7 @@ LeftPageGOBack = function()
 			}
 			else
 			{
+				
 				$("#leftpage").css({
 					"left": "0px"
 				});
@@ -551,7 +555,7 @@ LeftPageGOBack = function()
 		else 
 		{
 			$("#leftpage").css({
-					"left": "-66px"
+					"left": Native_left + "px"
 			});
 		}
 		

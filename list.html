@@ -149,7 +149,7 @@
 				<div class=" mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
 					<a href="#" class="mui-control-item mui-active">所有物品</a>
 					<a href="#" class="mui-control-item">已取物品</a>
-					<a href="#info" style="display:none" id="goto_subpage">已取物品</a>
+					
 				</div>
 				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
 			</div>
@@ -239,17 +239,17 @@
 								<a>状态<span class="mui-pull-right zhuangtai">未知</span></a>
 							</li>
 						</ul>
- 
-
 					</div>
 				</div>
-			</div>
-			
+			</div>			
 		</div>
+		
+		
+		
 
-		<div id="leftpage">
-			<span class="mui-icon mui-icon-arrowleft"></span>
-		</div>
+<div id="leftpage">
+	<span class="mui-icon mui-icon-arrowleft"></span>
+</div>
 
 <span style="display: none;">
 	<input type="hidden" name="page" id="page" value="1" />  
@@ -308,39 +308,53 @@
 		 
 			
 			
-			//初始化单页view
-			var viewApi = mui('#app').view
-			({
-				defaultPage: '#Main'
-			});
-				
-				
-		
-			mui.init
-			({
-				pullRefresh: 
+		          
+		          
+		          
+		     
+		    /**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() 
+			{
+				//加载数据
+				setTimeout(function() 
 				{
-					container: '#pullrefresh',
-					down: 
-					{
-						callback: pulldownRefresh
-					},
-					up: 
-					{
-						contentrefresh: '正在加载...',
-						callback: pullupRefresh
-					}
-				}
-			});
-		          
-		          
+						var count = cnt; //数据库总数
+				 
+						var num =  $(".mui-table-view-cell").size(); //列表总数
+		
+						if(num >= count)
+						{		
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+							return false;
+						}
+					
+						ResultJson = null; //清空
+						var html = $("#temple").html();			
+						/* 获取dipicker的时间参数  */	
+						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
+						var end = JSON.parse(optionsJson).value;	
+						var pass = new Date(end);
+						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
+						var page = parseInt($("#page").val()) + 1;						
+						$("#page").val(page); //分页标识+1						
+					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+						
+				}, 1500);
+			}       
 		            
 		     $(function()
 		     {
-		     		LeftPageGOBack();	//右滑箭头 
+		     		/* 加载功能 */
+					assistive_mTouch(); //小光点以及菜单
+					QQ_offCanvas(); //QQ侧滑菜单	 					
+					LeftPageGOBack();	//右滑箭头 
 		     		
-		     		
+		     		/* 初始化数据 */
+		     		bind_绑定子页面();	//正式环境不需要
 		     		初始化数据(); //初始化数据   
+		     		
 		     })
 		     
 		     
@@ -390,37 +404,6 @@
 		    
 		 	 
 		     
-		    /**
-			 * 上拉加载具体业务实现
-			 */
-			function pullupRefresh() 
-			{
-				//加载数据
-				setTimeout(function() 
-				{
-						var count = cnt; //数据库总数
-				 
-						var num =  $(".mui-table-view-cell").size(); //列表总数
-		
-						if(num >= count)
-						{		
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
-							return false;
-						}
-					
-						ResultJson = null; //清空
-						var html = $("#temple").html();			
-						/* 获取dipicker的时间参数  */	
-						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value;	
-						var pass = new Date(end);
-						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = parseInt($("#page").val()) + 1;						
-						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
-						
-				}, 1500);
-			}  
 			 
 			
 			
@@ -484,7 +467,7 @@
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
 							        
 		        bind_绑定子页面();
-			}  
+			}
 			
 			  
 			  
@@ -516,10 +499,11 @@
 			 {			 	 
 			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function (e) 
 	     		{	
+	     			
 	     			//根据不同的业务绑定不同的单页	     			
  					$(this).find(".goto_subpage").attr("href","#info");
  					
- 					
+ 					 
  					//根据不同的业务调用不同的API
 	     			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
 	     			
@@ -527,7 +511,41 @@
 			 } 
 			  
 			 
-			  
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			//初始化单页view
+			var viewApi = mui('#app').view
+			({
+				defaultPage: '#Main'
+			});
+				
+				
+		
+			mui.init
+			({
+				pullRefresh: 
+				{
+					container: '#pullrefresh',
+					down: 
+					{
+						callback: pulldownRefresh
+					},
+					up: 
+					{
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			}); 
 			  
 			if (mui.os.plus) 
 			{
@@ -574,9 +592,6 @@
 					//				console.log(e.detail.page.id + ' back');
 				});
 			})(mui);
-			
-			
-			
 			
 			
 		</script>

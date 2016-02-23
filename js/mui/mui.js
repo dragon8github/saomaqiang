@@ -4262,7 +4262,9 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 				this._initPulldownRefresh();
 			}
 			if (this.pulldown) {
+				
 				this._setCaption(this.y > this.options.down.height ? this.options.down.contentover : this.options.down.contentdown);
+				
 			}
 		},
 

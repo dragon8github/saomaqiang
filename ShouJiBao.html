@@ -14,7 +14,6 @@
 
 
 <title>微信找零</title>
-<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/jcalculator/jcalculator.css"/>
 <link rel="stylesheet" href="css/My_css/cover.css" />
@@ -57,7 +56,7 @@
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">收寄宝</h1>
-</div>	 
+</div>	  
 <!--侧滑菜单容器-->
 <div id="Main" class="mui-off-canvas-wrap mui-draggable" style="padding-top: 44px;"> 
 	<div class="mui-content mui-inner-wrap mui-scroll-wrapper" id="mui-content">
@@ -90,7 +89,7 @@
    </div>    
       
 </div>	 
-	 
+	  
 	
 <div id="leftpage">
 	<span class="mui-icon mui-icon-arrowleft"></span>
@@ -108,6 +107,15 @@
 <script type="text/javascript">
 
 	$(function(){ 
+		
+		
+		/* 加载功能 */
+		assistive_mTouch(); //小光点以及菜单
+		QQ_offCanvas(); //QQ侧滑菜单	 		 
+		LeftPageGOBack();	//右滑箭头 
+		
+		
+		
 		  var h = $(".calculator span").eq(0).outerHeight();
 		 
 		  $(".calculator span").not(".gobackhome").css({ 

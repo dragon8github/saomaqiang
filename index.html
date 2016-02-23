@@ -157,12 +157,7 @@
 </html>
 <script type="text/javascript"> 
 
- 
-mui.init
-({ 	
-	swipeBack: false 	//目前好像没有效果	 
-});
- 
+ 	
 
 	
 
@@ -170,6 +165,9 @@ mui.init
  
 $(function()
 {	
+	assistive_mTouch(); //小光点以及菜单
+	QQ_offCanvas(); //QQ侧滑菜单	
+	
 	var shoujichongzhi  = document.getElementById("shoujichongzhi");
 	var saomazhifu  =document.getElementById("saomazhifu");
 	var weixizhaoling = document.getElementById("weixizhaoling");
@@ -228,26 +226,25 @@ $(function()
 			});
 			
 			$(".shoujibaoxieyi").css({
-			"width": "60%",			
-			"background": "rgba(0,0, 0, .6)",
-			"border-radius": "20px",
-			"left": "22%",
-			"color":"#fff"
+						"width": "60%",			
+						"background": "rgba(0,0, 0, .6)",
+						"border-radius": "20px",
+						"left": "22%",
+						"color":"#fff"
 			});
 			
 			
 	})  
 	
-	  Cy_Tp_Agree = function(){
-	  	layer.closeAll(); 
-				return false;
-				layer.load(1,{time:3000});
-				mui.openWindow
-				({
-					url:"ShouJiBao.html",
-					id:"ShouJiBao", 
-					popGesture:"close"
-				});
+ 	 Cy_Tp_Agree = function(){
+  			layer.closeAll(); 				
+			layer.load(1,{time:3000});
+			mui.openWindow
+			({
+				url:"ShouJiBao.html",
+				id:"ShouJiBao", 
+				popGesture:"close"
+			});
 	  }
 	 
 	 Cy_Tp_cannel = function(){	 			

@@ -152,20 +152,31 @@
 	
 	$(function() 
 	{
-		$("#form").autoheight({n:4});
-		$("#well").autoheight({n:4.2,m:"margin"}); 
 		
-		$("#tijiaodingdan").autoheight({n:2.2,m:"margin"});
-		$("#chaxunmingxi").autoheight({n:2,m:"margin"});
+		/* 加载功能 */
+		assistive_mTouch(); //小光点以及菜单
+		QQ_offCanvas(); //QQ侧滑菜单	 
+		计算器_autolineheight();	//垂直居中
+		LeftPageGOBack();	//右滑箭头 
 		
-		$("#calculator").autoheight({n:12,m:"height"}) 
 		 
 		
-		计算器_autolineheight();
+		
+		/* 响应式布局 */
+		$("#form").autoheight({n:4});
+		$("#well").autoheight({n:4.2,m:"margin"}); 		
+		$("#tijiaodingdan").autoheight({n:2.2,m:"margin"});
+		$("#chaxunmingxi").autoheight({n:2,m:"margin"});		
+		$("#calculator").autoheight({n:12,m:"height"}) 
+		
+		
+		 
+		
+		
 		$("#chaxunmingxi").click(function() {
 			window.location.href = "list.html";
 		})
 		
-		LeftPageGOBack();	//右滑箭头
+		
 	})
 </script>
