@@ -498,12 +498,14 @@ QQ_offCanvas = function()
 /* 左滑返回的箭头 */
 LeftPageGOBack = function() 
 {
+	
+	var leftpageobj = $("#leftpage");
 	  
 	var Touch_Hold_X = null; //起始坐标
 
 	var Native_left = $("#leftpage").offset().left || -66;	//-66
 		
-	var prev_x = 0; //上一次拖动的坐标
+	$("#leftpage").hide();	
 
 	document.addEventListener("hold", function(e) {
 		Touch_Hold_X = e.detail.center.x;
@@ -518,10 +520,10 @@ LeftPageGOBack = function()
 		{
 			mui.back();
 		}
-		$("#leftpage").animate({
-			"left": Native_left + "px"
-		}, "fast");  
 		
+		$("#leftpage").animate({
+			"left": Native_left + "px"			
+		}, "fast"); 
 		return;
 	});
 
@@ -530,10 +532,11 @@ LeftPageGOBack = function()
 
 	document.addEventListener("drag", function(e) {
 
-		var x = e.detail.center.x - Touch_Hold_X; //拖拉的距离	
+		var x = e.detail.center.x - Touch_Hold_X; //拖拉的距离
+		
 		
 				
-		if (x > 0) //向右拉30px才可以看出效果
+		if (x > 0) 
 		{ 
 			var left = Native_left + x;  
 			
@@ -558,8 +561,6 @@ LeftPageGOBack = function()
 					"left": Native_left + "px"
 			});
 		}
-		
-	
 	})
 
 }
