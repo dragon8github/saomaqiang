@@ -5183,7 +5183,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 				
 					var lee_leftobj = document.getElementById("leftpage");
 					
-					if(lee_leftobj != null && lee_leftobj.offsetLeft != "-66")
+					if(lee_leftobj != null && lee_leftobj.getAttribute("data-working") == "true")
 					{
 						return false;
 					}

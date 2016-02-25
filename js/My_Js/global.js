@@ -477,18 +477,19 @@ LeftPageGOBack = function()
 
 	var Native_left = $("#leftpage").offset().left || -66;	//-66
 	
-	var prev_left = 0;
 
 	document.addEventListener("hold", function(e) {
 		Touch_Hold_X = e.detail.center.x;
+	
 		//console.log(Touch_Hold_X); 
 	});
  
 	document.addEventListener("dragend", function(e) 
 	{
+		$("#leftpage").attr("data-working","false");
+		
 		var left = $("#leftpage").offset().left;
 
-		$("#leftpage").attr("data-working","false");
 
 		if (left >= 0)  
 		{
@@ -503,11 +504,9 @@ LeftPageGOBack = function()
 		
 		return; 
 	});
-
-
+	
 	document.addEventListener("drag", function(e) 
 	{
-
 		$("#leftpage").attr("data-working","true");
 
 		var x = e.detail.center.x - Touch_Hold_X; //拖动的距离
@@ -517,45 +516,25 @@ LeftPageGOBack = function()
 		{ 
 			var left = Native_left + x; //箭头当前的Left坐标  
 			
-			var px = x - prev_left; 
 			
-			console.log("px:" + px);
-			console.log("left : " + left);
-
 			if (left < 0) //当对象的left为0时完全展开  
 			{
+				
 				$("#leftpage").css({
 					"left": left
 				});
 			}
-			else if(left >= 0)	// && px > 0
+			else
 			{		 
-				
 				$("#leftpage").css({
 					"left": "0px" 
 				});		
-				
-				console.log("我要变成0啊");
-				
-				
-				prev_left = x;	//将本次拖拉的距离记录起来
-			}
-			else if(left > 0 && px < 0)
-			{
-				var now_left = $("#leftpage").offset().left || 0;
-				
-				console.log("我主宰变化 ：" + (now_left + px) );
-				
-				$("#leftpage").css({
-						"left": now_left + px + "px"
-				});	
-				
-				prev_left = x;	//将本次拖拉的距离记录起来
 			}
 			
 		} 
 		else 
 		{
+			console.log("caonima");
 			$("#leftpage").css({
 					"left": Native_left + "px"
 			});
