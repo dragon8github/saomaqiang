@@ -53,12 +53,6 @@ mui.init({
 $(function() 
 {
 	Init_初始化();	
-
-	//assistive_mTouch(); //小光点以及菜单
-
-	//QQ_offCanvas(); //QQ侧滑菜单		
-	
-	//涟漪特效(); 
 	
 })
 
@@ -104,7 +98,7 @@ Init_初始化 = function()
 
 
 // <summary>
-// Get_获取容器高度
+// 辅助方法：Get_获取容器高度
 // </summary>
 Get_获取容器高度 = function() {
 	var a = $("#header").height(); //头部高度
@@ -122,7 +116,7 @@ Get_获取容器高度 = function() {
 
 
 // <summary>
-// 窗体的高度通常是自增长的。所以该类适应的场景是高度不变的容器内
+// 辅助方法：窗体的高度通常是自增长的。所以该类适应的场景是高度不变的容器内
 // </summary>
 // <param name="e">对象</param>
 $.fn.autoheight = function(opt) {
@@ -139,11 +133,9 @@ $.fn.autoheight = function(opt) {
 		var model = opt.m; //string,场景模式
 		var self = $(this); //obj,目标对象
 		var all_height = Get_获取容器高度(); //所在容器整体高度
-		var self_height = parseInt(self.innerHeight()); //int,目前高度							
+		var self_height = parseInt(self.height()); //int,目前高度							
 		var target_height = parseInt(opt.n * (all_height / 12)); //int,目标高度
-
-		//console.log(all_height);
-
+ 		
 
 		if (self_height >= target_height) {
 			self.css({
@@ -156,10 +148,9 @@ $.fn.autoheight = function(opt) {
 			//alert(self_height + "," + target_height + "," +value + "," + h); 
 
 			if (model == "padding") {
-				var extrapadding = parseInt(self.innerHeight()) - parseInt(self.height());
-				self.css({
-					//					"padding-top": (value + extrapadding / 2) / all_height * 100 * 2 + "%",
-					//					"padding-bottom": (value + extrapadding / 2) / all_height * 100 * 2 + "%"
+				var extrapadding = parseInt(self.height()) - parseInt(self.height());
+				self.css({ 
+					"box-sizing": "border-box",
 					"padding-top": (value + extrapadding / 2),
 					"padding-bottom": (value + extrapadding / 2)
 				});
@@ -168,8 +159,7 @@ $.fn.autoheight = function(opt) {
 				var extra = (now_height - self_height) / 2;
 				if (extra > 0)
 					self.css({
-						//						"padding-top": (value - extra) / all_height * 100 * 2 + "%",
-						//						"padding-bottom": (value - extra) / all_height * 100 * 2 + "%"
+						"box-sizing": "border-box",
 						"padding-top": (value - extra),
 						"padding-bottom": (value - extra)
 					});
@@ -177,8 +167,7 @@ $.fn.autoheight = function(opt) {
 
 			if (model == "margin") {
 				self.css({
-					//					"margin-top": value / all_height * 100 * 2 + "%",
-					//					"margin-bottom": value / all_height * 100 * 2 + "%"
+					"box-sizing": "border-box",
 					"margin-top": value,
 					"margin-bottom": value
 				});
@@ -186,8 +175,7 @@ $.fn.autoheight = function(opt) {
 
 			if (model == "height") {
 				self.css({
-					"box-sizing": "border-box",
-					//"height": value * 2
+					"box-sizing": "border-box",					
 					"height": ((value * 2) / all_height * 100) + "%"
 				});
 			}
@@ -225,9 +213,6 @@ $.fn.autoheight = function(opt) {
 	})
 		
 	
-
-
-
 	$("#calculator .calculator span").bind('tap', function() 
 	{
 		
@@ -271,7 +256,6 @@ $.fn.autoheight = function(opt) {
 			myinput.val('');
 		}
 
-		
 	})
 
 }
@@ -378,44 +362,33 @@ assistive_mTouch = function()
 Show_Menu = function() {
  
  
-	layer.open({ 
-		skin: "assistiveTouch",
+	layer.open
+	({
+		style: 'width:60%; background:rgba(0,0, 0, .6);border-radius: 20px;',
 		closeBtn: 0,
-		title: false,
+		title: false,	
+		shade:[0.1,"transparent"],
 		shadeClose: true,
+		anim:false,	//去除动画
 		content: $("#xiaoguangdiancaidan").html(),
-		btn: 0, //默认底部不显示任何按钮
-		success: function() 
-		{
-			$(".assistiveTouch").css({
-				"width": "60%",
-				"background": "rgba(0,0, 0, .6)",
-				"border-radius": "20px",
-				"left": "22%"		 
-			})
-		}
-	});
-
+		btn: 0 //默认底部不显示任何按钮
+	}); 
+	   
 
 	//返回
 	mui(".mui-table-view").on('tap', '.Menu_back', function() {
-		layer.load(1, {
-			time: 2000
-		});
+		layer.open({type: 2});
 		mui.back();
 	})
 	//刷新
 	mui(".mui-table-view").on('tap', '.Menu_refresh', function() {
-		layer.load(1, {
-			time: 2000
-		});
+		
+		layer.open({type: 2});
 		window.location.reload();
 	})
 	//主页
 	mui(".mui-table-view").on('tap', '.Menu_home', function() {
-		layer.load(1, {
-			time: 2000
-		});
+		layer.open({type: 2});
 		mui.openWindow({
 			url: "index.html",
 			id: "index"			
@@ -423,9 +396,7 @@ Show_Menu = function() {
 	})
 	//手机充值
 	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() {
-		layer.load(1, {
-			time: 2000
-		});
+		layer.open({type: 2});
 		mui.openWindow({
 			url: "test.html",
 			id: "test"		 	
@@ -433,9 +404,7 @@ Show_Menu = function() {
 	}) 
 	//管理
 	mui(".mui-table-view").on('tap', '.guanli', function() {
-		layer.load(1, {
-			time: 2000
-		});
+		layer.open({type: 2});
 		mui.openWindow({
 			url: "error.html",
 			id: "error"			
@@ -473,7 +442,7 @@ QQ_offCanvas = function()
 	//钱包流水
 	$("#qianbaoliushui").bind("tap",function()
 	{
-		layer.load(1);
+		layer.open({type: 2});
 		mui.openWindow({
 			url: "QiangBao_list.html",
 			id: "QiangBao_list"			
@@ -484,7 +453,7 @@ QQ_offCanvas = function()
 	//业务流水
 	$("#yewuliusuhi").bind("tap",function()
 	{
-		layer.load(1);
+		layer.open({type: 2});
 		mui.openWindow({
 			url: "list.html",
 			id: "list"			
@@ -495,7 +464,10 @@ QQ_offCanvas = function()
 }
 
 
-/* 左滑返回的箭头 */
+
+// <summary>
+// 左滑返回的箭头
+// </summary>
 LeftPageGOBack = function() 
 {
 	
@@ -504,42 +476,51 @@ LeftPageGOBack = function()
 	var Touch_Hold_X = null; //起始坐标
 
 	var Native_left = $("#leftpage").offset().left || -66;	//-66
-		
-	$("#leftpage").hide();	
+	
+	var prev_left = 0;
 
 	document.addEventListener("hold", function(e) {
 		Touch_Hold_X = e.detail.center.x;
 		//console.log(Touch_Hold_X); 
 	});
-
+ 
 	document.addEventListener("dragend", function(e) 
 	{
 		var left = $("#leftpage").offset().left;
 
-		if (left >= 0) 
+		$("#leftpage").attr("data-working","false");
+
+		if (left >= 0)  
 		{
 			mui.back();
 		}
-		
+		 
+		  
 		$("#leftpage").animate({
-			"left": Native_left + "px"			
-		}, "fast"); 
-		return;
+			left: Native_left + "px"			
+		},200,"ease-out"); 
+		
+		
+		return; 
 	});
 
 
+	document.addEventListener("drag", function(e) 
+	{
 
+		$("#leftpage").attr("data-working","true");
 
-	document.addEventListener("drag", function(e) {
-
-		var x = e.detail.center.x - Touch_Hold_X; //拖拉的距离
+		var x = e.detail.center.x - Touch_Hold_X; //拖动的距离
 		
 		
-				
-		if (x > 0) 
+		if (x > 0) //说明是向右拖的
 		{ 
-			var left = Native_left + x;  
+			var left = Native_left + x; //箭头当前的Left坐标  
 			
+			var px = x - prev_left; 
+			
+			console.log("px:" + px);
+			console.log("left : " + left);
 
 			if (left < 0) //当对象的left为0时完全展开  
 			{
@@ -547,13 +528,31 @@ LeftPageGOBack = function()
 					"left": left
 				});
 			}
-			else
-			{
+			else if(left >= 0)	// && px > 0
+			{		 
 				
 				$("#leftpage").css({
-					"left": "0px"
-				});
+					"left": "0px" 
+				});		
+				
+				console.log("我要变成0啊");
+				
+				
+				prev_left = x;	//将本次拖拉的距离记录起来
 			}
+			else if(left > 0 && px < 0)
+			{
+				var now_left = $("#leftpage").offset().left || 0;
+				
+				console.log("我主宰变化 ：" + (now_left + px) );
+				
+				$("#leftpage").css({
+						"left": now_left + px + "px"
+				});	
+				
+				prev_left = x;	//将本次拖拉的距离记录起来
+			}
+			
 		} 
 		else 
 		{
@@ -566,7 +565,10 @@ LeftPageGOBack = function()
 }
 
 
-/* 退出 */
+
+// <summary>
+// 退出
+// </summary>
 quit = function() 
 {
 	var quit = document.getElementById("quit");
@@ -601,7 +603,7 @@ quit = function()
  
 
 // <summary>
-// 时间Javascript类库
+// 辅助方法：时间Javascript类库
 // </summary>
 Date.prototype.format = function(format) {
 	var o = {
@@ -668,6 +670,9 @@ function timeFormat(time) {
 
 
 
+// <summary>
+// 涟漪特效
+// </summary>
 涟漪特效 = function()
 {
     $('body').on('tap', function (e) 
@@ -684,6 +689,9 @@ function timeFormat(time) {
 
 
 
+// <summary>
+// Guid
+// </summary>
 function newGuid()
 {
     var guid = "";
@@ -700,6 +708,9 @@ function newGuid()
 
 
 
+// <summary>
+// 菜单部分html加载
+// </summary>
 菜单部分 = function()
 {
 	var caidan = "<!--菜单部分-->"+
@@ -772,8 +783,8 @@ function newGuid()
 "							</div>"+
 "							"+
 "			</aside>";
-
-
+  
+ 
 	var size = $("asign").size();
 	if(size == 0)
 	{
@@ -784,6 +795,11 @@ function newGuid()
 }
 
 
+
+
+// <summary>
+// 小光点菜单
+// </summary>
 小光点菜单 = function()
 {
 	var caidan = "<div style=\"display:none\" id=\"xiaoguangdiancaidan\">		"+
