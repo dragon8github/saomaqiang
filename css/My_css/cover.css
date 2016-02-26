@@ -31,3 +31,7 @@
 	border-right: none;
 	border-bottom: none; 
 }
+.mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active
+{
+	background: #000000; 
+}

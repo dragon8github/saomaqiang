@@ -131,6 +131,21 @@
 		<!--侧滑菜单容器   -->
 		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
 
+
+			
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<div class=" mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
+					<a href="#" class="mui-control-item mui-active">所有物品</a>
+					<a href="#" class="mui-control-item">已取物品</a>
+					
+				</div>
+				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
+			</div>
+			<!--页面标题栏结束-->
+			
+			
 			<!-- 兼容 -->
 			<style type="text/css">
 				.mui-off-canvas-wrap .mui-bar
@@ -143,17 +158,6 @@
 				}
 			</style>
 
-			<!--页面标题栏开始-->
-			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<div class=" mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
-					<a href="#" class="mui-control-item mui-active">所有物品</a>
-					<a href="#" class="mui-control-item">已取物品</a>
-					
-				</div>
-				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
-			</div>
-			<!--页面标题栏结束-->
  
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
@@ -395,7 +399,7 @@
 				//模拟更新数据
 				setTimeout(function() 
 				{											
-					layer.msg("刷新成功");
+					mui.toast("刷新成功");
 				
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 		

@@ -146,6 +146,11 @@ input {
 	position: relative;
 }
 
+.assistive-touch:active
+{
+	opacity: .8;
+}
+
 .assistive-touch:before,
 .assistive-touch:after,
 .assistive-touch span {
@@ -203,7 +208,7 @@ input {
 		position:fixed;
 		left:-66px;
 		top:50%;
-		z-index: 9999;		
+	  z-index: 19930418;		
 		padding: 10px;
 	}
 	#leftpage .mui-icon

@@ -480,8 +480,6 @@ LeftPageGOBack = function()
 
 	document.addEventListener("hold", function(e) {
 		Touch_Hold_X = e.detail.center.x;
-	
-		//console.log(Touch_Hold_X); 
 	});
  
 	document.addEventListener("dragend", function(e) 
@@ -499,7 +497,7 @@ LeftPageGOBack = function()
 		  
 		$("#leftpage").animate({
 			left: Native_left + "px"			
-		},200,"ease-out"); 
+		},200); 
 		
 		
 		return; 
@@ -510,8 +508,8 @@ LeftPageGOBack = function()
 		$("#leftpage").attr("data-working","true");
 
 		var x = e.detail.center.x - Touch_Hold_X; //拖动的距离
-		
-		
+					  
+				
 		if (x > 0) //说明是向右拖的
 		{ 
 			var left = Native_left + x; //箭头当前的Left坐标  
@@ -519,7 +517,6 @@ LeftPageGOBack = function()
 			
 			if (left < 0) //当对象的left为0时完全展开  
 			{
-				
 				$("#leftpage").css({
 					"left": left
 				});
@@ -530,15 +527,14 @@ LeftPageGOBack = function()
 					"left": "0px" 
 				});		
 			}
-			
 		} 
 		else 
 		{
-			console.log("caonima");
 			$("#leftpage").css({
 					"left": Native_left + "px"
 			});
 		}
+		
 	})
 
 }

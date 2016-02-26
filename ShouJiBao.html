@@ -13,7 +13,7 @@
 
 
 
-<title>微信找零</title>
+<title>微信找零</title> 
 <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/jcalculator/jcalculator.css"/>
 <link rel="stylesheet" href="css/My_css/cover.css" />
@@ -55,10 +55,10 @@
         <div class="mui-col-xs-3"  id="calculator">	
 			<div class=""  id="calculator">	
 				<div class="calculator" > 
-				  	<a id="DaiShou" href="ShouJiBao/DaiShou.html" target="right_iframe"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p class="iconfont_p">我要代收</p></span></a>
-				  	<a id="DaiJi" href="ShouJiBao/DaiJi.html" target="right_iframe"><span><i class="icon-unie606 iconfont"></i><p class="iconfont_p">我要代寄</p></span></a>
-				  	<a id="Save" href="ShouJiBao/Save.html" target="right_iframe"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p class="iconfont_p">我要暂存</p></span></a>
-				  	<a id="Index" href="index.html"><span class="gobackhome"><i class="mui-icon mui-icon-home" style="font-size:66px;position:relative;top:15%;"></i></span></a>
+				  	<a id="DaiShou" data-href="ShouJiBao/DaiShou.html" target="right_iframe"><span><i class="icon-woyaodaishoucainiao iconfont"></i><p class="iconfont_p">我要代收</p></span></a>
+				  	<a id="DaiJi" data-href="ShouJiBao/DaiJi.html" target="right_iframe"><span><i class="icon-unie606 iconfont"></i><p class="iconfont_p">我要代寄</p></span></a>
+				  	<a id="Save" data-href="ShouJiBao/Save.html" target="right_iframe"><span><i class="icon-shouzhiliushuizhang iconfont"></i><p class="iconfont_p">我要暂存</p></span></a>
+				  	<a id="Index" data-href="index.html"><span class="gobackhome"><i class="mui-icon mui-icon-home" style="font-size:66px;position:relative;top:15%;"></i></span></a>
 	       		</div> 
 			</div>    
 			
@@ -111,8 +111,6 @@
 		assistive_mTouch(); //小光点以及菜单
 		
 		  
-		
-		
 		  var h = $(".calculator span").eq(0).height();
 		  
 		  $(".calculator span").not(".gobackhome").css({ 
@@ -131,7 +129,7 @@
 			 
 			 $("#DaiShou,#DaiJi,#Save").bind("tap",function(){
 			 	layer.open({type: 2});
-			 	var url = $(this).attr("href");			 	
+			 	var url = $(this).attr("data-href") +'?new='+Math.random();		 	
 		 		$("#right_iframe").attr("src",url); 			 
 			 })
 			 iframe.onload = function() {
