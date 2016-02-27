@@ -91,8 +91,7 @@
 			<div class="mui-view">			
 				<div class="mui-pages">
 								
-				</div> 
-							
+				</div> 							
 			</div>
 		</div>
 		<!--页面主结构结束-->
@@ -100,12 +99,12 @@
 		 
 		
 		<!--主页开始-->
-		<div id="Main" class="mui-page" style="z-index: 0;">	 		
-			<div class="mui-content"> 
+		<div id="Main" class="mui-page">	
+			<div class="mui-page-content"> 
 					<a href="#set" class=""><button style="border-radius: 10px;font-size:18px;" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe61e;</i>&nbsp;&nbsp;<span class="xingweiname">商户收包裹</span></button></a>
 					<a href="#get" class="mui-col-xs-6"><button style="border-radius: 10px;font-size:18px;" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe610;</i>&nbsp;&nbsp;<span class="xingweiname">顾客取包裹</span></button></a>
 					<a href="#refuse" class="mui-col-xs-6"><button style="border-radius: 10px;font-size:18px;" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe613;</i>&nbsp;&nbsp;<span class="xingweiname">商户拒收包裹</span></button></a>
-					<a href="DaiShou_info.html" class="mui-col-xs-6"><button style="border-radius: 10px;font-size:18px;" class="mybtn mui-btn mui-btn-block" ><i class="iconfont">&#xe612;</i>&nbsp;&nbsp;<span class="xingweiname">包裹记录查询</span></button></a>
+					<a href="DaiShou_info.html?new=7" class="mui-col-xs-6"><button style="border-radius: 10px;font-size:18px;" class="mybtn mui-btn mui-btn-block" ><i class="iconfont">&#xe612;</i>&nbsp;&nbsp;<span class="xingweiname">包裹记录查询</span></button></a>
 			</div>  
 		</div> 
 		<!--主页结束--> 
@@ -116,8 +115,8 @@
 		   
 		 
 		<!-- 商户收包裹 开始 -->
-		<div id="set" class="mui-page" style="z-index: 1;">		 	
-			<div class="mui-content">
+		<div id="set" class="mui-page" style="z-index: 1;">	
+			<div class="mui-page-content">			
 					<a href="#cainiaobaoguo" id="cainiaobaoguo_btn" ><button style="border-radius: 10px;font-size:24px;" class="mybtn mui-btn mui-btn-block"   ><i class="iconfont">&#xe615;</i>&nbsp;&nbsp;<span class="xingweiname">菜鸟驿站</span></button></a>
 					<a href="#qitabaoguo" id="qitabaoguo" ><button style="border-radius: 10px;font-size:24px;" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe616;</i>&nbsp;&nbsp;<span class="xingweiname">其他包裹</span></button></a>		
 			</div>				
@@ -128,7 +127,7 @@
 		  
 		  
 		<div id="cainiaobaoguo" class="mui-page" style="z-index: 2;">			
-			<div class="mui-content">				
+			<div class="mui-page-content">				
 				 <form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>包裹单号</label>
@@ -141,8 +140,8 @@
 		 
 		  
 		
-		<div id="qitabaoguo" class="mui-page"  style="z-index: 2;">			
-			<div class="mui-content">			
+		<div id="qitabaoguo" class="mui-page" style="z-index: 2;">			
+			<div class="mui-page-content">			
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label>包裹单号</label>
@@ -163,8 +162,8 @@
 		  
 		  
 		 <!--顾客取包裹开始    这里的Get是关键字，所以需要变成小写 -->
-		<div id="get" class="mui-page"  style="z-index: 1;">
-			<div class="mui-content">
+		<div id="get" class="mui-page" style="z-index: 1;">
+			<div class="mui-page-content">
 					<form class="mui-input-group">
 						<div class="mui-input-row">
 							<label>条形码</label>
@@ -182,9 +181,7 @@
 					<div class="mui-content-padded">
 						<p>可选择输入条形码或者扫描条形码进行验证</p>
 					</div> 									
-			</div> 
-		
-						
+			</div> 	
 		</div>
 		<!--单页结束--> 
 		
@@ -195,7 +192,7 @@
 		
 		 <!--商户拒收包裹开始  这里的Get是关键字，所以需要变成小写 -->
 		<div id="refuse" class="mui-page" style="z-index: 1;">
-			<div class="mui-content">
+			<div class="mui-page-content">
 					<form class="mui-input-group">
 						<div class="mui-input-row">
 							<label>条形码</label>
@@ -229,7 +226,7 @@
 								</a>
 							</li>
 						</ul>
-					</form> 
+					</form>  
 					<div class="mui-content-padded">
 						<button id='reg' class="mui-btn mui-btn-block mui-btn-success" id="sao_order"">扫码</button>
 						<button id='reg' class="mui-btn mui-btn-block mui-btn-primary" id="get_order"">确认</button>
@@ -245,8 +242,11 @@
 		
 		 
 		
-		
-		
+	
+<div id="leftpage">
+	<span class="mui-icon mui-icon-arrowleft"></span>
+</div>
+	
 		 
 		
 	 
@@ -267,9 +267,7 @@
 			
 				$(function()
 				{
-					//LeftPageGOBack();	//右滑箭头 
-					
-			  			
+					LeftPageGOBack();	//右滑箭头 					
 				}) 
 			
 			 

@@ -172,33 +172,21 @@
 			</div>
 		</div>
 		<!--页面主结构结束-->
-
+ 
 			<!--侧滑菜单容器   -->
-			<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
+			<div id="Main" class="mui-page">
 				<!--页面标题栏开始--> 
-				<div class="mui-navbar-inner mui-bar mui-bar-nav header">				
+				<div class="mui-navbar-inner mui-bar mui-bar-nav header">
+					<span class="mui-icon mui-icon-search"></span>
 					<div class=" mui-segmented-control" style="width: 50%;position: absolute;left: 10%;">
 						<a href="#" class="mui-control-item mui-active">未取物品</a>
 						<a href="#" class="mui-control-item">已取物品</a>
 					</div>
 					<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
 				</div>
-				<!--页面标题栏结束-->
-	
-				<!-- 兼容 -->
-				<style type="text/css">
-					.mui-off-canvas-wrap .mui-bar
-				  	{
-			  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
-				  	}
-				  	.mui-off-canvas-wrap
-					{
-						z-index: 0; 
-					}
-				</style>
-	
+				<!--页面标题栏结束-->	
 	 
-				<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
+				<div id="pullrefresh" class="mui-page-content mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 							<li class="mui-table-view-cell">	
@@ -232,9 +220,7 @@
 					</button>
 					<h1 class="mui-center mui-title ">详情</h1>
 				</div>
-				<div class="mui-page-content" id="sub_page">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
+				<div class="mui-page-content" id="sub_page">					
 							<div id="order" style="padding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
 								<p>存放号 : <span class="save_id" style="color: red;font-weight: bold;">未知</span></p>
 								<p><img id="barcode2"/></p>
@@ -243,8 +229,6 @@
 								<h5 class="mui-left">存放地址：<span class="save_address">未知</span></h5>
 								<h5 class="mui-left">存放商户电话：<span class="save_phone">未知</span></h5>
 							</div>
-						</div>
-					</div>
 				</div>			
 			</div>
 		
