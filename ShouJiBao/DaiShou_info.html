@@ -15,6 +15,10 @@
 		<link rel="stylesheet" type="text/css" href="../css/My_css/cover.css"/>
 		<style>
 			/* The custom style */
+				.mui-input-group .mui-input-row
+				{
+					height: auto;
+				}
 				.iconfont
 				{
 					font-size:30px
@@ -177,7 +181,7 @@
 			<div id="Main" class="mui-page">
 				<!--页面标题栏开始--> 
 				<div class="mui-navbar-inner mui-bar mui-bar-nav header">
-					<span class="mui-icon mui-icon-search"></span>
+					<span class="mui-icon mui-icon-search" id="search"></span>
 					<div class=" mui-segmented-control" style="width: 50%;position: absolute;left: 10%;">
 						<a href="#" class="mui-control-item mui-active">未取物品</a>
 						<a href="#" class="mui-control-item">已取物品</a>
@@ -185,6 +189,45 @@
 					<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
 				</div>
 				<!--页面标题栏结束-->	
+	 
+			 	<!-- 搜索菜单 开始 -->
+				<div class="mui-content" id="search_menu">
+					<div class="mui-card">
+						<ul class="mui-table-view" style="margin-top: 0px;margin-bottom: 0px;">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right" href="#">按订单号搜索</a>
+								<div class="mui-collapse-content">
+									<form class="mui-input-group">
+										<div class="mui-input-row"> 
+									    	 	<label>订单号</label> 
+									     	<input id="search_orderid" type="text" value="" placeholder="请输入订单号" class="mui-input-clear" /> 
+									    	</div> 	
+								    		<div class="mui-button-row">
+											<button type="button" class="search_yes mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+											<button type="button" class="search_canel mui-btn mui-btn-danger">取消</button>
+										</div> 
+									</form>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right" href="#">按手机号码搜索</a>
+								<div class="mui-collapse-content">
+									<form class="mui-input-group">
+										<div class="mui-input-row"> 
+									    	 	<label>手机号码</label> 
+									     	<input id="search_phone" type="text" value="" placeholder="请输入手机号码" class="mui-input-clear" /> 
+									    	</div> 	
+								    		<div class="mui-button-row">
+											<button type="button" class="search_yes mui-btn mui-btn-primary">确认</button>&nbsp;&nbsp;
+											<button type="button" class="search_canel mui-btn mui-btn-danger" >取消</button>
+										</div> 
+									</form>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+	 			<!-- 搜索菜单 结束 -->
 	 
 				<div id="pullrefresh" class="mui-page-content mui-scroll-wrapper">
 					<div class="mui-scroll">
@@ -319,6 +362,34 @@
 			}
 			
 			
+			
+			//选择搜索条件
+			document.getElementById("search").addEventListener("tap",function(){ 
+				
+				layer.open({
+					style: 'width:60%; background:rgba(0,0, 0, .6);border-radius: 20px;',
+					closeBtn: 0,
+					title: false,	
+					shade:[0.1,"transparent"],
+					shadeClose: true,
+					anim:false,	//去除动画
+					content: $("#search_menu").html(),
+					btn: 0 //默认底部不显示任何按钮
+				})
+				
+				$(".search_canel").bind("tap",function(){ 
+					var input = $(this).parents("form").find("input");
+					input.val("");
+				})
+				$(".search_yes").bind("tap",function(){ 
+					var label = $(this).parents("form").find("label").text();
+					if(label == "订单号")
+					{}
+					else if(label == "手机号码")
+					{}
+				})
+			
+			})
 			
 			
 			
