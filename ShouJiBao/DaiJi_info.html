@@ -157,8 +157,9 @@
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 						<li class="mui-table-view-cell">
-							<div class="mui-slider-right mui-disabled">
-								<a class="mui-btn mui-btn-red">删除</a>
+							<div class="mui-slider-right" style="z-index: 9999;"> 
+								<a id="slider-delete"  class="mui-btn mui-btn-red">删除</a>
+								<a href="#update"  class="mui-btn mui-btn-warning">编辑</a>
 							</div>
 							<a class="goto_subpage">
 								<div class="mui-slider-handle">
@@ -169,7 +170,6 @@
 											<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：137-13332652</p>
 										</div>
 										<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
-											<!--<span class="mui-h5">今天  16:30</span>-->
 											<p><img src="../Images/快递公司/sf.jpg" width="60" /></p>
 											<span class="mui-h5" style="color:#000">顺丰快递</span>
 										</div>
@@ -181,6 +181,8 @@
 				</div>
 			</div>
 		</div>
+
+
 
 		<!--快递详情页-->
 		<div id="info" class="mui-page" style="z-index: 10px;">
@@ -194,9 +196,7 @@
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<ul class="mui-table-view mui-action-back" id="form_info">
-							<!--<li class="mui-table-view-cell">
-								<a id="head" class="yewuleixing">快递公司<span class="mui-pull-right head">未知</span></a>
-							</li>-->
+							 
 							<li class="mui-table-view-cell">
 								<a>快递员<span class="mui-pull-right yewuhaoma">未知</span></a>
 							</li>
@@ -211,11 +211,29 @@
 							</li>
 						</ul>
 
-						<form class="mui-input-group" id="update" style="display: none;">
-							<!--<div class="mui-input-row"> 
-						     <label>快递公司</label> 
-						     <input id="username" type="text" value="未知" placeholder="请输入快递公司" class="mui-input-clear" /> 
-						    </div> -->
+						<a style="margin-top:20px" href="#update"  class="mui-btn mui-btn-warning mui-btn-block">编辑快递员</a>
+						<button type="button"   id="shoufeibiaozhun" class="mui-btn mui-btn-primary mui-btn-block">查看收费标准</button>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		
+				
+		<div id="update" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">编辑</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">		
+						<form class="mui-input-group" id="update" style="margin-top: 15px;">
 							<div class="mui-input-row">
 								<label>快递员</label>
 								<input id="password" type="text" value="未知" placeholder="请输入快递员" class="mui-input-clear" />
@@ -233,14 +251,14 @@
 								<input id="password" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" />
 							</div>
 						</form>
-
-						<button type="button" style="margin-top:20px" id="bianji" class="mui-btn mui-btn-warning mui-btn-block">编辑快递员</button>
-						<button type="button" id="shoufeibiaozhun" class="mui-btn mui-btn-primary mui-btn-block">查看收费标准</button>
+						<a style="margin-top:20px" id="updatebtn" class="mui-btn mui-btn-warning mui-btn-block">保存编辑</a>
 						<button type="button" id="shanchu" class="mui-btn mui-btn-danger mui-btn-block">删除快递员</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 
 		<!--<div id="leftpage">
 	<span class="mui-icon mui-icon-arrowleft"></span>
@@ -387,44 +405,37 @@
 				layer.closeAll();
 			}
 			/* 编辑按钮 */
-			$("#bianji").bind("tap", function() {
-				var speed = 500; //动画速度 
-				if ($("#bianji").text() == "保存/返回") {
-					var btnArray = ['取消保存', '确定保存'];
-					mui.confirm('你确定要保存修改吗？', '温馨提示', btnArray, function(e) {
-						if (e.index == 1) {
-							if (true) {
-								//保存成功
-								mui.toast("保存成功");
-							} else {
-								//保存失败
-								mui.toast("保存失败，失败原因：你没有编辑权限");
-							}
+			$("#updatebtn").bind("tap", function() {
+				var btnArray = ['取消保存', '确定保存'];
+				mui.confirm('你确定要保存修改吗？', '温馨提示', btnArray, function(e) {
+					if (e.index == 1) {
+						if (true) {
+							//保存成功
+							mui.alert('保存成功', '温馨提示', function() 
+							{
+								layer.open({type:2});
+								window.location.reload();
+							});
+						} else {
+							//保存失败
+							mui.toast("保存失败，失败原因：你没有编辑权限");
 						}
-						$("#bianji").text("编辑快递员");
-						$("#update").slideUp(speed);
-						setTimeout(function() {
-							$("#form_info").slideDown(speed);
-						}, speed)
-					})
-				} else if ($("#bianji").text() == "编辑快递员") {
-					$("#bianji").text("保存/返回");
-					$("#form_info").slideUp(speed);
-					setTimeout(function() {
-						$("#update").slideDown(speed);
-					}, speed)
-				}
-			})
+					}
+				})
+			}) 
+			
 			/* 删除 */
-			$("#shanchu").bind("tap", function() {
+			$("#shanchu,#slider-delete").bind("tap", function() {
 				var btnArray = ['否', '是'];
 				mui.confirm('你确定要删除该快递员吗？', '温馨提示', btnArray, function(e) {
 					if (e.index == 1) {
-						//是
-						mui.back();
-						$("#bianji").text("编辑快递员");
-						$("#update").hide();
-						$("#form_info").show();
+						//删除成功
+						mui.alert('删除成功', '温馨提示', function() 
+						{
+							layer.open({type:2});
+							window.location.reload();
+						});
+						
 					} else {
 						//否
 						return false;
