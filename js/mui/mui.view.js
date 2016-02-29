@@ -42,7 +42,7 @@
 			this.view = this.element = element;
 			this.options = $.extend({
 				animateNavbar: 'ios', //ios
-				swipeBackPageActiveArea: 30,
+				swipeBackPageActiveArea:250,	//李钊鸿在此优化 
 				hardwareAccelerated: true
 			}, options);
 			this.navbars = this.view.querySelector(SELECTOR_NAVBAR);
@@ -282,7 +282,8 @@
 		_initPageTransform: function() {
 			this.previousPage = this.pages.querySelector(SELECTOR_PAGE_LEFT);
 			this.activePage = this.pages.querySelector(SELECTOR_PAGE_CENTER);
-			if (this.previousPage && this.activePage) {
+			if (this.previousPage && this.activePage) 
+			{
 				this.activePage.appendChild(this.shadow);
 				this.previousPageClassList = this.previousPage.classList;
 				this.activePageClassList = this.activePage.classList;
@@ -372,17 +373,26 @@
 			}
 		},
 		_drag: function(event) {
+			
 			if (this.isInTransition) {
 				return;
 			}
+			
 			var detail = event.detail;
-			if (!this.dragging) {
+			
+			
+			if (!this.dragging) 
+			{	
+//				console.log($.gestures.session.firstTouch.center.x - this.view.offsetLeft + "|" + this.options.swipeBackPageActiveArea);
+				
 				if (($.gestures.session.firstTouch.center.x - this.view.offsetLeft) < this.options.swipeBackPageActiveArea) {
 					this.isBack = true;
 					this._initPageTransform();
 				}
 			}
-			if (this.dragging) {
+			if (this.dragging) 
+			{
+			//	mui.toast(detail.deltaX); //李钊鸿在此优化 
 				var deltaX = 0;
 				if (!this.moved) { //start
 					deltaX = detail.deltaX;
@@ -392,6 +402,8 @@
 					deltaX = detail.deltaX - ($.gestures.session.prevTouch && $.gestures.session.prevTouch.deltaX || 0);
 				}
 				var newX = this.x + deltaX;
+				
+				
 				if (newX < 0 || newX > this.maxScrollX) {
 					newX = newX < 0 ? 0 : this.maxScrollX;
 				}
@@ -402,6 +414,8 @@
 				if (!this.requestAnimationFrame) {
 					this._updateTranslate();
 				}
+
+				
 
 				this.moved = true;
 				this.x = newX;
@@ -476,6 +490,9 @@
 
 		_updateTranslate: function() {
 			var self = this;
+			
+//			console.log(self.x + "|" + self.y);
+			
 			if (self.x !== self.lastX || self.y !== self.lastY) {
 				self.setTranslate(self.x, self.y);
 			}
@@ -611,6 +628,7 @@
 		}
 
 	});
+	
 
 
 	$.fn.view = function(options) {

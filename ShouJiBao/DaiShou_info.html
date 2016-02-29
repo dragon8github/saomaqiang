@@ -367,7 +367,7 @@
 			document.getElementById("search").addEventListener("tap",function(){ 
 				
 				layer.open({
-					style: 'width:60%; background:rgba(0,0, 0, .6);border-radius: 20px;',
+					style: 'width:70%; background:rgba(0,0, 0, .6);border-radius: 20px;top:10px;position:absolute;left:20%;',
 					closeBtn: 0,
 					title: false,	
 					shade:[0.1,"transparent"],
@@ -380,6 +380,7 @@
 				$(".search_canel").bind("tap",function(){ 
 					var input = $(this).parents("form").find("input");
 					input.val("");
+					layer.closeAll();
 				})
 				$(".search_yes").bind("tap",function(){ 
 					var label = $(this).parents("form").find("label").text();

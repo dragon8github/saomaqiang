@@ -65,16 +65,18 @@
 
 		</div>
 
-		<div data-role="popup" id="Cy-Tp-XieYi" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="min-width:300px;display:none">
+		<div data-role="popup" id="Cy-Tp-XieYi" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="display:none">
 
 			<div role="main" class="ui-content">
 
-				<div style="max-height: 300px;overflow: auto;">
+				<!--<div class="col-xs-12 well mui-scroll-wrapper" id="Div1" style="position: relative; max-height: 250px;overflow: auto;">
+					<div class="mui-scroll" style="position: relative;">-->
+				<div class="col-xs-12 well" id="Div1" style="max-height: 250px;overflow: auto;">
 					<div>
-						<div style="text-align:center"><span style="font-size:23px">《收寄宝服务协议》</span></div>
+						<div style="text-align:center"><span style="font-size:24px">《收寄宝服务协议》</span></div>
 						<span>&nbsp;</span>
 						<br/>
-						<div style="text-align: left;">
+						<div style="text-align:left">
 							收寄宝服务协议（以下简称“本协议”）是东莞市糖酒集团美宜佳便利店有限公司下辖特许加盟商户(以下简称“商户”)向东莞市彩洋信息科技有限公司（以下简称“我公司”）申请便民预存款额度服授信服务（以下简称“本服务”）所订立的有效合约。
 							<br/>
 							<br/>在接受本协议之前，请商户仔细阅读本协议的全部内容（特别是粗体字的内容）。商户通过网络页面点击确认或以其他方式选择接受本协议，即表示商户与我公司已达成本协议并同意接受本协议的全部约定内容。
@@ -131,14 +133,12 @@
 							<br/> 《收寄宝服务费标准》
 							<br/>
 						</div>
-
 					</div>
-
 				</div>
 
 				<p style="margin:20px 0px 0px 0px;text-align:center;">
-					<a id="Cy_Tp_Agree" onclick="Cy_Tp_Agree()" style="margin-right: 10px;color:#fff" class="mui-btn mui-btn-outlined">同 意</a>
-					<a id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="color:#fff" class="mui-btn mui-btn-outlined">取 消</a>
+					<a id="Cy_Tp_Agree" onclick="Cy_Tp_Agree()" style="z-index: 9999;margin-right: 10px;color:#fff" class="mui-btn mui-btn-outlined">确 认</a>
+					<a id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="z-index: 9999;color:#fff" class="mui-btn mui-btn-outlined">取 消</a>
 				</p>
 			</div>
 		</div>
@@ -151,6 +151,13 @@
 	</body>
 </html>
 <script type="text/javascript">
+
+
+	
+
+
+
+
 	$(function()
 	{	
 		assistive_mTouch(); //小光点以及菜单
@@ -198,20 +205,24 @@
 		
 		shoujibao.addEventListener('tap',function()
 		{
-				layer.open({
-							style:"color:#fff;background:rgba(0,0, 0, .6);border-radius:20px;text-align:left;",
-							closeBtn: 0,
-							title: false,
-							shadeClose: true,
-							scrollbar:true,
-							content: $("#Cy-Tp-XieYi").html(),
-							btn: 0, //默认底部不显示任何按钮						
+			layer.open({
+					style: "width:60%;color:#fff;background:rgba(0,0, 0, .6);border-radius:20px;",
+					closeBtn: 0,
+					title: false,
+					shadeClose: true,
+					content: $("#Cy-Tp-XieYi").html(),
+					btn: 0, //默认底部不显示任何按钮
+					success:function(){
+//						mui('.mui-scroll-wrapper').scroll();	
+					}
 				});
+				
 			
 				
 		})   
 		
-	 	 Cy_Tp_Agree = function(){
+	 	 Cy_Tp_Agree = function()
+	 	 {
 	  			layer.closeAll(); 				
 				layer.open({type: 2});
 				mui.openWindow
@@ -222,7 +233,8 @@
 				});
 		  }
 		 
-		 Cy_Tp_cannel = function(){	 			
+		 Cy_Tp_cannel = function()
+		 {
 					layer.closeAll(); 
 					return false;
 		 }
