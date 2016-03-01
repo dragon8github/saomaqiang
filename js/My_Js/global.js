@@ -505,7 +505,7 @@ LeftPageGOBack = function()
 	
 	document.addEventListener("drag", function(e) 
 	{
-		//$("#leftpage").attr("data-working","true");
+		$("#leftpage").attr("data-working","true");
 
 		var x = e.detail.center.x - Touch_Hold_X; //拖动的距离
 				

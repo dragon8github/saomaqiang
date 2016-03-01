@@ -159,8 +159,8 @@
 						<li class="mui-table-view-cell">
 							<div class="mui-slider-right" style="z-index: 9999;"> 
 								<a id="slider-delete"  class="mui-btn mui-btn-red">删除</a>
-								<a href="#update"  class="mui-btn mui-btn-warning">编辑</a>
-							</div>
+								<a href="#update" id="go_update"  class="mui-btn mui-btn-warning">编辑</a>
+							</div>							
 							<a class="goto_subpage">
 								<div class="mui-slider-handle">
 									<div class="mui-table">
@@ -186,7 +186,7 @@
 
 		<!--快递详情页-->
 		<div id="info" class="mui-page" style="z-index: 10px;">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav  mui-action-back">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
@@ -224,7 +224,7 @@
 		
 				
 		<div id="update" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav mui-action-back">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
@@ -423,12 +423,23 @@
 					}
 				})
 			}) 
-			
+			/* 点击编辑按钮后，还原拖拉 */
+			$("#go_update").bind("tap",function()
+			{
+				var elem = this;
+				var li = elem.parentNode.parentNode;
+				mui.swipeoutClose(li);
+			})
 			/* 删除 */
 			$("#shanchu,#slider-delete").bind("tap", function() {
+				
+				var elem = this;
+				var li = elem.parentNode.parentNode;
+				
 				var btnArray = ['否', '是'];
 				mui.confirm('你确定要删除该快递员吗？', '温馨提示', btnArray, function(e) {
-					if (e.index == 1) {
+					if (e.index == 1)
+					{
 						//删除成功
 						mui.alert('删除成功', '温馨提示', function() 
 						{
@@ -436,11 +447,17 @@
 							window.location.reload();
 						});
 						
-					} else {
-						//否
+					} 
+					else
+					{			
+						mui.swipeoutClose(li);
 						return false;
 					}
 				})
+				 
+				
+				
+				
 			})
 			/* 显示金额条款 */
 			$("#shoufeibiaozhun").bind("tap", function() {
