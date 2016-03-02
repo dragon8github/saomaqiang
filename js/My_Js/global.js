@@ -211,53 +211,34 @@ $.fn.autoheight = function(opt) {
 		mui.toast("您可以输入识别码了");
 		return false;  
 	})
-		
+	
+	 
 	
 	$("#calculator .calculator span").bind('tap', function() 
 	{
-		
 		var text = $(this).text();
-		var myinput = $("input.target_input").eq(0);
-		 
-		if ($('.target_input').size() == 0 && text != "提交订单" && text != "Go!")
-		{
-			layer.tips("点我输入金额", $("#go_form"), { 
-				tipsMore: true,
-				time: 4000,
-				tips: [4, '#000'],
-			})
-			
-			layer.tips("点我输入识别码", $("#go_form2"), {
-					tipsMore: true,
-					time: 4000,
-					tips: [4, 'red'], 
-				})
-				//alert("请先聚焦输入框");
-			return false;
-		}
 		
-		var regex = /^[0-9]+.?[0-9]|\.*$/; //数字	
-		if (regex.test(text)) 
+		var myinput = $("input.target_input").eq(0); 		 
+		
+		if (text != "C") 
 		{			
 			var v = myinput.val() + text;
 			
 			myinput.val(v); 
 			
-			var reg = /^\d+\.?\d{0,2}$/;	//只能输入小数点和金额
-			 	 
+			var reg = v.indexOf(".") >= 0?/^\d{1,3}\.?\d{0,2}$/ : /^\d{1,3}$/;
+						 	 
 			if (!reg.test(v))  
 			{
-                 myinput.val(v.substr(0,v.length - 1));
-            } 			
+	             myinput.val(v.substr(0,v.length - 1));
+	        } 	
 		}
-
-		if (text == "C") 
+		else 	
 		{
 			myinput.val('');
 		}
 
 	})
-
 }
 
 
