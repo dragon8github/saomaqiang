@@ -136,7 +136,7 @@
 					</div>
 				</div>
 
-				<p style="margin:20px 0px 0px 0px;text-align:center;">
+				<p style="margin:10px 0px 0px 0px;text-align:center;">
 					<a id="Cy_Tp_Agree" onclick="Cy_Tp_Agree()" style="z-index: 9999;margin-right: 10px;color:#fff" class="mui-btn mui-btn-outlined">确 认</a>
 					<a id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="z-index: 9999;color:#fff" class="mui-btn mui-btn-outlined">取 消</a>
 				</p>
@@ -173,29 +173,35 @@
 		var assistiveTouch =  document.getElementById("assistiveTouch");
 		
 		
-	
+		shoujichongzhi.addEventListener('tap',function()
+		{
+				layer.open({type: 2,time:1000});
+				mui.openWindow
+				({
+					url:"test_index.html",
+					id:"test_index"
+				});
+		})     
 	 
 	
 	/* 导航区 */
 		saomazhifu.addEventListener('tap',function()
 		{
-				layer.open({type: 2});
+				layer.open({type: 2,time:1000});
 				mui.openWindow
 				({
 					url:"SweepYard.html",
-					id:"SweepYard",
-					popGesture:"close"
+					id:"SweepYard"
 				});
 		})     
 		
 		weixizhaoling.addEventListener('tap',function()
 		{
-				layer.open({type: 2});
+				layer.open({type: 2,time:1000});
 				mui.openWindow
 				({
 					url:"wx.html",
-					id:"wx",
-					popGesture:"close"
+					id:"wx"
 				}); 
 		})  
 		
@@ -222,12 +228,11 @@
 	 	 Cy_Tp_Agree = function()
 	 	 {
 	  			layer.closeAll(); 				
-				layer.open({type: 2});
+				layer.open({type: 2,time:1000});
 				mui.openWindow
 				({
 					url:"ShouJiBao.html",
-					id:"ShouJiBao", 
-					popGesture:"close"
+					id:"ShouJiBao"
 				});
 		  }
 		 
