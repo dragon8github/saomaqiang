@@ -1,1 +1,119 @@
-null
+{
+	"login.html": {
+		"resources": [
+			"js/mui/mui.min.js",
+			"js/mui/mui.min.lee.js",
+			"css/mui/mui.min.css",
+			"js/My_Js/API.js"
+		],
+		"refer": [
+			"index.html"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"js/My_Js/global.js",
+			"Images/main_01.gif",
+			"Images/main_06.gif",
+			"js/Zepto/zepto_1.1.3.js",
+			"css/My_css/ico.css",
+			"css/My_css/global.css",
+			"Images/main_02.gif",
+			"Images/logo.png",
+			"js/layermobile/need/layer.css",
+			"Images/main_05.gif",
+			"css/My_css/cover.css",
+			"Images/main_07.gif",
+			"Images/main_04.gif",
+			"css/fonts/tb_ico/iconfont.ttf",
+			"js/layermobile/layer.js",
+			"Images/main_03.gif",
+			"Images/main_08.gif",
+			"css/fonts/mui.ttf",
+			"js/mui/mui.min.lee.js",
+			"js/My_Js/API.js",
+			"css/mui/mui.min.css"
+		],
+		"refer": [
+			"wx.html",
+			"ShouJiBao.html",
+			"list.html",
+			"login.html",
+			"SweepYard.html"
+		]
+	},
+	"wx.html": {
+		"resources": [
+			"css/jcalculator/jcalculator.css",
+			"js/mui/mui.js",
+			"css/bootstrap/bootstrap.min.css",
+			"js/My_Js/global.js",
+			"js/Zepto/zepto_1.1.3.js",
+			"css/My_css/ico.css",
+			"css/My_css/global.css",
+			"Images/logo.png",
+			"js/layermobile/need/layer.css",
+			"css/My_css/cover.css",
+			"js/My_Js/API.js",
+			"css/fonts/tb_ico/iconfont.ttf",
+			"js/layermobile/layer.js",
+			"css/fonts/mui.ttf",
+			"css/mui/mui.min.css"
+		]
+	},
+	"ShouJiBao.html": {
+		"resources": [
+			"js/My_Js/global.js",
+			"js/Zepto/zepto_1.1.3.js",
+			"ShouJiBao/DaiShou.html",
+			"css/jcalculator/jcalculator.css",
+			"css/My_css/ico.css",
+			"css/My_css/global.css",
+			"js/mui/mui.min.lee.js",
+			"js/layermobile/need/layer.css",
+			"js/JsBarcode/CODE39.js",
+			"css/My_css/cover.css",
+			"js/My_Js/API.js",
+			"css/fonts/tb_ico/iconfont.ttf",
+			"js/layermobile/layer.js",
+			"js/JsBarcode/JsBarcode.js",
+			"css/fonts/mui.ttf",
+			"js/mui/mui.view.js",
+			"css/mui/mui.min.css",
+			"ShouJiBao/WelCome.html",
+			"ShouJiBao/DaiJi_info.html",
+			"js/jquery/jquery.min.js",
+			"Images/kuaidigongsi/sf.jpg",
+			"Images/kuaidigongsi/allbgs.gif",
+			"ShouJiBao/DaiJi.html"
+		]
+	},
+	"list.html": {
+		"resources": [
+			"css/mui/mui.picker.min.css",
+			"js/mui/mui.picker.min.js",
+			"js/layer/laytpl.js",
+			"js/mui/mui.view.js"
+		]
+	},
+	"SweepYard.html": {
+		"resources": [
+			"css/fonts/glyphicons-halflings-regular.ttf",
+			"css/jcalculator/jcalculator.css",
+			"css/bootstrap/bootstrap.min.css",
+			"js/My_Js/global.js",
+			"js/Zepto/zepto_1.1.3.js",
+			"css/My_css/ico.css",
+			"css/My_css/global.css",
+			"js/mui/mui.min.lee.js",
+			"Images/logo.png",
+			"js/layermobile/need/layer.css",
+			"css/My_css/cover.css",
+			"js/My_Js/API.js",
+			"css/fonts/tb_ico/iconfont.ttf",
+			"js/layermobile/layer.js",
+			"css/fonts/mui.ttf",
+			"css/mui/mui.min.css"
+		]
+	}
+}

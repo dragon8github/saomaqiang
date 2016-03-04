@@ -51,14 +51,13 @@
    </div> 
   </div> 
  
+ <script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/mui/mui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
  </body>
  
  
  <script type="text/javascript">
-  
-  
   
   
   
@@ -124,7 +123,7 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
-			 if(true) 
+			 if(false) 
 			 {
 				localStorage.登录帐号 = document.getElementById("username").value;  
 				localStorage.CustomerCode = "7b759a354ea94683ba603019f842c5b5";
@@ -134,7 +133,7 @@
 				
 				mui.openWindow
 				 ({ 
-						url:"index.html",
+						url:"index.html?new=" + Math.random(0,10),
 						id:"index" 
 				});		
 				
@@ -168,8 +167,8 @@
 		
 		//alert(str);
 		
+		var jsonobj = Api_filter(str);
 		
-		var jsonobj = JSON.parse(str);
 		var dt = JSON.parse(str)["dtCustomer"];
 		
 		

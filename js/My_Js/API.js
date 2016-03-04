@@ -1,4 +1,6 @@
 
+
+
 /* 核心业务处理函数 */
 
 GetApiUrl = function(ModuleName)
@@ -25,6 +27,43 @@ InvokeApi = function(apiUrl, ApiPath, MethodName, bodyJson , callBackFunctionNam
 	var str_json = JSON.stringify(bodyJson);
 	 
 	android.send(apiUrl, ApiPath, MethodName, str_json , callBackFunctionName);
+}
+
+
+
+Api_filter = function(jsonstr)
+{	
+	var jsonobj =  eval('('+ jsonstr +')');
+	
+	var error = jsonobj.android_err_type;
+	
+	if(error != null)
+	{
+		var str = null;
+		
+		switch(error)
+		{
+			case 1:
+			  str = "网络连接超时";
+			  break;
+			case 2:
+			  str = "网络连接中断";
+			  break;
+			case 3:
+			  str = "服务器繁忙，请稍后再试";
+			  break;
+			default:
+			 str = "网络连接超时";
+		}
+		
+		mui.toast(str);
+		
+		return false;
+	}
+	else
+	{
+		return jsonobj;
+	}
 }
   
  

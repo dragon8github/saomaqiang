@@ -131,6 +131,17 @@
 </html> 
 <script type="text/javascript">
 
+
+
+//	mui.plusReady(function(){
+//		
+//		console.log("wx.htmlOK");
+//		
+//	})
+	
+
+
+
 	/* terst */
 	if(false)  
 	{  
@@ -145,9 +156,10 @@
 		console.log(JSON.stringify(opt));  
 		//alert(JSON.stringify(opt)); 
 		
-		InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "QueryOrder", opt, "CYAPI_微信找零查询"); 
 		
-		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正"); 
+		InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正"); 
+		
+		
 		
 		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
 	}	  
@@ -180,15 +192,16 @@
 		/* 查询明细 */
 		document.getElementById("chaxunmingxi").addEventListener('tap',function(){
 			mui.openWindow({
-				url:"list.html",
-				id:"list"
+				url:"WeiXinlist.html",
+				id:"WeiXinlist" 
 			});
-		})
-		
+		}) 
+		   
 		/* 提交订单 */
 		$("#tijiaodingdan").bind('tap',function()
 		{
 			var Amount = $("#money").val(); //金额
+			
 			if(Amount.length == 0)
 			{
 				mui.toast("请输入金额");
@@ -223,9 +236,9 @@
 /* 微信找零From提交 */
 CYAPI_微信找零获取返回值 = function(str)
 {
-		layer.closeAll();
+		//alert(str);
 		
-		var jsonobj = JSON.parse(str);
+		var jsonobj = Api_filter(str);
 		
 		if(jsonobj.RetCode == "1")
 		{
@@ -241,28 +254,6 @@ CYAPI_微信找零获取返回值 = function(str)
 					mui.toast(jsonobj.RetMsg); //弹出结果
 			});			
 		} 
-}
-
-
-/* 微信找零查询列表 */
-CYAPI_微信找零查询 = function(str)
-{
-		alert(str);
-	
-		return false;
-		
-		var jsonobj = JSON.parse(str);
-		
-		if(jsonobj.RetCode == "1")
-		{
-			//success
-		}
-		else
-		{
-			//fail
-		} 
-		
-		mui.toast(jsonobj.RegMsg);
 }
 
 

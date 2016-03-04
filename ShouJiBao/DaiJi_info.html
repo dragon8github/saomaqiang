@@ -109,7 +109,7 @@
 			}
 			
 			.mui-page .mui-table-view:first-child {
-				margin-top: 15px;
+				/*margin-top: 15px;*/
 			}
 		</style>
 
@@ -233,7 +233,12 @@
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">		
-						<form class="mui-input-group" id="update" style="margin-top: 15px;">
+						<style type="text/css">
+							.mui-input-group .mui-input-row {
+								height: 43px;
+							}
+						</style>
+						<form class="mui-input-group" id="update">
 							<div class="mui-input-row">
 								<label>快递员</label>
 								<input id="password" type="text" value="未知" placeholder="请输入快递员" class="mui-input-clear" />
@@ -249,10 +254,12 @@
 							<div class="mui-input-row">
 								<label>联系电话</label>
 								<input id="password" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" />
-							</div>
+							</div>							
 						</form>
+						
 						<a style="margin-top:20px" id="updatebtn" class="mui-btn mui-btn-warning mui-btn-block">保存编辑</a>
 						<button type="button" id="shanchu" class="mui-btn mui-btn-danger mui-btn-block">删除快递员</button>
+							
 					</div>
 				</div>
 			</div>

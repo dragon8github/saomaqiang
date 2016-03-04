@@ -2,7 +2,10 @@
 <html>
 
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8">					
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="pragma" content="no-cache">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -135,12 +138,15 @@
 			
 			<!--页面标题栏开始-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-				<div class=" mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
-					<a href="#" class="mui-control-item mui-active">所有物品</a>
-					<a href="#" class="mui-control-item">已取物品</a>
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<div id="tapstate" class="mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
+					<a href="#" class="mui-control-item">所有订单</a>
+					<a href="#" class="mui-control-item">成功订单</a>
+					<a href="#" class="mui-control-item mui-active">未成订单</a>
 				</div>
-				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
+				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606; <span style="font-size:16px">时间</span></a> 
 			</div>
 			<!--页面标题栏结束-->
 			
@@ -155,7 +161,9 @@
 				{
 					z-index: 0; 
 				}
+				
 			</style>
+
 
  
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
@@ -183,6 +191,7 @@
 								</a> 
 						</li>
 						-->
+					
 					</ul>
 				</div>
 
@@ -206,7 +215,7 @@
 
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
+					<span class="mui-icon mui-icon-left-nav"></span>返回
 				</button>
 				<h1 class="mui-center mui-title ">详情</h1>
 			</div>
@@ -312,10 +321,6 @@
 			var cnt = null; 	//数据总条数
 		 
 			
-			
-		          
-		          
-		          
 		     
 		    /**
 			 * 上拉加载具体业务实现
@@ -327,7 +332,7 @@
 				{
 				 	
 						var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
-		
+				
 						if(num >= cnt)
 						{		
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
@@ -338,34 +343,28 @@
 						var html = $("#temple").html();			
 						/* 获取dipicker的时间参数  */	
 						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value;	
+						var end = JSON.parse(optionsJson).value + " 23:59:59";	
 						var pass = new Date(end);
 						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = parseInt($("#page").val()) + 1;							
+						var page = parseInt($("#page").val()) + 1;	
+						var state = Get_State();
 						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
 						
 				}, 1500);
 			}       
+			
+			
 		            
-		     $(function()
+		     $(function() 
 		     {
 		     		/* 加载功能 */
 					assistive_mTouch(); //小光点以及菜单
-					//QQ_offCanvas(); //QQ侧滑菜单	 					
-					//LeftPageGOBack();	//右滑箭头 
-		     		
-		     		
-		     		mui('.mui-scroll-wrapper').scroll({
-						deceleration: 0.0000 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-					});
-		     		
-		     		
+																	   
 		     		/* 初始化数据 */
-		     		bind_绑定子页面();	//正式环境不需要
 		     		初始化数据(); //初始化数据   
 		     		
-		     })
+		     }) 
 		     
 		     
 		     
@@ -376,6 +375,13 @@
 		   
 		     初始化数据 = function()
 		     {
+		     	layer.open({type:2,time:1.5});
+		     	/*清空数据列表*/
+		     	var page = 1;	
+				$("#page").val(page); //分页标识变为1				
+		     	ResultJson = null; //清空		
+		     	
+		     	
 		     	/* 初始化dipicker的默认参数 */
 		     	var opt = {};
 		     	var now = new Date(); 	//当前时间
@@ -385,12 +391,16 @@
 		     	opt.endYear =  now.getFullYear();		     
 		     	var str_json = JSON.stringify(opt);		     			     	
 		     	$("#dipicker").attr("data-options",str_json);	
-		     	
+		     	var state = Get_State();
 		     
 		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd"); //今天 		     	
+		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
 		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
+			  	
+			  	//alert(JSON.stringify( {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
+			  	
+			  	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
+		     
 		     }
 		     
 		     
@@ -402,11 +412,14 @@
 			{
 				//模拟更新数据
 				setTimeout(function() 
-				{											
+				{			
+					window.location.reload();
+					
 					mui.toast("刷新成功");
-				
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //开启下拉刷新
 		
+				
 				}, 1500);
 			}        
 		    
@@ -417,12 +430,14 @@
 			
 			
 			//选择时间之后
-			document.getElementById("select_time").addEventListener('tap',function(){ 
-								
+			document.getElementById("select_time").addEventListener('tap',function()
+			{				
 		        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
 				var options = JSON.parse(optionsJson);
 				var picker = new mui.DtPicker(options);
-				picker.show(function(rs) {
+				picker.show(function(rs) 
+				{
+					layer.open({type:2,time:1.5});
 					mui.toast('选择结果: ' + rs.text);
 					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
 					var opt = JSON.parse(optionsJson);
@@ -430,15 +445,16 @@
 					$("#dipicker").attr("data-options",JSON.stringify(opt));	
 					
 					/* 渲染数据 */
-					var end = rs.text;	 
+					var end = rs.text + " 23:59:59";	 
 					var pass = new Date(end);
 					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
 					var page = 1;	
+					var state = Get_State();
 					$("#page").val(page); //分页标识变为1				
 			     	ResultJson = null; //清空		
 			     	$("#mui-table-view").html(""); //清空所有的li	
 			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					 
 				}) 
 			})
@@ -447,12 +463,14 @@
 			 
 			//专门用来初始化的函数 
 			CYAPI_获取返回值 = function(str)
-			{
-				//alert(str);
+			{				
+				//alert(str);	
 				
-				layer.closeAll();				
+				layer.closeAll();
+				
+				var jsonobj = Api_filter(str);
 
-				ResultJson = eval('('+ str +')')["dtOrderDetail"] || {};
+				ResultJson = jsonobj["dtOrderDetail"] || {};
 				
 				cnt = ResultJson[0].cnt; //数据库总数,存放在公共变量中去
 				
@@ -460,7 +478,7 @@
 				$.each(ResultJson,function(i,o)
 				{
 					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
-					o.OrderTime = timeFormat(o.OrderTime);
+					o.OrderTime = timeFormat(o.OrderTime.replace("T"," "));
 				})		
 								
 				var temple_html = $("#temple").html();								
@@ -469,12 +487,11 @@
 		        {        		   
 		            $("#mui-table-view").append(html);      //填充初始化数据     
 		        });    	
-		        		   
+		        		    
 				var num =  $("#pullrefresh .mui-table-view-cell").size();	//列表总数
-		
-		
+								
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
-							        
+						        							        
 		        bind_绑定子页面();
 			}
 			
@@ -526,6 +543,26 @@
 			 
 			 
 			 
+			/**
+			 * 获取当前模式
+			 */
+			Get_State = function()
+			{
+				var text = $("#tapstate .mui-active").text();
+				
+				if(text == "所有订单")
+				{
+					return "*all";
+				}
+				else if("未成订单")
+				{
+					return "2";
+				}
+				else if("成功订单")
+				{
+					return "1";
+				}
+			}
 			 
 			 
 			 

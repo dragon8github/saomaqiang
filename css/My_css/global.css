@@ -72,6 +72,28 @@
 
 /* Custom tools class*/
 
+.myfilter
+{
+	 -moz-filter: blur(5px);
+	-webkit-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+}
+
+.myanimate{
+	transition:  2s,ease-in;
+	-moz-transition:  2s,ease-in; /* Firefox 4 */
+	-webkit-transition:  2s,ease-in; /* Safari 和 Chrome */
+	-o-transition:  2s,ease-in; /* Opera */
+	-ms-transition:2s,ease-in; /* IE */
+}
+
+.opacity
+{
+	opacity: 0;
+}
+
 .clearpadding {
 	padding: 0px;
 }
@@ -90,6 +112,10 @@
 
 
 /* Global style configuration */
+.mui-table-view-cell:active
+{
+	background: rgba(127, 255, 212,.3)
+}
 .footer {
 	padding: 20px;
 	text-align: center;                               

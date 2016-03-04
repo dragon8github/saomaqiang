@@ -372,9 +372,11 @@
 				}
 			}
 		},
-		_drag: function(event) {
+		_drag: function(event) 
+		{
 			
-			if (this.isInTransition) {
+			if (this.isInTransition) 
+			{
 				return;
 			}
 			
@@ -386,13 +388,20 @@
 //				console.log($.gestures.session.firstTouch.center.x - this.view.offsetLeft + "|" + this.options.swipeBackPageActiveArea);
 				
 				if (($.gestures.session.firstTouch.center.x - this.view.offsetLeft) < this.options.swipeBackPageActiveArea) {
+					
 					this.isBack = true;
 					this._initPageTransform();
 				}
 			}
 			if (this.dragging) 
 			{
+				
+				
 			//	mui.toast(detail.deltaX); //李钊鸿在此优化 
+			
+			//Zepto(this.activePage).addClass("myfilter"); //李钊鸿在此添加毛玻璃
+
+			
 				var deltaX = 0;
 				if (!this.moved) { //start
 					deltaX = detail.deltaX;
@@ -411,7 +420,8 @@
 				event.stopPropagation();
 				detail.gesture.preventDefault();
 
-				if (!this.requestAnimationFrame) {
+				if (!this.requestAnimationFrame) 
+				{
 					this._updateTranslate();
 				}
 
@@ -422,10 +432,16 @@
 				this.y = 0;
 			}
 		},
-		_dragend: function(event) {
+		_dragend: function(event) 
+		{
 			if (!this.moved) {
 				return;
 			}
+			
+			//Zepto(this.activePage).removeClass("myfilter");	//李钊鸿在此去除毛玻璃
+
+	
+			//李钊鸿再次做样式调整，去除毛玻璃
 
 			event.stopPropagation();
 
@@ -475,16 +491,21 @@
 				}
 			}
 		},
-		_clearRequestAnimationFrame: function() {
-			if (this.requestAnimationFrame) {
+		_clearRequestAnimationFrame: function()
+		{
+			if (this.requestAnimationFrame) 
+			{
 				cancelAnimationFrame(this.requestAnimationFrame);
 				this.requestAnimationFrame = null;
 			}
 		},
 		_getTranslateStr: function(x, y) {
-			if (this.options.hardwareAccelerated) {
+			if (this.options.hardwareAccelerated) 
+			{
+				//console.log('translate3d(' + x + 'px,' + y + 'px,0px) ' + this.translateZ);
 				return 'translate3d(' + x + 'px,' + y + 'px,0px) ' + this.translateZ;
 			}
+			
 			return 'translate(' + x + 'px,' + y + 'px) ';
 		},
 
@@ -542,9 +563,15 @@
 		setTranslate: function(x, y) {
 			this.x = x;
 			this.y = y;
-			this.previousPage.style.opacity = 0.9 + 0.1 * x / this.maxScrollX;
+			this.previousPage.style.opacity = 0.9 + 0.1 * x / this.maxScrollX;			
 			this.previousPage.style['webkitTransform'] = this._getTranslateStr((x / 6 - this.maxScrollX / 6), y);
-			this.activePage.style['webkitTransform'] = this._getTranslateStr(x, y);
+			
+			
+			
+			this.activePage.style['webkitTransform'] = this._getTranslateStr(x, y);	
+			
+//			Zepto(this.activePage).addClass("myfilter");
+			
 
 			this.navbars && this._setNavbarTranslate(x, y);
 			this.lastX = this.x;
@@ -553,13 +580,15 @@
 		canBack: function() {
 			return this.pages.querySelector(SELECTOR_PAGE_LEFT);
 		},
-		back: function() {
+		back: function() 
+		{			
 			if (this.isInTransition) {
 				return;
 			}
 			this.isBack = true;
 			this.ratio = 1;
-			if (this._initPageTransform()) {
+			if (this._initPageTransform()) 
+			{
 				this._trigger('pageBeforeBack', this.activePage);
 				this._trigger('pageBeforeShow', this.previousPage);
 				this._prepareTransition();
@@ -574,7 +603,9 @@
 			}
 			var nextPage = document.querySelector(pageSelector);
 
-			if (nextPage) {
+			if (nextPage)
+			{
+				
 				var previousPage = this.pages.querySelector(SELECTOR_PAGE_LEFT);
 				var activePage = this.pages.querySelector(SELECTOR_PAGE_CENTER);
 				var previousNavbar;

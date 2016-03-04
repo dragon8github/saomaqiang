@@ -34,7 +34,7 @@
 		}
 	</style>
 
-	<body>
+	<body> 
 
 		<!--侧滑菜单容器-->
 		<div id="Main" class="mui-off-canvas-wrap mui-draggable">
@@ -153,7 +153,30 @@
 <script type="text/javascript">
 
 
-	
+//	mui.init({  
+//		preloadPages:  
+//		[
+//			{
+//				url:"wx.html",  
+//				id:"wx"			
+//			},
+//			{
+//				url:"list.html",  
+//				id:"list"			
+//			},
+//			{
+//				url:"ShouJiBao.html",  
+//				id:"ShouJiBao"			
+//			},
+//			{
+//				url:"SweepYard.html",  
+//				id:"SweepYard"			
+//			},
+//			
+//		]
+//		
+//		  
+//	});  
 	
 
 
@@ -175,32 +198,32 @@
 		
 		shoujichongzhi.addEventListener('tap',function()
 		{
-				layer.open({type: 2,time:1000});
-				mui.openWindow
-				({
-					url:"test_index.html",
-					id:"test_index"
-				});
+//				
+//				mui.openWindow
+//				({
+//					url:"test_index.html",
+//					id:"test_index"
+//				});
 		})     
 	 
 	
 	/* 导航区 */
 		saomazhifu.addEventListener('tap',function()
 		{
-				layer.open({type: 2,time:1000});
+				
 				mui.openWindow
 				({
-					url:"SweepYard.html",
+					url:"SweepYard.html?new" + Math.random(0,10),
 					id:"SweepYard"
 				});
 		})     
 		
 		weixizhaoling.addEventListener('tap',function()
 		{
-				layer.open({type: 2,time:1000});
+				
 				mui.openWindow
 				({
-					url:"wx.html",
+					url:"wx.html?new" + Math.random(0,10),
 					id:"wx"
 				}); 
 		})  
@@ -228,10 +251,10 @@
 	 	 Cy_Tp_Agree = function()
 	 	 {
 	  			layer.closeAll(); 				
-				layer.open({type: 2,time:1000});
+				
 				mui.openWindow
 				({
-					url:"ShouJiBao.html",
+					url:"ShouJiBao.html?new" + Math.random(0,10),
 					id:"ShouJiBao"
 				});
 		  }

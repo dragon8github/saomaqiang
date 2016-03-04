@@ -1,4 +1,9 @@
-﻿
+﻿.mui-table-view-cell:after
+{
+	right:15px;		
+}
+
+
 .mui-bar-nav ~ .mui-content
 {	
 	 padding-top: 0px;

@@ -358,18 +358,18 @@ Show_Menu = function() {
 
 	//返回
 	mui(".mui-table-view").on('tap', '.Menu_back', function() {
-		layer.open({type: 2});
+		
 		mui.back();
 	})
 	//刷新
-	mui(".mui-table-view").on('tap', '.Menu_refresh', function() {
-		
-		layer.open({type: 2});
+	mui(".mui-table-view").on('tap', '.Menu_refresh', function() 
+	{
+		android.clearCache(); 
 		window.location.reload();
 	})
 	//主页
 	mui(".mui-table-view").on('tap', '.Menu_home', function() {
-		layer.open({type: 2});
+		
 		mui.openWindow({
 			url: "index.html",
 			id: "index"			
@@ -377,7 +377,7 @@ Show_Menu = function() {
 	})
 	//手机充值
 	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() {
-		layer.open({type: 2});
+		
 		mui.openWindow({
 			url: "test.html",
 			id: "test"		 	
@@ -385,7 +385,7 @@ Show_Menu = function() {
 	}) 
 	//管理
 	mui(".mui-table-view").on('tap', '.guanli', function() {
-		layer.open({type: 2});
+		
 		mui.openWindow({
 			url: "error.html",
 			id: "error"			
@@ -423,7 +423,7 @@ QQ_offCanvas = function()
 	//钱包流水
 	$("#qianbaoliushui").bind("tap",function()
 	{
-		layer.open({type: 2});
+		
 		mui.openWindow({
 			url: "QiangBao_list.html",
 			id: "QiangBao_list"			
@@ -434,9 +434,8 @@ QQ_offCanvas = function()
 	//业务流水
 	$("#yewuliusuhi").bind("tap",function()
 	{
-		layer.open({type: 2});
 		mui.openWindow({
-			url: "list.html",
+			url: "list.html?new=" + Math.random(0,10),
 			id: "list"			
 		});
 	})
@@ -507,13 +506,18 @@ LeftPageGOBack = function()
 					"left": "0px" 	//当left==0时完全箭头展开
 				});		
 			}
+			
+			
 		} 
 		else 
 		{
 			$("#leftpage").css({
 					"left": Native_left + "px"
 			});
+			
+			 
 		}
+		
 		
 	})
 
@@ -592,7 +596,7 @@ function timeFormat(time) {
 	var date = new Date(time),
 		curDate = new Date(),
 		year = date.getFullYear(),
-		month = date.getMonth() + 10,
+		month = date.getMonth() + 1,
 		day = date.getDate(),
 		hour = date.getHours(),
 		minute = date.getMinutes(),
