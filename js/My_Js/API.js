@@ -7,7 +7,8 @@ GetApiUrl = function(ModuleName)
 {
 	if(ModuleName == "Global_V0001_5un29")
 	{
-		return "http://192.168.20.63:8008/Global_V0001_5un29/ApiIndex.aspx";
+		//http://192.168.20.63:8008/Global_V0001_5un29/ApiIndex.aspx 测试
+		return "http://192.168.22.23:31450/Global_V0001_5un29/ApiIndex.aspx";
 	} 
 	else if(ModuleName == "B001_V0001_5un29") 
 	{

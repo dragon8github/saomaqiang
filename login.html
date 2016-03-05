@@ -60,22 +60,12 @@
  <script type="text/javascript">
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
 	var usernamed = localStorage.登录帐号 || "";
 	var autoed = localStorage.auto || "";
 	if (usernamed != ""  && autoed != "" && autoed != "false") 
 	{ 
 		
-		//需要提示一下
-		
+		//需要提示一下		
 		mui.openWindow({
 			url: "index.html",  
 			id: "index"
@@ -123,7 +113,7 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
-			 if(false) 
+			 if(true) 
 			 {
 				localStorage.登录帐号 = document.getElementById("username").value;  
 				localStorage.CustomerCode = "7b759a354ea94683ba603019f842c5b5";
@@ -169,7 +159,7 @@
 		
 		var jsonobj = Api_filter(str);
 		
-		var dt = JSON.parse(str)["dtCustomer"];
+		var dt = jsonobj["dtCustomer"];
 		
 		
 		if(jsonobj.errMsg == "用户登录验证通过" && jsonobj.success == true)
