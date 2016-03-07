@@ -133,35 +133,36 @@
 
 
 
-//	mui.plusReady(function(){
-//		
-//		console.log("wx.htmlOK");
-//		
-//	})
-	
-
-
-
-	/* terst */
+	/* 测试区域 */
 	if(false)  
 	{  
 		var v = newGuid(); 
 		var CustomerCode = localStorage.CustomerCode; 
 		var Operator = localStorage.EmployeeCode;
 		var CustomerOrderNo = "92d535992e56d8031a34575a46213dc0";
-				  		
+		var opt = {};		  		
 				  	
-		var opt = {"Operator":Operator,"CustomerOrderNo":CustomerOrderNo,"CustomerCode":CustomerCode};
-		
-		console.log(JSON.stringify(opt));  
+		 	
+		//console.log(JSON.stringify(opt));  
 		//alert(JSON.stringify(opt)); 
 		
 		
-		InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正"); 
+		
+		
+		//订单列表查询		
+		//opt = {"开始时间":"2016-01-01","截止时间":"2016-02-01","业务类型":"","订单状态":"","业务号码":"","每页显示条数":"12","当前页码":"1"};
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "G002_Order", "QueryOrderDetail", opt, "CYAPI_微信冲正"); 
 		
 		
 		
-		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
+		//订单详情查询
+		opt = {"订单号":"201601271550424372079"};		 
+		InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetails", opt, "CYAPI_微信冲正"); 
+		
+		
+		
+		//opt = {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"};
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_微信找零获取返回值");
 	}	  
 	
 	
@@ -196,6 +197,7 @@
 				id:"WeiXinlist" 
 			});
 		}) 
+		
 		   
 		/* 提交订单 */
 		$("#tijiaodingdan").bind('tap',function()
@@ -262,6 +264,7 @@ CYAPI_微信找零获取返回值 = function(str)
 /* 微信冲正 */
 CYAPI_微信冲正 = function(str)
 {
+	
 		alert(str);
 	
 		return false;

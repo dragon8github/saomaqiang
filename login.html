@@ -79,14 +79,16 @@
   	var forgetPassword = document.getElementById("forgetPassword");
 	 
 	forgetPassword.addEventListener('tap',function()
-	{	
-		window.location.reload();
+	{			
+		android.switchMode(0);	//本地模式	
+		//window.location.reload();
 	})
 	
 	  
     reg.addEventListener('tap',function()
 	{
-		window.location.reload();
+		android.switchMode(1);	//服务器模式
+		//window.location.reload();
 	})
     
     
