@@ -189,61 +189,6 @@
 
 
 
-		<!--单页面结束-->	
-		<div id="info" class="mui-page mui-action-back" style="z-index: 10;">
-
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>返回
-				</button>
-				<h1 class="mui-center mui-title ">详情</h1>
-			</div>
-
-			<div class="mui-page-content" id="sub_page">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-
-						<ul class="mui-table-view" style="margin:10px 0px">
-							<li class="mui-table-view-cell">
-								<a id="head" class="yewuleixing">业务类型
-								<span class="mui-pull-right head">
-									未知
-								</span> 
-							</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>业务号码<span class="mui-pull-right yewuhaoma">未知</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>订单金额<span class="mui-pull-right dingdanjine">未知</span></a>
-							</li>
-						</ul>
-												
-						<button type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
-												
-						<ul class="mui-table-view" style="margin:10px 0px">
-							<li class="mui-table-view-cell">
-								<a>下单时间<span class="mui-pull-right xiadanshijian">未知</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>处理时间<span class="mui-pull-right chulishijian">未知</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>状态<span class="mui-pull-right zhuangtai">未知</span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>			
-		</div>
-		
-		
-		
-
-		<div id="leftpage">
-			<span class="mui-icon mui-icon-arrowleft"></span>
-		</div>
-
 <span style="display: none;">
 	<input type="hidden" name="page" id="page" value="1" />  
 	<button id='dipicker' data-options='{"type":"date","beginYear":2015,"endYear":2016}' class="btn hidden mui-btn mui-btn-block">选择日期 ...</button>
@@ -254,7 +199,7 @@
 
 
 <li class="mui-table-view-cell">
-	<a href="#info"> 
+	<a> 
 		<div class="mui-table">
 			<div class="mui-table-cell mui-col-xs-9">
 				<h4 class="mui-ellipsis-2 Lee_Money">￥ {{d[i].PayAmount}}  </h4>
@@ -309,14 +254,11 @@
 		     $(function()
 		     { 
 		     		
-					/* 加载功能 */
+					/* 小光点以及菜单 */
 					assistive_mTouch(); //小光点以及菜单
-					//QQ_offCanvas(); //QQ侧滑菜单	 
-					//LeftPageGOBack();	//右滑箭头 
-		     		
-		     		bind_绑定子页面(); //正式环境不需要在这里使用
-		     		
-		     		初始化数据(); //初始化数据   
+					
+					/* 初始化数据 */
+		     		初始化数据(); 
 		     		
 		     })
 		     
@@ -467,41 +409,10 @@
 				var num =  $("#pullrefresh .mui-table-view-cell").size();	//列表总数
 				
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
-							        
-		        bind_绑定子页面();
+							      
 			}
 			
 			  
-			  
-			//进入详情界面
-			CYAPI_详情 = function(str)
-			{
-				//alert(str);				 							
-				var json = JSON.parse(str);
-				
-				$("#sub_page .yewuleixing").text(json.ProductName);	//业务类型
-				$("#sub_page .yewuhaoma").text(json.CustomerOrderNo);	//订单号
-				$("#sub_page .dingdanjine").text(json.OrderAmount);	//订单金额
-				
-				$("#sub_page .xiadanshijian").text(json.OrderTime);//下单时间
-				$("#sub_page .chulishijian").text(json.OrderTime);//处理时间
-				$("#sub_page .zhuangtai").text(json.OrderState);  //状态
-				
-				
-				layer.closeAll();
-				
-			}
-			
-			
-			  
-			   
-			 bind_绑定子页面 = function()
-			 {			 	 
-			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function () 
-	     		{		    		
-	     			$(this).find("a").attr("href","#info");
-     			})  
-			 } 
 			  
 			 
 			 

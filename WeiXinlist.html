@@ -2,7 +2,10 @@
 <html>
 
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8">					
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="pragma" content="no-cache">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -138,11 +141,17 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>返回
 				</button>
-					<div id="tapstate" class="mui-segmented-control" style="width: 50%;position: absolute;right: 23%;">
-					<a href="#" class="mui-control-item">所有订单</a>
-					<a href="#" class="mui-control-item">成功订单</a>
-					<a href="#" class="mui-control-item mui-active">未成订单</a>
+				<div id="tapstate" class="mui-segmented-control" style="width: 60%;position: absolute;right: 20%;">
+					<a href="#" class="mui-control-item mui-active">所有</a>
+					<a href="#" class="mui-control-item ">待处理</a>
+					<a href="#" class="mui-control-item">成功</a>
+					<a href="#" class="mui-control-item">失败</a>					
+					<a href="#" class="mui-control-item">冲正</a>
 				</div>
+				
+				
+				
+				
 				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606; <span style="font-size:16px">时间</span></a> 
 			</div>
 			<!--页面标题栏结束-->
@@ -161,16 +170,18 @@
 				
 			</style>
 
+
  
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 					
-						<!--<li class="mui-table-view-cell">							
+						<!--
+						<li class="mui-table-view-cell" data-orderid="201601271550424372079">							
 								<div class="mui-slider-right mui-disabled">
 									<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i>&nbsp;&nbsp;立即冲正</a>
 								</div>
-								<a class="goto_subpage">
+								<a class="goto_subpage" href="#info">
 									<div class="mui-slider-handle">
 										<div class="mui-table">									
 											<div class="mui-table-cell mui-col-xs-9">
@@ -185,7 +196,8 @@
 										</div>
 									</div>
 								</a> 
-						</li>-->
+						</li>
+						-->
 					
 					</ul>
 				</div>
@@ -205,51 +217,67 @@
 		
 		</div>
 
-		<!--单页面结束-->	
-		<div id="info" class="mui-page mui-action-back" style="z-index: 10;">
 
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+
+
+		<!--单页面结束-->	
+		<div id="info" class="mui-page" style="z-index: 10;">
+
+			<div class="mui-navbar-inner mui-bar mui-bar-nav mui-action-back">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>返回
 				</button>
 				<h1 class="mui-center mui-title ">详情</h1>
 			</div>
 
-			<div class="mui-page-content" id="sub_page">
+			<div class="mui-page-content" id="sub_page" style="overflow: auto;height: 100%;">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-
+					
+					
 						<ul class="mui-table-view" style="margin:10px 0px">
 							<li class="mui-table-view-cell">
-								<a id="head" class="yewuleixing">业务类型
-								<span class="mui-pull-right head">
-									未知
-								</span> 
-							</a>
+								<a>订单号<span class="mui-pull-right OrderNo mui-spinner"></span></a>								
 							</li>
 							<li class="mui-table-view-cell">
-								<a>业务号码<span class="mui-pull-right yewuhaoma">未知</span></a>
+								<a>订单金额<span class="mui-pull-right OrderAmount mui-spinner"></span></a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a>订单金额<span class="mui-pull-right dingdanjine">未知</span></a>
+								<a>订单时间<span class="mui-pull-right OrderTime mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>业务类型<span class="mui-pull-right ProductTypeName mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>业务名称<span class="mui-pull-right ProductName mui-spinner"></span></a>
 							</li>
 						</ul>
 												
+						<ul class="mui-table-view" style="margin:10px 0px">								
+							<li class="mui-table-view-cell">
+								<a>包裹号<span class="mui-pull-right BaoGuoName mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>手机号<span class="mui-pull-right PhoneName mui-spinner"></span></a>
+							</li>	
+							<li class="mui-table-view-cell">
+								<a>支付状态<span class="mui-pull-right PayStateDescription mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>订单状态<span class="mui-pull-right OrderStateDescription mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>冲正状态<span class="mui-pull-right RefundStateDescription mui-spinner"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>备注<span class="mui-pull-right Remark mui-spinner"></span></a>
+							</li>
+						</ul>
+															
 						<button type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
-												
-						<ul class="mui-table-view" style="margin:10px 0px">
-							<li class="mui-table-view-cell">
-								<a>下单时间<span class="mui-pull-right xiadanshijian">未知</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>处理时间<span class="mui-pull-right chulishijian">未知</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>状态<span class="mui-pull-right zhuangtai">未知</span></a>
-							</li>
-						</ul>
+									
 					</div>
-				</div>
+				</div>		
 			</div>			
 		</div>
 		
@@ -272,24 +300,23 @@
 			<div class="mui-slider-right mui-disabled">
 				<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i>&nbsp;&nbsp;立即冲正</a>
 			</div>
-			<a class="goto_subpage" href="#info">
+			<a class="goto_subpage" href="#info" data-orderid="{{d[i].OrderNo}}">
 				<div class="mui-slider-handle">
 					<div class="mui-table">									
 						<div class="mui-table-cell mui-col-xs-9">
 							<h4 class="mui-ellipsis-2 Lee_Money">￥ {{d[i].OrderAmount}}</h4>
-							<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;订单号 ：{{d[i].CustomerOrderNo}} </h5>
+							<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;订单号 ：{{d[i].OrderNo}} </h5>
 							<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;业务类型：{{d[i].ProductName}}</p>
 						</div>
 						<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
 							<span class="mui-h5"> {{d[i].OrderTime}}</span>
-							<span class="mui-h5"><i class="iconfont">&nbsp;{{d[i].OrderState}}</i></span>
+							<span class="mui-h5"><i class="iconfont">&nbsp;{{d[i].OrderStateDescription}}</i></span>
 						</div>
 					</div>
 				</div>
 			</a> 
 		</li>
-	{{#     }	 }}
-	
+	{{#     }	 }}	
 </script>
 
 		 
@@ -314,12 +341,83 @@
 			var ResultJson = null;	//获取的列表数据
 			
 			var cnt = null; 	//数据总条数
-		 
-		          
-		          
-		          
+			
+			var state = "";  //默认""为所有
+			
+			var bind_绑定子页面_lock = false; //锁头	
+			
+			
+			
+		            
+		     $(function() 
+		     {
+	     		/* 小光点以及菜单 */
+				assistive_mTouch(); 
+																   
+	     		/* 初始化数据 */
+	     		初始化数据(); 	   
+	     		
+	     		mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+		     }) 
 		     
-		    /**
+		     
+		     初始化数据 = function()
+		     {
+		     	
+		     	layer.open({type:2,time:1.5});
+		     	
+		     	/*清空数据列表*/
+		     	$("#mui-table-view").html(""); //清空所有的li	
+		     	var page = 1;	
+				$("#page").val(page); //分页标识变为1				
+		     	ResultJson = null; //清空		
+		     	
+		     	
+		     	/* 初始化dipicker的默认参数 */
+		     	var opt = {};
+		     	var now = new Date(); 	//当前时间
+		     	opt.value = now.format("yyyy-MM-dd"); 
+		     	opt.type = "date";
+		     	opt.beginYear =  now.getFullYear() - 1;		     	
+		     	opt.endYear =  now.getFullYear();		     
+		     	var str_json = JSON.stringify(opt);		     			     	
+		     	$("#dipicker").attr("data-options",str_json);	
+		     	var state = Get_State();
+		     	
+		     
+		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
+		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
+		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
+			  				  	
+			  	//console.log(JSON.stringify( {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} ));			  	
+			  	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
+		     
+		     }
+		     
+		     
+		     
+		       
+		    /*
+			 * 下拉刷新具体业务实现 
+			 */
+			function pulldownRefresh() 
+			{
+				//模拟更新数据
+				setTimeout(function() 
+				{			
+					window.location.reload();
+					
+					mui.toast("刷新成功");
+					
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //开启下拉刷新		
+				
+				}, 1500);
+			}        
+		    
+		 	 
+		     /**
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() 
@@ -340,102 +438,45 @@
 						var html = $("#temple").html();			
 						/* 获取dipicker的时间参数  */	
 						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value;	
+						var end = JSON.parse(optionsJson).value + " 23:59:59";	
 						var pass = new Date(end);
 						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = parseInt($("#page").val()) + 1;							
+						var page = parseInt($("#page").val()) + 1;	
+						state = Get_State();						
 						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"微信找零","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+					   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
 						
 				}, 1500);
 			}       
-		            
-		     $(function()
-		     {
-		     		/* 加载功能 */
-					assistive_mTouch(); //小光点以及菜单
-					//QQ_offCanvas(); //QQ侧滑菜单	 					
-					//LeftPageGOBack();	//右滑箭头 
-		     		
-		     		
-		     		
-		     		/* 初始化数据 */
-		     		//bind_绑定子页面();	//正式环境不需要,测试环境绑定测试数据用的
-		     		初始化数据(); //初始化数据   
-		     		
-		     })
+			
 		     
 		     
 		     
-		     
-		     
-		     
-		     
+		    //选择模式之后
 		   
-		     初始化数据 = function()
-		     {
-		     	/*清空数据列表*/
-		     	var page = 1;	
-				$("#page").val(page); //分页标识变为1				
-		     	ResultJson = null; //清空		
-		     	
-		     	
-		     	
-		     	
-		     	/* 初始化dipicker的默认参数 */
-		     	var opt = {};
-		     	var now = new Date(); 	//当前时间
-		     	opt.value = now.format("yyyy-MM-dd"); 
-		     	opt.type = "date";
-		     	opt.beginYear =  now.getFullYear() - 1;		     	
-		     	opt.endYear =  now.getFullYear();		     
-		     	var str_json = JSON.stringify(opt);		     			     	
-		     	$("#dipicker").attr("data-options",str_json);	
-		     	
-		     
-		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天
-		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			    //console.log(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"微信找零","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"微信找零","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
-		     
-		     }
-		     
-		     
-		     
-		    /*
-			 * 下拉刷新具体业务实现 
-			 */
-			function pulldownRefresh() 
+		    $("#tapstate .mui-control-item").bind("tap",function()
 			{
-				//模拟更新数据
-				setTimeout(function() 
-				{			
-					window.location.reload();
 					
-					mui.toast("刷新成功");
-					
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-		
-				
-				}, 1500);
-			}        
-		    
-		 	 
-		     
+					if(!$(this).hasClass("mui-active"))
+					{
+						$("#tapstate .mui-active").removeClass("mui-active");
+						$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
+						初始化数据();
+					}					
+			})
 			 
 			
 			
 			
 			//选择时间之后
 			document.getElementById("select_time").addEventListener('tap',function()
-			{
-				
+			{				
 		        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
 				var options = JSON.parse(optionsJson);
 				var picker = new mui.DtPicker(options);
 				picker.show(function(rs) 
 				{
+					layer.open({type:2,time:1.5});
 					mui.toast('选择结果: ' + rs.text);
 					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
 					var opt = JSON.parse(optionsJson);
@@ -447,33 +488,76 @@
 					var pass = new Date(end);
 					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
 					var page = 1;	
+					state = Get_State();
 					$("#page").val(page); //分页标识变为1				
 			     	ResultJson = null; //清空		
 			     	$("#mui-table-view").html(""); //清空所有的li	
-			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"微信找零","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} ));
-				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"微信找零","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+
+				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					 
 				}) 
 			})
 			 
 			 
 			 
-			//专门用来初始化的函数 
+			
+			  
+			   
+			//  支付宝扫码
+			//	微信扫码
+			//	翼支付
+			//	微信找零
+			 bind_绑定子页面 = function()
+			 {		
+			 	$(".goto_subpage").bind('tap',function (e) 
+	     		{	
+	     			if(!bind_绑定子页面_lock)
+	     			{
+	     			
+		     			bind_绑定子页面_lock = true; //加锁
+		     			
+		     			
+		     			$("#sub_page .mui-pull-right").text("").addClass("mui-spinner");
+							     				     			
+		     			
+		     			//根据不同的业务绑定不同的单页	     			
+	 					$(this).attr("href","#info");
+	 					
+	 					
+	 					//获取订单号
+	 					var orderid = $(this).attr("data-orderid");
+	 					
+	 					
+	 					 
+	 					//根据不同的业务调用不同的API 					
+		     			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetails", {"订单号":orderid}, "CYAPI_详情");
+		     			
+	     			}
+     			})   
+			 } 
+			  
+			 
+		     
+		   
+			 
+			//订单列表
 			CYAPI_获取返回值 = function(str)
-			{
+			{				
 				
-				//alert(str);
+				layer.closeAll();
 				
-				var jsonobj = Api_filter(str);				
+				alert(str);
+				
+				var jsonobj = Api_filter(str);
 
-				ResultJson = jsonobj["dtOrderDetail"] || {};
+				ResultJson = jsonobj["OrderDetail"] || {};
 				
 				cnt = ResultJson[0].cnt; //数据库总数,存放在公共变量中去
-								
+				
 				//替换美化文本
 				$.each(ResultJson,function(i,o)
 				{
-					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderStateDescription = o.OrderStateDescription.replace("处理中","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
 					o.OrderTime = timeFormat(o.OrderTime.replace("T"," "));
 				})		
 								
@@ -482,63 +566,61 @@
 				laytpl(temple_html).render(ResultJson, function (html)
 		        {        		   
 		            $("#mui-table-view").append(html);      //填充初始化数据     
-		        });    
-		        
-		        		   
+		        });    	
+		        		    
 				var num =  $("#pullrefresh .mui-table-view-cell").size();	//列表总数
-				
-				
+								
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
-							        
+						        							        
 		        bind_绑定子页面();
-		        
-		       
 			}
 			
 			  
 			  
 			//进入详情界面
 			CYAPI_详情 = function(str)
-			{
-				//alert(str);				 							
-				var json = JSON.parse(str);
+			{									
+				bind_绑定子页面_lock = false; //解锁
 				
-				$("#sub_page .yewuleixing").text(json.ProductName);	//业务类型
-				$("#sub_page .yewuhaoma").text(json.CustomerOrderNo);	//订单号
-				$("#sub_page .dingdanjine").text(json.OrderAmount);	//订单金额
+				$("#sub_page .mui-pull-right").removeClass("mui-spinner");
+								
+				var json = JSON.parse(str); 
 				
-				$("#sub_page .xiadanshijian").text(json.OrderTime);//下单时间
-				$("#sub_page .chulishijian").text(json.OrderTime);//处理时间
-				$("#sub_page .zhuangtai").text(json.OrderState);  //状态
+				var ResCode = json.ResCode; //成功失败标识
+				
+				var ResMsg = json.ResMsg;	//返回信息
+				
+				var OrderDeails = json.OrderDeails;	//各种信息
+				
+				var OrderParams = json.OrderParams;	//手机号 + 包裹号			
 				
 				
+				
+				
+				if(OrderDeails != null)
+				{
+					$("#sub_page .OrderNo").text(OrderDeails[0]["OrderNo"].toString());	 	//订单号
+					$("#sub_page .OrderAmount").text("￥ " + OrderDeails[0]["OrderAmount"].toString());		 	//订单金额
+					$("#sub_page .OrderTime").text(timeFormat(OrderDeails[0]["OrderTime"].toString()));	 	//订单时间			
+					$("#sub_page .ProductTypeName").text(OrderDeails[0]["ProductTypeName"].toString());	//业务类型
+					$("#sub_page .ProductName").text(OrderDeails[0]["ProductName"]);		//业务名称
+					$("#sub_page .PayStateDescription").text(OrderDeails[0]["PayStateDescription"].toString());  		//支付状态
+					$("#sub_page .OrderStateDescription").text(OrderDeails[0]["OrderStateDescription"].toString());		//订单状态
+					$("#sub_page .RefundStateDescription").text(OrderDeails[0]["RefundStateDescription"].toString());	//冲正状态
+					$("#sub_page .Remark").text(OrderDeails[0]["Remark"].toString());	//备注
+				}
+				
+				if(OrderParams != null)
+				{
+					$("#sub_page .PhoneName").text(OrderParams[0]["PhoneName"].toString());		//手机号
+					$("#sub_page .BaoGuoName").text(OrderParams[0]["BaoGuoName"].toString());	//包裹号
+				}	
+				
+				
+					
 				layer.closeAll();
 				
 			}
-			  
-			   
-			//  支付宝扫码
-			//	微信扫码
-			//	翼支付
-			//	微信找零
-			 bind_绑定子页面 = function()
-			 {			 	 
-			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function (e) 
-	     		{	
-	     			
-	     			//根据不同的业务绑定不同的单页	     			
- 					$(this).find(".goto_subpage").attr("href","#info");
- 					
- 					 
- 					//根据不同的业务调用不同的API
-	     			//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
-	     			
-     			})   
-			 } 
-			  
-			 
-			 
-			 
 			 
 			 
 			 
@@ -549,21 +631,32 @@
 			{
 				var text = $("#tapstate .mui-active").text();
 				
-				if(text == "所有订单")
+				if(text == "所有")
 				{
-					return "*all";
+					return "";
 				}
-				else if("未成订单")
+				else if(text == "失败")
 				{
-					return "2";
+					return "0";
 				}
-				else if("成功订单")
+				else if(text == "成功")
 				{
 					return "1";
 				}
-			}     
+				else if(text == "待处理")
+				{
+					return "2";
+				}
+				else if(text == "冲正")
+				{
+					return "3";				
+				}
+			}
 			 
+			  
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 以下区域不必改动 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			 
+		 	
 			 
 			 
 			 
@@ -608,9 +701,6 @@
 					});
 			}
 			
-			
-			
-			
 			var view = viewApi.view;
 			(function($) {
 				//处理view的后退与webview后退
@@ -637,6 +727,8 @@
 					//				console.log(e.detail.page.id + ' back');
 				});
 			})(mui);
+			
+			
 			
 			
 		</script>
