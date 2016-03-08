@@ -107,6 +107,10 @@
 			}
 			
 			/* 兼容 */
+			.lijichongzhengbtn
+			{
+				z-index: 9999;
+			}
 			.mui-off-canvas-wrap .mui-bar
 		  	{
 	  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
@@ -190,10 +194,12 @@
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+				
 					
+					<!--
 						
 						<li class="mui-table-view-cell" data-orderid="201601271550424372079">							
-								<div class="mui-slider-right mui-disabled">
+								<div class="mui-slider-right mui-disabled lijichongzhengbtn">
 									<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i><p class="lijichongzheng">&nbsp;&nbsp;立即冲正</p></a>
 								</div> 
 								<a class="goto_subpage" href="#info">
@@ -213,6 +219,8 @@
 								</a> 
 						</li>
 						
+						
+					-->
 					
 					</ul>
 				</div>
@@ -310,12 +318,15 @@
 
 <script type="text/template" id="temple">
 	
+	
+	
+	
 	{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
-		<li class="mui-table-view-cell">							
-			<div class="mui-slider-right mui-disabled">
-				<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i>&nbsp;&nbsp;立即冲正</a>
+		<li class="mui-table-view-cell"  data-orderid="{{d[i].OrderNo}}">							
+			<div class="mui-slider-right mui-disabled lijichongzhengbtn">
+				<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i><p class="lijichongzheng">&nbsp;&nbsp;立即冲正</p></a>
 			</div>
-			<a class="goto_subpage" href="#info" data-orderid="{{d[i].OrderNo}}">
+			<a class="goto_subpage" href="#info">
 				<div class="mui-slider-handle">
 					<div class="mui-table">									
 						<div class="mui-table-cell mui-col-xs-9">
@@ -351,6 +362,10 @@
 			
 			var username = localStorage.登录帐号;	//登录帐号
 			
+			var 冲正申请人 = localStorage.EmployeeCode; //冲正申请人
+			
+			var 用户编号 = localStorage.CustomerCode; //用户编号
+			
 			var rows = "10";		//每次加载的行数	
 		
 			var ResultJson = null;	//获取的列表数据
@@ -359,7 +374,7 @@
 			
 			var state = "";  //默认业务状态，""为所有						
 			
-			var bind_绑定子页面_lock = false; //不知名的原因会发送两次请求，总之加上锁头就没事了	
+			var bind_绑定事件_lock = false; //不知名的原因会发送两次请求，总之加上锁头就没事了	
 			
 			var type = get_urlpara(); //获取页面参数 ，同时作为业务类型的参数，默认是"",表示所有				
 			
@@ -469,7 +484,11 @@
 				}, 1500);
 			}       
 			
-		    
+			
+			
+			
+			
+			
 		    //设置业务类型
 		    if(type != "" && API_业务类型列表.indexOf(type) >= 0)
 		    {
@@ -535,14 +554,45 @@
 			 
 			 
 			 
-			 bind_绑定子页面 = function()
-			 {		
+			 bind_绑定事件 = function()
+			 {	
+			 	/* 当前状态为成功时，才可以使用冲正功能  */
+//			 	if(Get_State() == "1")
+//			 	{
+//			 		$(".mui-table-view-cell .mui-slider-right").addClass("lijichongzhengbtn");
+//			 	}
+			 	
+			 	//绑定立即冲正事件
+				$(".lijichongzhengbtn").bind("tap", function() 
+				{					
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					var orderid = $(this).parents(".mui-table-view-cell").attr("data-orderid");
+					
+					
+					var btnArray = ['否', '是'];
+					mui.confirm('你确定要对该订单进行冲正吗？', '冲正提示', btnArray, function(e) {
+						if (e.index == 1)
+						{
+							opt = {"订单号":orderid,"用户编号":用户编号,"冲正申请人":冲正申请人};
+							InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "RefundOrder", opt, "CYAPI_立即冲正");
+							mui.swipeoutClose(li);
+						}
+						else
+						{			
+							mui.swipeoutClose(li);
+							return false;
+						}
+					})
+				})
+			 	
+			 	//绑定跳转子页面事件
 			 	$(".goto_subpage").bind('tap',function (e) 
 	     		{	
-	     			if(!bind_绑定子页面_lock)
+	     			if(!bind_绑定事件_lock)
 	     			{
 	     			
-		     			bind_绑定子页面_lock = true; //加锁
+		     			bind_绑定事件_lock = true; //加锁
 		     			
 		     			
 		     			$("#sub_page .mui-pull-right").text("").addClass("mui-spinner");
@@ -553,8 +603,7 @@
 	 					
 	 					
 	 					//获取订单号
-	 					var orderid = $(this).attr("data-orderid");
-	 					
+	 					var orderid = $(this).parent().attr("data-orderid");
 	 					
 	 					 
 	 					//根据不同的业务调用不同的API 					
@@ -565,15 +614,25 @@
 			 } 
 			  
 			 
+			 
+			 //立即冲正
+		     CYAPI_立即冲正 = function(str)
+		     {
+		     	
+		     	//alert(str);
+		     	
+		     	var json = JSON.parse(str);
+		     	
+		     	mui.toast(json.ResMsg);
 		     
+		     	
+		     }
 		   
 			 
 			//订单列表
 			CYAPI_获取返回值 = function(str)
-			{				
-				
-				layer.closeAll();
-				
+			{								
+				layer.closeAll();				
 				
 				var jsonobj = Api_filter(str);
 
@@ -599,7 +658,7 @@
 								
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 						        							        
-		        bind_绑定子页面();
+		        bind_绑定事件();
 			}
 			
 			  
@@ -607,7 +666,7 @@
 			//进入详情界面
 			CYAPI_详情 = function(str)
 			{									
-				bind_绑定子页面_lock = false; //解锁
+				bind_绑定事件_lock = false; //解锁
 				
 				$("#sub_page .mui-pull-right").removeClass("mui-spinner");
 								
