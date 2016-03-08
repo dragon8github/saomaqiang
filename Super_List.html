@@ -317,10 +317,6 @@
 </span>
 
 <script type="text/template" id="temple">
-	
-	
-	
-	
 	{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
 		<li class="mui-table-view-cell"  data-orderid="{{d[i].OrderNo}}">							
 			<div class="mui-slider-right mui-disabled lijichongzhengbtn">
@@ -394,14 +390,14 @@
 					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 				});
 		     }) 
-		     
+		  
 		     
 		     初始化数据 = function()
 		     {		     	
 		     	/*初始化*/
 		     	layer.open({type:2,time:1.5});	//蒙版	
 		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
-		     	//$("#mui-table-view").html(""); //清空所有的li	
+		     	$("#mui-table-view").html(""); //清空所有的li	
 		     	var page = 1;	//分页还原
 				$("#page").val(page); //分页标识变为1				
 		     	ResultJson = null; //清空		
@@ -486,14 +482,31 @@
 			
 			
 			
-			
+			//详情中的冲正
+			$('#lijichongz').bind("tap",function()
+			{
+				var orderid = $(this).attr("data-orderid");
+				
+				var btnArray = ['否', '是'];
+				mui.confirm('你确定要对该订单进行冲正吗？', '冲正提示', btnArray, function(e) {
+					if (e.index == 1)
+					{
+						opt = {"订单号":orderid,"用户编号":用户编号,"冲正申请人":冲正申请人};
+						InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "RefundOrder", opt, "CYAPI_立即冲正");
+					}
+					else
+					{			
+						return false;
+					}
+				})
+			})
 			
 			
 		    //设置业务类型
 		    if(type != "" && API_业务类型列表.indexOf(type) >= 0)
 		    {
-		    	$("#mui-bar").find(".mui-active").removeClass("mui-active");    	
-		    	$("#" + type).parent().addClass("mui-active");	  
+		    		$("#mui-bar").find(".mui-active").removeClass("mui-active");    	
+		    		$("#" + type).parent().addClass("mui-active");	  
 		    }
 		     
 		     
@@ -556,12 +569,11 @@
 			 
 			 bind_绑定事件 = function()
 			 {	
-			 	/* 当前状态为成功时，才可以使用冲正功能  */
-//			 	if(Get_State() == "1")
-//			 	{
-//			 		$(".mui-table-view-cell .mui-slider-right").addClass("lijichongzhengbtn");
-//			 	}
-			 	
+			 	/* 当前状态为成功时，才可以使用冲正功能,否则删除侧滑菜单  */
+			 	if(Get_State() != "1")
+			 	{
+			 		$(".mui-table-view-cell .mui-slider-right").remove();
+			 	}
 			 	//绑定立即冲正事件
 				$(".lijichongzhengbtn").bind("tap", function() 
 				{					
@@ -625,7 +637,6 @@
 		     	
 		     	mui.toast(json.ResMsg);
 		     
-		     	
 		     }
 		   
 			 
@@ -685,6 +696,7 @@
 				
 				if(OrderDeails != null)
 				{
+					$("#sub_page #lijichongz").attr("data-orderid",OrderDeails[0]["OrderNo"].toString());	 	//订单号
 					$("#sub_page .OrderNo").text(OrderDeails[0]["OrderNo"].toString());	 	//订单号
 					$("#sub_page .OrderAmount").text("￥ " + OrderDeails[0]["OrderAmount"].toString());		 	//订单金额
 					$("#sub_page .OrderTime").text(timeFormat(OrderDeails[0]["OrderTime"].toString()));	 	//订单时间			
