@@ -1,8 +1,11 @@
 
+var API_业务类型列表 = ["通用扫码支付","微信找零"];
+
+
+
 
 
 /* 核心业务处理函数 */
-
 GetApiUrl = function(ModuleName)
 {
 	if(ModuleName == "Global_V0001_5un29")
@@ -68,4 +71,5 @@ Api_filter = function(jsonstr)
 }
   
  
+
 

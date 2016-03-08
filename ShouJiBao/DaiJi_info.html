@@ -395,15 +395,8 @@
 			var ResultJson = null; //获取的列表数据
 			var cnt = null; //数据总条数
 			$(function() {
-				var urlinfo = window.location.href; //获取当前页面的url
-				var len = urlinfo.length; //获取url的长度
-				var offset = urlinfo.indexOf("?"); //设置参数字符串开始的位置
-				var newsidinfo = urlinfo.substr(offset, len) //取出参数字符串 这里会获得类似“id=1”这样的字符串
-				var newsids = newsidinfo.split("="); //对获得的参数字符串按照“=”进行分割
-				var newsid = newsids[1]; //得到参数值
-				var newsname = newsids[0]; //得到参数名字
-				//newsid
-				//		     		LeftPageGOBack();	//右滑箭头 
+				
+				var newsid =  get_urlpara(); //获取参数				
 				bind_绑定子页面(); //测试阶段需要，正式环境可以去掉,不去也没关系
 				初始化数据(); //初始化数据   
 			})

@@ -379,8 +379,8 @@ Show_Menu = function() {
 	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() {
 		
 		mui.openWindow({
-			url: "test.html",
-			id: "test"		 	
+			url: "All_List.html?new=" + Math.random(0,10),
+			id: "All_List"			
 		});
 	}) 
 	//管理
@@ -425,18 +425,18 @@ QQ_offCanvas = function()
 	{
 		
 		mui.openWindow({
-			url: "QiangBao_list.html",
-			id: "QiangBao_list"			
+			url: "QianBao_list.html",
+			id: "QianBao_list.html"			
 		});
 	})
-	
-	
+	 
+	 
 	//业务流水
 	$("#yewuliusuhi").bind("tap",function()
 	{
 		mui.openWindow({
-			url: "list.html?new=" + Math.random(0,10),
-			id: "list"			
+			url: "Super_List.html?new=" + Math.random(0,10),
+			id: "Super_List.html"			
 		});
 	})
 	
@@ -556,6 +556,33 @@ quit = function()
 }
 
 
+/* 获取url参数 */
+get_urlpara = function()
+{
+		var urlinfo = window.location.href; //获取当前页面的url
+		var len = urlinfo.length; //获取url的长度
+		var offset = urlinfo.indexOf("?"); //设置参数字符串开始的位置
+		var newsid = "";
+		
+		
+		if(offset >= 0)
+		{
+			var newsidinfo = urlinfo.substr(offset, len) //取出参数字符串 这里会获得类似“id=1”这样的字符串
+			var newsids = newsidinfo.split("="); //对获得的参数字符串按照“=”进行分割			
+			var newsname = newsids[0]; //得到参数名字
+			newsid = decodeURI(newsids[1]); //得到参数值	,记得转义
+			
+			if(newsid.toString() == "undefined")
+			{
+				newsid = "";
+			}
+			
+		}	
+		
+		
+		return newsid;
+		
+}
 
 
 

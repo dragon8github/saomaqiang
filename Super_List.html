@@ -13,57 +13,53 @@
 
 		<link href="css/mui/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/mui/mui.picker.min.css" />
-		<link rel="stylesheet" type=	"text/css" href="css/My_css/ico.css" />
+		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css" />
 		<link rel="stylesheet" type="text/css" href="css/My_css/global.css" />
 		<link rel="stylesheet" type="text/css" href="css/My_css/cover.css"/>
 		<style>
 			/* The custom style */
-				.iconfont
-				{
-					font-size:30px
-				}
-				.mui-table .Lee_time
-				{
-					vertical-align: middle;				
-				}
-				.mui-table .Lee_time .iconfont
-				{
-					color:#007AFF;
-					font-size:26px; 
-				}			
-				.mui-table .Lee_Order
-				{
-					margin:8px 0px;
-					color:#333;
-				}			
-				.mui-table .Lee_Phone
-				{
-					color:#333;
-				}			
-				.mui-table .Lee_Money
-				{
-					font-weight: 700;
-				}			
-				/* Cover the style */
-				.mui-bar .mui-segmented-control
-				{
-					top:6px;
-					right:10px
-				}			
-				.mui-segmented-control .mui-control-item
-				{
-					line-height:30px;
-				}
-				.mui-pull-bottom-pocket
-				{
-					margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
-				}
+			.iconfont
+			{
+				font-size:30px
+			}
+			.mui-table .Lee_time
+			{
+				vertical-align: middle;				
+			}
+			.mui-table .Lee_time .iconfont
+			{
+				color:#007AFF;
+				font-size:26px; 
+			}			
+			.mui-table .Lee_Order
+			{
+				margin:8px 0px;
+				color:#333;
+			}			
+			.mui-table .Lee_Phone
+			{
+				color:#333;
+			}			
+			.mui-table .Lee_Money
+			{
+				font-weight: 700;
+			}			
+			/* Cover the style */
+			.mui-bar .mui-segmented-control
+			{
+				top:6px;
+				right:10px
+			}			
+			.mui-segmented-control .mui-control-item
+			{
+				line-height:30px;
+			}
+			.mui-pull-bottom-pocket
+			{
+				margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
+			}
 				
-		</style>
-		<!--
-        这里是无缝跳转的css
-        -->
-		<style>
+			/*这里是DIV跳转的css*/
 			.mui-views,
 			.mui-view,
 			.mui-pages,
@@ -109,18 +105,28 @@
 			.mui-table-view {
 				margin-top: 20px;
 			}
+			
+			/* 兼容 */
+			.mui-off-canvas-wrap .mui-bar
+		  	{
+	  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
+		  	}
+		  	.mui-off-canvas-wrap
+			{
+				z-index: 0; 
+			}
+			.lijichongzheng
+			{
+				color:#fff;
+				vertical-align:middle;
+			}
 		</style>
 
 	</head>
 
 	<body>
 
-		<!--
-			页面主结构开始：
-			一个容器（.mui-page）
-			包含一个标题(.mui-navbar-inner)
-			和一个内容(.mui-page-content)
-		-->
+		<!-- 页面主结构开始 -->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
@@ -130,6 +136,28 @@
 			</div>
 		</div>
 		<!--页面主结构结束-->
+		
+			
+
+			<nav id="mui-bar" class="mui-bar mui-bar-tab">
+					<a class="mui-tab-item  mui-active">
+						<span class="mui-icon mui-icon-home"></span>
+						<span class="mui-tab-label" id="全部">全部</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar">
+						<span class="mui-icon mui-icon-weixin"></span>
+						<span class="mui-tab-label" id="微信找零">微信找零</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar-with-map">
+						<span class="mui-icon iconfont">&#xe61c;</span>
+						<span class="mui-tab-label" id="通用扫码支付">通用扫码支付</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar-with-chat">
+						<span class="mui-icon iconfont">&#xe622;</span>
+						<span class="mui-tab-label" id="翼支付">翼支付</span>
+					</a>					
+					
+			</nav>
 
 		<!--侧滑菜单容器   -->
 		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
@@ -157,30 +185,17 @@
 			<!--页面标题栏结束-->
 			
 			
-			<!-- 兼容 -->
-			<style type="text/css">
-				.mui-off-canvas-wrap .mui-bar
-			  	{
-		  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
-			  	}
-			  	.mui-off-canvas-wrap
-				{
-					z-index: 0; 
-				}
-				
-			</style>
-
 
  
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 					
-						<!--
+						
 						<li class="mui-table-view-cell" data-orderid="201601271550424372079">							
 								<div class="mui-slider-right mui-disabled">
-									<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i>&nbsp;&nbsp;立即冲正</a>
-								</div>
+									<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i><p class="lijichongzheng">&nbsp;&nbsp;立即冲正</p></a>
+								</div> 
 								<a class="goto_subpage" href="#info">
 									<div class="mui-slider-handle">
 										<div class="mui-table">									
@@ -197,7 +212,7 @@
 									</div>
 								</a> 
 						</li>
-						-->
+						
 					
 					</ul>
 				</div>
@@ -274,7 +289,7 @@
 							</li>
 						</ul>
 															
-						<button type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
+						<button style="margin-bottom: 70px;" type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
 									
 					</div>
 				</div>		
@@ -334,7 +349,7 @@
 		
 			/* 初始化公共数据 */
 			
-			var username = localStorage.登录帐号;	
+			var username = localStorage.登录帐号;	//登录帐号
 			
 			var rows = "10";		//每次加载的行数	
 		
@@ -342,12 +357,15 @@
 			
 			var cnt = null; 	//数据总条数
 			
-			var state = "";  //默认""为所有
+			var state = "";  //默认业务状态，""为所有						
 			
-			var bind_绑定子页面_lock = false; //锁头	
+			var bind_绑定子页面_lock = false; //不知名的原因会发送两次请求，总之加上锁头就没事了	
 			
+			var type = get_urlpara(); //获取页面参数 ，同时作为业务类型的参数，默认是"",表示所有				
 			
-			
+		   
+		    
+		    
 		            
 		     $(function() 
 		     {
@@ -364,15 +382,16 @@
 		     
 		     
 		     初始化数据 = function()
-		     {
-		     	
-		     	layer.open({type:2,time:1.5});
-		     	
-		     	/*清空数据列表*/
-		     	$("#mui-table-view").html(""); //清空所有的li	
-		     	var page = 1;	
+		     {		     	
+		     	/*初始化*/
+		     	layer.open({type:2,time:1.5});	//蒙版	
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
+		     	//$("#mui-table-view").html(""); //清空所有的li	
+		     	var page = 1;	//分页还原
 				$("#page").val(page); //分页标识变为1				
 		     	ResultJson = null; //清空		
+		     	state = Get_State();
+		     	type = get_type();
 		     	
 		     	
 		     	/* 初始化dipicker的默认参数 */
@@ -384,15 +403,15 @@
 		     	opt.endYear =  now.getFullYear();		     
 		     	var str_json = JSON.stringify(opt);		     			     	
 		     	$("#dipicker").attr("data-options",str_json);	
-		     	var state = Get_State();
+		     	
 		     	
 		     
 		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
 		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
 		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			  				  	
-			  	//console.log(JSON.stringify( {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} ));			  	
-			  	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
+			  			 	  	
+			  	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"}));			  	
+			  	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
 		     
 		     }
 		     
@@ -407,7 +426,7 @@
 				//模拟更新数据
 				setTimeout(function() 
 				{			
-					window.location.reload();
+					//window.location.reload();
 					
 					mui.toast("刷新成功");
 					
@@ -442,21 +461,26 @@
 						var pass = new Date(end);
 						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
 						var page = parseInt($("#page").val()) + 1;	
-						state = Get_State();						
+						state = Get_State();	
+						type = get_type();
 						$("#page").val(page); //分页标识+1						
-					   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
+					   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
 						
 				}, 1500);
 			}       
 			
+		    
+		    //设置业务类型
+		    if(type != "" && API_业务类型列表.indexOf(type) >= 0)
+		    {
+		    	$("#mui-bar").find(".mui-active").removeClass("mui-active");    	
+		    	$("#" + type).parent().addClass("mui-active");	  
+		    }
 		     
 		     
-		     
-		    //选择模式之后
-		   
+		    //选择模式之后		   
 		    $("#tapstate .mui-control-item").bind("tap",function()
-			{
-					
+			{					
 					if(!$(this).hasClass("mui-active"))
 					{
 						$("#tapstate .mui-active").removeClass("mui-active");
@@ -466,7 +490,16 @@
 			})
 			 
 			
-			
+			//选择业务模式之后	
+			$("#mui-bar .mui-tab-item").bind("tap",function()
+			{					
+					if(!$(this).hasClass("mui-active"))
+					{
+						$("#mui-bar .mui-active").removeClass("mui-active");
+						$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
+						初始化数据();
+					}					
+			})
 			
 			//选择时间之后
 			document.getElementById("select_time").addEventListener('tap',function()
@@ -489,24 +522,19 @@
 					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
 					var page = 1;	
 					state = Get_State();
+					type = get_type();
+					
 					$("#page").val(page); //分页标识变为1				
 			     	ResultJson = null; //清空		
 			     	$("#mui-table-view").html(""); //清空所有的li	
 			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+				    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					 
 				}) 
 			})
 			 
 			 
 			 
-			
-			  
-			   
-			//  支付宝扫码
-			//	微信扫码
-			//	翼支付
-			//	微信找零
 			 bind_绑定子页面 = function()
 			 {		
 			 	$(".goto_subpage").bind('tap',function (e) 
@@ -546,7 +574,6 @@
 				
 				layer.closeAll();
 				
-				alert(str);
 				
 				var jsonobj = Api_filter(str);
 
@@ -557,7 +584,7 @@
 				//替换美化文本
 				$.each(ResultJson,function(i,o)
 				{
-					o.OrderStateDescription = o.OrderStateDescription.replace("处理中","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderStateDescription = o.OrderStateDescription.replace("处理中","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;").replace("失败","&nbsp;&#xe61b;").replace("已冲正","&nbsp;&#xe621;");
 					o.OrderTime = timeFormat(o.OrderTime.replace("T"," "));
 				})		
 								
@@ -623,6 +650,36 @@
 			}
 			 
 			 
+			
+			 
+			 /*
+			  *获取当前业务类型
+			  * */
+			 get_type = function()
+			 {
+			 	var text = $("#mui-bar .mui-active .mui-tab-label").text();
+			 	
+			 	
+			 	if(text.indexOf("全部") >= 0)
+			 	{
+			 		return "";
+			 	}
+			 	else if(text.indexOf("微信找零") >= 0)
+				{
+					return "002";
+				}								
+				else if(text.indexOf("通用扫码支付") >= 0)
+				{
+					return "001";
+				}
+				else if(text.indexOf("翼支付") >= 0)
+				{
+					return "";
+				}
+				
+			 }
+			 
+			
 			 
 			 /**
 			 * 获取当前模式

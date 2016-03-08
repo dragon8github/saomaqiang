@@ -134,7 +134,7 @@
 
 
 	/* 测试区域 */
-	if(false)  
+	if(true)  
 	{  
 		var v = newGuid(); 
 		var CustomerCode = localStorage.CustomerCode; 
@@ -156,14 +156,19 @@
 		
 		
 		//订单详情查询
-		opt = {"订单号":"201601271550424372079"};		 
-		InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetails", opt, "CYAPI_微信冲正"); 
+		//opt = {"订单号":"201601271550424372079"};		 
+		//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetails", opt, "CYAPI_微信冲正"); 
 		
 		
 		
 		//opt = {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"};
 		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_微信找零获取返回值");
-	}	  
+	
+		//订单冲正
+		opt = {"CustomerOrderNo":"20160308c03uw4lc2fvd5qq0dvb178aq5"};
+		InvokeApi(GetApiUrl("Global_V0001_5un29"), "ApiClass", "RefundOrder", opt, "CYAPI_微信冲正");
+		
+	}
 	
 	
 	
@@ -193,8 +198,8 @@
 		/* 查询明细 */
 		document.getElementById("chaxunmingxi").addEventListener('tap',function(){
 			mui.openWindow({
-				url:"WeiXinlist.html",
-				id:"WeiXinlist" 
+				url:"Super_List.html?type=微信找零",
+				id:"Super_List" 
 			});
 		}) 
 		

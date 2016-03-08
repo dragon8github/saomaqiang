@@ -47,7 +47,7 @@
 				/* Cover the style */
 				.mui-bar .mui-segmented-control
 				{
-					top:6px;
+					top:6px; 
 					right:10px
 				}			
 				.mui-segmented-control .mui-control-item
@@ -131,6 +131,27 @@
 		</div>
 		<!--页面主结构结束-->
 
+
+
+			<nav id="mui-bar" class="mui-bar mui-bar-tab">
+					<a class="mui-tab-item mui-active" href="#tabbar">
+						<span class="mui-icon mui-icon-home"></span>
+						<span class="mui-tab-label">所有</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar-with-chat">
+						<span class="mui-icon mui-icon-checkmarkempty"></span>
+						<span class="mui-tab-label">成功</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar-with-contact">
+						<span class="mui-icon mui-icon-close-filled"></span>
+						<span class="mui-tab-label">失败</span>
+					</a>
+					<a class="mui-tab-item" href="#tabbar-with-map">
+						<span class="mui-icon mui-icon-gear"></span>
+						<span class="mui-tab-label">冲正</span>
+					</a>
+			</nav>
+
 		<!--侧滑菜单容器   -->
 		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
 
@@ -141,20 +162,14 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>返回
 				</button>
-				<div id="tapstate" class="mui-segmented-control" style="width: 60%;position: absolute;right: 20%;">
-					<a href="#" class="mui-control-item mui-active">所有</a>
-					<a href="#" class="mui-control-item ">待处理</a>
-					<a href="#" class="mui-control-item">成功</a>
-					<a href="#" class="mui-control-item">失败</a>					
-					<a href="#" class="mui-control-item">冲正</a>
-				</div>
-				
-				
-				
-				
+				<h1 class="mui-title" id="mui-title">成功订单</h1>
 				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606; <span style="font-size:16px">时间</span></a> 
 			</div>
 			<!--页面标题栏结束-->
+			
+			
+			
+			
 			
 			
 			<!-- 兼容 -->
@@ -176,11 +191,11 @@
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 					
-						<!--
+					<!--
 						<li class="mui-table-view-cell" data-orderid="201601271550424372079">							
 								<div class="mui-slider-right mui-disabled">
 									<a class="mui-btn mui-btn-red"><i class="iconfont">&#xe60b;</i>&nbsp;&nbsp;立即冲正</a>
-								</div>
+								</div> 
 								<a class="goto_subpage" href="#info">
 									<div class="mui-slider-handle">
 										<div class="mui-table">									
@@ -197,7 +212,8 @@
 									</div>
 								</a> 
 						</li>
-						-->
+					-->
+					
 					
 					</ul>
 				</div>
@@ -274,7 +290,7 @@
 							</li>
 						</ul>
 															
-						<button type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
+						<button style="margin-bottom: 70px;" type="button" id="lijichongz" class="mui-btn mui-btn-danger mui-btn-block">立即冲正</button>
 									
 					</div>
 				</div>		
@@ -366,13 +382,16 @@
 		     初始化数据 = function()
 		     {
 		     	
-		     	layer.open({type:2,time:1.5});
 		     	
-		     	/*清空数据列表*/
+		     	     	
+		     	/*初始化*/
+		     	layer.open({type:2,time:1.5});	//蒙版	
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
 		     	$("#mui-table-view").html(""); //清空所有的li	
-		     	var page = 1;	
+		     	var page = 1;	//分页还原
 				$("#page").val(page); //分页标识变为1				
 		     	ResultJson = null; //清空		
+		     	var state = Get_State();
 		     	
 		     	
 		     	/* 初始化dipicker的默认参数 */
@@ -384,14 +403,14 @@
 		     	opt.endYear =  now.getFullYear();		     
 		     	var str_json = JSON.stringify(opt);		     			     	
 		     	$("#dipicker").attr("data-options",str_json);	
-		     	var state = Get_State();
+		     	
 		     	
 		     
 		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
 		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
 		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
 			  				  	
-			  	//console.log(JSON.stringify( {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} ));			  	
+			  	//alert(JSON.stringify( {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} ));			  	
 			  	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
 		     
 		     }
@@ -454,12 +473,14 @@
 		     
 		    //选择模式之后
 		   
-		    $("#tapstate .mui-control-item").bind("tap",function()
+		    $("#mui-bar .mui-tab-item").bind("tap",function()
 			{
-					
 					if(!$(this).hasClass("mui-active"))
-					{
-						$("#tapstate .mui-active").removeClass("mui-active");
+					{					
+						
+						var title = $(this).text();
+						$("#mui-title").text(title + "订单");
+						$("#mui-bar .mui-active").removeClass("mui-active");
 						$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
 						初始化数据();
 					}					
@@ -492,8 +513,8 @@
 					$("#page").val(page); //分页标识变为1				
 			     	ResultJson = null; //清空		
 			     	$("#mui-table-view").html(""); //清空所有的li	
-
-				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
+				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":"","业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					 
 				}) 
 			})
@@ -546,7 +567,6 @@
 				
 				layer.closeAll();
 				
-				alert(str);
 				
 				var jsonobj = Api_filter(str);
 
@@ -557,7 +577,7 @@
 				//替换美化文本
 				$.each(ResultJson,function(i,o)
 				{
-					o.OrderStateDescription = o.OrderStateDescription.replace("处理中","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
+					o.OrderStateDescription = o.OrderStateDescription.replace("处理中","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;").replace("失败","&nbsp;&#xe61b;").replace("已冲正","&nbsp;&#xe621;");
 					o.OrderTime = timeFormat(o.OrderTime.replace("T"," "));
 				})		
 								
@@ -616,7 +636,6 @@
 					$("#sub_page .BaoGuoName").text(OrderParams[0]["BaoGuoName"].toString());	//包裹号
 				}	
 				
-				
 					
 				layer.closeAll();
 				
@@ -629,25 +648,25 @@
 			 */
 			Get_State = function()
 			{
-				var text = $("#tapstate .mui-active").text();
+				var text = $("#mui-bar .mui-active").text();
 				
-				if(text == "所有")
+				if(text.indexOf("所有") >=0)
 				{
 					return "";
 				}
-				else if(text == "失败")
+				else if(text.indexOf("失败") >=0)
 				{
 					return "0";
 				}
-				else if(text == "成功")
+				else if(text.indexOf("成功") >=0)
 				{
 					return "1";
 				}
-				else if(text == "待处理")
+				else if(text.indexOf("待处理") >=0)
 				{
 					return "2";
 				}
-				else if(text == "冲正")
+				else if(text.indexOf("冲正") >=0)
 				{
 					return "3";				
 				}
@@ -655,9 +674,6 @@
 			 
 			  
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 以下区域不必改动 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
-			 
-		 	
-			 
 			 
 			 
 			//初始化单页view
