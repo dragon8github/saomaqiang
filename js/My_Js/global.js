@@ -368,28 +368,24 @@ Show_Menu = function() {
 		window.location.reload();
 	})
 	//主页
-	mui(".mui-table-view").on('tap', '.Menu_home', function() {
-		
+	mui(".mui-table-view").on('tap', '.Menu_home', function()
+	{		
 		mui.openWindow({
 			url: "index.html",
 			id: "index"			
 		});
 	})
 	//手机充值
-	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() {
+	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() 
+	{
 		
-		mui.openWindow({
-			url: "All_List.html?new=" + Math.random(0,10),
-			id: "All_List"			
-		});
+		
 	}) 
 	//管理
-	mui(".mui-table-view").on('tap', '.guanli', function() {
+	mui(".mui-table-view").on('tap', '.guanli', function() 
+	{
 		
-		mui.openWindow({
-			url: "error.html",
-			id: "error"			
-		});
+		
 	})
 
 	
@@ -565,12 +561,15 @@ get_urlpara = function()
 		var newsid = "";
 		
 		
+		
 		if(offset >= 0)
 		{
 			var newsidinfo = urlinfo.substr(offset, len) //取出参数字符串 这里会获得类似“id=1”这样的字符串
 			var newsids = newsidinfo.split("="); //对获得的参数字符串按照“=”进行分割			
 			var newsname = newsids[0]; //得到参数名字
 			newsid = decodeURI(newsids[1]); //得到参数值	,记得转义
+			
+			
 			
 			if(newsid.toString() == "undefined")
 			{

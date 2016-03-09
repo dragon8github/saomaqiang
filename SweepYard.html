@@ -82,7 +82,7 @@
 							<span class="input-group-btn">
 				 
 								<button class="btn btn-default" id="go_form2" style="padding:9px 12px;" type="button"><i class="iconfont icon-suo" style="font-size:12px"></i></button>
-				
+								<input type="reset" style="display: none;" name="reset" id="reset" value="reset" />
 				  			</span>
 
 						</div>
@@ -148,13 +148,7 @@
 </html> 
 <script type="text/javascript">
 	
-//	mui.plusReady(function()
-//	{
-//		
-//		console.log("sweepOK");
-//		
-//	})
-	
+
 	$(function() 
 	{
 		
@@ -178,10 +172,95 @@
 		 
 		
 		
-		$("#chaxunmingxi").click(function() {
-			window.location.href = "list.html";
+		$("#chaxunmingxi").bind("tap",function() 
+		{			
+			var type = "通用扫码支付";
+			
+			mui.openWindow
+			({
+				url: "Super_List.html?type=" + type,
+				id: "Super_List"			
+			});
+		})
+		
+		
+		/* 提交订单 */
+		$("#tijiaodingdan").bind('tap',function()
+		{
+			var Amount = $("#money").val(); //金额
+			
+			var BarCode = $("#yard").val() || "281234567812345678"; //条形码			
+			
+			
+			
+			if(Amount.length == 0)
+			{
+				mui.toast("请输入金额");
+				
+				return false;
+			}
+			
+			
+			if(BarCode.length == 0 )
+			{
+				mui.toast("请输入或扫描条形码");
+				
+				return false;
+			}			
+			
+			
+			var btnArray = ['否', '是'];
+			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) 
+			{
+					if (e.index == 1) 
+					{						
+						mui.toast("正在提交表单..."); 						
+						
+						/* 参数列表 */
+						var opt = {};
+						opt.CustomerOrderNo = newGuid(); //guid订单号
+						opt.CustomerCode = localStorage.CustomerCode;	 //门店号
+						opt.Amount = Amount;
+						opt.PayParm = JSON.stringify({"BarCode":BarCode});	//支付码json
+						opt.PayRem = ""; //暂时为空的参数
+						opt.Operator = localStorage.EmployeeCode;	//员工号
+						
+						//console.log(JSON.stringify(opt));
+								
+		  			    InvokeApi(GetApiUrl("B002_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_通用扫码支付");
+				 
+					} 
+					else
+					{
+						return false;
+					}
+			}) 
 		})
 		
 		
 	})
+	
+	
+	
+	CYAPI_通用扫码支付 = function(str)
+	{
+		var jsonobj = Api_filter(str);
+		
+		if(jsonobj.RetCode == "1")
+		{
+			mui.alert(jsonobj.RetMsg, '成功提示', function() {
+					mui.toast(jsonobj.RetMsg); //弹出结果
+			});
+			
+			$("#reset").click();  //重置表单	
+		}
+		else
+		{
+			mui.alert(jsonobj.RetMsg, '异常提示', function() {
+					mui.toast(jsonobj.RetMsg); //弹出结果
+			});			
+		} 
+			
+	}
+	
 </script>

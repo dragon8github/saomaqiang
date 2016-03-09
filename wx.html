@@ -167,10 +167,16 @@
 	
 	
 		//订单冲正
-		opt = {"订单号":"20160308c03uw4lc2fvd5qq0dvb178aq5","用户编号":CustomerOrderNo,"冲正申请人":Operator}; 
+		//opt = {"订单号":"20160308c03uw4lc2fvd5qq0dvb178aq5","用户编号":CustomerOrderNo,"冲正申请人":Operator}; 
 		//console.log(JSON.stringify(opt));
-		InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "RefundOrder", opt, "CYAPI_微信冲正");
+		//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "RefundOrder", opt, "CYAPI_微信冲正");
 		
+		
+		 
+		//通用扫码支付		
+		//var PayParm = JSON.stringify({"BarCode":"281234567812345678"});	//支付码				
+		//opt = {"CustomerOrderNo":newGuid(),"Amount":"0.1","PayParm":PayParm,"PayRem":"","CustomerCode":CustomerCode,"Operator":Operator};  		
+		//InvokeApi(GetApiUrl("B002_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_微信冲正");
 	}
 	
 	
@@ -277,18 +283,6 @@ CYAPI_微信冲正 = function(str)
 	
 		return false;
 		
-		var jsonobj = JSON.parse(str);
-		
-		if(jsonobj.RetCode == "1")
-		{
-			//success
-		}
-		else
-		{
-			//fail
-		} 
-		
-		mui.toast(jsonobj.RegMsg);
 }
 
 	
