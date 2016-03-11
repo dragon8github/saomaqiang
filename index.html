@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css" />
 		<link rel="stylesheet" type="text/css" href="css/My_css/global.css" />
 		<link rel="stylesheet" type="text/css" href="css/My_css/cover.css" />
+	
 	</head>
 	<style type="text/css">
 		.mainlist
@@ -153,33 +154,6 @@
 <script type="text/javascript">
 
 
-//	mui.init({  
-//		preloadPages:  
-//		[
-//			{
-//				url:"wx.html",  
-//				id:"wx"			
-//			},
-//			{
-//				url:"list.html",  
-//				id:"list"			
-//			},
-//			{
-//				url:"ShouJiBao.html",  
-//				id:"ShouJiBao"			
-//			},
-//			{
-//				url:"SweepYard.html",  
-//				id:"SweepYard"			
-//			},
-//			
-//		]
-//		
-//		  
-//	});  
-	
-
-
 	$(function()
 	{	
 		assistive_mTouch(); //小光点以及菜单
@@ -196,31 +170,28 @@
 		var assistiveTouch =  document.getElementById("assistiveTouch");
 		
 		
+		 
+		//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 导航区 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		
+		//手机充值
 		shoujichongzhi.addEventListener('tap',function()
 		{
-//				
-//				mui.openWindow
-//				({
-//					url:"test_index.html",
-//					id:"test_index"
-//				});
-		})     
-	 
-	
-	/* 导航区 */
+			mui.toast("该功能暂未开放");
+		})    
+		
+		//扫码支付
 		saomazhifu.addEventListener('tap',function()
 		{
-				
 				mui.openWindow
 				({
 					url:"SweepYard.html?new" + Math.random(0,10),
 					id:"SweepYard"
 				});
 		})     
-		
-		weixizhaoling.addEventListener('tap',function()
-		{
 				
+		//微信找零
+		weixizhaoling.addEventListener('tap',function()
+		{				
 				mui.openWindow
 				({
 					url:"wx.html?new" + Math.random(0,10),
@@ -228,8 +199,19 @@
 				}); 
 		})  
 		
-		  
+	    //代缴违章
+		daijiaoweizhang.addEventListener('tap',function()
+		{
+			mui.toast("该功能暂未开放");
+		})  
 		
+		//火车票
+		huochepiao.addEventListener('tap',function()
+		{
+			mui.toast("该功能暂未开放");
+		})
+		
+		//收寄宝
 		shoujibao.addEventListener('tap',function()
 		{
 			layer.open({
@@ -238,32 +220,46 @@
 					title: false,
 					shadeClose: true,
 					content: $("#Cy-Tp-XieYi").html(),
-					btn: 0, //默认底部不显示任何按钮
-					success:function(){
-//						mui('.mui-scroll-wrapper').scroll();	
-					}
+					btn: 0 //默认底部不显示任何按钮					
 				});
-				
-			
-				
+		})   	
+		
+		//账户查询
+		zhanghuchaxun.addEventListener('tap',function()
+		{
+			mui.openWindow
+			({
+				url:"QianBao_list.html?new" + Math.random(0,10),
+				id:"QianBao_list"
+			}); 
 		})   
 		
-	 	 Cy_Tp_Agree = function()
-	 	 {
-	  			layer.closeAll(); 				
-				
-				mui.openWindow
-				({
-					url:"ShouJiBao.html?new" + Math.random(0,10),
-					id:"ShouJiBao"
-				});
-		  }
-		 
-		 Cy_Tp_cannel = function()
-		 {
-					layer.closeAll(); 
-					return false;
-		 }
+		//管理
+		guanli.addEventListener('tap',function()
+		{
+			mui.toast("该功能暂未开放");
+		})   
+		
+		
 		
 	})
+	
+	
+	 
+//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 方法体 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+ Cy_Tp_Agree = function()
+{
+	layer.closeAll(); 
+	mui.openWindow
+	({
+		url:"ShouJiBao.html?new" + Math.random(0,10),
+		id:"ShouJiBao"
+	});
+  }
+ 
+ Cy_Tp_cannel = function()
+ {
+	layer.closeAll(); 
+	return false;
+ }
 </script>

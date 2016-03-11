@@ -328,7 +328,7 @@ Show_Menu = function()
  
 	layer.open
 	({
-		style: 'width:70%; background:rgba(0,0, 0, .6);border-radius: 20px;',
+		style: 'width:65%; background:rgba(0,0, 0, .6);border-radius: 20px;',
 		closeBtn: 0,
 		title: false,	
 		shade:[0.1,"transparent"],
@@ -343,6 +343,67 @@ Show_Menu = function()
 	}); 
 	
 	
+	//手机充值
+	mui(".mui-table-view").on('tap', '.Menu_shoujichongzhi', function() 
+	{
+		mui.toast("该功能暂未开放");
+	})
+	 
+	//扫码支付
+	mui(".mui-table-view").on('tap', '.Menu_saomazhifu', function()
+	{ 
+		mui.openWindow({
+			url: "SweepYard.html",
+			id: "SweepYard"			
+		});
+	})
+	
+	//微信找零
+	mui(".mui-table-view").on('tap', '.Menu_weixinzhaoling', function()
+	{		
+		mui.openWindow({
+			url: "wx.html",
+			id: "wx"			
+		});
+	})
+	
+	//代缴违章
+	mui(".mui-table-view").on('tap', '.Menu_daijiaoweizhang', function()
+	{		
+		mui.toast("该功能暂未开放");
+	})
+	
+	
+	
+	//火车票
+	mui(".mui-table-view").on('tap', '.Menu_huochepiao', function() 
+	{
+		mui.toast("该功能暂未开放");
+	})
+	
+	//扫码支付
+	mui(".mui-table-view").on('tap', '.Menu_shoujibao', function()
+	{ 
+		mui.openWindow({
+			url: "ShouJiBao.html",
+			id: "ShouJiBao"			
+		});
+	})
+	
+	//账户查询
+	mui(".mui-table-view").on('tap', '.Menu_zhanghuchaxun', function()
+	{				
+		mui.openWindow({
+			url: "QianBao_list.html",
+			id: "QianBao_list"			
+		});
+	})
+	
+	//管理
+	mui(".mui-table-view").on('tap', '.Menu_guanli', function()
+	{		
+		mui.toast("该功能暂未开放");
+	})
 	
 	
 
@@ -736,25 +797,25 @@ function newGuid()
 "	           <li id=\"Menu_shoujichongzhi\" class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "		                <i class=\"iconfont\">&#xe61f;</i>"+
 "		                <div class=\"mui-media-body\">手机充值</div></a></li>	         "+
-"	           <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	           <li class=\"Menu_saomazhifu mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                   <i class=\"iconfont\">&#xe61c;</i>	"+
 "	                    <div class=\"mui-media-body\">扫码支付</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li class=\"Menu_weixinzhaoling mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                     <i class=\"iconfont\">&#xe61a;</i>"+
 "	                    <div class=\"mui-media-body\">微信找零</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li class=\"Menu_daijiaoweizhang mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                    <i class=\"iconfont\">&#xe600;</i>"+
 "	                    <div class=\"mui-media-body\">代缴违章</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li class=\"Menu_huochepiao mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                    <i class=\"iconfont\">&#xe619;</i>"+
 "	                    <div class=\"mui-media-body\">火车票</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li class=\"Menu_shoujibao mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                    <i class=\"iconfont\">&#xe61e;</i>"+
 "	                    <div class=\"mui-media-body\">收寄宝</div></a></li>"+
-"	            <li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li class=\"Menu_zhanghuchaxun mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                   <i class=\"iconfont\">&#xe602;</i>"+
 "	                    <div class=\"mui-media-body\">账户查询</div></a></li>"+
-"	            <li  class=\"guanli mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
+"	            <li  class=\"Menu_guanli mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\"><a href=\"#\">"+
 "	                    <i class=\"iconfont\">&#xe617;</i>"+
 "	                    <div class=\"mui-media-body\">管理</div></a></li>  "+
 "	                     "+
