@@ -15,7 +15,7 @@
  		 font-family: "微软雅黑"; 
  	}
   </style>
-  
+
   <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" /> 
  </head>  
  <body> 
@@ -80,7 +80,8 @@
 	 
 	forgetPassword.addEventListener('tap',function()
 	{			
-		android.switchMode(0);	//本地模式	
+		android.updateRes(); //更新资源
+		android.switchMode(0);	//本地模式	 
 		//window.location.reload();
 	})
 	
@@ -115,7 +116,7 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
-			 if(false) 
+			 if(true) 
 			 {
 				localStorage.登录帐号 = document.getElementById("username").value;  
 				localStorage.CustomerCode = "7b759a354ea94683ba603019f842c5b5";

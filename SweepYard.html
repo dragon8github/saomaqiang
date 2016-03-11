@@ -30,7 +30,7 @@
 		}
 		#tijiaodingdan,#chaxunmingxi
 		{
-			padding:10px 0px
+			padding:7px 0px
 		} 
 		.form-control[disabled],
 		.form-control[readonly],
@@ -45,6 +45,10 @@
 			-webkit-box-shadow: 0px 0px 25px #00BFFF;	
 			-ms-box-shadow: 0px 0px 25px #00BFFF;
 		}
+		.mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-password~.mui-icon-eye, .mui-input-row .mui-input-speech~.mui-icon-speech
+		{
+			z-index: 10;
+		}
 	</style>
 
 	<body>
@@ -56,47 +60,48 @@
 				<div class="col-xs-7">
 					<form id="form" class="text-left">
 
-						<div class="form-group">
-							<h4>请输入金额</h4></div>
+						<div class="form-group" style="padding-top: 9px;"><h4>请输入金额与条形码</h4></div>
 
-						<div class="input-group form-group">
+						<div class="input-group form-group" style="margin-bottom: 10px;">
 
 							<div class="input-group-addon">￥</div>
-
+							 
 							<input type="text" id="money" style="z-index: 10;" readonly="readonly" class="form-control target_input" placeholder="Input Some Money..." />
 
 							<span class="input-group-btn">
 				
-				<button class="btn btn-default" id="go_form" style="padding:9px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
+							<button class="btn btn-default" id="go_form" style="padding:10px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
 				
 				  </span>
 
 						</div>
 
-						<div class="input-group">
+						<div class="input-group" >
 
 							<div class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></div>
-
-							<input type="text" id="yard" style="z-index: 10;" readonly="readonly" class="form-control" placeholder="Sweep the yard..." />
-
+								 <div class="mui-input-row"> 
+									<input type="text" id="yard" style="z-index: 10;"  class="form-control mui-input-clear" placeholder="Sweep the yard..."  onkeydown='if(event.keyCode==13) this.blur();' />
+								</div>
 							<span class="input-group-btn">
 				 
-								<button class="btn btn-default" id="go_form2" style="padding:9px 12px;" type="button"><i class="iconfont icon-suo" style="font-size:12px"></i></button>
-								<input type="reset" style="display: none;" name="reset" id="reset" value="reset" />
+								<button class="btn btn-default" id="go_form2" style="padding:10px 12px;" type="button"><i class="iconfont icon-suo" style="font-size:12px"></i></button>
+								
 				  			</span>
 
 						</div>
 
+					<input type="reset" style="display: none;" name="reset" id="reset" value="reset" />
+
 					</form>
 					<div class="well text-left clearmargin" id="well">
-						<div class="form-group">
-							<h4 id="cy-tp-h2">温馨提示：</h4></div>
+						
+						<div class="form-group" style="margin-bottom: 10px;">
+							<h4 id="cy-tp-h2">温馨提示：</h4>
+						</div>
+						
 						<p class="lead">
-							1、找零不可撤销，请确保输入正确金额
-						</p>
-						<p class="lead">
-							2、找零金额在0.0001 - 99元
-						</p>
+							1、点击文本框可以切换计算器的输入对象
+						</p>						
 					</div>
 
 							
@@ -106,7 +111,7 @@
 
 				</div>
 
-				<div class="col-xs-5"  id="calculator">	
+				<div class="col-xs-5"  id="calculator"  style="background: #000;">	
 					<div class="calculator" >
 					  	<span>7</span><span>8</span><span>9</span>
 					  	<span>4</span><span>5</span><span>6</span>
@@ -162,14 +167,13 @@
 		
 		
 		/* 响应式布局 */
-		$("#form").autoheight({n:4});
-		$("#well").autoheight({n:4.2,m:"margin"}); 		
+		$("#form").autoheight({n:3.5}); 
+		$("#well").autoheight({n:3.5,m:"margin"}); 		
 		$("#tijiaodingdan").autoheight({n:2.2,m:"margin"});
 		$("#chaxunmingxi").autoheight({n:2,m:"margin"});		
 		$("#calculator").autoheight({n:12,m:"height"}) 
 		
 		
-		 
 		
 		
 		$("#chaxunmingxi").bind("tap",function() 

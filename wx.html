@@ -33,7 +33,7 @@
 		}
 		#tijiaodingdan,#chaxunmingxi
 		{
-			padding:15px 0px
+			padding:10px 0px
 		}
 		.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control
 		{
@@ -41,9 +41,11 @@
 		}
 		#money
 		{
-			font-size: 23px;
+			font-size: 20px; 
 			font-family: 黑体;
 			z-index: 9999;
+			line-height: 30px;
+			/*height:42px;*/
 		}		
 		/* 醒目提醒  */
 		.form-control:focus
@@ -55,7 +57,7 @@
 		
 </style>
 
-<body> 
+<body  ontouchstart=""> 
 
 <!--侧滑菜单容器-->
 <div id="Main" class="mui-off-canvas-wrap mui-draggable"> 
@@ -69,7 +71,7 @@
 						  <div class="input-group-addon">￥</div>
 						  <input type="text" id="money" readonly="readonly"  class="form-control target_input" placeholder="Input Some Money...">
 						  <span class="input-group-btn"> 
-							<button class="btn btn-default"  id="go_form" style="padding:9px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
+							<button class="btn btn-default"  id="go_form" style="padding:10px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
 						  </span>
 					</div>			
 					<input type="reset" style="display: none;" name="reset" id="reset" value="reset" />
@@ -85,12 +87,12 @@
            </div>    
            
             <button type="button"  id="tijiaodingdan" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
-			<button type="button"   id="chaxunmingxi" class="mui-btn mui-btn-warning mui-btn-block">查询明细</button>
+			<button type="button"  id="chaxunmingxi" class="mui-btn mui-btn-warning mui-btn-block">查询明细</button>
 
         </div> 
 		
         <div class="col-xs-5"  id="calculator">	
-			<div class="calculator" >
+			<div class="calculator" style="background: #000;">
 			  	<span>7</span><span>8</span><span>9</span>
 			  	<span>4</span><span>5</span><span>6</span>
 			  	<span>1</span><span>2</span><span>3</span>
@@ -130,7 +132,6 @@
 </body>
 </html> 
 <script type="text/javascript">
-
 
 
 	/* 测试区域 */
@@ -193,16 +194,13 @@
 		
 		
 		/* 响应式布局 */
-		$("#form").autoheight({n:3.5});
-		$("#well").autoheight({n:3.5});		
+		$("#form").autoheight({n:3.2});
+		$("#well").autoheight({n:4.2,m:"margin"});		
 		$("#tijiaodingdan").autoheight({n:2.5,m:"margin"});
 		$("#chaxunmingxi").autoheight({n:2.5,m:"margin"});		
 		$("#calculator").autoheight({n:12,m:"height"}) 
 		 
 		
-		
-		
-		 
 		
 		/* 查询明细 */
 		document.getElementById("chaxunmingxi").addEventListener('tap',function(){

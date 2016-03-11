@@ -52,18 +52,6 @@ mui.init({
 //╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 我的公共加载模块  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 $(function() 
 {
-	Init_初始化();	
-	
-})
-
-
-
-// <summary>
-// Init_初始化
-// </summary>
-Init_初始化 = function() 
-{
-	
 	//验证是否登录
 	var username = localStorage.登录帐号;
 	if (typeof(username) == "undefined" || username == "undefined" ) 
@@ -89,7 +77,8 @@ Init_初始化 = function()
 					"overflow": "hidden"
 			}); //固定高度		
 	}
-}
+	
+})
 
 
 
@@ -97,9 +86,11 @@ Init_初始化 = function()
 
 
 
-// <summary>
-// 辅助方法：Get_获取容器高度
-// </summary>
+
+
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  辅助方法：Get_获取容器高度  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+
 Get_获取容器高度 = function() {
 	var a = $("#header").height(); //头部高度
 	var b = $("#footer").height(); //脚步高度
@@ -115,10 +106,8 @@ Get_获取容器高度 = function() {
 
 
 
-// <summary>
-// 辅助方法：窗体的高度通常是自增长的。所以该类适应的场景是高度不变的容器内
-// </summary>
-// <param name="e">对象</param>
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  辅助方法：窗体的高度通常是自增长的。所以该类适应的场景是高度不变的容器内  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 $.fn.autoheight = function(opt) {
 	return this.each(function() {
 
@@ -184,9 +173,8 @@ $.fn.autoheight = function(opt) {
 }
 
 
-// <summary>
-// 计算器line-height自适应高度差
-// </summary>
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  计算器line-height自适应高度差 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 计算器_autolineheight = function() {
 	var height = Get_获取容器高度() / 4;
 	
@@ -245,7 +233,7 @@ $.fn.autoheight = function(opt) {
 
 
  
-//悬浮球
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  悬浮球 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 assistive_mTouch = function() 
 {
 	
@@ -265,10 +253,7 @@ assistive_mTouch = function()
 			windowWith = (document.documentElement || document.body).offsetWidth;
 			windowheight = Get_获取容器高度() + header;
 			
-			
-			
-			
-		//开启以下让小光点无法超出屏幕外	
+						
 		if(Top < header)
 		{
 			Top = height + header; 
@@ -336,37 +321,44 @@ assistive_mTouch = function()
 
 
 
-
-// <summary>
-// 展示小光点菜单
-// </summary>
-Show_Menu = function() {
  
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  光点菜单 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+Show_Menu = function() 
+{
  
 	layer.open
 	({
-		style: 'width:60%; background:rgba(0,0, 0, .6);border-radius: 20px;',
+		style: 'width:70%; background:rgba(0,0, 0, .6);border-radius: 20px;',
 		closeBtn: 0,
 		title: false,	
 		shade:[0.1,"transparent"],
 		shadeClose: true,
 		anim:false,	//去除动画
 		content: $("#xiaoguangdiancaidan").html(),
-		btn: 0 //默认底部不显示任何按钮
+		btn: 0, //默认底部不显示任何按钮
+		success:function()
+		{
+			$(".layermcont").css("padding","15px 20px 5px 20px"); 
+		}
 	}); 
-	   
+	
+	
+	
+	
 
 	//返回
-	mui(".mui-table-view").on('tap', '.Menu_back', function() {
-		
+	mui(".mui-table-view").on('tap', '.Menu_back', function() 
+	{
 		mui.back();
 	})
-	//刷新
-	mui(".mui-table-view").on('tap', '.Menu_refresh', function() 
-	{
+	
+	//刷新	
+	mui(".mui-table-view").on('tap', '.Menu_refresh', function()
+	{ 
 		android.clearCache(); 
 		window.location.reload();
 	})
+	
 	//主页
 	mui(".mui-table-view").on('tap', '.Menu_home', function()
 	{		
@@ -375,46 +367,48 @@ Show_Menu = function() {
 			id: "index"			
 		});
 	})
-	//手机充值
-	mui(".mui-table-view").on('tap', '#Menu_shoujichongzhi', function() 
-	{
-		
-		
-	}) 
-	//管理
-	mui(".mui-table-view").on('tap', '.guanli', function() 
-	{
-		
-		
-	})
-
 	
-	
-	
-
 }
 
 
-/*侧滑菜单*/
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  侧滑菜单 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 QQ_offCanvas = function() 
 {
-	菜单部分(); //html
 	
-	
-	
+	菜单部分(); //加载必要的html
+		
 	var Main = mui('#Main'); //侧滑容器父节点
 	Main[0].classList.add('mui-scalable'); //动画效果的类
-	Main.offCanvas().refresh();	
+	Main.offCanvas().refresh();		
+	mui('#offCanvasSideScroll').scroll();
+	
+	//关闭侧滑菜单
 	document.getElementById('offCanvasHide').addEventListener('tap', function()
 	{
 		Main.offCanvas('close');//关闭侧滑菜单
 	});
 	
-	//支持区域滚动，需要添加.mui-scroll-wrapper
-	mui('#offCanvasSideScroll').scroll();
 	
 	
-	quit(); //退出登录
+	//退出登录
+	$("#quit").bind("tap", function() 
+	{
+		var btnArray = ['否', '是'];
+		mui.confirm('你确定要退出？', '温馨提示', btnArray, function(e) {
+			if (e.index == 1) 
+			{
+				localStorage.removeItem("登录帐号");
+				localStorage.removeItem("auto");
+				 
+				mui.openWindow
+				 ({ 
+						url:"login.html",
+						id:"login"  
+				}); 
+			}
+		})
+	})
+	
 	
 	//钱包流水
 	$("#qianbaoliushui").bind("tap",function()
@@ -425,8 +419,8 @@ QQ_offCanvas = function()
 			id: "QianBao_list.html"			
 		});
 	})
-	 
-	 
+	
+	
 	//业务流水
 	$("#yewuliusuhi").bind("tap",function()
 	{
@@ -435,15 +429,13 @@ QQ_offCanvas = function()
 			id: "Super_List.html"			
 		});
 	})
-	
-
 }
 
 
 
-// <summary>
-// 左滑返回的箭头
-// </summary>
+
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  左滑返回的箭头 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 LeftPageGOBack = function() 
 {
 	
@@ -487,8 +479,7 @@ LeftPageGOBack = function()
 				
 		if (x > 0) //说明是向右拖的
 		{ 
-			var left = Native_left + x; //箭头当前的Left坐标  
-			
+			var left = Native_left + x; //箭头当前的Left坐标  			
 			
 			if (left < 0) //未达到最大值
 			{
@@ -502,57 +493,22 @@ LeftPageGOBack = function()
 					"left": "0px" 	//当left==0时完全箭头展开
 				});		
 			}
-			
-			
 		} 
 		else 
 		{
 			$("#leftpage").css({
-					"left": Native_left + "px"
-			});
-			
-			 
-		}
-		
-		
+				"left": Native_left + "px"
+			});						 
+		}	
 	})
-
 }
 
 
 
-// <summary>
-// 退出
-// </summary>
-quit = function() 
-{
-	var quit = document.getElementById("quit");
-
-	quit.addEventListener("tap", function() {
-		
-
-		var btnArray = ['否', '是'];
-		mui.confirm('你确定要退出？', '温馨提示', btnArray, function(e) {
-			if (e.index == 1) 
-			{
-				localStorage.removeItem("登录帐号");
-				localStorage.removeItem("auto");
-				 
-				mui.openWindow
-				 ({ 
-						url:"login.html",
-						id:"login"  
-				}); 
-			}
-		})
 
 
-	})
- 
-}
 
-
-/* 获取url参数 */
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  获取url第一个参数的值 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 get_urlpara = function()
 {
 		var urlinfo = window.location.href; //获取当前页面的url
@@ -587,9 +543,8 @@ get_urlpara = function()
 
  
 
-// <summary>
-// 辅助方法：时间Javascript类库
-// </summary>
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  时间Javascript类库 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 Date.prototype.format = function(format) {
 	var o = {
 		"M+": this.getMonth() + 1, //month
@@ -611,13 +566,8 @@ Date.prototype.format = function(format) {
 
 
 
-/*
-1、< 60s, 显示为“刚刚”
-2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
-3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
-4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
-5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
-*/
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  Javascript时间美化类库 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+
 function timeFormat(time) {
 	var date = new Date(time),
 		curDate = new Date(),
@@ -655,9 +605,7 @@ function timeFormat(time) {
 
 
 
-// <summary>
-// 涟漪特效
-// </summary>
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  涟漪特效 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 涟漪特效 = function()
 {
     $('body').on('tap', function (e) 
@@ -674,9 +622,8 @@ function timeFormat(time) {
 
 
 
-// <summary>
-// Guid
-// </summary>
+
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  Guid ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 function newGuid()
 {
     var guid = "";
@@ -693,9 +640,7 @@ function newGuid()
 
 
 
-// <summary>
-// 菜单部分html加载
-// </summary>
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  菜单部分html加载 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 菜单部分 = function()
 {
 	var caidan = "<!--菜单部分-->"+
@@ -782,9 +727,8 @@ function newGuid()
 
 
 
-// <summary>
-// 小光点菜单
-// </summary>
+//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  小光点菜单的Htnl ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+
 小光点菜单 = function()
 {
 	var caidan = "<div style=\"display:none\" id=\"xiaoguangdiancaidan\">		"+
