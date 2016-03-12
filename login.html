@@ -20,7 +20,13 @@
  </head>  
  <body> 
   <header class="mui-bar mui-bar-nav"> 
+  	<button id="jinrufuwuqi" style="line-height: 48px;" type="button" class="mui-left  mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+		&nbsp;进入服务器
+	</button>
    <h1 class="mui-title">登录</h1> 
+   <button id="jinrubendi" style="line-height: 48px;" type="button" class="mui-right mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+		进入本地&nbsp;
+	</button>
   </header> 
   <div class="mui-content" style="margin-top:20px;"> 
    <form class="mui-input-group"> 
@@ -44,7 +50,7 @@
   </div> 
   <div class="mui-content-padded" align="center" style="margin-top:20px;"> 
    <button id="login" class="mui-btn mui-btn-block mui-btn-primary">登录</button> 
-   <div class="link-area" style="margin-top:20px;">
+   <div class="link-area" style="margin-top:20px;margin-bottom: 50px;">
     <a id="reg">注册账号</a> 
     <span class="spliter">|</span> 
     <a id="forgetPassword">忘记密码</a> 
@@ -58,7 +64,6 @@
  
  
  <script type="text/javascript">
-  
   
 	var usernamed = localStorage.登录帐号 || "";
 	var autoed = localStorage.auto || "";
@@ -77,21 +82,40 @@
   	var login = document.getElementById("login");
   	var reg = document.getElementById("reg");
   	var forgetPassword = document.getElementById("forgetPassword");
+	var jinrufuwuqi = document.getElementById("jinrufuwuqi");
+	var jinrubendi =  document.getElementById("jinrubendi");
 	 
 	forgetPassword.addEventListener('tap',function()
 	{			
-		android.updateRes(); //更新资源
-		android.switchMode(0);	//本地模式	 
-		//window.location.reload();
+		mui.alert("请致电热线客服 ： 137-13332652");
 	})
 	
 	  
     reg.addEventListener('tap',function()
 	{
-		android.switchMode(1);	//服务器模式
-		//window.location.reload();
+		 mui.openWindow
+		 ({
+			url:"region.html",
+			id:"region" 
+		});
 	})
     
+    //测试阶段：进入服务器
+    jinrufuwuqi.addEventListener("tap",function(){
+		
+		//进入服务器
+		android.switchMode(1);	//服务器模式
+		window.location.reload();
+	})
+	
+	
+	//测试阶段，进入本地
+	jinrubendi.addEventListener("tap",function(){ 
+		//进入本地
+		android.updateRes(); //更新资源
+		android.switchMode(0);	//本地模式	 
+		window.location.reload();
+	})
     
 	 
 	login.addEventListener('tap',function()
@@ -116,7 +140,7 @@
  			login.innerHTML = "登陆中...";
  			 
 			 
-			 if(true) 
+			 if(false) 
 			 {
 				localStorage.登录帐号 = document.getElementById("username").value;  
 				localStorage.CustomerCode = "7b759a354ea94683ba603019f842c5b5";

@@ -416,7 +416,6 @@ Show_Menu = function()
 	//刷新	
 	mui(".mui-table-view").on('tap', '.Menu_refresh', function()
 	{ 
-		android.clearCache(); 
 		window.location.reload();
 	})
 	
@@ -713,7 +712,7 @@ function newGuid()
 "		                    			<a class=\"mui-navigate-right\">"+
 "											<img class=\"mui-media-object mui-pull-left head-img\" id=\"head-img\" width=\"50px\" style=\"margin-right: 10px;\" src=\"Images/logo.png\">"+
 "											<div class=\"mui-media-body\" style=\"margin-left: 20px;\">"+
-"												<h3  style=\"color:#fff\"><span id=\"username\"></span><span id=\"quit\" class=\"mui-pull-right mui-h6\" style=\"color:#fff;margin-right: 10px;display: block;width: 100px;text-align: right;\"><i class=\"iconfont\">&#xe605;</i></span></h3>	"+
+"												<h3  style=\"color:#fff\"><span id=\"username\"></span><span id=\"quit\" class=\"mui-pull-right mui-h6\" style=\"color:#fff;margin-right: 10px;display: block;height:70px;width: 100px;text-align: right;\"><i class=\"iconfont\">&#xe605;</i></span></h3>	"+
 "												<p class=\'mui-ellipsis\' style=\"color:#fff\"> 金额: ￥ 00.00</p>"+
 "											</div>"+
 "										</a>"+
