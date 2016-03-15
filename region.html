@@ -11,11 +11,12 @@
 		<title></title>
 		
 		<link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav" id="header" >
-			<button style="line-height: 48px;" type="button" class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+			<button style="line-height: 48px;" onclick="mui.back();" type="button" class="mui-left mui-btn mui-btn-link mui-btn-nav mui-pull-left">
 				<span class="mui-icon mui-icon-left-nav"></span>返回
 			</button>
 			<h1 class="mui-title">注册</h1>
@@ -27,19 +28,19 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>账号</label>
-					<input id="username" type="text" value="" placeholder="请输入账号 (不少于6位的大小写字母组合)" class="mui-input-clear" />
+					<input onclick = "shurufa_open(this)"; id="username" type="text"readonly="readonly" value="" placeholder="请输入账号 (不少于6位的字母+数字组合)" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id="password" type="password" value="" placeholder="请输入密码 (不少于6位)" class="mui-input-clear" />
+					<input id="password" type="password" value="" placeholder="请输入密码 (不少于6位)" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>手机号码</label>
-					<input id="phone" type="text" value="" placeholder="请输入手机号码" class="mui-input-clear" />
+					<input id="phone" type="text" value="" placeholder="请输入手机号码" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>验证码</label>
-					<input id="code" type="text" value="" placeholder="请输入验证码" class="mui-input-clear" />
+					<input id="code" type="text" value="" placeholder="请输入验证码" class="mui-input-clear keyboard" />
 				</div>
 			</form>
 		</div>
@@ -48,58 +49,304 @@
 			<button id="region" class="mui-btn mui-btn-block mui-btn-primary">注册</button>
 
 		</div>
-
+		
+		
+		<style type="text/css">
+			#shurufa
+			{
+				display:none;
+			}
+			#shurufa_num,#shurufa_q,#shurufa_a,#shurufa_z
+			{				
+				list-style: none;
+				margin:15px auto;	
+				clear:both;		
+				padding: 0px;	
+				text-align: center;
+			}
+			#shurufa_gongneng li,#shurufa_num li,#shurufa_q li,#shurufa_a li,#shurufa_z li
+			{
+				display: inline-block;
+				width:8%;
+				padding: 5px;
+				border:1px solid #fff;
+				text-align: center;
+				background: transparent;
+				line-height: 30px;
+				margin-right:5px;	
+				color:#fff; 	
+				border-radius: 7px;
+				filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
+		        -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+		        -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+		        box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+			}
+			#shurufa_gongneng li:active,#shurufa_num li:active,#shurufa_q li:active,#shurufa_a li:active,#shurufa_z li:active
+			{
+				background: #909090;
+				line-height:25px;			
+			}
+			#shurufa_input
+			{
+				width:30%;
+				background: transparent;
+				border-bottom: 1px solid #fff;
+				border-left:none;
+				border-top:none;
+				border-right:none;
+				border-radius: 0px;
+				text-align: left;
+				color:#fff;
+				margin:10px 10px 0px 10px;
+				float:left;
+				padding-left:5px;
+				font-size: 17px;
+			}	
+			.shurufa_gongnengtitle
+			{
+				float:right;
+				padding-right:15px;				
+			}	
+			/*
+			#shurufa_enter
+			{
+				display:none;
+				width:110px;
+				height:100px;
+				border-right:1px solid #fff;
+				border-bottom:1px solid #fff;						
+		        position:absolute;
+		        right:25px;
+		        bottom:37px;
+			}
+			#shurufa_enter_shadow_A
+			{
+				float:left;
+				background: transparent;
+				height:50%;
+				width:60%;
+				border-right:1px solid #ccc;
+				border-bottom:1px solid #ccc;									
+			}
+			#shurufa_enter_shadow_B
+			{
+				float:left;
+				background: transparent;
+				height:50%;
+				width:40%;
+				border-top:1px solid #ccc;
+			}
+			#shurufa_enter_shadow_C
+			{
+				clear:both;
+				float:left;
+				background: transparent;
+				height:50%;	
+				width:100%;	
+								
+				border-left:1px solid #ccc;
+			} 
+			*/
+			
+			
+			
+		</style>
+		
+		<!-- 幽灵输入法  -->
+		<div id="shurufa">
+			<div id="shurufa_enter">
+				<div id="shurufa_enter_shadow_A"></div>
+				<div id="shurufa_enter_shadow_B"></div>
+				<div id="shurufa_enter_shadow_C"></div>
+				<h5 style="display:none" id="shurufa_enter_shadow_Title">Enter</h5>
+			</div>
+			
+			<input type="text" name="shurufa_input" readonly="readonly" id="shurufa_input"  placeholder="Input Something ..."/>
+			
+			<ul id="shurufa_gongneng" style="">
+				<li class="mui-icon mui-icon-arrowthinleft" style="width: 100px;"><h4 class="shurufa_gongnengtitle" >Back</h4></li>
+				<li class="mui-icon mui-icon-trash" style="width: 100px;"><h4 class="shurufa_gongnengtitle"  >Clear</h4></li>
+				<li class="mui-icon mui-icon-paperplane" style="width: 100px;" id="shurufa_send" onclick="layer.closeAll()" ><h4 class="shurufa_gongnengtitle">Send</h4></li>
+			</ul>
+			
+			<ul id="shurufa_num">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+				<li>6</li>
+				<li>7</li>
+				<li>8</li>
+				<li>9</li>
+				<li>0</li>				
+			</ul>
+			<ul id="shurufa_q">
+				<li>Q</li>
+				<li>W</li>
+				<li>E</li>
+				<li>R</li>
+				<li>T</li>
+				<li>Y</li>
+				<li>U</li>
+				<li>I</li>
+				<li>O</li>
+				<li>P</li>
+			</ul>
+			<ul id="shurufa_a">
+				<li>A</li>
+				<li>S</li>
+				<li>D</li>
+				<li>F</li>
+				<li>G</li>
+				<li>H</li>
+				<li>J</li>
+				<li>K</li>
+				<li>L</li>				
+			</ul>
+			<ul id="shurufa_z">				
+				<li>Z</li>
+				<li>X</li>
+				<li>C</li>
+				<li>V</li>
+				<li>B</li>
+				<li>N</li>
+				<li>M</li>				
+			</ul>
+		</div>
+		
+		
+		<script src="js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/mui/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 	<script type="text/javascript">
-		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  公共变量   ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
-		var obj_region = document.getElementById("region"); //注册按钮
-		var obj_username = document.getElementById("username"); //账号
-		var obj_password = document.getElementById("password"); //密码
-		var obj_phone = document.getElementById("phone"); //手机号码
-		var obj_code = document.getElementById("code"); //验证码
-		var obj_get_code = document.getElementById("get_code");
-		var guid = ""; //验证码专用guid
-		var lock = false; //防止重复注册,false表示没锁 
-		var code_lock = false; //防止重复申请验证码,false表示没锁 
-		var VerCode = ""; //返回的验证码
-		var Is_get_code = false; //是否已获取验证码
+		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  所有Dom对象   ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+		var obj_region = document.getElementById("region"); 		//注册按钮
+		var obj_username = document.getElementById("username"); 	//账号
+		var obj_password = document.getElementById("password"); 	//密码
+		var obj_phone = document.getElementById("phone"); 			//手机号码
+		var obj_code = document.getElementById("code"); 			//验证码
+		var obj_get_code = document.getElementById("get_code"); 	//获取验证码
 		
-		//获取验证码
-		get_code.addEventListener("tap", function() 
+		
+		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  全局变量   ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣		
+		var guid = ""; 	 	    //验证码专用guid
+		var lock = false;	    //防止重复注册,false表示没锁 
+		var code_lock = false;  //防止重复申请验证码,false表示没锁 
+		var VerCode = ""; 	    //返回的验证码
+		var 申请人 = "扫描枪端"; //后台区分是通过什么注册的 
+		
+		
+		
+		
+		var shurufa_open = function(e)
 		{
-			//防止重复申请验证码
-			if(code_lock)
-			{				
-				return false;
-			}
-			//获取手机号码
+			$(e).addClass("shurufa_input_active"); //添加标志.shurufa_input_active
+			
+			layer.open
+			({
+				style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
+				closeBtn: 0,
+				title: false,	
+				shade:[0.1,"transparent"],
+				shadeClose: true,
+				anim:true,	//开启动画
+				content: $("#shurufa").html(),
+				
+				success:function()
+				{
+					$(".layermanim").css({"max-width":"100%"});
+					$(".layermcont").css({"padding":"10px 20px 15px 20px"});					 
+				}
+			}); 
+			
+			$("#shurufa_num li").bind("click",function(){
+				
+				var v = $(this).text();
+				
+				shurufa_input(v);
+				
+			})
+		}
+		
+		
+		//专门用来输入数字和英文的函数
+		var shurufa_input = function(str)
+		{
+			var myinput = $("#shurufa_input");
+			
+			var v = myinput.val() + str;
+			
+			myinput.val(v); 
+		}
+		
+		//backspace
+		var shurufa_back = function()
+		{
+			var myinput = $("#shurufa_input");
+			
+			var v = myinput.val() + str;
+			
+		    myinput.val(v.substr(0,v.length - 1)); 
+		}
+		
+		//clear
+		var shurufa_clear = function()
+		{
+			var myinput = $("#shurufa_input");
+			
+			myinput.val("");			
+		}
+		
+		//send
+		var shurufa_send = function()
+		{
+			var myinput = $("#shurufa_input");			
+			
+			var v = myinput.val();
+			
+			
+		}
+				
+		
+		//获取验证码(click键更稳定)
+		get_code.addEventListener("click", function() 
+		{			
+			//防止重复申请验证码,true为锁,false为没锁
+			if(code_lock) return false;			
 			var phone = obj_phone.value;
 			//判断是否为空
-			if (phone.length == 0) {
-				mui.toast("请先输入手机号码,再获取验证码");
+			if (phone.length == 0) 
+			{
+				mui.toast("请先输入手机号码");
 				return;
 			}
 			//验证手机号码合法性
-			if (!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test(phone)) {
-				mui.toast('请先输入合法的手机号码,再获取验证码');
+			if (!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test(phone)) 
+			{
+				mui.toast('请先输入合法的手机号码');
 				return;
 			}
 			//生成验证码专用guid,存储全局变量中
 			guid = newGuid();
 			//为了安全起见，将验证码放入缓存中
 			localStorage.setItem("guid", guid);			
-			//开启倒计时,并且加锁、只有30秒过后才能解锁
-			 showtime(30);							
+			//颜色改变
+			obj_get_code.style.color = "#a9a9a9"; 
+			//改变文字
+			obj_get_code.innerHTML = "获取中...";
+			//获取手机号码
 			//调用接口
 			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "GetVerCode", {
 				"验证码请求号": guid,
 				"手机号码": phone
 			}, "CYAPI_获取验证码");
 		})
+		
+		
 		//注册
 		region.addEventListener('tap', function() 
 		{					
@@ -110,73 +357,102 @@
 			var username = obj_username.value;
 			var password = obj_password.value;
 			var phone = obj_phone.value;
-			var code = obj_get_code.value;
+			var code = obj_code.value;
 						
 			
+			//开始本地验证
 			if (username.length == 0) 
 			{
-				mui.toast("您的账号不可为空！");
-				//obj_username.focus();
+				mui.toast("您的账号不可为空！");				
 				return;
 			} 			
-			if (!/[_a-zA-Z]+\d+/g.test(username) && username.length < 6)
+			if (!/[_a-zA-Z]+\d+/g.test(username) || username.length < 6)
 			{
-				mui.toast("请输入以字母和数字组合6位以上的账号");
-				//obj_username.focus(); //聚焦
+				mui.toast("请输入以字母和数字组合6位以上的账号");				
 				return;
 			}			
 			if (password.length == 0) 
 			{
-				mui.toast("您的密码不可为空!");
-				//obj_password.focus();//聚焦
+				mui.toast("您的密码不可为空!");				
 				return;
 			}
 			if (password.length < 6) 
 			{
-				mui.toast("请输入不少于6位的密码");
-				//obj_password.focus();//聚焦
+				mui.toast("请输入不少于6位的密码");				
 				return;
 			}
 			if (phone.length == 0) 
 			{
-				mui.toast("您的手机号码不可为空！");
-				//obj_phone.focus();
+				mui.toast("您的手机号码不可为空！");				
 				return;
 			}		
 			if (!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test(phone)) 
 			{
-				mui.toast('请输入合法的手机号码');
-				//obj_phone.focus();
+				mui.toast('请输入合法的手机号码');				
 				return;
 			}
 			if (code.length == 0) 
 			{
-				mui.toast("请输入验证码，你可以通过点击右上角【获取验证码】取得");
-				//obj_code.focus();
+				mui.toast("请输入验证码，你可以通过点击右上角【获取验证码】取得");				
 				return;
 			}
+			
 			
 			//加上锁，因为接下来的验证是要发送到服务器的
 			lock = true;
 			
-			//加入提示,因为接下来的操作可能会比较耗时间
+			
+			//加入提示
 			obj_region.innerHTML = "请稍后...";
 			
+			
 			//验证账号
-			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "CheckLoginName", {
-				"登录名": username
-			}, "CYAPI_检验登陆名")
+			//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "CheckLoginName", {
+			//	"登录名": username
+			//}, "CYAPI_检验登陆名");
 			
 			
 			//检验验证码
-			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "CheckVerCode", {
-				"登录账号": username,
-				"密码": password
-			}, "CYAPI_获取返回值");			
+			//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "CheckVerCode", {
+			//	"验证码请求号":guid,
+			//	"手机号码":phone,
+			//	"验证码":code
+			//}, "CYAPI_检验验证码");
+			
+			
+			//发送注册请求
+			InvokeApi(GetApiUrl("Global_V0001_5un29"), "G001_CustomerRegister", "RegisterCustomer", {
+				"登录名":username,
+				"登录密码":password,
+				"验证码请求号":guid,
+				"手机号码":phone,
+				"验证码":code,
+				"申请人":申请人
+			}, "CYAPI_注册用户"); 
 			
 		})
-		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  方法体  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
-		function newGuid() {
+		
+		//聚焦手机号码和验证码的时候，将表单往上拉一点
+		$("#phone,#code").focus(function()
+		{
+			$(".mui-bar-nav~.mui-content").animate({
+					"margin-top":"-60px" 
+			},'fast');
+			
+		}).blur(function()
+		{
+			setTimeout(function(){
+				$(".mui-bar-nav~.mui-content").animate({
+					"margin-top":"20px"
+				},'fast');
+			},300);
+			
+		})
+		
+		
+		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  方法区域  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
+		function newGuid() 
+		{
 			var guid = "";
 			for (var i = 1; i <= 32; i++) {
 				var n = Math.floor(Math.random() * 16.0).toString(16);
@@ -187,86 +463,106 @@
 			return guid.replace(/-/g, "");
 		}
 		
-		function mySetInterval()
-		{
-			code_lock = true; //加锁		    
-		    obj_get_code.style.color = "#a9a9a9"; //颜色改变
-			var t = 30;
-			var myInterval =  setInterval(function()
-			{
-				obj_get_code.innerText = " (" + t +")秒后重新发送"; 
-				t--;
-				if(t <= 0)
-				{
-					clearInterval(myInterval);
-					obj_get_code.innerText ="获取验证码"; 
-			      	code_lock = false; //解锁
-			      	obj_get_code.style.color = "#007aff"; //颜色改变
-				}
-			},1000);
-		}
-		
 		function showtime(t)
 		{			
 		    code_lock = true; //加锁		    
 		    obj_get_code.style.color = "#a9a9a9"; //颜色改变
 		    
 		    for(i = 1; i <= t; i++)
-		    {
-		    	if(Is_get_code)
-		    	{
-		    		return false; //如果已经获取验证码，那么暂停倒计时
-		    	}
-		    	
+		    {		 
 		        window.setTimeout("update_p(" + i + ","+t+")", i * 1000); 
 		    } 		 
 		} 
-		 
 		function update_p(num,t) 
 		{
 		    if(num == t) 
 		    {
-		        obj_get_code.innerText ="获取验证码"; 
-		      	code_lock = false; //解锁
+		    	code_lock = false; //解锁		        		      	
 		      	obj_get_code.style.color = "#007aff"; //颜色改变
+		      	obj_get_code.innerText ="获取验证码"; 
 		    } 
-		    else { 
-		        printnr = t-num; 
+		    else 
+		    {
+		        printnr = t - num; 
 		        obj_get_code.innerText = " (" + printnr +")秒后重新发送"; 
 		    } 
-		} 
+		}
+		
+		
 		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  以下是API接收区 ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
-		CYAPI_注册用户 = function(str) {
-			alert(str);
+		CYAPI_注册用户 = function(str) 
+		{
 			var jsonobj = Api_filter(str);
-		}
-		CYAPI_检验登陆名 = function(str) {
-			alert(str);
-			var jsonobj = Api_filter(str);
-		}
-		CYAPI_获取验证码 = function(str) {
-			
-			var jsonobj = Api_filter(str);
-			
 			var ResCode = jsonobj.ResCode; //状态
 			var ResMsg = jsonobj.ResMsg;   //信息
-			var _VerCode = jsonobj.VerCode; //验证码
 			
 			if(ResCode == "1")
-			{				
-				Is_get_code = true; //标志已获取验证码
-				localStorage.setItem("VerCode",_VerCode); //放入缓存中
-				VerCode = _VerCode; //放入全局变量中
-				obj_get_code.innerHTML = "验证码： " + VerCode; //将验证码展示给用户观看
+			{
+				mui.alert("注册成功","成功提示",function(){
+					//跳转到login.html主页登陆		
+					mui.openWindow({
+						url: "login.html",
+						id: "login"			
+					});
+				})				
+			}
+			else
+			{
+				obj_region.innerHTML = "注册";
+				mui.toast(ResMsg);
+				return false;				
 			}
 			
-			mui.toast(ResMsg);	
+		}
+		CYAPI_检验登陆名 = function(str) 
+		{			
+			var jsonobj = Api_filter(str);
+			var ResCode = jsonobj.ResCode; //状态
+			var ResMsg = jsonobj.ResMsg;   //信息
 			
+			if(ResCode != "1")
+			{
+				obj_region.innerHTML = "注册";
+				mui.toast(ResMsg);
+				return false;
+			}			
+		}		
+		CYAPI_获取验证码 = function(str) 
+		{			
+			var jsonobj = Api_filter(str); 		//json对象			
+			var ResCode = jsonobj.ResCode; 		//状态
+			var ResMsg = jsonobj.ResMsg;   		//信息
+			var _VerCode = jsonobj.VerCode; 	//验证码			
+			mui.toast(ResMsg);					//提示用户
+			if(ResCode == "1")
+			{								
+				showtime(30);							  //开启倒计时,并且加锁、只有30秒过后才能解锁
+				localStorage.setItem("VerCode",_VerCode); //放入缓存中
+				VerCode = _VerCode; 					  //放入全局变量中		
+				alert(VerCode); 						  //测试阶段开启
+			}
+			else
+			{			
+				obj_get_code.style.color = "#007aff"; //颜色改变
+		      	obj_get_code.innerText ="获取验证码";  //改变文字
+				return false;
+			}
 		}
 		CYAPI_检验验证码 = function(str) 
-		{
-			alert(str);
+		{			
 			var jsonobj = Api_filter(str);
+			var ResCode = jsonobj.ResCode; //状态
+			var ResMsg = jsonobj.ResMsg;   //信息
+			
+			if(ResCode == "1")
+			{
+				//验证码有效				
+			}
+			else
+			{
+				obj_region.innerHTML = "注册";
+				return false;
+			}
 		}
 	</script>
 

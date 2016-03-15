@@ -333,7 +333,7 @@ Show_Menu = function()
 		title: false,	
 		shade:[0.1,"transparent"],
 		shadeClose: true,
-		anim:false,	//去除动画
+		anim:true,	//开启动画
 		content: $("#xiaoguangdiancaidan").html(),
 		btn: 0, //默认底部不显示任何按钮
 		success:function()

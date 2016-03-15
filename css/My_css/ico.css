@@ -30,6 +30,7 @@
 .icon-jijian:before { content: "\e60e"; }
 .icon-yijujue:before { content: "\e613"; }
 .icon-yuyuechulizhong:before { content: "\e607"; }
+.icon-backspace:before { content: "\e625"; }
 .icon-saomazhifu:before { content: "\e61c"; }
 .icon-repair:before { content: "\e618"; }
 .icon-tiaoxingma:before { content: "\e614"; }
