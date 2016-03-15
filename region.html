@@ -121,6 +121,20 @@
 		
 		$(function(){
 			幽灵输入法html();
+			
+			document.onkeydown=function(event){ 
+			var e = event || window.event || arguments.callee.caller.arguments[0]; 
+			var keycode = e.keyCode;
+				if(keycode == 48)
+				{ 
+					// 按 0 
+				} 
+				if(keycode == 49)
+				{
+					// 按 1
+				}
+			}
+			
 		})
 		
 		var shurufa_open_num = function()
@@ -143,6 +157,8 @@
 				}
 			}); 
 		}
+		
+		
 				
 		
 		//获取验证码(click键更稳定)
