@@ -9,7 +9,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 
 		<title></title>
-		
+		<link rel="stylesheet" type="text/css" href="css/My_css/shurufa.css"/>
 		<link rel="stylesheet" type="text/css" href="css/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
 	</head>
@@ -28,19 +28,19 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>账号</label>
-					<input onclick = "shurufa_open(this)"; id="username" type="text"readonly="readonly" value="" placeholder="请输入账号 (不少于6位的字母+数字组合)" class="mui-input-clear keyboard" />
+					<input onclick = "shurufa_open(this)"; id="username" type="text" readonly="readonly" value="" placeholder="请输入账号 (不少于6位的字母+数字组合)" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id="password" type="password" value="" placeholder="请输入密码 (不少于6位)" class="mui-input-clear keyboard" />
+					<input onclick = "shurufa_open(this)"; id="password" type="password" value="" placeholder="请输入密码 (不少于6位)" readonly="readonly" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>手机号码</label>
-					<input id="phone" type="text" value="" placeholder="请输入手机号码" class="mui-input-clear keyboard" />
+					<input onclick = "shurufa_open(this)"; id="phone" type="text" value="" placeholder="请输入手机号码" readonly="readonly" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>验证码</label>
-					<input id="code" type="text" value="" placeholder="请输入验证码" class="mui-input-clear keyboard" />
+					<input onclick = "shurufa_open(this)"; id="code" type="text" value="" placeholder="请输入验证码" readonly="readonly" class="mui-input-clear keyboard" />
 				</div>
 			</form>
 		</div>
@@ -51,175 +51,13 @@
 		</div>
 		
 		
-		<style type="text/css">
-			#shurufa
-			{
-				display:none;
-			}
-			#shurufa_num,#shurufa_q,#shurufa_a,#shurufa_z
-			{				
-				list-style: none;
-				margin:15px auto;	
-				clear:both;		
-				padding: 0px;	
-				text-align: center;
-			}
-			#shurufa_gongneng li,#shurufa_num li,#shurufa_q li,#shurufa_a li,#shurufa_z li
-			{
-				display: inline-block;
-				width:8%;
-				padding: 5px;
-				border:1px solid #fff;
-				text-align: center;
-				background: transparent;
-				line-height: 30px;
-				margin-right:5px;	
-				color:#fff; 	
-				border-radius: 7px;
-				filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
-		        -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-		        -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
-		        box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
-			}
-			#shurufa_gongneng li:active,#shurufa_num li:active,#shurufa_q li:active,#shurufa_a li:active,#shurufa_z li:active
-			{
-				background: #909090;
-				line-height:25px;			
-			}
-			#shurufa_input
-			{
-				width:30%;
-				background: transparent;
-				border-bottom: 1px solid #fff;
-				border-left:none;
-				border-top:none;
-				border-right:none;
-				border-radius: 0px;
-				text-align: left;
-				color:#fff;
-				margin:10px 10px 0px 10px;
-				float:left;
-				padding-left:5px;
-				font-size: 17px;
-			}	
-			.shurufa_gongnengtitle
-			{
-				float:right;
-				padding-right:15px;				
-			}	
-			/*
-			#shurufa_enter
-			{
-				display:none;
-				width:110px;
-				height:100px;
-				border-right:1px solid #fff;
-				border-bottom:1px solid #fff;						
-		        position:absolute;
-		        right:25px;
-		        bottom:37px;
-			}
-			#shurufa_enter_shadow_A
-			{
-				float:left;
-				background: transparent;
-				height:50%;
-				width:60%;
-				border-right:1px solid #ccc;
-				border-bottom:1px solid #ccc;									
-			}
-			#shurufa_enter_shadow_B
-			{
-				float:left;
-				background: transparent;
-				height:50%;
-				width:40%;
-				border-top:1px solid #ccc;
-			}
-			#shurufa_enter_shadow_C
-			{
-				clear:both;
-				float:left;
-				background: transparent;
-				height:50%;	
-				width:100%;	
-								
-				border-left:1px solid #ccc;
-			} 
-			*/
-			
-			
-			
-		</style>
-		
-		<!-- 幽灵输入法  -->
-		<div id="shurufa">
-			<div id="shurufa_enter">
-				<div id="shurufa_enter_shadow_A"></div>
-				<div id="shurufa_enter_shadow_B"></div>
-				<div id="shurufa_enter_shadow_C"></div>
-				<h5 style="display:none" id="shurufa_enter_shadow_Title">Enter</h5>
-			</div>
-			
-			<input type="text" name="shurufa_input" readonly="readonly" id="shurufa_input"  placeholder="Input Something ..."/>
-			
-			<ul id="shurufa_gongneng" style="">
-				<li class="mui-icon mui-icon-arrowthinleft" style="width: 100px;"><h4 class="shurufa_gongnengtitle" >Back</h4></li>
-				<li class="mui-icon mui-icon-trash" style="width: 100px;"><h4 class="shurufa_gongnengtitle"  >Clear</h4></li>
-				<li class="mui-icon mui-icon-paperplane" style="width: 100px;" id="shurufa_send" onclick="layer.closeAll()" ><h4 class="shurufa_gongnengtitle">Send</h4></li>
-			</ul>
-			
-			<ul id="shurufa_num">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>6</li>
-				<li>7</li>
-				<li>8</li>
-				<li>9</li>
-				<li>0</li>				
-			</ul>
-			<ul id="shurufa_q">
-				<li>Q</li>
-				<li>W</li>
-				<li>E</li>
-				<li>R</li>
-				<li>T</li>
-				<li>Y</li>
-				<li>U</li>
-				<li>I</li>
-				<li>O</li>
-				<li>P</li>
-			</ul>
-			<ul id="shurufa_a">
-				<li>A</li>
-				<li>S</li>
-				<li>D</li>
-				<li>F</li>
-				<li>G</li>
-				<li>H</li>
-				<li>J</li>
-				<li>K</li>
-				<li>L</li>				
-			</ul>
-			<ul id="shurufa_z">				
-				<li>Z</li>
-				<li>X</li>
-				<li>C</li>
-				<li>V</li>
-				<li>B</li>
-				<li>N</li>
-				<li>M</li>				
-			</ul>
-		</div>
 		
 		
 		<script src="js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/My_Js/shurufa.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 	<script type="text/javascript">
@@ -240,76 +78,10 @@
 		var 申请人 = "扫描枪端"; //后台区分是通过什么注册的 
 		
 		
+		$(function(){
+			幽灵输入法html();
+		})
 		
-		
-		var shurufa_open = function(e)
-		{
-			$(e).addClass("shurufa_input_active"); //添加标志.shurufa_input_active
-			
-			layer.open
-			({
-				style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
-				closeBtn: 0,
-				title: false,	
-				shade:[0.1,"transparent"],
-				shadeClose: true,
-				anim:true,	//开启动画
-				content: $("#shurufa").html(),
-				
-				success:function()
-				{
-					$(".layermanim").css({"max-width":"100%"});
-					$(".layermcont").css({"padding":"10px 20px 15px 20px"});					 
-				}
-			}); 
-			
-			$("#shurufa_num li").bind("click",function(){
-				
-				var v = $(this).text();
-				
-				shurufa_input(v);
-				
-			})
-		}
-		
-		
-		//专门用来输入数字和英文的函数
-		var shurufa_input = function(str)
-		{
-			var myinput = $("#shurufa_input");
-			
-			var v = myinput.val() + str;
-			
-			myinput.val(v); 
-		}
-		
-		//backspace
-		var shurufa_back = function()
-		{
-			var myinput = $("#shurufa_input");
-			
-			var v = myinput.val() + str;
-			
-		    myinput.val(v.substr(0,v.length - 1)); 
-		}
-		
-		//clear
-		var shurufa_clear = function()
-		{
-			var myinput = $("#shurufa_input");
-			
-			myinput.val("");			
-		}
-		
-		//send
-		var shurufa_send = function()
-		{
-			var myinput = $("#shurufa_input");			
-			
-			var v = myinput.val();
-			
-			
-		}
 				
 		
 		//获取验证码(click键更稳定)
@@ -432,22 +204,22 @@
 			
 		})
 		
-		//聚焦手机号码和验证码的时候，将表单往上拉一点
-		$("#phone,#code").focus(function()
-		{
-			$(".mui-bar-nav~.mui-content").animate({
-					"margin-top":"-60px" 
-			},'fast');
-			
-		}).blur(function()
-		{
-			setTimeout(function(){
-				$(".mui-bar-nav~.mui-content").animate({
-					"margin-top":"20px"
-				},'fast');
-			},300);
-			
-		})
+//聚焦手机号码和验证码的时候，将表单往上拉一点
+//		$("#phone,#code").focus(function()
+//		{
+//			$(".mui-bar-nav~.mui-content").animate({
+//					"margin-top":"-60px" 
+//			},'fast');
+//			
+//		}).blur(function()
+//		{
+//			setTimeout(function(){
+//				$(".mui-bar-nav~.mui-content").animate({
+//					"margin-top":"20px"
+//				},'fast');
+//			},300);
+//			
+//		})
 		
 		
 		//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  方法区域  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣

@@ -1,6 +1,4 @@
 
-
-
 /* 涟漪特效 */ 
 
 .dot {
@@ -251,15 +249,9 @@ input {
 	}
 	
 
-/* 优化 */
 *{ 
 	-webkit-touch-callout: none; /* 禁止长按下载图片 */
 	-webkit-user-select: none;  /* 禁止用户选中文字 */	
-}
-
-body 
-{
-	-webkit-overflow-scrolling: touch;
 }
 
 
