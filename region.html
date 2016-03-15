@@ -28,7 +28,7 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>账号</label>
-					<input onclick = "shurufa_open(this)"; id="username" type="text" readonly="readonly" value="" placeholder="请输入账号 (不少于6位的字母+数字组合)" class="mui-input-clear keyboard" />
+					<input onclick = "shurufa_open_num(this)"; id="username" type="text" readonly="readonly" value="" placeholder="请输入账号 (不少于6位的字母+数字组合)" class="mui-input-clear keyboard" />
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
@@ -44,13 +44,54 @@
 				</div>
 			</form>
 		</div>
+		
 		<div class="mui-content-padded" align="center" style="margin-top:20px;">
-
 			<button id="region" class="mui-btn mui-btn-block mui-btn-primary">注册</button>
-
 		</div>
 		
+		<style type="text/css">
+			#shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li
+			{
+				display: inline-block;
+				width:15%;
+				min-width: 75px;
+				padding: 15px;
+				border:1px solid #fff;
+				text-align: center;
+				background: transparent;
+				line-height: 30px;
+				margin-right:5px;	
+				color:#fff; 	
+				border-radius: 7px;
+				filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
+			    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+			    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+			    box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+			}
+		</style>
 		
+		<script type="text/template" id="shurufanumhtml">
+			<ul id="shurufa_num_123">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+			<ul id="shurufa_num_456">
+				<li>4</li>
+				<li>5</li>
+				<li>6</li>
+			</ul>
+			<ul id="shurufa_num_789">
+				<li>7</li>
+				<li>8</li>
+				<li>9</li>
+			</ul>
+			<ul id="shurufa_num_c0">
+				<li>C</li>
+				<li>0</li>
+				<li>.</li>
+			</ul>
+		</script>
 		
 		
 		<script src="js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
@@ -82,6 +123,26 @@
 			幽灵输入法html();
 		})
 		
+		var shurufa_open_num = function()
+		{
+			layer.open
+			({
+				style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
+				closeBtn: 0,
+				title: false,	
+				shade:[0.1,"transparent"],
+				shadeClose: true,
+				anim:true,	//开启动画
+				content: $("#shurufanumhtml").html(),
+				
+				success:function()
+				{
+					$(".layermanim").css({"max-width":"100%"});
+					$(".layermcont").css({"padding":"10px 20px 15px 20px"});	
+					$("#shurufa_input").val(val);
+				}
+			}); 
+		}
 				
 		
 		//获取验证码(click键更稳定)
