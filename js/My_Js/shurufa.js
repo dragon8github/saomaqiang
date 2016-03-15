@@ -58,7 +58,7 @@ var shurufa_open = function(e)
 	var shurufahtml = "<!-- 幽灵输入法  -->"+
 "		<script type=\"text/template\" id=\"shurufahtml\">"+
 "			<input type=\"text\" name=\"shurufa_input\" readonly=\"readonly\" id=\"shurufa_input\"  placeholder=\"Input Something ...\"/>"+
-"			<ul id=\"shurufa_gongneng\" style=\"\">"+
+"			<ul id=\"shurufa_gongneng\">"+
 "				<li id=\"shurufa_back\" class=\"mui-icon mui-icon-arrowthinleft\" style=\"width: 100px;\"><h4 class=\"shurufa_gongnengtitle\" >Back</h4></li>"+
 "				<li id=\"shurufa_clear\" class=\"mui-icon mui-icon-trash\" style=\"width: 100px;\"><h4 class=\"shurufa_gongnengtitle\"  >Clear</h4></li>"+
 "				<li id=\"shurufa_send\" class=\"mui-icon mui-icon-paperplane\" style=\"width: 100px;\" ><h4 class=\"shurufa_gongnengtitle\">Send</h4></li>"+

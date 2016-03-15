@@ -53,6 +53,7 @@
 			#shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li
 			{
 				display: inline-block;
+				clear:both;
 				width:15%;
 				min-width: 75px;
 				padding: 15px;
@@ -71,6 +72,14 @@
 		</style>
 		
 		<script type="text/template" id="shurufanumhtml">
+			
+			
+			<ul id="shurufa_gongneng">
+				<input type="text" name="shurufa_input_num" readonly="readonly" id="shurufa_input_num"  placeholder="Input Something ..."/>
+				<li id="shurufa_send" class="mui-icon mui-icon-paperplane" style="width: 100px;" ><h4 class="shurufa_gongnengtitle">Send</h4></li>
+			</ul>
+			
+			
 			<ul id="shurufa_num_123">
 				<li>1</li>
 				<li>2</li>
@@ -119,8 +128,9 @@
 		var 申请人 = "扫描枪端"; //后台区分是通过什么注册的 
 		
 		
-		$(function(){
-			幽灵输入法html();
+		$(function()
+		{
+			//幽灵输入法html();
 			
 			document.onkeydown=function(event){ 
 			var e = event || window.event || arguments.callee.caller.arguments[0]; 
@@ -137,8 +147,12 @@
 			
 		})
 		
-		var shurufa_open_num = function()
+		var shurufa_open_num = function(e)
 		{
+			$(".shurufa_input_active").removeClass("shurufa_input_active"); 
+			$(e).addClass("shurufa_input_active"); //添加标志.shurufa_input_active
+			var val = $(e).val();
+	
 			layer.open
 			({
 				style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
