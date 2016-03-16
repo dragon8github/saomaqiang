@@ -14,7 +14,7 @@ var shurufa_open = function(e)
 		shadeClose: true,
 		anim:true,	//开启动画
 		content: $("#shurufahtml").html(),	
-		success:function()
+		success:function(e)
 		{
 			$(".layermanim").css({"max-width":"100%"});
 			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	
@@ -81,11 +81,14 @@ var shurufa_open_num = function(e)
 		shadeClose: true,
 		anim:true,	//开启动画
 		content: $("#shurufanumhtml").html(),
-		success:function()
+		success:function(e)
 		{
 			$(".layermanim").css({"max-width":"100%"});
-			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	
+			$(".layermcont").css({"padding":"10px 0px"});	
 			$("#shurufa_input_num").val(val);
+			
+			//$("a").remove();
+			//$("button").remove();
 			
 			document.onkeydown=function(event)
 			{
@@ -213,8 +216,8 @@ var shurufa_open_num = function(e)
 	var shurufanumhtml = "<script type=\"text/template\" id=\"shurufanumhtml\">			"+
 "			<ul id=\"shurufa_gongneng\">"+
 "				<input type=\"text\" name=\"shurufa_input_num\" readonly=\"readonly\" id=\"shurufa_input_num\"  placeholder=\"Input Something ...\"/>"+
-"				<li id=\"shurufa_send\" class=\"mui-icon mui-icon-paperplane\" style=\"width: 90px;\" ><h4 class=\"shurufa_gongnengtitle\" style=\"padding-right:10px\">Send</h4></li>"+
-"				<li id=\"shurufa_clear\" class=\"mui-icon mui-icon-trash\" style=\"width: 95px;\"><h4 class=\"shurufa_gongnengtitle\" style=\"padding-right:10px\" >Clear</h4></li>"+
+"				<li id=\"shurufa_send\"  class=\"mui-icon mui-icon-paperplane\" style=\"width: 88px;\" ><h4 class=\"shurufa_gongnengtitle\" style=\"padding-right:10px\">Send</h4></li>"+
+"				<li id=\"shurufa_clear\" class=\"mui-icon mui-icon-trash\" style=\"width: 90px;\"><h4 class=\"shurufa_gongnengtitle\" style=\"padding-right:10px\" >Clear</h4></li>"+
 "			</ul>"+
 "			<ul id=\"shurufa_num_123\">"+
 "				<li>1</li>"+
@@ -317,7 +320,15 @@ var get_keycode = function(keycode)
 		case 105:
 		  return 9;
 		  break;
-		  
+		
+		
+		//---------------
+		case 108:
+			return false;
+			break;
+		case 13:
+			return false;
+			break;
 		default:
 		  return 0;
 	}

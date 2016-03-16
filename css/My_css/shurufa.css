@@ -7,6 +7,10 @@
 	padding: 0px;	
 	text-align: center;
 }
+#shurufa_gongneng,#shurufa_num_123,#shurufa_num_456,#shurufa_num_789
+{
+	padding-left:0;
+}
 #shurufa_gongneng li,#shurufa_num li,#shurufa_q li,#shurufa_a li,#shurufa_z li,#shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li
 {
 	display: inline-block;
@@ -27,8 +31,8 @@
 #shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li
 {
 	clear:both;
-	width:18%;
-	min-width: 75px;
+	width:19%;
+	min-width: 65px;
 	padding: 15px;
 }
 #shurufa_gongneng li:active,#shurufa_num li:active,#shurufa_q li:active,#shurufa_a li:active,#shurufa_z li:active,#shurufa_num_123 li:active,#shurufa_num_456 li:active,#shurufa_num_789 li:active,#shurufa_num_c0 li:active
