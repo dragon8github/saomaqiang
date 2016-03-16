@@ -129,13 +129,15 @@
 		  
 		<div id="cainiaobaoguo" class="mui-page" style="z-index: 2;">			
 			<div class="mui-page-content">				
-				 <form class="mui-input-group">
+				 <div class="mui-input-group">
 					<div class="mui-input-row">
 						<label>包裹单号</label>
-						<input id='account' onclick="shurufa_open_num(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入包裹单号" />
-					</div>										
-					<button id='reg' type="button" style="margin-top: 10px;" class="mui-btn mui-btn-block mui-btn-primary" id="get_order">确认</button>
-				</form> 		
+						<input id='account' onclick="" type="text" class="mui-input-clear mui-input" placeholder="请输入包裹单号" />
+					</div>	
+				</div> 		
+				<div class="mui-content-padded" align="center">
+					<button id="region" class="mui-btn mui-btn-block mui-btn-primary">确认</button>
+				</div>
 			</div> 
 		</div> 
 		 
@@ -144,7 +146,7 @@
 		
 		<div id="qitabaoguo" class="mui-page" style="z-index: 2;">			
 			<div class="mui-page-content">			
-				<form class="mui-input-group">
+				<div class="mui-input-group">
 					<div class="mui-input-row">
 						<label>包裹单号</label>
 						<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入包裹单号">
@@ -153,8 +155,10 @@
 						<label>手机号码</label>
 						<input id='phone' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号码" />
 					</div>								
-					<button id='reg' type="button" style="margin-top: 10px;" class="mui-btn mui-btn-block mui-btn-primary" id="get_order">确认</button>		
-				</form> 			
+				</div> 			
+				<div class="mui-content-padded" align="center">
+					<button id="region" class="mui-btn mui-btn-block mui-btn-primary">确认</button>
+				</div>
 			</div>			
 		</div> 
 		
@@ -166,7 +170,7 @@
 		<!--顾客取包裹开始    这里的Get是关键字，所以需要变成小写 -->
 		<div id="get" class="mui-page" style="z-index: 1;">
 			<div class="mui-page-content">
-					<form class="mui-input-group">
+					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>条形码</label>
 							<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入条形码">
@@ -175,7 +179,7 @@
 							<label>密码</label>
 							<input id='account' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
 						</div>
-					</form> 
+					</div> 
 					<div class="mui-content-padded">						
 						<button type="button"  class="mui-btn mui-btn-block mui-btn-primary" id="get_order">确认</button>
 					</div>
@@ -195,7 +199,7 @@
 		<div id="refuse" class="mui-page" style="z-index: 1;">
 			<div class="mui-page-content mui-scroll-wrapper">
 				<div class="mui-scroll">
-					<form class="mui-input-group">
+					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>条形码</label>
 							<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入条形码">
@@ -228,7 +232,7 @@
 								</a>
 							</li>
 						</ul>
-					</form>  
+					</div>  
 					<div class="mui-content-padded">						
 						<button type="button" class="mui-btn mui-btn-block mui-btn-primary" id="get_order">确认</button>
 					</div>

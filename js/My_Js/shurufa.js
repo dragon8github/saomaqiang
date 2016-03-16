@@ -8,11 +8,6 @@ var shurufa_open = function(e)
 	layer.open
 	({
 		style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
-		closeBtn: 0,
-		title: false,
-		shade:[0.1,"transparent"],
-		shadeClose: true,
-		anim:true,	//开启动画
 		content: $("#shurufahtml").html(),	
 		success:function(e)
 		{
@@ -75,20 +70,12 @@ var shurufa_open_num = function(e)
 	layer.open
 	({
 		style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
-		closeBtn: 0,
-		title: false,	
-		shade:[0.1,"transparent"],
-		shadeClose: true,
-		anim:true,	//开启动画
 		content: $("#shurufanumhtml").html(),
 		success:function(e)
-		{
+		{	
 			$(".layermanim").css({"max-width":"100%"});
 			$(".layermcont").css({"padding":"10px 0px"});	
 			$("#shurufa_input_num").val(val);
-			
-			//$("a").remove();
-			//$("button").remove();
 			
 			document.onkeydown=function(event)
 			{
