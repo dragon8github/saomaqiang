@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="renderer" content="ie-comp">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+
+
+
+
+<title>微信找零</title>
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/jcalculator/jcalculator.css"/>
+<link rel="stylesheet" href="css/My_css/cover.css" />
+<link rel="stylesheet" href="css/My_css/global.css" />
+<link rel="stylesheet" type="text/css" href="css/My_css/ico.css"/>
+</head> 
+
+<style type="text/css">
+		.lead{
+			font-size:12px; 
+			margin-bottom:10px;
+		}
+		.well
+		{
+			padding: 10px;
+		}
+		#tijiaodingdan,#chaxunmingxi
+		{
+			padding:10px 0px
+		}
+		.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control
+		{
+			background: #fff;
+		}
+		#money
+		{
+			font-size: 20px; 
+			font-family: 黑体;
+			z-index: 9999;
+			line-height: 30px;
+			/*height:42px;*/
+		}		
+		/* 醒目提醒  */
+		.form-control:focus
+		{
+			box-shadow: 0px 0px 25px #00BFFF;
+			-moz-box-shadow: 0px 0px 25px #00BFFF;
+			-webkit-box-shadow: 0px 0px 25px #00BFFF;	 
+		}
+		
+</style>
+
+<body> 
+
+<!--侧滑菜单容器-->
+<div id="Main" class="mui-off-canvas-wrap mui-draggable"> 
+	
+	<div class="mui-content mui-inner-wrap mui-scroll-wrapper" id="mui-content">
+	     <div class="col-xs-7">
+	     	
+			<form id="form" class="text-left">
+					<div class="form-group"><h4>请输入找零金额</h4></div>		
+					<div class="input-group" >
+						  <div class="input-group-addon">￥</div>
+						  <input type="text" id="money" readonly="readonly"  class="form-control target_input" placeholder="Input Some Money...">
+						  <span class="input-group-btn"> 
+							<button class="btn btn-default"  id="go_form" style="padding:10px 12px;" type="button"><i class="iconfont icon-jiesuo" style="font-size:12px"></i></button>
+						  </span>
+					</div>			
+					<input type="reset" style="display: none;" name="reset" id="reset" value="reset" />
+			</form>
+            <div class="well text-left clearmargin"  id="well">
+                   <div class="form-group"><h4 id="cy-tp-h2" >温馨提示：</h4></div>
+                   <p class="lead">
+                        1、找零不可撤销，请确保输入正确金额
+                   </p> 
+                    <p class="lead">
+                        2、找零金额在￥0.01 - ￥99.00元
+                    </p>                   
+           </div>    
+           
+            <button type="button"  id="tijiaodingdan" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
+			<button type="button"  id="chaxunmingxi" class="mui-btn mui-btn-warning mui-btn-block">查询明细</button>
+
+        </div> 
+		
+        <div class="col-xs-5"  id="calculator">	
+			<div class="calculator" style="background: #000;">
+			  	<span>7</span><span>8</span><span>9</span>
+			  	<span>4</span><span>5</span><span>6</span>
+			  	<span>1</span><span>2</span><span>3</span>
+			  	<span class="operation">C</span>
+			  	<span>0</span>
+			  	<span class="operation">.</span>	
+       		</div>
+		</div>
+		
+		<!-- 小光点 -->
+		<div class="assistive-wrap" id="assistiveTouch">
+	        <div class="assistive-touch">
+	            <span></span>
+	        </div> 
+   		</div>  
+   		  
+   		
+		<!-- 这个东西不能删，利用他还原界面 -->
+		<div class="mui-off-canvas-backdrop"></div>
+		 
+    </div>   
+     
+</div>	 
+	 
+	
+<div id="leftpage">
+	<span class="mui-icon mui-icon-arrowleft"></span>
+</div>	 
+	   
+	   
+ 
+<script src="js/Zepto/zepto_1.1.3.js"></script>  
+<script src="js/mui/mui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html> 
+<script type="text/javascript">
+
+
+	/* 测试区域 */
+	if(true)  
+	{  
+		var v = newGuid(); 
+		var CustomerCode = localStorage.CustomerCode; 
+		var Operator = localStorage.EmployeeCode;		
+		var opt = {};		  		
+		
+		//包裹记录查询
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"status":"",
+		 	"mobile":"",
+		 	"mailNo":"",
+		 	"beginTime":"",
+		 	"endTime":"",
+		 	"pageIndex":""		 
+		 }	
+		 alert(JSON.stringify(opt));
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", opt, "CYAPI_微信冲正");
+		
+		 
+		 	 
+		 /*
+		  * 
+			
+ 	 	//收寄宝(收包裹)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"mailNo":v.substr(0,10), //通过扫码器扫描的条形码
+		 	"mobile":"",
+		 	"employeeCode":Operator
+		 }		 
+		 //alert(JSON.stringify(opt));  
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ShouPackage", opt, "CYAPI_微信冲正");
+		
+		 
+	 	 //收寄宝(取包裹)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"mailNo":v.substr(0,10), //通过扫码器扫描的条形码
+		 	"password":"",
+		 	"employeeCode":Operator
+		 }		 
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QuPackage", opt, "CYAPI_微信冲正");
+		
+		
+		 //收寄宝(拒收包裹)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"mailNo":v.substr(0,10), //通过扫码器扫描的条形码
+		 	"rem":"包裹损坏",
+		 	"employeeCode":Operator
+		 }		 
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "TuiPackage", opt, "CYAPI_微信冲正");
+		
+		
+	 	 //收寄宝(包裹记录查询)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"status":"0", //所有为0
+		 	"mobile":"", //手机号
+		 	"mailNo":"", //快递单号(扫码)
+		 	"beginTime":"2015-01-01 12:00", //开始时间
+		 	"endTime":"2015-01-01 15:00",	//结束时间
+		 	"pageIndex":"1" //第几页
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", opt, "CYAPI_微信冲正");
+		
+		
+		
+		
+		//--------------------------------------------
+		
+		
+		
+	
+		 //收寄宝(快递公司列表查询)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode		 	
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaCompanyList", opt, "CYAPI_微信冲正");
+		
+		
+		 
+		//收寄宝(快递公司费用信息查询)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"companyID":"500"
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaCompanyFee", opt, "CYAPI_微信冲正");
+		
+		
+		 
+		//收寄宝(站点收件员信息查询)
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"companyID":"500",
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaKuaiDiYuan", opt, "CYAPI_微信冲正");
+		
+	
+	
+		
+		//（代寄包裹）站点更新快递员设置
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"companyID":"",
+		 	"kuaiDiYuanName":"",
+		 	"kuaiDiYuanM":"",
+		 	"method":""
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "SetKuaiDiYuan", opt, "CYAPI_微信冲正");
+		
+		
+		
+		//--------------------------------------
+		
+		
+		
+		
+		//存包裹
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"mobile":"",
+		 
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "CunPackage", opt, "CYAPI_微信冲正");
+		
+		
+		
+		 
+		//取包裹
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"quKey":"",
+		 
+		 }	
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QuHuiPackage", opt, "CYAPI_微信冲正");
+		
+		
+		
+		
+	
+		*/
+		 
+		 
+		
+		//订单列表查询		
+		//opt = {"开始时间":"2016-01-01","截止时间":"2016-02-01","业务类型":"","订单状态":"","业务号码":"","每页显示条数":"12","当前页码":"1"};
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "G002_Order", "QueryOrderDetail", opt, "CYAPI_微信冲正"); 
+		
+		
+		
+		//订单详情查询
+		//opt = {"订单号":"201601271550424372079"};		 
+		//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetails", opt, "CYAPI_微信冲正"); 
+		
+		
+		
+		//opt = {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"};
+		//InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_微信找零获取返回值");
+	
+	
+	
+		//订单冲正
+		//opt = {"订单号":"20160308c03uw4lc2fvd5qq0dvb178aq5","用户编号":CustomerOrderNo,"冲正申请人":Operator}; 
+		//console.log(JSON.stringify(opt));
+		//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "RefundOrder", opt, "CYAPI_微信冲正");
+		
+		
+		 
+		//通用扫码支付		
+		//var PayParm = JSON.stringify({"BarCode":"281234567812345678"});	//支付码				
+		//opt = {"CustomerOrderNo":newGuid(),"Amount":"0.1","PayParm":PayParm,"PayRem":"","CustomerCode":CustomerCode,"Operator":Operator};  		
+		//InvokeApi(GetApiUrl("B002_V0001_5un29"), "ApiClass", "SubmitOrder", opt, "CYAPI_微信冲正");
+	}
+	
+	
+	
+
+	$(function() 
+	{
+		/* 加载功能 */
+		assistive_mTouch(); //小光点以及菜单
+		QQ_offCanvas(); //QQ侧滑菜单	 
+		计算器_autolineheight();	//垂直居中
+		LeftPageGOBack();	//右滑箭头 
+		
+		
+		
+		/* 响应式布局 */
+		$("#form").autoheight({n:3.2});
+		$("#well").autoheight({n:4.2,m:"margin"});		
+		$("#tijiaodingdan").autoheight({n:2.5,m:"margin"});
+		$("#chaxunmingxi").autoheight({n:2.5,m:"margin"});		
+		$("#calculator").autoheight({n:12,m:"height"}) 
+		 
+		
+		
+		/* 查询明细 */
+		document.getElementById("chaxunmingxi").addEventListener('tap',function(){
+			mui.openWindow({
+				url:"Super_List.html?type=微信找零",
+				id:"Super_List" 
+			});
+		}) 
+		
+		   
+		/* 提交订单 */
+		$("#tijiaodingdan").bind('tap',function()
+		{
+			var Amount = $("#money").val(); //金额
+			
+			if(Amount.length == 0)
+			{
+				mui.toast("请输入金额");
+				
+				return false;
+			}
+							
+			var btnArray = ['否', '是'];
+			mui.confirm('你确定要提交订单吗？', '温馨提示', btnArray, function(e) {
+					if (e.index == 1) 
+					{
+						var CustomerCode = localStorage.CustomerCode;	 //门店号
+						var CustomerOrderNo = newGuid(); //guid订单号
+						var Operator = localStorage.EmployeeCode;	//员工号
+						
+						mui.toast("正在提交表单..."); 
+						
+		  			    InvokeApi(GetApiUrl("B001_V0001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":CustomerOrderNo,"Amount":Amount}, "CYAPI_微信找零获取返回值");
+				 
+					} 
+					else
+					{
+						return false;
+					}
+			}) 
+		})
+	})
+	
+	/* $结束 */
+
+
+/* 微信找零From提交 */
+CYAPI_微信找零获取返回值 = function(str)
+{
+		//alert(str);
+		
+		var jsonobj = Api_filter(str);
+		
+		if(jsonobj.RetCode == "1")
+		{
+			mui.alert(jsonobj.RetMsg, '成功提示', function() {
+					mui.toast(jsonobj.RetMsg); //弹出结果
+			});
+			
+			$("#reset").click();  //重置表单	
+		}
+		else
+		{
+			mui.alert(jsonobj.RetMsg, '异常提示', function() {
+					mui.toast(jsonobj.RetMsg); //弹出结果
+			});			
+		} 
+}
+
+
+
+
+/* 微信冲正 */
+CYAPI_微信冲正 = function(str)
+{
+	
+		alert(str);
+	
+		return false;
+		
+}
+
+	
+</script>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/mui/mui.min.css" />
+
+		<style type="text/css">
+			/* my */
+			.kdmc
+			{
+				color:#008000; 
+			}
+			.mui-col-xs-6
+			{
+				float:left;				
+				text-align: center;
+				margin: 20px 0px;
+			}	
+			.mui-content
+			{
+				background: #fff;
+			}			
+			.mui-col-xs-6 > a > div
+			{
+				width:75px;padding-top:77px;margin:10px auto;
+				background:url("../Images/kuaidigongsi/allbgs.gif") no-repeat;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="index" class="mui-page">
+			<div class="mui-content">
+				<div class="mui-col-xs-6">
+					<a href="DaiJi_info.html?key=212">
+						<div  style="background-position:-600px 0px;"></div>
+						<p class="mui-h2 kdmc">顺丰快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html">
+						<div  style="background-position:-375px 0px;"></div>
+						<p class="mui-h2 kdmc">联邦快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:-525px 0px;"></div>
+						<p class="mui-h2 kdmc">申通快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:-300px 0px;"></div>
+						<p class="mui-h2 kdmc">天天快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:-75px 0px;"></div>
+						<p class="mui-h2 kdmc">韵达快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:0px 0px;"></div>
+						<p class="mui-h2 kdmc">邮政快递</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:-225px 0px;"></div>
+						<p class="mui-h2 kdmc">宅急送</p>
+					</a>
+				</div>
+				<div class="mui-col-xs-6 ">
+					<a href="DaiJi_info.html"> 
+						<div  style="background-position:-450px 0px;"></div>
+						<p class="mui-h2 kdmc">中通快递</p>
+					</a>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+	{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
+				<li class="mui-table-view-cell">										
+					<div class="mui-slider-left mui-disabled">
+						<a class="mui-btn mui-btn-red">立即冲正</a>
+					</div>
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">立即冲正</a>
+					</div>
+					<div class="mui-slider-handle">
+						<a class="goto_subpage">
+							<div class="mui-table">
+								<div class="mui-table-cell mui-col-xs-9">
+									<h4 class="mui-ellipsis-2 Lee_Money">￥ {{d[i].OrderAmount}}</h4>
+									<h5 class="Lee_Order">订单号 ：{{d[i].OrderNo }}</h5>
+									<p class="mui-h5 mui-ellipsis Lee_Phone">业务类型：{{d[i].ProductName}}</p>
+								</div>
+								<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+									<span class="mui-h5">  {{d[i].OrderTime}}</span>
+									<span class="mui-h5"><i class="iconfont">&nbsp;{{d[i].OrderState}}</i></span>
+								</div>
+							</div>
+						</a>
+					</div>
+				</li>
+	{{#     }	 }}
+
+
+
+	if(false)
+	{
+		var url = "http://192.168.20.63:8008/Global_5un29/ApiIndex.aspx";
+		var ApiPath = "G001_Customer";
+		var MethodName = "Login";
+		var ShangHuHao = "0tnwjqgu45al010edmfg25kkf";	
+		var AuthSign = "未实现";		
+		var t = "\t";	
+		
+		
+		var bodyJson = JSON.stringify({"登录账号":"MailAddress_004","密码":"666666"});
+		
+		
+		var opt = {};
+		opt.ApiPath = ApiPath;
+		opt.MethodName = MethodName;
+		opt.ShangHuHao = ShangHuHao;
+		opt.AuthSign = AuthSign;
+		
+		var jsonstr = JSON.stringify(opt);
+		
+		var para = jsonstr + t + bodyJson;
+		
+		
+		$.ajax({
+			dataType: "jsonp",
+			type:"POST",
+			url:url, 
+			async:true, 
+			data:para,
+			success:function(data)
+			{
+				alert(data); 
+			},
+			error:function(xhr, status, e)
+			{
+				console.log("error_xhr:" + xhr);
+	            console.log("error_status:" + status);
+	            console.log("error_e:" + e);
+			}			
+		}); 
+		
+	}
+	
+	
+	
+	if(false)
+	{
+		var v = newGuid(); 
+		var CustomerCode = localStorage.CustomerCode; 
+		var Operator = localStorage.EmployeeCode;
+		
+		 
+//		alert("订单号:" + v);
+//		alert("CustomerCode:" + CustomerCode);
+//		alert("Operator:" + Operator); 
+		 
+//		e217a962100c156650d5e0c341e7a8c0
+//		68c5df65517c2731e1ba0bb0b6ef37a9
+//		ab6a759af8bfe16d7a3bf9da15097317
+
+		var opt = {"Operator":Operator,"CustomerOrderNo":"ab6a759af8bfe16d7a3bf9da15097317","CustomerCode":CustomerCode};
+		
+		alert(JSON.stringify(opt));  
+		
+		  
+		InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "QueryOrder", opt, "CYAPI_微信找零查询");
+		//InvokeApi(GetApiUrl("B001_5un29"), "ApiClass", "SubmitOrder", {"CustomerCode":CustomerCode,"Operator":Operator,"CustomerOrderNo":v,"Amount":"0.01"}, "CYAPI_微信找零获取返回值");
+	}	  

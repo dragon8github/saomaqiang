@@ -1,0 +1,45 @@
+﻿.mui-table-view-cell:after
+{
+	right:15px;		
+}
+
+
+.mui-bar-nav ~ .mui-content
+{	
+	 padding-top: 0px;
+	margin-top:44px;	
+}
+
+
+*
+{
+     -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+}
+
+.mui-grid-view.mui-grid-9
+{
+	border-top: none;
+	border-left: none;
+	background: rgba(0,0, 0,0);
+}
+.mui-grid-view.mui-grid-9 .mui-media
+{
+	color:#fff;
+}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body
+{
+	line-height: 20px;
+	color:#fff;
+	height: 18px;	
+}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell
+{ 
+	border-right: none;
+	border-bottom: none; 
+	padding: 5px;
+}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active
+{
+	background: #000000; 
+}
