@@ -81,22 +81,16 @@
 					</div> 	
 					
 					<div id="set_code" style="display:none;bpadding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
-						<p>存放号 : <span class="save_id" style="color: red;font-weight: bold;">未知</span></p>
+						<p>存放号 : <span id="set_save_id" style="color: red;font-weight: bold;">未知</span></p>
 						<p><img id="set_barcode"/></p>
 						<p style="color: red;">注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
-						<h5 class="mui-left">存放时间：<span class="save_time">未知</span></h5>
-						<h5 class="mui-left">存放地址：<span class="save_address">未知</span></h5>
-						<h5 class="mui-left">存放商户电话：<span class="save_phone">未知</span></h5>
+						<h5 class="mui-left">存放时间：<span id="set_save_time">未知</span></h5>
+						<h5 class="mui-left">存放地址：<span id="set_save_address">未知</span></h5>
+						<h5 class="mui-left">存放商户电话：<span id="set_save_phone">未知</span></h5>
 					</div>					
 			</div>		 
 		</div>
 		<!--单页结束--> 
-		
-		
-		
-		
-		
-		
 		
 		
 		  
@@ -120,12 +114,12 @@
 					</div> 	
 					
 					<div id="get_code" style="display:none;bpadding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
-						<p>存放号 : <span class="save_id" style="color: red;font-weight: bold;">未知</span></p>
+						<p>存放号 : <span id="get_save_id" style="color: red;font-weight: bold;">未知</span></p>
 						<p><img id="get_barcode"/></p>
 						<p style="color: red;">注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
-						<h5 class="mui-left">存放时间：<span class="save_time">未知</span></h5>
-						<h5 class="mui-left">存放地址：<span class="save_address">未知</span></h5>
-						<h5 class="mui-left">存放商户电话：<span class="save_phone">未知</span></h5>
+						<h5 class="mui-left">存放时间：<span id="get_save_time">未知</span></h5>
+						<h5 class="mui-left">存放地址：<span id="get_save_address">未知</span></h5>
+						<h5 class="mui-left">存放商户电话：<span id="get_save_phone">未知</span></h5>
 					</div>					
 			</div> 	
 		</div>
@@ -153,7 +147,7 @@
 				幽灵输入法数字版html();
 			}) 
 			
-			
+			//存物品
 			document.getElementById("set_btn").addEventListener("tap",function()
 			{
 				var set_phone = document.getElementById("set_phone").value;
@@ -169,12 +163,10 @@
 				 	"employeeCode":Operator
 				 }	
 				 
-				 //console.log(JSON.stringify(opt));
-				 
 				 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "CunPackage", opt, "CYAPI_存包裹");
-
 			})
 			
+			//取物品
 			document.getElementById("get_btn").addEventListener("tap",function()
 			{
 				var quKey = document.getElementById("quKey").value;
@@ -198,38 +190,31 @@
 			
 			
 	 		//func_生成订单
-		   	生成订单 = function(quKey,phone)
+		   	存放物品_生成订单 = function(quKey,phone)
 			{ 
-				
-				if(quKey.length == 0)
-				{
-					mui.toast("请先扫描条形码或者手动输入"); 
-					return;
-				}
-				
-				if(phone.length == 0)
-				{
-					mui.toast("请输入手机号码"); 
-					return;
-				}
-				
-				//验证手机号码合法性
-				if (!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test(phone)) 
-				{
-					mui.toast('请先输入合法的手机号码');
-					return;
-				}
-				
-						
 				var now = new Date(); 	//当前时间
 				now = now.format("yyyy-MM-dd hh:mm:ss");
 				
 				$("#get_barcode").JsBarcode("quKey",{format:"CODE39", width:1, displayValue: true});
-				$(".save_id").text("01");
-				$(".save_time").text(now);
-				$(".save_address").text("广泰路110号");
-				$(".save_phone").text(phone);
-				$("#order").fadeIn("slow");						
+				$("#get_save_id").text("01");
+				$("#get_save_time").text(now);
+				$("#get_save_address").text("广泰路110号");
+				$("#get_save_phone").text(phone);
+				$("#get_code").fadeIn("slow");						
+				
+			}
+			
+			//func_生成订单
+		   	取回物品_生成订单 = function(quKey,phone)
+			{ 
+				var now = new Date(); 	//当前时间
+				now = now.format("yyyy-MM-dd hh:mm:ss");
+				$("#set_barcode").JsBarcode("quKey",{format:"CODE39", width:1, displayValue: true});
+				$("#set_save_id").text("01");
+				$("#set_save_time").text(now);
+				$("#set_save_address").text("广泰路110号");
+				$("#set_save_phone").text(phone);
+				$("#set_code").fadeIn("slow");						
 				
 			}
 			 
@@ -237,25 +222,23 @@
 			 //--------------------
 			 CYAPI_存包裹 = function(str)
 			 {
-			 		
-				 	setTimeout(function(){
-			 			$("#set_btn").text("确定");
-				 		var json = Api_filter(str);		 	
-				 		mui.alert(json.retMessage,function(){
-				 				mui.toast(json.retMessage);
-			 			});
-			 		},1000);
+			 	setTimeout(function(){
+		 			$("#set_btn").text("确定");
+			 		var json = Api_filter(str);		 	
+			 		mui.alert(json.retMessage,function(){
+			 				mui.toast(json.retMessage);
+		 			});
+		 		},1000);
 			 }
 			 CYAPI_取包裹 = function(str)
 			 {
-			 		
-				 	setTimeout(function(){
-			 			$("#get_btn").text("确定");
-				 		var json = Api_filter(str);		 	
-				 		mui.alert(json.retMessage,function(){
-				 				mui.toast(json.retMessage);
-			 			});
-			 		},1000);
+			 	setTimeout(function(){
+		 			$("#get_btn").text("确定");
+			 		var json = Api_filter(str);		 	
+			 		mui.alert(json.retMessage,function(){
+			 				mui.toast(json.retMessage);
+		 			});
+		 		},1000);
 			 }
 			  
 			 

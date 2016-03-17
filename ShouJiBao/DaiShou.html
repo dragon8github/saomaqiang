@@ -212,11 +212,11 @@
 			
 			//╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣  全局变量   ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 		 	var CustomerCode = localStorage.CustomerCode; //门店号
-	    	var Operator = localStorage.EmployeeCode;	  //员工号
-	    	var opt = {};//参数对象
+	   	 	var Operator = localStorage.EmployeeCode;	  //员工号
+	   	 	var opt = {};//参数对象
 	    	
 		 	
-	    	$(function()
+	    		$(function()
 			{
 				幽灵输入法数字版html();
 				mui('.mui-scroll-wrapper').scroll({
@@ -266,9 +266,7 @@
 				 	"mobile":qitabaoguo_phone,
 				 	"employeeCode":Operator
 				 }	
-				 
 				 //console.log(JSON.stringify(opt));
-				 
 				 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ShouPackage", opt, "CYAPI_收包裹");
 		 	})
 		 			 	
@@ -389,8 +387,6 @@
 						//				console.log(e.detail.page.id + ' back');
 					});
 				})(mui);
- 
-			 
 			</script>
 	</body>
 
