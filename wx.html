@@ -12,7 +12,6 @@
 
 
 
-
 <title>微信找零</title>
 <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/mui/mui.min.css"/>
@@ -23,38 +22,13 @@
 </head> 
 
 <style type="text/css">
-		.lead{
-			font-size:12px; 
-			margin-bottom:10px;
-		}
-		.well
-		{
-			padding: 10px;
-		}
-		#tijiaodingdan,#chaxunmingxi
-		{
-			padding:10px 0px
-		}
-		.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control
-		{
-			background: #fff;
-		}
-		#money
-		{
-			font-size: 20px; 
-			font-family: 黑体;
-			z-index: 9999;
-			line-height: 30px;
-			/*height:42px;*/
-		}		
-		/* 醒目提醒  */
-		.form-control:focus
-		{
-			box-shadow: 0px 0px 25px #00BFFF;
-			-moz-box-shadow: 0px 0px 25px #00BFFF;
-			-webkit-box-shadow: 0px 0px 25px #00BFFF;	 
-		}
-		
+		/* my */
+		#chaxunmingxi,#tijiaodingdan{padding:10px 0}		
+		#money{font-size:20px;font-family:黑体;z-index:9999;line-height:30px}
+		.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background:#fff}
+		.form-control:focus{box-shadow:0 0 25px #00BFFF;-moz-box-shadow:0 0 25px #00BFFF;-webkit-box-shadow:0 0 25px #00BFFF}
+		.lead{font-size:12px;margin-bottom:10px}
+		.well{padding:10px}
 </style>
 
 <body> 
@@ -125,7 +99,7 @@
 	   
  
 <script src="js/Zepto/zepto_1.1.3.js"></script>  
-<script src="js/mui/mui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
@@ -142,23 +116,9 @@
 		var Operator = localStorage.EmployeeCode;		
 		var opt = {};		  		
 		
-		 
-		//包裹记录查询
-		 opt = 
-		 {
-		 	"userCode":CustomerCode,
-		 	"status":"",
-		 	"mobile":"",
-		 	"mailNo":"",
-		 	"beginTime":"",
-		 	"endTime":"",
-		 	"pageIndex":""		 
-		 }	
-		 alert(JSON.stringify(opt));
-		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", opt, "CYAPI_微信冲正");
 		
 		
-		 	 
+		
 		 /*
 		  * 
 			
@@ -195,8 +155,7 @@
 		 }		 
 		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "TuiPackage", opt, "CYAPI_微信冲正");
 		
-		
-	 	 //收寄宝(包裹记录查询)
+		 //收寄宝(包裹记录查询)
 		 opt = 
 		 {
 		 	"userCode":CustomerCode,
@@ -210,6 +169,7 @@
 		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", opt, "CYAPI_微信冲正");
 		
 		
+	 
 		
 		
 		//--------------------------------------------
@@ -270,7 +230,6 @@
 		 {
 		 	"userCode":CustomerCode,
 		 	"mobile":"",
-		 
 		 }	
 		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "CunPackage", opt, "CYAPI_微信冲正");
 		
@@ -284,6 +243,37 @@
 		 
 		 }	
 		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QuHuiPackage", opt, "CYAPI_微信冲正");
+		
+		
+		//包裹记录查询
+		 opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"status":"0",
+		 	"mobile":"",
+		 	"mailNo":"",
+		 	"beginTime":"2015-01-01",
+		 	"endTime":"2015-02-01",
+		 	"pageIndex":"1"		 
+		 }	
+		 console.log(JSON.stringify(opt));
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", opt, "CYAPI_微信冲正");
+		
+		  opt = 
+		 {
+		 	"userCode":CustomerCode,
+		 	"status":"0",
+		 	"mobile":"",
+		 	"mailNo":"",
+		 	"beginTime":"2015-01-01",
+		 	"endTime":"2015-02-01",
+		 	"pageIndex":"1"		 
+		 }	
+		 console.log(JSON.stringify(opt));
+		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", opt, "CYAPI_微信冲正");
+		
+		
+		
 		
 		
 		

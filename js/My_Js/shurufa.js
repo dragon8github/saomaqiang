@@ -49,6 +49,7 @@ var shurufa_open = function(e)
 	$("#shurufa_clear").bind("click",function(){
 		var myinput = $("#shurufa_input,.shurufa_input_active");
 		myinput.val("");	
+		
 	})
 	
 	$("#shurufa_send").bind("click",function(){
@@ -112,6 +113,7 @@ var shurufa_open_num = function(e)
 	{
 		var myinput = $("#shurufa_input_num,.shurufa_input_active");
 		myinput.val("");	
+		
 	})
 	
 	$("#shurufa_send").bind("click",function()

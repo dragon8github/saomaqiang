@@ -2,9 +2,11 @@
 var API_业务类型列表 = ["通用扫码支付","微信找零"];
 
 
+
 /* 核心业务处理函数 */
 GetApiUrl = function(ModuleName)
 {
+	
 	if(ModuleName == "Global_V0001_5un29")
 	{
 		return "http://192.168.22.23:31450/Global_V0001_5un29/ApiIndex.aspx";

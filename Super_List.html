@@ -18,112 +18,38 @@
 		<link rel="stylesheet" type="text/css" href="css/My_css/cover.css"/>
 		<style>
 			/* The custom style */
-			.iconfont
-			{
-				font-size:30px
-			}
-			.mui-table .Lee_time
-			{
-				vertical-align: middle;				
-			}
-			.mui-table .Lee_time .iconfont
-			{
-				color:#007AFF;
-				font-size:26px; 
-			}			
-			.mui-table .Lee_Order
-			{
-				margin:8px 0px;
-				color:#333;
-			}			
-			.mui-table .Lee_Phone
-			{
-				color:#333;
-			}			
-			.mui-table .Lee_Money
-			{
-				font-weight: 700;
-			}			
+			.iconfont{font-size:30px}
+			.mui-table .Lee_time{vertical-align:middle}
+			.mui-table .Lee_time .iconfont{color:#007AFF;font-size:26px}
+			.mui-table .Lee_Order{margin:8px 0;color:#333}
+			.mui-table .Lee_Phone{color:#333}
+			.mui-table .Lee_Money{font-weight:700}
+		
 			/* Cover the style */
-			.mui-bar .mui-segmented-control
-			{
-				top:6px;
-				right:10px
-			}			
-			.mui-segmented-control .mui-control-item
-			{
-				line-height:30px;
-			}
-			.mui-pull-bottom-pocket
-			{
-				margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
-			}
+			.mui-bar .mui-segmented-control{top:6px;right:10px}
+			.mui-segmented-control .mui-control-item{line-height:30px}
+			.mui-pull-bottom-pocket{margin-bottom:40px}/* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
+
 				
 			/*这里是DIV跳转的css*/
-			.mui-views,
-			.mui-view,
-			.mui-pages,
-			.mui-page,
-			.mui-page-content {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #efeff4;
-			}
-			.mui-pages {
-				top: 46px;
-				height: auto;
-			}
-			.mui-page.mui-transitioning {
-				-webkit-transition: -webkit-transform 300ms ease;
-				transition: transform 300ms ease;
-			}
-			.mui-page-left {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-			}
-			.mui-ios .mui-page-left {
-				-webkit-transform: translate3d(-20%, 0, 0);
-				transform: translate3d(-20%, 0, 0);
-			}
-			.mui-page {
-				display: none;
-			}
-			.mui-pages .mui-page {
-				display: block;
-			}
-			.mui-page .mui-table-view:first-child {
-				margin-top: 15px;
-			}
-			.mui-page .mui-table-view:last-child {
-				margin-bottom: 30px;
-			}
-			.mui-table-view {
-				margin-top: 20px;
-			}
+			.mui-page,.mui-page-content,.mui-pages,.mui-view,.mui-views{position:absolute;left:0;right:0;top:0;bottom:0;width:100%;height:100%;background-color:#efeff4}
+			.mui-pages{top:46px;height:auto}
+			.mui-page.mui-transitioning{-webkit-transition:-webkit-transform 300ms ease;transition:transform 300ms ease}
+			.mui-page-left{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+			.mui-ios .mui-page-left{-webkit-transform:translate3d(-20%,0,0);transform:translate3d(-20%,0,0)}
+			.mui-page{display:none}
+			.mui-pages .mui-page{display:block}
+			.mui-page .mui-table-view:first-child{margin-top:15px}
+			.mui-page .mui-table-view:last-child{margin-bottom:30px}
+			.mui-table-view{margin-top:20px}
+
 			
 			/* 兼容 */
-			.lijichongzhengbtn
-			{
-				z-index: 9999;
-			}
-			.mui-off-canvas-wrap .mui-bar
-		  	{
-	  		    box-shadow:rgb(204, 204, 204) 0px 1px 6px 0px
-		  	}
-		  	.mui-off-canvas-wrap
-			{
-				z-index: 0; 
-			}
-			.lijichongzheng
-			{
-				color:#fff;
-				vertical-align:middle;
-			}
+			.lijichongzhengbtn{z-index:9999}
+			.mui-off-canvas-wrap .mui-bar{box-shadow:#ccc 0 1px 6px 0}
+			.mui-off-canvas-wrap{z-index:0}
+			.lijichongzheng{color:#fff;vertical-align:middle}
+
 		</style>
 
 	</head>
