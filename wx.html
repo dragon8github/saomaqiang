@@ -115,10 +115,12 @@
 		var CustomerCode = localStorage.CustomerCode; 
 		var Operator = localStorage.EmployeeCode;		
 		var opt = {};		  		
+		 
 		
-		
-		
-		
+		opt = {"userCode":"7b759a354ea94683ba603019f842c5b5","mobile":"13713332652","employeeCode":"JHT_0001_002"}
+		console.log(JSON.stringify(opt));
+		InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "CunPackage", opt, "CYAPI_微信冲正");
+		 
 		 /*
 		  * 
 			

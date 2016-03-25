@@ -2,7 +2,10 @@
 <html>
 
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8">					
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="pragma" content="no-cache">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -15,304 +18,149 @@
 		<link rel="stylesheet" type="text/css" href="../css/My_css/cover.css"/>
 		<style>
 			/* The custom style */
-				.mui-input-group .mui-input-row
-				{
-					height: auto;
-				}
-				.iconfont
-				{
-					font-size:30px
-				}
-				.mui-table .Lee_time
-				{
-					vertical-align: middle;				
-				}
-				.mui-table .Lee_time .iconfont
-				{
-					color:#007AFF;
-					font-size:26px; 
-				}			
-				.mui-table .Lee_id,.Lee_phone
-				{
-					margin:8px 0px;
-					color:#333;
-				}			
-				.mui-table .Lee_Phone
-				{
-					color:#333;
-				}			
-				.mui-table .Lee_Money
-				{
-					font-weight: 700;
-				}			
-				/* Cover the style */
-				.mui-bar .mui-segmented-control
-				{
-					top:6px;
-					right:10px
-				}			
-				.mui-segmented-control .mui-control-item
-				{
-					line-height:30px;
-				}
-				.mui-pull-bottom-pocket
-				{
-					margin-bottom: 40px; /* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
-				}
+			.iconfont{font-size:30px}
+			.mui-table .Lee_time{vertical-align:middle}
+			.mui-table .Lee_time .iconfont{color:#007AFF;font-size:26px}
+			.mui-table .Lee_Order{margin:8px 0;color:#333}
+			.mui-table .Lee_Phone{color:#333}
+			.mui-table .Lee_Money{font-weight:700}
+		
+			/* Cover the style */
+			.mui-bar .mui-segmented-control{top:6px;right:10px}
+			.mui-segmented-control .mui-control-item{line-height:30px}
+			.mui-pull-bottom-pocket{margin-bottom:40px}/* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
+
 				
-		</style>
-		<!--
-        这里是无缝跳转的css
-        -->
-		<style>
-			.mui-views,
-			.mui-view,
-			.mui-pages,
-			.mui-page,
-			.mui-page-content {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #efeff4;
-			}
-			.mui-pages {
-				top: 46px;
-				height: auto;
-			}
-			.mui-page.mui-transitioning {
-				-webkit-transition: -webkit-transform 300ms ease;
-				transition: transform 300ms ease;
-			}
-			.mui-page-left {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-			}
-			.mui-ios .mui-page-left {
-				-webkit-transform: translate3d(-20%, 0, 0);
-				transform: translate3d(-20%, 0, 0);
-			}
-			.mui-page {
-				display: none;
-			}
-			.mui-pages .mui-page {
-				display: block;
-			}
-			.mui-page .mui-table-view:first-child {
-				margin-top: 15px;				
-			}
-		</style>
-		<!--
-        这里是无缝跳转的css
-        -->
-		<style>
-			.mui-views,
-			.mui-view,
-			.mui-pages,
-			.mui-page,
-			.mui-page-content {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #efeff4;
-			}
-			.mui-pages {
-				top: 46px;
-				height: auto;
-			}
-			.mui-page.mui-transitioning {
-				-webkit-transition: -webkit-transform 300ms ease;
-				transition: transform 300ms ease;
-			}
-			.mui-page-left {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-			}
-			.mui-ios .mui-page-left {
-				-webkit-transform: translate3d(-20%, 0, 0);
-				transform: translate3d(-20%, 0, 0);
-			}
-			.mui-page {
-				display: none;
-			}
-			.mui-pages .mui-page {
-				display: block;
-			}
-			.mui-page .mui-table-view:first-child {
-				margin-top: 15px;
-			}
-			.mui-page .mui-table-view:last-child {
-				margin-bottom: 30px;
-			}
-			.mui-table-view {
-				margin-top: 20px;
-			}
+			/*这里是DIV跳转的css*/
+			.mui-page,.mui-page-content,.mui-pages,.mui-view,.mui-views{position:absolute;left:0;right:0;top:0;bottom:0;width:100%;height:100%;background-color:#efeff4}
+			.mui-pages{top:46px;height:auto}
+			.mui-page.mui-transitioning{-webkit-transition:-webkit-transform 300ms ease;transition:transform 300ms ease}
+			.mui-page-left{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+			.mui-ios .mui-page-left{-webkit-transform:translate3d(-20%,0,0);transform:translate3d(-20%,0,0)}
+			.mui-page{display:none}
+			.mui-pages .mui-page{display:block}
+			.mui-page .mui-table-view:first-child{margin-top:15px}
+			.mui-page .mui-table-view:last-child{margin-bottom:30px}
+			.mui-table-view{margin-top:20px}
+
+			
+			/* 兼容 */
+			.lijichongzhengbtn{z-index:9999}
+			.mui-off-canvas-wrap .mui-bar{box-shadow:#ccc 0 1px 6px 0}
+			.mui-off-canvas-wrap{z-index:0}
+			.lijichongzheng{color:#fff;vertical-align:middle}
+
 		</style>
 
 	</head>
 
 	<body>
 
-		<!--
-			页面主结构开始：
-			一个容器（.mui-page）
-			包含一个标题(.mui-navbar-inner)
-			和一个内容(.mui-page-content)
-		-->
+		<!-- 页面主结构开始 -->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar">
 				</div>
 				<div class="mui-pages">
-					
 				</div>
 			</div>
 		</div>
 		<!--页面主结构结束-->
- 
-			<!--侧滑菜单容器   -->
-			<div id="Main" class="mui-page">
-				<!--页面标题栏开始--> 
-				<div class="mui-navbar-inner mui-bar mui-bar-nav header">
-					<span class="mui-icon mui-icon-search" id="search"></span>
-					<div class=" mui-segmented-control" style="width: 50%;position: absolute;left: 10%;">
-						<a href="#" class="mui-control-item mui-active">未取物品</a>
-						<a href="#" class="mui-control-item">已取物品</a>
-					</div>
-					<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
+		
+			
+		
+		<!--主窗体 开始   -->
+		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
+			<!--页面标题栏开始--> 
+			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
+				<span class="mui-icon mui-icon-search" id="search"></span>
+				<div id="tapstate" class=" mui-segmented-control" style="width: 65%;position: absolute;left: 4%;">
+					<a href="#" class="mui-control-item mui-active">所有包裹</a>
+					<a href="#" class="mui-control-item">未收包裹</a>
+					<a href="#" class="mui-control-item">已收包裹</a>
+					<a href="#" class="mui-control-item">已退包裹</a>
 				</div>
-				<!--页面标题栏结束-->	
-	 
-			 	<!-- 搜索菜单 开始 -->
-				<div class="mui-content" id="search_menu">
-					<div class="mui-card">
-						<ul class="mui-table-view" style="margin-top: 0px;margin-bottom: 0px;">
-							<li class="mui-table-view-cell mui-collapse">
-								<a class="mui-navigate-right" href="#">按订单号搜索</a>
-								<div class="mui-collapse-content">
-									<form class="mui-input-group">
-										<div class="mui-input-row"> 
-									    	 	<label>订单号</label> 
-									     	<input id="search_orderid" type="text" value="" placeholder="请输入订单号" class="mui-input-clear" /> 
-									    	</div> 	
-								    		<div class="mui-button-row">
-											<button type="button" class="search_yes mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
-											<button type="button" class="search_canel mui-btn mui-btn-danger">取消</button>
-										</div> 
-									</form>
-								</div>
-							</li>
-							<li class="mui-table-view-cell mui-collapse">
-								<a class="mui-navigate-right" href="#">按手机号码搜索</a>
-								<div class="mui-collapse-content">
-									<form class="mui-input-group">
-										<div class="mui-input-row"> 
-									    	 	<label>手机号码</label> 
-									     	<input id="search_phone" type="text" value="" placeholder="请输入手机号码" class="mui-input-clear" /> 
-									    	</div> 	
-								    		<div class="mui-button-row">
-											<button type="button" class="search_yes mui-btn mui-btn-primary">确认</button>&nbsp;&nbsp;
-											<button type="button" class="search_canel mui-btn mui-btn-danger" >取消</button>
-										</div> 
-									</form>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-	 			<!-- 搜索菜单 结束 -->
-	 
-				<div id="pullrefresh" class="mui-page-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
-							<li class="mui-table-view-cell">	
-								<a class="goto_subpage">
-									<div class="mui-slider-handle">
-										<div class="mui-table">									
-											<div class="mui-table-cell mui-col-xs-9">
-												<h4 class="mui-ellipsis-2 Lee_Money">￥ 0.00</h4> 
-												<h5 class="Lee_id"><i class="mui-icon mui-icon-compose"></i>&nbsp;包裹单号：01</h5>
-												<h5 class="Lee_phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：13713332652</h5>
-																							
-											</div>
-											<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
-												<span class="mui-h5">今天  16:30</span>
-												<span class="mui-h5"><i class="iconfont">&nbsp;&#xe604;</i></span>
-											</div>
+				<a class="mui-icon mui-pull-right iconfont" id="select_time">&#xe606;</a>
+			</div>
+			<!--页面标题栏结束-->	 
+			
+
+ 			<!-- 主内容    开始  -->
+			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
+				<div class="mui-scroll">	
+					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						<!-->
+						<li class="mui-table-view-cell">	
+							<a class="goto_subpage">
+								<div class="mui-slider-handle">
+									<div class="mui-table">									
+										<div class="mui-table-cell mui-col-xs-7">
+											<h4 class="mui-ellipsis-2 Lee_Money">￥ 0.00</h4> 
+											<h5 class="Lee_id"><i class="mui-icon mui-icon-compose"></i>&nbsp;包裹单号：01</h5>
+											<h5 class="Lee_phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：13713332652</h5>																						
+										</div>
+										<div class="mui-table-cell mui-col-xs-5 mui-text-right Lee_time">
+											<span class="mui-h5">今天  16:30</span>
+											<span class="mui-h5"><i class="iconfont">&nbsp;&#xe604;</i></span>
 										</div>
 									</div>
-								</a> 
-							</li> 
-						</ul>
-					</div>
+								</div>
+							</a> 
+						</li> 
+						-->
+					</ul>							
 				</div>
 			</div>
+			<!-- 主内容    结束  -->			
+		</div>		
+		<!--主窗体 结束   -->
 
-			<!--单页面结束-->	 
-			<div id="info" class="mui-page mui-action-back" style="z-index: 10;">				
-				<div class="mui-navbar-inner mui-bar mui-bar-nav">
-					<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-						<span class="mui-icon mui-icon-left-nav"></span>
-					</button>
-					<h1 class="mui-center mui-title ">详情</h1>
-				</div>
-				<div class="mui-page-content" id="sub_page">					
-							<div id="order" style="padding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
-								<p>存放号 : <span class="save_id" style="color: red;font-weight: bold;">未知</span></p>
-								<p><img id="barcode2"/></p>
-								<p style="color: red;">注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
-								<h5 class="mui-left">存放时间：<span class="save_time">未知</span></h5>
-								<h5 class="mui-left">存放地址：<span class="save_address">未知</span></h5>
-								<h5 class="mui-left">存放商户电话：<span class="save_phone">未知</span></h5>
-							</div>
-				</div>			
-			</div>
+
+		
 		
 		
 		
 		
 
-<div id="leftpage">
-	<span class="mui-icon mui-icon-arrowleft"></span>
-</div>
-
+		
+<!-- 变量存储    开始  -->
 <span style="display: none;">
 	<input type="hidden" name="page" id="page" value="1" />  
 	<button id='dipicker' data-options='{"type":"date","beginYear":2015,"endYear":2016}' class="btn hidden mui-btn mui-btn-block">选择日期 ...</button>
 </span>
+<!-- 变量存储    结束  -->
 
 
+
+
+<!-- 列表模板   开始  -->
 <script type="text/template" id="temple">
-{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
-		
-		<a class="goto_subpage">
-			<div class="mui-slider-handle">
-				<div class="mui-table">									
-					<div class="mui-table-cell mui-col-xs-9">
-						<h4 class="mui-ellipsis-2 Lee_Money">联系人：{{d[i].OrderAmount}}</h4>
-						<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;电话号码 ：{{d[i].OrderAmount}} </h5>
-						<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：{{d[i].OrderAmount}}</p>
-					</div>
-					<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
-						<!--<span class="mui-h5">今天  16:30</span>--> 
-						<p><img src="../Images/快递公司/sf.jpg" width="60"/></p>  
-						<span class="mui-h5" style="color:#000">{{d[i].OrderAmount}}</span>
+	{{# for(var i =0,len = d.length; i< len;i++){ 	}} 
+		<li class="mui-table-view-cell">	
+			<a class="goto_subpage">
+				<div class="mui-slider-handle">
+					<div class="mui-table">									
+						<div class="mui-table-cell mui-col-xs-7">
+							<h4 class="mui-ellipsis-2 Lee_Money">￥ {{d[i].fee}}</h4> 
+							<h5 class="Lee_id"><i class="mui-icon mui-icon-compose"></i>&nbsp;包裹单号：{{d[i].mailNo}}</h5>
+							<h5 class="Lee_phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：{{d[i].mobile}}</h5>																						
+						</div>
+						<div class="mui-table-cell mui-col-xs-5 mui-text-right Lee_time">
+							<span class="mui-h5">{{d[i].shouDateTime}}</span>
+							<span class="mui-h5"><i class="iconfont">{{d[i].status}}</i></span>
+						</div>
 					</div>
 				</div>
-			</div>
-		</a>  
-{{#     }	 }}
+			</a> 
+		</li> 
+	{{#     }	 }}	
 </script>
- 
-		 
-<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 列表模板  结束  -->
+
+
+
+
+<script src="../js/Zepto/zepto_1.1.3.js"></script>  
 <script src="../js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui/mui.view.js" type="text/javascript" charset="utf-8"></script>
@@ -320,368 +168,288 @@
 <script src="../js/mui/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/JsBarcode/CODE39.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/JsBarcode/JsBarcode.js" type="text/javascript" charset="utf-8"></script>
 
 
 		<script type="text/javascript" charset="UTF-8">
 		
-			/* 初始化公共数据 */
-			
-			var username = localStorage.登录帐号;	
-			
-			var rows = "10";		//每次加载的行数	
 		
-			var ResultJson = null;	//获取的列表数据
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 初始化公共数据  开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
-			var cnt = null; 	//数据总条数
-		 
+			var username = localStorage.登录帐号;	//登录帐号
 			
+			var 冲正申请人 = localStorage.EmployeeCode; //员工号
+			 
+			var CustomerCode = localStorage.CustomerCode; //门店号
 			
-		 	 /* 生成订单 */
-		   	生成订单 = function(e)
-			{ 
-				
-				var id = $(e).find("Lee_id").text();
-				var phome = $(e).find("Lee_phone").text();
-				
-				
-				if(true)
-				{						 
-					$("#barcode2").JsBarcode("8008208820",{format:"CODE39", width:1, displayValue: true});
-					$(".save_id").text("8060");
-					$(".save_time").text("2015-12-30 15:00:00");
-					$(".save_address").text("广泰路110号");
-					$(".save_phone").text("07692659155");
-					$("#order").fadeIn("slow");						
-				}
-				else
-				{
-					mui.toast("生成失败");
-				} 
-			}
+			var rows = "10";		//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
+		
+			var cnt = 0; 	//数据总条数
+		
+			var ResultJson = {};	//获取的列表数据
+			
+			var state = "";  //默认业务状态，""为所有	
+			
+			var Is_Frist = true; //这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
+						
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 初始化公共数据  结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
 			
 			
-			//选择搜索条件
-			document.getElementById("search").addEventListener("tap",function(){ 
-				
-				layer.open({
-					style: 'width:70%; background:rgba(0,0, 0, .6);border-radius: 20px;top:10px;position:absolute;left:20%;',
-					closeBtn: 0,
-					title: false,	
-					shade:[0.1,"transparent"],
-					shadeClose: true,
-					anim:false,	//去除动画
-					content: $("#search_menu").html(),
-					btn: 0 //默认底部不显示任何按钮
-				})
-				
-				$(".search_canel").bind("tap",function(){ 
-					var input = $(this).parents("form").find("input");
-					input.val("");
-					layer.closeAll();
-				})
-				$(".search_yes").bind("tap",function(){ 
-					var label = $(this).parents("form").find("label").text();
-					if(label == "订单号")
-					{}
-					else if(label == "手机号码")
-					{}
-				})
-			
-			})
 			
 			
 			
-			//选择时间之后
-			document.getElementById("select_time").addEventListener('tap',function(){ 
-								
-		        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var picker = new mui.DtPicker(options);
-				picker.show(function(rs) {
-					mui.toast('选择结果: ' + rs.text);
-					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-					var opt = JSON.parse(optionsJson);
-					opt.value = rs.text;
-					$("#dipicker").attr("data-options",JSON.stringify(opt));	
+		  	//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件  开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		     $(function() 
+		     {	     			   
+		     		初始化数据(); 	
+		     							
+					 //选择状态事件		   
+				    $("#tapstate .mui-control-item").bind("tap",function()
+					{					
+							if(!$(this).hasClass("mui-active"))
+							{
+								$("#tapstate .mui-active").removeClass("mui-active");
+								$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
+								初始化数据();
+							}					
+					})
 					
-					/* 渲染数据 */
-					var end = rs.text;	 
+					//选择时间之后
+					document.getElementById("select_time").addEventListener('tap',function()
+					{				
+				        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var picker = new mui.DtPicker(options);
+						picker.show(function(rs) 
+						{
+							layer.open({type:2,time:1.5});							
+							mui.toast('选择结果: ' + rs.text);
+							var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
+							var opt = JSON.parse(optionsJson);
+							opt.value = rs.text;
+							$("#dipicker").attr("data-options",JSON.stringify(opt));	
+							
+							/* 渲染数据 */
+							var end = rs.text + " 23:59:59";	 
+							var pass = new Date(end);
+							var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
+							var page = 1;	
+							state = Get_State();
+							$("#page").val(page); //分页标识变为1				
+					     	ResultJson = null; //清空		
+					     	$("#mui-table-view").html(""); //清空所有的li
+					     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶					     	
+				         	InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代收列表");
+						}) 
+					})					  
+		     }) 
+		  
+		  	//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件 结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		  		     
+		    
+		    
+		    //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新、下拉加载 开始  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		    
+		    //下拉刷新具体业务实现
+			function pulldownRefresh() 
+			{
+				setTimeout(function() 
+				{								
+					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能
+					
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				
+				}, 1500);
+			}        
+		     		 	 
+		    //上拉加载具体业务实现
+			function pullupRefresh() 
+			{
+				//加载数据
+				setTimeout(function() 
+				{			 	
+					if(Is_Frist)
+					{
+						Is_Frist = false; //解除限制，之后的都可以通过了
+						//首次加载数据的时候，不必再运行加载。
+						//计划是初始化10条，如果再次执行这个会变成20条过份冗长
+						return false;  
+					}		
+				
+					var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
+																		
+					if(num >= cnt)
+					{		
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
+						return false;
+					}
+				
+				
+					/* 获取dipicker的时间参数  */	
+					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
+					var end = JSON.parse(optionsJson).value + " 23:59:59";	
 					var pass = new Date(end);
 					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-					var page = 1;	
-					$("#page").val(page); //分页标识变为1				
-			     	ResultJson = null; //清空		
-			     	$("#mui-table-view").html(""); //清空所有的li	
-			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-				   InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+					
+					
+					
+					/* 获取和设置基本参数 */
+					var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
+					$("#page").val(page); //设置分页标识	
+					state = Get_State(); //获取和设置当前状态	
 					 
-				}) 
-			})
-			
-			
-			
-			
-		            
-		     $(function()
-		     {
-		     	
-		     		var urlinfo=window.location.href; //获取当前页面的url
-					var len=urlinfo.length;//获取url的长度
-					var offset=urlinfo.indexOf("?");//设置参数字符串开始的位置
-					var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
-					var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
-					var newsid=newsids[1];//得到参数值
-					var newsname=newsids[0];//得到参数名字
-					
-					//newsid
-					
+				    InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代收列表");
 					 
-		     	 
-		     		LeftPageGOBack();	//右滑箭头 
-		     		
-		     		bind_绑定子页面(); //测试阶段需要，正式环境可以去掉,不去也没关系
-		     		
-		     		初始化数据(); //初始化数据   
-		     })
-		     
-		     
-		     
-		     /* 这是简单的取消 */
-		      Cy_Tp_cannel = function()
-			  {
-					layer.closeAll();
-			  }
-				
-		     	/* 编辑按钮 */
-		     	$("#bianji").bind("tap",function() 
-				{
-					var speed = 500;	//动画速度 
-				
-					if($("#bianji").text() == "保存/返回")
-					{
-						var btnArray = ['取消保存', '确定保存'];
-						mui.confirm('你确定要保存修改吗？', '温馨提示', btnArray, function(e) {
-							if (e.index == 1)  
-							{
-								if(true)
-								{ 
-									//保存成功
-									mui.toast("保存成功");									
-								}
-								else
-								{
-									//保存失败
-									mui.toast("保存失败，失败原因：你没有编辑权限");
-								}
-							}
-							$("#bianji").text("编辑快递员"); 
-							$("#update").slideUp(speed); 								
-							setTimeout(function(){$("#form_info").slideDown(speed); },speed)
-						})
-					}
-					else if($("#bianji").text() == "编辑快递员")
-					{
-						$("#bianji").text("保存/返回");
-						$("#form_info").slideUp(speed);
-						setTimeout(function(){$("#update").slideDown(speed); },speed)
-						
-					}
-				}) 
-				
-				
-				/* 删除 */
-				$("#shanchu").bind("tap",function(){ 
-					
-						var btnArray = ['否', '是'];
-						mui.confirm('你确定要删除该快递员吗？', '温馨提示', btnArray, function(e) {
-							if (e.index == 1) 
-							{
-								//是
-								mui.back();
-								$("#bianji").text("编辑快递员"); 
-								$("#update").hide(); 								
-								$("#form_info").show();
-							}
-							else 
-							{
-								//否
-								return false;
-							}
-						})
-				})
-				
-				
-				/* 显示金额条款 */
-				$("#shoufeibiaozhun").bind("tap",function(){ 
-					
-					layer.open({
-						style: "width:60%;background:rgba(0,0, 0, .6);border-radius:20px;left:22%;color:#fff",
-						closeBtn: 0,
-						title: false, 
-						shadeClose: true,
-						content: $("#Cy-Tp-XieYi").html(),
-						btn: 0, //默认底部不显示任何按钮								
-					}); 
-	
-				})
+				}, 1500);
+			}       
 			
-		     
-		     
-		     初始化数据 = function()
-		     {
-		     	 
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新、下拉加载  结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			
+			
+			 
+			 
+			 //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 方法体 开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			 
+			 初始化数据 = function()
+		     {		   
+		     	/*初始化*/
+		     	layer.open({type:2,time:1.5});	//蒙版	
+		     	mui("#pullrefresh").pullRefresh().refresh(true);		     	
+		     	mui("#pullrefresh").pullRefresh().scrollTo(0,0,100); //滚动置顶		     	
+		     	$("#mui-table-view").html(""); //清空所有的数据
+		     	var page = 1;	//分页还原 
+				$("#page").val(page); //分页标识变为1				
+		     	ResultJson = null; //清空返回数据		     	
+		     	state = Get_State(); //获取和设置当前状态
+		     	//alert(state);
 		     	
-		     	/* 初始化dipicker的默认参数 */
-		     	var opt = {};
+		     	
+		     	/* 初始化dipicker时间控制器的默认参数 */
+		     	var opt = {};	//参数是一个json对象
 		     	var now = new Date(); 	//当前时间
 		     	opt.value = now.format("yyyy-MM-dd"); 
 		     	opt.type = "date";
 		     	opt.beginYear =  now.getFullYear() - 1;		     	
 		     	opt.endYear =  now.getFullYear();		     
 		     	var str_json = JSON.stringify(opt);		     			     	
-		     	$("#dipicker").attr("data-options",str_json);	
+		     	$("#dipicker").attr("data-options",str_json);			     	
 		     	
 		     
-		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd"); //今天 		     	
-		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
-		     }
-		     
-		     
-		     
-		    /*
-			 * 下拉刷新具体业务实现 
-			 */
-			function pulldownRefresh() 
-			{
-				//模拟更新数据
-				setTimeout(function() 
-				{											
-					mui.toast("刷新成功");
-				
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-		
-				}, 1500);
-			}        
-		    
-		 	 
-		     
-		    /**
-			 * 上拉加载具体业务实现
-			 */
-			function pullupRefresh() 
-			{
-				//加载数据
-				setTimeout(function() 
-				{
-						var count = cnt; //数据库总数
-				 
-						var num =  $(".mui-table-view-cell").size(); //列表总数
-		
-						if(num >= count)
-						{		
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
-							return false;
-						}
-					
-						ResultJson = null; //清空
-						var html = $("#temple").html();			
-						/* 获取dipicker的时间参数  */	
-						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value;	
-						var pass = new Date(end);
-						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = parseInt($("#page").val()) + 1;						
-						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
-						
-				}, 1500);
-			}  
-			 
-			
+		     	
+		     	/* 初始化时间 -- 从今天到两个月前的数据  */			     	
+		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
+		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");			  			 	  	
+			  	//alert(JSON.stringify({"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows}));
+			    InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代收列表");
+		    } 
 			
 			 
-			 
-			 
-			//专门用来初始化的函数 
-			CYAPI_获取返回值 = function(str)
-			{
+			
+			//订单列表
+			CYAPI_代收列表 = function(str)
+			{		
 				//alert(str);
 				
-				layer.closeAll();
-
-				ResultJson = eval('('+ str +')')["dtOrderDetail"] || {};
+				layer.closeAll();	
 				
+				var jsonobj = Api_filter(str);
+
+				ResultJson = jsonobj["packageList"] || {};	
+				
+				cnt = jsonobj.rowCount; //数据库总数,存放在公共变量中去
+				
+				//alert(cnt);
+
+				if(cnt.toString() == "0")
+				{						
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);						
+					return false;
+				}				
+										
 				//替换美化文本
 				$.each(ResultJson,function(i,o)
-				{
-					o.OrderState = o.OrderState.replace("待处理","&nbsp;&#xe603;").replace("成功","&nbsp;&#xe604;");
-					o.OrderTime = timeFormat(o.OrderTime);
-				})		
+				{					
+					o.status = replace_ico(o.status); //将状态更改为图标
+					o.shouDateTime = timeFormat(o.shouDateTime.replace("T"," "));	//将收包裹时间美化
+					o.quDateTime = timeFormat(o.quDateTime.replace("T"," "));	    //将取包裹时间美化
+				
+					if(o.quDateTime == "")
+					{
+						//如果取包裹时间不为空，说明包裹已被取走，那么就使用取包裹的时间
+						o.shouDateTime = o.quDateTime; 
+					}
+				
+				})
 								
-				var temple_html = $("#temple").html();								
+				var temple_html = $("#temple").html();		
 				
 				laytpl(temple_html).render(ResultJson, function (html)
-		        {        		   
-		            $("#mui-table-view").append(html);      //填充初始化数据     
+		        {        		 	      
+		            $("#mui-table-view").append(html);      //填充初始化数据	                  
 		        });    	
-		        		        
-				var count = cnt; //数据库总数
-				 
-				var num =  $(".mui-table-view-cell").size();	//列表总数
-		
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
-							        
-		        bind_绑定子页面();
-			}  
+		        		    
+				var num =  $("#pullrefresh .mui-table-view-cell").size();	//列表总数
+								
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
+			}
 			
-			   
-			  
-			//进入详情界面
-			CYAPI_详情 = function(str)
+			
+			 //替换状态为图标 	1，已收(已登记) 2，已取，3，已退
+			 replace_ico = function(str)
+			 {			 	
+			 	if(str == "1")
+			 	{
+			 		str = "&nbsp;&#xe604;";			 		
+			 	}
+			 	else if(str == "2")
+			 	{
+			 		str = "&nbsp;&#xe603;";
+			 	}
+			 	else if(str == "3")
+			 	{
+			 		str = "&nbsp;&#xe613;";
+			 	}
+			 	
+			 	return str;
+			 }
+			 
+			 
+			 //获取当前模式
+			Get_State = function()
 			{
-				//alert(str);				 							
-				var json = JSON.parse(str);
-				
-				$("#sub_page .yewuleixing").text(json.ProductName);	//业务类型
-				$("#sub_page .yewuhaoma").text(json.CustomerOrderNo);	//订单号
-				$("#sub_page .dingdanjine").text(json.OrderAmount);	//订单金额
-				
-				$("#sub_page .xiadanshijian").text(json.OrderTime);//下单时间
-				$("#sub_page .chulishijian").text(json.OrderTime);//处理时间
-				$("#sub_page .zhuangtai").text(json.OrderState);  //状态
+				var text = $("#tapstate .mui-active").text();
 				
 				
-//   			$(this).find(".goto_subpage").trigger("tap"); //依靠气泡就实现了
-				layer.closeAll(); 
+				if(text == "所有包裹")
+				{
+					return "0"; 
+				}
+				else if(text == "未收包裹")
+				{
+					return "1";
+				}
+				else if(text == "已收包裹")
+				{
+					return "2";
+				}
+				else if(text == "已退包裹")
+				{
+					return "3";
+				}
 				
 			}
+			
+			
+			 //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 方法体 结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			 
+			 
+			 
+			 
+			 
+			
+			 
 			  
-			   
-			//  支付宝扫码
-			//	微信扫码
-			//	翼支付
-			//	微信找零
-			 bind_绑定子页面 = function()
-			 {			 	 
-			 	$("#mui-table-view .mui-table-view-cell").bind('tap',function (e) 
-	     		{	
-	     			//根据不同的业务绑定不同的单页	     			
- 					$(this).find(".goto_subpage").attr("href","#info");
-										
-					生成订单 ($(this));				
-										
- 				 	
- 					//根据不同的业务调用不同的API
-	     			//InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "OrderDetail", {"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"} , "CYAPI_详情")
-	     			
-     			})   
-			 } 
-			  
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 以下区域不必改动 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			 
 			 
 			//初始化单页view
@@ -699,18 +467,17 @@
 					container: '#pullrefresh',
 					down: 
 					{
-						callback: pulldownRefresh
+						//callback: pulldownRefresh
 					},
 					up: 
 					{
 						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
+						contentdown:"", //默认值'下拉加载更多'，这里设为空
 						callback: pullupRefresh
 					}
 				}
-			});
-		          
-		          
-			  
+			}); 
 			  
 			if (mui.os.plus) 
 			{
@@ -727,9 +494,6 @@
 						mui('#pullrefresh').pullRefresh().pullupLoading();
 					});
 			}
-			
-			
-			
 			
 			var view = viewApi.view;
 			(function($) {
@@ -757,7 +521,6 @@
 					//				console.log(e.detail.page.id + ' back');
 				});
 			})(mui);
-			
 			
 			
 			

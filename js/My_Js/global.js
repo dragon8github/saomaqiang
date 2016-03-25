@@ -416,6 +416,7 @@ Show_Menu = function()
 	//刷新	
 	mui(".mui-table-view").on('tap', '.Menu_refresh', function()
 	{ 
+		//android.clearCache();
 		window.location.reload();
 	})
 	

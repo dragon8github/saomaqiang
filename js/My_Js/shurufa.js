@@ -67,6 +67,7 @@ var shurufa_open_num = function(e)
 	$(".shurufa_input_active").removeClass("shurufa_input_active"); 
 	$(e).addClass("shurufa_input_active"); //添加标志.shurufa_input_active
 	var val = $(e).val();
+	var myinput = null;
 
 	layer.open
 	({
@@ -74,10 +75,15 @@ var shurufa_open_num = function(e)
 		content: $("#shurufanumhtml").html(),
 		success:function(e)
 		{	
+			//样式美化和兼容
 			$(".layermanim").css({"max-width":"100%"});
 			$(".layermcont").css({"padding":"10px 0px"});	
 			$("#shurufa_input_num").val(val);
 			
+			//获取两个核心的input
+			myinput = $("#shurufa_input_num,.shurufa_input_active");			
+			
+			//兼容扫码枪
 			document.onkeydown=function(event)
 			{
 				var e = event || window.event || arguments.callee.caller.arguments[0]; 
@@ -95,14 +101,13 @@ var shurufa_open_num = function(e)
 	
 	$("#shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li").not("#shurufa_back").bind("click",function()
 	{
-		var myinput = $("#shurufa_input_num,.shurufa_input_active");
 		var str = $(this).text();	
 		var v = myinput.val() + str;	
-		myinput.val(v); 
+		myinput.val(v);  
 	})
 	
 	$("#shurufa_back").bind("click",function(){
-		var myinput = $("#shurufa_input_num");
+		
 		var v = myinput.val();
 		var value = v.substr(0,v.length - 1);
 	    myinput.val(value); 
@@ -111,13 +116,12 @@ var shurufa_open_num = function(e)
 	
 	$("#shurufa_clear").bind("click",function()
 	{
-		var myinput = $("#shurufa_input_num,.shurufa_input_active");
 		myinput.val("");	
-		
 	})
 	
 	$("#shurufa_send").bind("click",function()
-	{
+	{  
+		//虽然是同步更新Input的，但还是这样做适合点
 		var myinput = $("#shurufa_input_num");
 		var v = myinput.val();
 		$(".shurufa_input_active").val(v);
