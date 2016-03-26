@@ -15,7 +15,6 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/My_css/ico.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/My_css/global.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/My_css/shurufa.css"/>
 		<style>
 			/* 无缝DIV */
 			.mui-views,.mui-view, .mui-pages,.mui-page,.mui-page-content {position: absolute;left: 0;right: 0;top: 0;bottom: 0;width: 100%;height: 100%;background-color: #efeff4;}
@@ -100,7 +99,7 @@
 					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>取货码</label>
-							<input id='quKey' onclick="shurufa_open_num(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入条形码">
+							<input id='quKey' onclick="parent.shurufa_open(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入条形码">
 						</div>
 					</div> 
 					
@@ -134,7 +133,6 @@
 		<script src="../js/JsBarcode/CODE39.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/JsBarcode/JsBarcode.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/My_Js/shurufa.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/My_Js/MyValidate.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -151,8 +149,7 @@
 			
 			
 			$(function()
-			{
-				幽灵输入法数字版html(); 				
+			{		
 			}) 
 			
 			//存物品
