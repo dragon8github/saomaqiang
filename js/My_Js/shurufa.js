@@ -1,19 +1,23 @@
 /* 打开幽灵键盘全版  */
 var shurufa_open = function(e)
-{
+{	
+	var active_obj = e;		//获取
 	$(".shurufa_input_active").removeClass("shurufa_input_active"); 
 	$(e).addClass("shurufa_input_active"); //添加标志
 	var val = $(e).val();
+	var myinput = null;
+	
 	
 	layer.open
 	({
-		style: 'width:100%;height:100%; background:rgba(0,0, 0, .2);',
+		style: 'width:100%;height:100%;background:rgba(0,0, 0, .2)',
 		content: $("#shurufahtml").html(),	
-		success:function(e)
+		success:function()
 		{
 			$(".layermanim").css({"max-width":"100%"});
 			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	
 			$("#shurufa_input").val(val);
+			myinput = $("#shurufa_input,.shurufa_input_active");
 			
 			document.onkeydown=function(event)
 			{
@@ -31,31 +35,32 @@ var shurufa_open = function(e)
 	
 	$("#shurufa_num li,#shurufa_q li,#shurufa_a li,#shurufa_z li").bind("click",function()
 	{
-		var myinput = $("#shurufa_input,.shurufa_input_active");
-		var str = $(this).text();	
+		
+		var str = $(this).text();
 		var v = myinput.val() + str;	
 		myinput.val(v); 
+		$(active_obj).val(v);
 	})
 	
 	$("#shurufa_back").bind("click",function()
 	{
-		var myinput = $("#shurufa_input");
 		var v = myinput.val();
 		var value = v.substr(0,v.length - 1);
 	    myinput.val(value); 
-	    $(e).val(value);
+	    $(active_obj).val(value);
 	})
 	
 	$("#shurufa_clear").bind("click",function(){
-		var myinput = $("#shurufa_input,.shurufa_input_active");
 		myinput.val("");	
-		
+		$(active_obj).val("");
 	})
 	
-	$("#shurufa_send").bind("click",function(){
+	$("#shurufa_send").bind("click",function()
+	{
 		var myinput = $("#shurufa_input");
 		var v = myinput.val();
 		$(".shurufa_input_active").val(v);
+		$(active_obj).val(v);
 		layer.closeAll();
 	})
 }
@@ -111,7 +116,6 @@ var shurufa_open_num = function(e)
 		var v = myinput.val();
 		var value = v.substr(0,v.length - 1);
 	    myinput.val(value); 
-	    $(e).val(value); 
 	})
 	
 	$("#shurufa_clear").bind("click",function()

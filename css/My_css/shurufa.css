@@ -1,4 +1,5 @@
 /* 幽灵输入法 */
+
 #shurufa_num,#shurufa_q,#shurufa_a,#shurufa_z
 {				
 	list-style: none;
@@ -19,14 +20,16 @@
 	border:1px solid #fff;
 	text-align: center;
 	background: transparent;
+	/*background: rgba(255,255,255,.1);*/
 	line-height: 30px;
 	margin-right:5px;	
 	color:#fff; 	
-	border-radius: 7px;
-	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);/*ie*/
-    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
-    box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+	border-radius: 7px; 	
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=3);
+	-moz-box-shadow: 2px 2px 10px #909090;
+	-webkit-box-shadow: 2px 2px 10px #909090;
+	box-shadow:2px 2px 10px #909090;
+    
 }
 #shurufa_num_123 li,#shurufa_num_456 li,#shurufa_num_789 li,#shurufa_num_c0 li
 {
@@ -37,8 +40,8 @@
 }
 #shurufa_gongneng li:active,#shurufa_num li:active,#shurufa_q li:active,#shurufa_a li:active,#shurufa_z li:active,#shurufa_num_123 li:active,#shurufa_num_456 li:active,#shurufa_num_789 li:active,#shurufa_num_c0 li:active
 {
-	background: #909090;		
-	line-height:25px;
+	background: #fff;		
+	color:#000; 
 }
 #shurufa_input,#shurufa_input_num
 {

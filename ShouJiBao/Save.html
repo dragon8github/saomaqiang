@@ -64,12 +64,11 @@
 		 
 		 <!--单页开始 -->
 		<div id="set" class="mui-page">
-			<div class="mui-content mui-scroll-wrapper">
-				 <div class="mui-scroll">
+			<div class="mui-content">				 
 					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>手机号码</label>
-							<input id='set_phone' value="" onclick="shurufa_open_num(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入手机号码">
+							<input id='set_phone' value="" onclick="parent.shurufa_open(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入手机号码">
 						</div>
 					</div> 
 					
@@ -82,13 +81,12 @@
 					</div> 	
 					
 					<div id="set_code" style="display:none;padding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
-						<p>存放号 : <span id="set_save_id" style="color: red;font-weight: bold;">未知</span></p>
+						<p  style="color: red;font-size:30px;margin:20px;">存放号 : <span id="set_save_id" style="color: red;font-weight: bold;">未知</span></p>
 						<p><img id="set_barcode"/></p>
 						<p style="color: red;">注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
 						<h5 class="mui-left">存放时间：<span id="set_save_time">未知</span></h5>						
 						<h5 class="mui-left">存放商户电话：<span id="set_save_phone">未知</span></h5>
-					</div>	
-				</div>
+					</div>				
 			</div>		 
 		</div>
 		<!--单页结束--> 
@@ -101,7 +99,7 @@
 			<div class="mui-content">
 					<div class="mui-input-group">
 						<div class="mui-input-row">
-							<label>条形码</label>
+							<label>取货码</label>
 							<input id='quKey' onclick="shurufa_open_num(this)" readonly="readonly" type="text" class="mui-input-clear mui-input" placeholder="请输入条形码">
 						</div>
 					</div> 
@@ -115,9 +113,9 @@
 					</div> 	
 					
 					<div id="get_code" style="display:none;padding:15px;border-radius: 5px; margin: 0px auto;text-align: center;">
-						<p>存放号 : <span id="get_save_id" style="color: red;font-weight: bold;">未知</span></p>
+						<p style="color: red;font-size:30px;margin:20px;">存放号 : <span id="get_save_id" style="color: red;font-weight: bold;">未知</span></p>
 						<p><img id="get_barcode"/></p>
-						<p style="color: red;">注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
+						<p>注：前两个小时免费，超过后每小时收取1元，10元封顶。</p>
 						<h5 class="mui-left">存放时间：<span id="get_save_time">未知</span></h5>
 						<h5 class="mui-left">存放地址：<span id="get_save_address">未知</span></h5>
 						<h5 class="mui-left">存放商户电话：<span id="get_save_phone">未知</span></h5>
@@ -154,14 +152,13 @@
 			
 			$(function()
 			{
-				幽灵输入法数字版html(); 
-				
-				mui('.mui-scroll-wrapper').scroll();	
+				幽灵输入法数字版html(); 				
 			}) 
 			
 			//存物品
 			document.getElementById("set_btn").addEventListener("tap",function()
 			{
+				
 				var set_phone = document.getElementById("set_phone").value;
 				if(!Is_Null(set_phone,"请输入手机号码")) return false;
 		 		if(!Is_Phone(set_phone,"请输入正确合法的手机号码")) return false;
@@ -175,7 +172,6 @@
 				 	"employeeCode":Operator
 				 }	
 				 
-				 //console.log(JSON.stringify(opt)); 
 				 
 				 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "CunPackage", opt, "CYAPI_存包裹");
 			})
@@ -216,7 +212,7 @@
 		 			var cunNo = json.cunNo || "00";				//存放号
 			 		var orderid = json.orderId || "00000000"; 	//订单号
 			 		
-			 		//mui.toast(json.retMessage + "\r\n" + "请提示用户拍照保留");
+			 		mui.toast(json.retMessage + "\r\n" + "请提示用户拍照保留");
 		 				
 	 				存放物品_生成条形码(cunNo,orderid);
 	 				
@@ -231,22 +227,28 @@
 			 CYAPI_取包裹 = function(str)
 			 {
 			 	setTimeout(function()
-			 	{
+			 	{			 		
 	 				$("#get_btn").text("确定");
 			 		var json = Api_filter(str);		
 			 		
 			 		var retMessage = json.retMessage;			//返回的信息
- 					var cunNo = json.cunNo;						//存放号
-			 		var orderId = json.orderId; 				//订单号
-			 		var time = json.time; 						//寄存时长
-	 				var fee = json.fee; 						//费用
-	 				var phone = json.phone;						//手机号码
-	 				
-			 		
-			 		mui.toast(json.retMessage + "\r\n" + "请提示用户拍照保留");
-		 				
-	 				取回物品_生成条形码(orderId,phone,time,cunNo);
-	 				
+			 		var retCode = json.retCode;					//返回的操作码
+			 		if(retCode == "0")
+			 		{		
+			 			mui.alert(retMessage);
+			 			return false;
+	 				}
+			 		else if(retCode == "1")
+			 		{
+			 			mui.alert(retMessage);
+	 					var cunNo = json.cunNo;						//存放号
+				 		var orderId = json.orderId; 				//订单号
+				 		var time = json.time; 						//寄存时长
+		 				var fee = json.fee; 						//费用
+		 				var phone = json.phone;						//手机号码	 				
+				 				 				
+		 				取回物品_生成条形码(orderId,phone,time,cunNo);		 			
+			 		}
 			 		
 	 			},1000);
 			 }
@@ -263,7 +265,7 @@
 				$("#set_save_phone").text(phone);
 				$("#set_code").fadeIn("slow");	
 				
-				mui('.mui-scroll-wrapper').scroll().scrollToBottom(500);	
+				$("html,body").animate({scrollTop:$("#app").height()}, '1000'); 
 				
 				
 			}
@@ -277,7 +279,7 @@
 				$("#get_save_time").text(time);
 				$("#get_save_phone").text(phone);
 				$("#get_code").fadeIn("slow");	
-				mui('.mui-scroll-wrapper').scroll().scrollTo(0,-100,500); 
+				$("html,body").animate({scrollTop:$("#app").height()}, '1000'); 
 			}
 			 
 			  
