@@ -7,15 +7,15 @@ var shurufa_open = function(e)
 	var val = $(e).val();
 	var myinput = null;
 	
-	
+
 	layer.open
 	({
-		style: 'width:100%;height:100%;background:rgba(0,0, 0, .2)',
+		style: 'width:100%;height:100%;background:rgba(0,0, 0, .2);margin: auto 0px;',
 		content: $("#shurufahtml").html(),	
 		success:function()
 		{
 			$(".layermanim").css({"max-width":"100%"});
-			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	
+			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	 
 			$("#shurufa_input").val(val);
 			myinput = $("#shurufa_input,.shurufa_input_active");
 			

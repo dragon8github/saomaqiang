@@ -18,156 +18,72 @@
 		<link rel="stylesheet" type="text/css" href="../css/My_css/cover.css" />
 		
 		<style>
-			/* The custom style */
-			
-			.iconfont 
-			{
-				font-size: 30px
-			}			
-			.mui-table .Lee_time {
-				vertical-align: middle;
-			}
-			
-			.mui-table .Lee_time .iconfont {
-				color: #007AFF;
-				font-size: 26px;
-			}
-			
-			.mui-table .Lee_Order {
-				margin: 8px 0px;
-				color: #333;
-			}
-			
-			.mui-table .Lee_Phone {
-				color: #333;
-			}
-			
-			.mui-table .Lee_Money {
-				font-weight: 700;
-			}
-			/* Cover the style */
-			
-			.mui-bar .mui-segmented-control {
-				top: 6px;
-				right: 10px
-			}
-			
-			.mui-segmented-control .mui-control-item {
-				line-height: 30px;
-			}
-			
-			.mui-pull-bottom-pocket {
-				margin-bottom: 40px;
-				/* 这个很重要 和#pullrefresh 的margin-top配合 才可以兼容侧滑菜单的遮盖  */
-			}
-		</style>
-		<!--
-        这里是无缝跳转的css
-        -->
-		<style>
-			.mui-views,
-			.mui-view,
-			.mui-pages,
-			.mui-page,
-			.mui-page-content {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #efeff4;
-			}
-			
-			.mui-pages {
-				top: 46px;
-				height: auto;
-			}
-			
-			.mui-page.mui-transitioning {
-				-webkit-transition: -webkit-transform 300ms ease;
-				transition: transform 300ms ease;
-			}
-			
-			.mui-page-left {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-			}
-			
-			.mui-ios .mui-page-left {
-				-webkit-transform: translate3d(-20%, 0, 0);
-				transform: translate3d(-20%, 0, 0);
-			}
-			
-			.mui-page {
-				display: none;
-			}
-			
-			.mui-pages .mui-page {
-				display: block;
-			}
-			
-			.mui-page .mui-table-view:first-child {
-				/*margin-top: 15px;*/
-			}
+			.iconfont{font-size:30px}
+			.mui-table .Lee_time{vertical-align:middle}
+			.mui-table .Lee_time .iconfont{color:#007aff;font-size:26px}
+			.mui-table .Lee_Order{margin:8px 0;color:#333}
+			.mui-table .Lee_Phone{color:#333}
+			.mui-table .Lee_Money{font-weight:700}
+			.mui-bar .mui-segmented-control{top:6px;right:10px}
+			.mui-segmented-control .mui-control-item{line-height:30px}
+			.mui-pull-bottom-pocket{margin-bottom:40px}
+			.mui-page,.mui-page-content,.mui-pages,.mui-view,.mui-views{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;background-color:#efeff4}
+			.mui-pages{top:46px;height:auto}
+			.mui-page.mui-transitioning{-webkit-transition:-webkit-transform .3s ease;transition:transform .3s ease}
+			.mui-page-left{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+			.mui-ios .mui-page-left{-webkit-transform:translate3d(-20%,0,0);transform:translate3d(-20%,0,0)}
+			.mui-page{display:none}
+			.mui-pages .mui-page{display:block}
+			.mui-off-canvas-wrap .mui-bar{box-shadow:#ccc 0 1px 6px 0}
+			.mui-off-canvas-wrap{z-index:0}
+			.mui-input-group .mui-input-row{height:43px}
 		</style>
 
 	</head>
 
 	<body>
 
-		<!--
-			页面主结构开始：
-			一个容器（.mui-page）
-			包含一个标题(.mui-navbar-inner)
-			和一个内容(.mui-page-content)
-		-->
+
+
+		<!--页面主结构 开始-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
 				<div class="mui-navbar"></div>
-				<div class="mui-pages">
-
-				</div>
+				<div class="mui-pages"></div>
 			</div>
 		</div>
-		<!--页面主结构结束-->
+		<!--页面主结构 结束-->
+		
+		
+		
 
-		<!--侧滑菜单容器   -->
-		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
+		<!--主容器   -->
+		<div id="Main" class="mui-page">
 
 			<!--页面标题栏开始-->
 			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">快递列表</h1>
+				<a href="#add" class="mui-icon mui-pull-right mui-icon-plusempty" id="add_kuaidiyuan"></a>
 			</div>
 			<!--页面标题栏结束-->
-
-			<!-- 兼容 -->
-			<style type="text/css">
-				.mui-off-canvas-wrap .mui-bar {
-					box-shadow: rgb(204, 204, 204) 0px 1px 6px 0px
-				}
-				
-				.mui-off-canvas-wrap {
-					z-index: 0;
-				}
-			</style>
 
 			<div id="pullrefresh" class="mui-page-content mui-content mui-inner-wrap mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul style="margin-top: 0px;" id="mui-table-view" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 						<li class="mui-table-view-cell">
 							<div class="mui-slider-right" style="z-index: 9999;"> 
-								<a id="slider-delete"  class="mui-btn mui-btn-red">删除</a>
-								<a href="#update" id="go_update"  class="mui-btn mui-btn-warning">编辑</a>
+								<a id="look_tip"  class="mui-btn mui-btn-primary">收费</a>
+								<a href="#update" id="go_update"  class="mui-btn mui-btn-warning">编辑</a>	
+								<a id="slider-delete"  class="mui-btn mui-btn-red">删除</a>		
 							</div>							
 							<a class="goto_subpage">
 								<div class="mui-slider-handle">
 									<div class="mui-table">
 										<div class="mui-table-cell mui-col-xs-9">
 											<h4 class="mui-ellipsis-2 Lee_Money">联系人：李四</h4>
-											<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;电话号码 ：6264184415221 </h5>
-											<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：137-13332652</p>
+											<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;客服电话 ：6264184415221 </h5>
+											<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;联系电话：137-13332652</p>
 										</div>
 										<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
 											<p><img src="../Images/kuaidigongsi/sf.jpg" width="60" /></p>
@@ -192,13 +108,13 @@
 				</button>
 				<h1 class="mui-center mui-title ">详情</h1>
 			</div>
-			<div class="mui-page-content" id="sub_page">
+			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-						<ul class="mui-table-view mui-action-back" id="form_info">
+						<ul class="mui-table-view" id="form_info">
 							 
 							<li class="mui-table-view-cell">
-								<a>快递员<span class="mui-pull-right yewuhaoma">未知</span></a>
+								<a>快递公司<span class="mui-pull-right yewuhaoma">未知</span></a>
 							</li>
 							<li class="mui-table-view-cell">
 								<a>快递电话<span class="mui-pull-right dingdanjine">未知</span></a>
@@ -210,9 +126,9 @@
 								<a>联系电话<span class="mui-pull-right dingdanjine">未知</span></a>
 							</li>
 						</ul>
-
-						<a style="margin-top:20px" href="#update"  class="mui-btn mui-btn-warning mui-btn-block">编辑快递员</a>
-						<button type="button"   id="shoufeibiaozhun" class="mui-btn mui-btn-primary mui-btn-block">查看收费标准</button>
+					
+						<a href="#update" style="margin-top: 20px;"  class="mui-btn mui-btn-warning mui-btn-block">编辑快递员</a>
+						<button  type="button"   id="shoufeibiaozhun" class="mui-btn mui-btn-primary mui-btn-block">查看收费标准</button>
 						
 					</div>
 				</div>
@@ -221,43 +137,34 @@
 
 
 
-		
-				
+		 
+		<!-- 更新页面 -->		
 		<div id="update" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav mui-action-back">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">编辑</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">		
-						<style type="text/css">
-							.mui-input-group .mui-input-row {
-								height: 43px;
-							}
-						</style>
-						<form class="mui-input-group" id="update">
-							<div class="mui-input-row">
-								<label>快递员</label>
-								<input id="password" type="text" value="未知" placeholder="请输入快递员" class="mui-input-clear" />
-							</div>
-							<div class="mui-input-row">
-								<label>快递电话</label>
-								<input id="username" type="text" value="未知" placeholder="请输入快递电话" class="mui-input-clear" />
-							</div>
+					<div class="mui-scroll">	
+					
+						<form class="mui-input-group" id="update">	
+							
 							<div class="mui-input-row">
 								<label>联系人</label>
-								<input id="password" type="text" value="未知" placeholder="请输入联系人" class="mui-input-clear" />
+								<input id="update_lianxiren" readonly="readonly" onclick="parent.shurufa_open(this)" type="text" value="未知" placeholder="请输入联系人" class="mui-input-clear" />
 							</div>
+							
 							<div class="mui-input-row">
 								<label>联系电话</label>
-								<input id="password" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" />
-							</div>							
+								<input id="update_lianxidianhua" readonly="readonly" onclick="parent.shurufa_open(this)" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" />
+							</div>		
+							
 						</form>
 						
-						<a style="margin-top:20px" id="updatebtn" class="mui-btn mui-btn-warning mui-btn-block">保存编辑</a>
+						<a id="updatebtn" style="margin-top: 10px;" class="mui-btn mui-btn-warning mui-btn-block">保存编辑</a>
 						<button type="button" id="shanchu" class="mui-btn mui-btn-danger mui-btn-block">删除快递员</button>
 							
 					</div>
@@ -267,14 +174,46 @@
 
 
 
-		<!--<div id="leftpage">
-	<span class="mui-icon mui-icon-arrowleft"></span>
-</div> -->
 
-		<span style="display: none;">
+
+		<!-- 添加 -->
+		<div id="add" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav mui-action-back">
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">添加快递员</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">	
+					
+						<form class="mui-input-group" id="update">
+							<div class="mui-input-row">
+								<label>联系人</label>
+								<input id="add_lianxiren" readonly="readonly" onclick="parent.shurufa_open(this)" type="text" value="未知" placeholder="请输入联系人" class="mui-input-clear" />
+							</div>
+							<div class="mui-input-row">
+								<label>联系电话</label>
+								<input id="add_lianxidianhua" readonly="readonly" onclick="parent.shurufa_open(this)" type="text" value="未知" placeholder="请输入联系电话" class="mui-input-clear" />
+							</div>							
+						</form>
+						
+						<a style="margin-top:10px" id="add_btn" class="mui-btn mui-btn-warning mui-btn-block">保存编辑</a>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+<span style="display: none;">
 	<input type="hidden" name="page" id="page" value="1" />  
 	<button id='dipicker' data-options='{"type":"date","beginYear":2015,"endYear":2016}' class="btn hidden mui-btn mui-btn-block">选择日期 ...</button>
 </span>
+
+
 
 		<div data-role="popup" id="Cy-Tp-XieYi" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="min-width:300px;display:none">
 
@@ -351,32 +290,40 @@
 				</p>
 			</div>
 		</div>
+		
+		
+		
 
-		<script type="text/template" id="temple">
+<script type="text/template" id="temple">
+{{# for(var i =0,len = d.length; i	< len;i++){ }} 
+	
 
-			{{# for(var i =0,len = d.length; i
-			< len;i++){ }} <div class="mui-slider-right mui-disabled">
-				<a class="mui-btn mui-btn-red mui-del">删除</a>
-				</div>
-				<a class="goto_subpage">
-					<div class="mui-slider-handle">
-						<div class="mui-table">
-							<div class="mui-table-cell mui-col-xs-9">
-								<h4 class="mui-ellipsis-2 Lee_Money">联系人：{{d[i].OrderAmount}}</h4>
-								<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;电话号码 ：{{d[i].OrderAmount}} </h5>
-								<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;手机号码：{{d[i].OrderAmount}}</p>
-							</div>
-							<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
-								<!--<span class="mui-h5">今天  16:30</span>-->
-								<p><img src="../Images/快递公司/sf.jpg" width="60" /></p>
-								<span class="mui-h5" style="color:#000">{{d[i].OrderAmount}}</span>
-							</div>
+<li class="mui-table-view-cell">
+			<div class="mui-slider-right" style="z-index: 9999;"> 
+				<a id="look_tip"  class="mui-btn mui-btn-primary">收费</a>
+				<a href="#update" id="go_update"  class="mui-btn mui-btn-warning">编辑</a>	
+				<a id="slider-delete"  class="mui-btn mui-btn-red">删除</a>		
+			</div>							
+			<a class="goto_subpage">
+				<div class="mui-slider-handle">
+					<div class="mui-table">
+						<div class="mui-table-cell mui-col-xs-9">
+							<h4 class="mui-ellipsis-2 Lee_Money">联系人：李四</h4>
+							<h5 class="Lee_Order"><i class="mui-icon mui-icon-compose"></i>&nbsp;客服电话 ：6264184415221 </h5>
+							<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;联系电话：137-13332652</p>
+						</div>
+						<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
+							<p><img src="../Images/kuaidigongsi/sf.jpg" width="60" /></p>
+							<span class="mui-h5" style="color:#000">顺丰快递</span>
 						</div>
 					</div>
-				</a>
-				{{# } }}
+				</div>
+			</a>
+</li>
 
-		</script>
+
+{{# } }}
+</script>
 
 		<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<!--<script src="../js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>-->
@@ -388,24 +335,34 @@
 		<script src="../js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
 
+
+
 		<script type="text/javascript" charset="UTF-8">
 			/* 初始化公共数据 */
 			var username = localStorage.登录帐号;
 			var rows = "10"; //每次加载的行数	
 			var ResultJson = null; //获取的列表数据
-			var cnt = null; //数据总条数
-			$(function() {
-				
-				var newsid =  get_urlpara(); //获取参数				
+			var cnt = null; //数据总条数			
+			var newsid =  get_urlpara(); //获取参数	
+			
+			
+			$(function() 
+			{							
 				bind_绑定子页面(); //测试阶段需要，正式环境可以去掉,不去也没关系
 				初始化数据(); //初始化数据   
 			})
+			
+			
 			/* 这是简单的取消 */
-			Cy_Tp_cannel = function() {
+			Cy_Tp_cannel = function() 
+			{
 				layer.closeAll();
 			}
+			
+			
 			/* 编辑按钮 */
-			$("#updatebtn").bind("tap", function() {
+			$("#updatebtn").bind("tap", function() 
+			{
 				var btnArray = ['取消保存', '确定保存'];
 				mui.confirm('你确定要保存修改吗？', '温馨提示', btnArray, function(e) {
 					if (e.index == 1) {
@@ -423,6 +380,8 @@
 					}
 				})
 			}) 
+			
+			
 			/* 点击编辑按钮后，还原拖拉 */
 			$("#go_update").bind("tap",function()
 			{
@@ -430,9 +389,12 @@
 				var li = elem.parentNode.parentNode;
 				mui.swipeoutClose(li);
 			})
+			
+			
+			
 			/* 删除 */
-			$("#shanchu,#slider-delete").bind("tap", function() {
-				
+			$("#shanchu,#slider-delete").bind("tap", function() 
+			{				
 				var elem = this;
 				var li = elem.parentNode.parentNode;
 				
@@ -454,11 +416,14 @@
 						return false;
 					}
 				})
-				 
-				
-				
-				
 			})
+			
+			
+			
+			
+			
+			
+			
 			/* 显示金额条款 */
 			$("#shoufeibiaozhun").bind("tap", function() {
 				layer.open({
@@ -471,8 +436,15 @@
 					btn: 0 //默认底部不显示任何按钮							
 				});
 			})
-			初始化数据 = function() {
-				layer.open({
+			
+			
+			
+			
+			
+			初始化数据 = function() 
+			{
+				layer.open
+				({
 					type: 2,
 					time: 1.5
 				});
@@ -498,6 +470,10 @@
 					"当前页码": "1"
 				}, "CYAPI_获取返回值")
 			}
+			
+			
+			
+			
 			/*
 			 * 下拉刷新具体业务实现 
 			 */
@@ -508,6 +484,10 @@
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				}, 1500);
 			}
+			
+			
+			
+			
 			/**
 			 * 上拉加载具体业务实现
 			 */
@@ -540,8 +520,13 @@
 					}, "CYAPI_获取返回值")
 				}, 1500);
 			}
+			
+			
+			
+			
 			//专门用来初始化的函数 
-			CYAPI_获取返回值 = function(str) {
+			CYAPI_获取返回值 = function(str) 
+			{
 				//alert(str);
 				layer.closeAll();
 				ResultJson = eval('(' + str + ')')["dtOrderDetail"] || {};
@@ -559,6 +544,9 @@
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
 				bind_绑定子页面();
 			}
+			
+			
+			
 			//进入详情界面
 			CYAPI_详情 = function(str) {
 				//alert(str);				 							
@@ -572,6 +560,9 @@
 				//   			$(this).find(".goto_subpage").trigger("tap"); //依靠气泡就实现了
 				layer.closeAll();
 			}
+			
+			
+			
 			//  支付宝扫码
 			//	微信扫码
 			//	翼支付
@@ -588,6 +579,14 @@
 				
 				})
 			}
+			
+			
+			
+			
+			
+			
+			
+			
 			//初始化单页view
 			var viewApi = mui('#app').view({
 				defaultPage: '#Main'
