@@ -1,10 +1,11 @@
 /* 打开幽灵键盘全版  */
 var shurufa_open = function(e)
 {	
-	var active_obj = e;		//获取
+	var active_obj = e;		//获取子页面的对象
 	$(".shurufa_input_active").removeClass("shurufa_input_active"); 
 	$(e).addClass("shurufa_input_active"); //添加标志
 	var val = $(e).val();
+	var placehoder = $(e).attr("placeholder");
 	var myinput = null;
 	
 
@@ -17,6 +18,7 @@ var shurufa_open = function(e)
 			$(".layermanim").css({"max-width":"100%"});
 			$(".layermcont").css({"padding":"10px 20px 15px 20px"});	 
 			$("#shurufa_input").val(val);
+			$("#shurufa_input").attr("placeholder",placehoder); //替换placehoder
 			myinput = $("#shurufa_input,.shurufa_input_active");
 			
 			document.onkeydown=function(event)
@@ -34,12 +36,11 @@ var shurufa_open = function(e)
 	}); 
 	
 	$("#shurufa_num li,#shurufa_q li,#shurufa_a li,#shurufa_z li").bind("click",function()
-	{
-		
+	{		
 		var str = $(this).text();
 		var v = myinput.val() + str;	
 		myinput.val(v); 
-		$(active_obj).val(v);
+		$(active_obj).val(v); 
 	})
 	
 	$("#shurufa_back").bind("click",function()
@@ -142,9 +143,9 @@ var shurufa_open_num = function(e)
 "		<script type=\"text/template\" id=\"shurufahtml\">"+
 "			<input type=\"text\" name=\"shurufa_input\" readonly=\"readonly\" id=\"shurufa_input\"  placeholder=\"Input Something ...\"/>"+
 "			<ul id=\"shurufa_gongneng\">"+
-"				<li id=\"shurufa_back\" class=\"mui-icon mui-icon-arrowthinleft\" style=\"width: 100px;\"><h4 class=\"shurufa_gongnengtitle\" >Back</h4></li>"+
-"				<li id=\"shurufa_clear\" class=\"mui-icon mui-icon-trash\" style=\"width: 100px;\"><h4 class=\"shurufa_gongnengtitle\"  >Clear</h4></li>"+
-"				<li id=\"shurufa_send\" class=\"mui-icon mui-icon-paperplane\" style=\"width: 100px;\" ><h4 class=\"shurufa_gongnengtitle\">Send</h4></li>"+
+"				<li id=\"shurufa_back\" class=\"mui-icon mui-icon-arrowthinleft\" style=\"width: 100px;margin-top: 7px;\"><h4 class=\"shurufa_gongnengtitle\" >返回</h4></li>"+
+"				<li id=\"shurufa_clear\" class=\"mui-icon mui-icon-trash\" style=\"width: 100px;margin-top: 7px;\"><h4 class=\"shurufa_gongnengtitle\"  >清空</h4></li>"+
+"				<li id=\"shurufa_send\" class=\"mui-icon mui-icon-paperplane\" style=\"width: 100px;margin-top: 7px;\" ><h4 class=\"shurufa_gongnengtitle\">发送</h4></li>"+
 "			</ul>"+
 "			<ul id=\"shurufa_num\">"+
 "				<li>1</li>"+

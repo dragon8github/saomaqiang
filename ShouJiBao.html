@@ -49,13 +49,6 @@
 			</div>    
 			
 			
-		<!-- 小光点 -->
-		<div class="assistive-wrap" id="assistiveTouch">
-	        <div class="assistive-touch">
-	            <span></span>
-	        </div> 
-   		</div>  
-   		  
    		
 		<!-- 这个东西不能删，利用他还原界面 -->
 		<div class="mui-off-canvas-backdrop"></div>
@@ -112,11 +105,26 @@
 			   
 
 			//DaiJi.html 函数重定向-----
+			CYAPI_删除快递员 = function(str)
+			{
+				myiframe.CYAPI_删除快递员(str);
+			}
 			CYAPI_快递公司列表 = function(str)
 			{
 				myiframe.CYAPI_快递公司列表(str);
 			}
-			  
+			CYAPI_获取快递员列表 = function(str)
+			{
+				myiframe.CYAPI_获取快递员列表(str);
+			}
+			CYAPI_添加快递员 = function(str)
+			{
+				myiframe.CYAPI_添加快递员(str);
+			}
+			CYAPI_代寄明细 = function(str)
+			{
+				myiframe.CYAPI_代寄明细(str);
+			}
 			
 			//Save.html 函数重定向--------------
 			 CYAPI_存包裹 = function(str)
@@ -135,8 +143,6 @@
 			 
 	$(function()
 	{
-		/* 加载功能 */
-		assistive_mTouch(); //小光点以及菜单
 		
 		  
 		  var h = $(".calculator span").eq(0).height();
@@ -146,7 +152,7 @@
 		  })
 		  
 		  $("#Index").bind("tap",function(){  
-			 		layer.open({type: 2});
+			 		//layer.open({type: 2,time:10});
 					mui.openWindow({
 						url: "index.html",
 						id: "index"			
@@ -156,7 +162,7 @@
 	    var iframe = document.getElementById("right_iframe");  
 		 
 		 $("#DaiShou,#DaiJi,#Save").bind("tap",function(){
-		 	layer.open({type: 2});
+		 	//layer.open({type: 2,time:10});
 		 	var url = $(this).attr("data-href") +'?new='+Math.random();		 	
 	 		$("#right_iframe").attr("src",url); 			 
 		 })

@@ -21,13 +21,21 @@
 			.mui-pages {top: 10px;height: auto;}
 			.mui-page.mui-transitioning {-webkit-transition: -webkit-transform 300ms ease;transition: transform 300ms ease;}
 			.mui-page-left {-webkit-transform: translate3d(0, 0, 0);transform: translate3d(0, 0, 0);}
-			.mui-ios .mui-page-left {-webkit-transform: translate3d(-20%, 0, 0);transform: translate3d(-20%, 0, 0);}		
+			.mui-ios .mui-page-left {-webkit-transform: translate3d(-18%, 0, 0);transform: translate3d(-18%, 0, 0);}		
 			.mui-page {display: none;}
 			.mui-pages .mui-page {display: block;}			
 			
 			/* my */
 			.mybtn{ width:40%;height:100px;text-align: center;margin: 20px 5%; font-family: "微软雅黑";float:left;border-radius: 7px;font-size:18px;}
 			.xingweiname{position: relative;top:-5px;}
+			
+			
+			/* 新样式 */
+			 .mui-col-xs-10 img{float:left}
+			.mui-col-xs-10{padding-bottom:15px;margin-left:8%;border-bottom: 2px dashed #fff;}
+			.text-left{text-align:left;text-indent:15px;position:relative;top:10px}
+			.media-heading{padding-bottom:5px}
+			.go_ahref{position: absolute;z-index: 19930710;width: 100%;height: 100%;}
 			
 		</style>
 	</head>
@@ -44,16 +52,76 @@
 			</div>
 		</div>
 		<!--页面主结构结束-->
-		
 		 
+		  
 		
 		<!--主页开始-->
 		<div id="Main" class="mui-page">	
-			<div class="mui-page-content"> 
-					<a href="#set" class=""><button type="button" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe61e;</i>&nbsp;&nbsp;<span class="xingweiname">商户收包裹</span></button></a>
+			<div class="mui-page-content"> 	
+					    <div class="tab1">
+					        <div class="container">
+		            		<div class="row">				            			
+				                <div class="mui-col-xs-10" id="go_set">	
+				                	<a href="#set" class="go_ahref">
+					                    <div class="media">
+					                        <div class="media-left">
+					                            <a href="#"><img src="../Images/tab1-1.png" width="60px" alt="" /></a>
+					                        </div>
+					                        <div class="media-body text-left">
+					                                <h4 class="media-heading">商户收包裹</h4>
+					                                <p class="media-middle">商户收包裹商户收包裹商户收包裹商户收包裹</p>
+					                        </div> 
+					                    </div> 	
+			                        </a>
+				                </div>	
+				              
+				                <div class="mui-col-xs-10" id="go_get">
+				                	<a href="#get" class="go_ahref">
+					                    <div class="media">
+					                        <div class="media-right">
+					                            <a href="#"><img src="../Images/tab1-2.png" width="60px" alt="" /></a>
+					                        </div>    
+					                        <div class="media-body text-left">
+					                            <h4 class="media-heading">顾客取包裹</h4>
+					                            <p>顾客取包裹顾客取包裹顾客取包裹顾客取包裹</p>
+					                        </div>
+					                    </div>
+					                </a>    
+				                </div>
+				                <div class="mui-col-xs-10" id="go_refuse">
+				                	<a href="#refuse" class="go_ahref">
+					                    <div class="media">
+					                        <div class="media-left">
+					                            <a href="#"><img src="../Images/tab1-3.png" width="60px" alt="" /></a>
+					                        </div>
+					                        <div class="media-body text-left">
+					                                <h4 class="media-heading">商户拒收包裹</h4>
+					                                <p>商户拒收包裹商户拒收包裹商户拒收包裹</p>
+					                        </div>
+					                    </div>
+				                    </a>  
+				                </div>
+				                <div class="mui-col-xs-10" id="go_DaiShou_info">
+				                	<a href="DaiShou_info.html" class="go_ahref">
+					                    <div class="media">
+					                        <div class="media-right">
+					                            <a href="#"><img src="../Images/tab1-4.png" width="60px" alt="" /></a>
+					                        </div>    
+					                        <div class="media-body text-left">
+					                                <h4 class="media-heading">包裹记录查询</h4>
+					                                <p>包裹记录查询包裹记录查询包裹记录查询</p>				                              
+					                        </div>
+					                    </div>
+				                    </a> 
+				                </div>
+				            </div> 
+				        </div> 
+				    </div>			
+				
+					<!--<a href="#set" class=""><button type="button" class="mybtn mui-btn mui-btn-block"  ><img src="../Images/tab1-1.png" width="80px" height="60px" />&nbsp;&nbsp;<span class="xingweiname" style="">商户收包裹</span></button></a>
 					<a href="#get" class="mui-col-xs-6"><button type="button" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe610;</i>&nbsp;&nbsp;<span class="xingweiname">顾客取包裹</span></button></a>
 					<a href="#refuse" class="mui-col-xs-6"><button type="button" class="mybtn mui-btn mui-btn-block"  ><i class="iconfont">&#xe613;</i>&nbsp;&nbsp;<span class="xingweiname">商户拒收包裹</span></button></a>
-					<a href="DaiShou_info.html?new=7" class="mui-col-xs-6"><button type="button" class="mybtn mui-btn mui-btn-block" ><i class="iconfont">&#xe612;</i>&nbsp;&nbsp;<span class="xingweiname">包裹记录查询</span></button></a>
+					<a href="DaiShou_info.html?new=7" class="mui-col-xs-6"><button type="button" class="mybtn mui-btn mui-btn-block" ><i class="iconfont">&#xe612;</i>&nbsp;&nbsp;<span class="xingweiname">包裹记录查询</span></button></a>-->
 			</div>  
 		</div> 
 		<!--主页结束--> 
@@ -84,7 +152,7 @@
 					</div>	
 				</div> 		
 				<div class="mui-content-padded" align="center">
-					<button id="cainiaobaoguo_btn" class="mui-btn mui-btn-block mui-btn-primary">确定</button>
+					<button id="cainiaobaoguo_btn" class="mui-btn mui-btn-block mui-btn-warning">确定</button>
 				</div>
 			</div> 
 		</div> 
@@ -104,7 +172,7 @@
 					</div>								
 				</div> 			
 				<div class="mui-content-padded" align="center">
-					<button id="qitabaoguo_btn" class="mui-btn mui-btn-block mui-btn-primary">确定</button>
+					<button id="qitabaoguo_btn" class="mui-btn mui-btn-block mui-btn-warning">确定</button>
 				</div>
 			</div>			
 		</div> 
@@ -127,7 +195,7 @@
 						</div>
 					</div> 
 					<div class="mui-content-padded">						
-						<button type="get_btn"  class="mui-btn mui-btn-block mui-btn-primary" id="get_order">确定</button>
+						<button type="get_btn"  class="mui-btn mui-btn-block mui-btn-warning" id="get_order">确定</button>
 					</div>
 					<div class="mui-content-padded">
 						<p>可选择输入条形码或者扫描条形码进行验证</p>
@@ -180,7 +248,7 @@
 						</ul>
 					</div>  
 					<div class="mui-content-padded">						
-						<button type="button" class="mui-btn mui-btn-block mui-btn-primary" id="refuse_btn">确定</button>
+						<button type="button" class="mui-btn mui-btn-block mui-btn-warning" id="refuse_btn">确定</button>
 					</div>
 					<div class="mui-content-padded">
 						<p>可选择输入条形码或者扫描条形码进行验证</p>
@@ -220,7 +288,9 @@
 				mui('.mui-scroll-wrapper').scroll({
 					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 				});
+				
 			}) 
+			
 			
 			
 			//菜鸟收包裹		 	

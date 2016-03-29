@@ -52,6 +52,7 @@ mui.init({
 //╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣ 我的公共加载模块  ╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣
 $(function() 
 {
+	
 	//验证是否登录
 	var username = localStorage.登录帐号;
 	if (typeof(username) == "undefined" || username == "undefined" ) 
@@ -671,8 +672,10 @@ function timeFormat(time) {
 {
     $('body').on('tap', function (e) 
     {  
-            var left = e.originalEvent.detail.center.x;
-            var top = e.originalEvent.detail.center.y;
+    	
+    	
+            var left = e.detail.center.x;
+            var top = e.detail.center.y;
               
             $("body").append('<div class="dot" style="top:' + top + 'px;left:' + left + 'px;"></div>')
             setTimeout(function () {

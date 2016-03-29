@@ -9,10 +9,19 @@
 
 		<style type="text/css">
 			/* my */
+			
 			.kdmc{color:green}
 			.mui-col-xs-6{float:left;text-align:center;margin:20px 0}
-			.mui-content{background:#fff}
+			
 			.mui-col-xs-6>a>div{width:75px;padding-top:77px;margin:10px auto;background:url(../Images/kuaidigongsi/allbgs.gif) no-repeat}
+		
+			/* 新样式 */
+			 .mui-col-xs-10 img{float:left}
+			.mui-col-xs-10{padding-bottom:15px;margin-left:8%;border-bottom: 2px dashed #fff;}
+			.text-left{text-align:left;text-indent:15px;position:relative;top:10px}
+			.media-heading{padding-bottom:5px}
+			.go_ahref{position: absolute;z-index: 19930710;width: 100%;height: 100%;}
+			.media-middle{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}	
 		</style>
 
 	</head>
@@ -24,99 +33,70 @@
 
 		<div id="index" class="mui-page">
 			<div class="mui-content" id="content">
-				<div class="mui-col-xs-6" id="顺丰快递">
-					<a href="DaiJi_info.html">
-						<div  style="background-position:-600px 0px;"></div>
-						<p class="mui-h2 kdmc">顺丰快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="联邦快递">
-					<a href="DaiJi_info.html">
-						<div  style="background-position:-375px 0px;"></div>
-						<p class="mui-h2 kdmc">联邦快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="申通快递">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:-525px 0px;"></div>
-						<p class="mui-h2 kdmc">申通快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="天天快递">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:-300px 0px;"></div>
-						<p class="mui-h2 kdmc">天天快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="韵达快递">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:-75px 0px;"></div>
-						<p class="mui-h2 kdmc">韵达快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="邮政快递">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:0px 0px;"></div>
-						<p class="mui-h2 kdmc">邮政快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="宅急送">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:-225px 0px;"></div>
-						<p class="mui-h2 kdmc">宅急送</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="中通快递">
-					<a href="DaiJi_info.html"> 
-						<div  style="background-position:-450px 0px;"></div>
-						<p class="mui-h2 kdmc">中通快递</p>
-					</a>
-				</div>
-				<div class="mui-col-xs-6" id="圆通快递">
-					<a href="DaiJi_info.html"> 
-						<img src="../Images/kuaidigongsi/yt.jpg" width="90px" style="padding-bottom: 10px;"/>
-						<p class="mui-h2 kdmc">圆通快递</p>
-					</a>
-				</div>
-				<div style="clear:both"></div>
+				
+				
 			</div>
 		</div>
 
 	</body>
+	
+
+<script type="text/template" id="temple">
+{{# for(var i =0,len = d.length; i	< len;i++){ }} 
+	
+<div class="mui-col-xs-10">	
+	<a href="DaiJi_info.html?id={{d[i].companyID}}" class="go_ahref">
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img src="../Images/kuaidigongsi/{{d[i].companyID}}.jpg" width="65px" height="60px" alt="" /></a>
+            </div>
+            <div class="media-body text-left">
+                    <h4 class="media-heading">{{d[i].companyName}}</h4>
+                    <p class="media-middle">中通快递中通快递中通快递中通快递中通快递中通快递</p>
+            </div> 
+        </div> 	
+    </a>
+</div>		
+	
+{{# } }} 
+</script>
+	
 
 <script src="../js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/layer/laytpl.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	
 	$(function()
 	{
-		 var CustomerCode = localStorage.CustomerCode; 
+		var CustomerCode = localStorage.CustomerCode; 		
 		
-		 //收寄宝(快递公司列表查询)
-		 opt = 
-		 {
-		 	"userCode":CustomerCode		 	
-		 }	
-		 InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaCompanyList", opt, "CYAPI_快递公司列表");
-		
-		
+		InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaCompanyList",  {"userCode":CustomerCode}, "CYAPI_快递公司列表");
+				
 	}) 
 	
 	
 	CYAPI_快递公司列表 = function(str)
 	{
-		//alert(str); 
-		$("#content .mui-col-xs-6").hide();
 		var json = Api_filter(str);	
+			
+		
 		if(json.retCode == "1")
 		{ 
 			var c = json.companyList;
-			$.each(c,function(k,v)
+			
+			var temple_html = $("#temple").html();
+			
+			laytpl(temple_html).render(c, function(html) 
 			{
-				var companyID = v.companyID;
-				var companyName = "#" + v.companyName;				
-				$(companyName).show().find("a").attr("href","DaiJi_info.html?id=" + companyID);
-			})
+				$("#content").html("");
+				$("#content").append(html); //填充初始化数据
+			});			
+			
+		}
+		else
+		{
+			mui.alert(json.retMessage);
 		}
 	}
 	

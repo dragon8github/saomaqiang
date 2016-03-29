@@ -73,7 +73,7 @@
 		<div id="Main" class="mui-page mui-off-canvas-wrap mui-draggable">
 			<!--页面标题栏开始--> 
 			<div class="mui-navbar-inner mui-bar mui-bar-nav header">
-				<span class="mui-icon mui-icon-search" id="search"></span>
+				<span class="mui-icon mui-icon-back mui-btn-link" style="line-height:inherit"></span>
 				<div id="tapstate" class=" mui-segmented-control" style="width: 65%;position: absolute;left: 4%;">
 					<a href="#" class="mui-control-item mui-active">所有包裹</a>
 					<a href="#" class="mui-control-item">未收包裹</a>
@@ -348,7 +348,7 @@
 			//订单列表
 			CYAPI_代收列表 = function(str)
 			{		
-				//alert(str);
+				 alert(str);
 				
 				layer.closeAll();	
 				
@@ -370,8 +370,8 @@
 				$.each(ResultJson,function(i,o)
 				{					
 					o.status = replace_ico(o.status); //将状态更改为图标
-					o.shouDateTime = timeFormat(o.shouDateTime.replace("T"," "));	//将收包裹时间美化
-					o.quDateTime = timeFormat(o.quDateTime.replace("T"," "));	    //将取包裹时间美化
+					o.shouDateTime = timeFormat(o.shouDateTime);	//将收包裹时间美化
+					o.quDateTime = timeFormat(o.quDateTime);	    //将取包裹时间美化
 				
 					if(o.quDateTime == "")
 					{
