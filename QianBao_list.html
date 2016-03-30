@@ -173,15 +173,6 @@
 					</ul>
 				</div>
 
-				<!-- 小光球 -->
-				<div class="assistive-wrap" id="assistiveTouch">
-					<div class="assistive-touch" id="assistive-touch">
-						<span></span>
-					</div>
-				</div>
-
-				<!-- 这个东西不能删，利用他还原界面 -->
-				<div class="mui-off-canvas-backdrop"></div>
 
 			</div>
 
@@ -245,7 +236,7 @@
 			
 			var cnt = null; 	//数据总条数
 		
-			
+			var Is_Frist = true; //是否第一次加载
 			
 		          
 		            
@@ -254,9 +245,6 @@
 		     $(function()
 		     { 
 		     		
-					/* 小光点以及菜单 */
-					assistive_mTouch(); //小光点以及菜单
-					
 					/* 初始化数据 */
 		     		初始化数据(); 
 		     		
@@ -328,6 +316,16 @@
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
 							return false;
 						}
+						
+						if(Is_Frist)
+						{
+							Is_Frist = false; //解除限制，之后的都可以通过了
+							//首次加载数据的时候，不必再运行加载。
+							//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
+							//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
+							//并且只能通过这个函数来使用才可以的
+							return false;  
+						}		
 					
 						ResultJson = null; //清空
 						var html = $("#temple").html();			

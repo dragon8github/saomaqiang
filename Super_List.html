@@ -223,7 +223,7 @@
 		
 <!-- 变量存储    开始  -->
 <span style="display: none;">
-	<input type="hidden" name="page" id="page" value="1" />  
+	<input type="hidden" name="page" id="page" value="0" />  
 	<button id='dipicker' data-options='{"type":"date","beginYear":2015,"endYear":2016}' class="btn hidden mui-btn mui-btn-block">选择日期 ...</button>
 </span>
 <!-- 变量存储    结束  -->
@@ -271,25 +271,31 @@
 		
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 公共数据   开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
-			var username = localStorage.登录帐号;	//登录帐号
+			var username = localStorage.登录帐号;		 //登录帐号
 			
 			var 冲正申请人 = localStorage.EmployeeCode; //冲正申请人
 			
-			var 用户编号 = localStorage.CustomerCode; //用户编号
+			var 用户编号 = localStorage.CustomerCode;  //用户编号
 			
-			var rows = "10";		//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
+			var rows = "10";						//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
 		
-			var cnt = 0; 	//数据总条数
+			var cnt = 1; 							//数据总条数,默认为1
 		
-			var ResultJson = {};	//获取的列表数据
+			var ResultJson = {};					//获取的列表数据
 			
-			var state = "";  //默认业务状态，""为所有	
+			var state = "";  						//默认业务状态，""为所有	
 						
-			var type = get_urlpara(); //获取页面参数 ，同时作为业务类型的参数，默认是"",表示所有
+		    var type = get_urlpara(); 				//获取页面参数 ，同时作为业务类型的参数，默认是"",表示所有
 			
-			var bind_绑定事件_lock = false; //不知名的原因会发送两次请求，总之加上锁头就没事了	
+			var bind_绑定事件_lock = false; 			//不知名的原因会发送两次请求，总之加上锁头就没事了		
+						
+			var Is_Frist = true; 					//(已废弃)这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
 			
-			var Is_Frist = true; //这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
+			var now= new Date(); 					//时间对象		
+			
+	     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 	
+	     	
+	     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");//两个月前
 			
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 公共数据   结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
@@ -299,26 +305,21 @@
 			
 		  //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件  开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 		  $(function() 
-		  {	     	
-		  		//获取并且设置业务类型(不能改变这个函数的位置，用来接收get参数和设置当前业务类型的)
+		  {	     			  		
+	     		//小光点
+				assistive_mTouch();	
+			    
+		  	
+		  		//获取并且设置业务类型
 			    if(type != "" && API_业务类型列表.indexOf(type) >= 0)
 			    {			
 		    		$("#mui-bar").find(".mui-active").removeClass("mui-active");    	
 		    		$("#" + type).parent().addClass("mui-active");	  
-			    }
+			    }		  	
 		  	
-		  	
-		  		//初始化数据
-	     		初始化数据(); 	   	     		
-	     		
-	     		//小光点
-				assistive_mTouch();	
-			    
 	     		
 	     		//设置详情单页可以滚动
-	     		mui('#xiangqing-mui-scroll-wrapper').scroll({
-					deceleration: 0.0001 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-				});
+	     		mui('#xiangqing-mui-scroll-wrapper').scroll();
 				
 				
 			
@@ -369,32 +370,33 @@
 				//选择时间事件
 				document.getElementById("select_time").addEventListener('tap',function()
 				{				
-			        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
-					var options = JSON.parse(optionsJson);
-					var picker = new mui.DtPicker(options);
+			        var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options')) || '{}';					
+					var picker = new mui.DtPicker(optionsJson);
 					picker.show(function(rs) 
-					{
-						layer.open({type:2,time:1.5});							
-						mui.toast('选择结果: ' + rs.text);
-						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var opt = JSON.parse(optionsJson);
-						opt.value = rs.text;
-						$("#dipicker").attr("data-options",JSON.stringify(opt));	
+					{						
+						mui.toast('选择结果: ' + rs.text);						
+						optionsJson.value = rs.text;
+						$("#dipicker").attr("data-options",JSON.stringify(optionsJson));	
 						
 						/* 渲染数据 */
-						var end = rs.text + " 23:59:59";	 
-						var pass = new Date(end);
-						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = 1;	
-						state = Get_State();
-						type = get_type();
+						var timeend = rs.text + " 23:59:59";	//开始时间（用户选择的时间）	 
+						var timepass = new Date(timeend);		//时间对象
+						var timestart = new Date(timepass.setMonth(timepass.getMonth() - 2)).format("yyyy-MM-dd"); //结束时间（两个月前）
+						
+						
+						var page = 1;	 		//分页						
+						state = Get_State();	//状态
+						type = get_type();		//业务
 						
 						$("#page").val(page); //分页标识变为1				
-				     	ResultJson = null; //清空		
+				     	ResultJson = null; //清空json		
 				     	$("#mui-table-view").html(""); //清空所有的li
 				     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
+				     	mui('#pullrefresh').pullRefresh().refresh(true);	 //滚动恢复
+				     	
+				     	
 				     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":timestart,"截止时间":timeend,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
 					}) 
 				})					 
 		     }) 
@@ -410,7 +412,8 @@
 			{
 				setTimeout(function() 
 				{								
-					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能
+					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能,如果要实现，
+										  //可以获取最新的10条，然后删除前10条
 					
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				
@@ -421,44 +424,41 @@
 		     //上拉加载具体业务实现			 
 			function pullupRefresh() 
 			{
+				//alert(4);
 				//加载数据
 				setTimeout(function() 
-				{			 	
-						if(Is_Frist)
-						{
-							Is_Frist = false; //解除限制，之后的都可以通过了
-							//首次加载数据的时候，不必再运行加载。
-							//计划是初始化10条，如果再次执行这个会变成20条过份冗长
-							return false;  
-						}
+				{							
+					var num =  $("#pullrefresh .mui-table-view-cell").size(); //当前列表总条数
+
+							
+					if(num >= cnt)
+					{	
+						alert("没有更多数据了");
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
+						return false;
+					}
+				
+				
+					/* 获取dipicker的时间参数  */	
+					var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options'));
 					
-						var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
-														
-						if(num >= cnt)
-						{		
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
-							return false;
-						}
-					
-					
-						/* 获取dipicker的时间参数  */	
-						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value + " 23:59:59";	
+					if(optionsJson.value != null)
+					{ 
+						end = optionsJson.value + " 23:59:59";
 						var pass = new Date(end);
-						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						
-						
-						
-						/* 获取和设置基本参数 */
-						var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
-						$("#page").val(page); //设置分页标识	
-						state = Get_State(); //获取和设置当前状态
-	     				type = get_type();	//获取和设置当前业务类型		
-						
-						//mui.alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page}));
-						
-					   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
-						
+					    start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");		
+					}
+					
+					
+					/* 获取和设置基本参数 */
+					var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
+					$("#page").val(page); //设置分页标识	
+					state = Get_State(); //获取和设置当前状态
+     				type = get_type();	//获取和设置当前业务类型		
+					
+					alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page}));
+				   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
+						 
 				}, 1500);
 			}       
 			
@@ -470,37 +470,32 @@
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 核心方法体 开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			 
 			 初始化数据 = function()
-		     {		     	
-		     	/*初始化*/
-		     	layer.open({type:2,time:1.5});	//蒙版			     	
-		     	mui('#pullrefresh').pullRefresh().refresh(true);
-		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
+		     {	 
+		     	
 		     	$("#mui-table-view").html(""); //清空所有的数据	
-		     	var page = 1;	//分页还原
-				$("#page").val(page); //分页标识变为1				
+		     	
+		     	cnt = 1;//设置数据库总行数默认为1
+				$("#page").val(0); //分页标识变为0			
 		     	ResultJson = null; //清空返回数据		
 		     	state = Get_State(); //获取和设置当前状态		     	
 		     	type = get_type();	//获取和设置当前业务类型
 		     	
 		     	
 		     	/* 初始化dipicker时间控制器的默认参数 */
-		     	var opt = {};	//参数是一个json对象
-		     	var now = new Date(); 	//当前时间
+		     	var opt = {};	//参数是一个json对象		     
 		     	opt.value = now.format("yyyy-MM-dd"); 
 		     	opt.type = "date";
 		     	opt.beginYear =  now.getFullYear() - 1;		     	
 		     	opt.endYear =  now.getFullYear();		     
-		     	var str_json = JSON.stringify(opt);		     			     	
+		     	var str_json = JSON.stringify(opt);	   	
 		     	$("#dipicker").attr("data-options",str_json);			     	
 		     	
-		     	
-		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
-		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");			  			 	  	
-			  	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"}));			  			  
-			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值");
 		     
-		     	layer.closeAll();	
+		     			     	
+		     	mui('#pullrefresh').pullRefresh().refresh(true);	//恢复滚动
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
+	     		//使用这个之后，自动会加载[下拉刷新]绑定的函数
+	     		mui('#pullrefresh').pullRefresh().pullupLoading();  
 		     }
 			
 			 
@@ -567,14 +562,16 @@
 			//订单列表
 			CYAPI_获取返回值 = function(str)
 			{					
+				alert(str);
+				
 				var jsonobj = Api_filter(str);
 
 				ResultJson = jsonobj["OrderDetail"] || {};	
 				
-				cnt = jsonobj.RowCount; //数据库总数,存放在公共变量中去				
+				cnt = jsonobj.RowCount; //数据库总数,存放在公共变量中去
 				
 				if(cnt.toString() == "0")
-				{						
+				{				
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);						
 					return false;
 				}				

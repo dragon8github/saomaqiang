@@ -299,8 +299,8 @@
 			{
 				/*初始化*/
 		     	layer.open({type:2,time:1.5});	//蒙版	
-		     	//mui("#pullrefresh").pullRefresh().refresh(true);		     	
-		     	//mui("#pullrefresh").pullRefresh().scrollTo(0,0,100); //滚动置顶		     	
+		     	mui("#pullrefresh").pullRefresh().refresh(true);		     	
+		     	mui("#pullrefresh").pullRefresh().scrollTo(0,0,100); //滚动置顶		     	
 		     	$("#mui-table-view").html(""); //清空所有的数据
 		     	var page = 1;	//分页还原 
 				$("#page").val(page); //分页标识变为1						
@@ -330,26 +330,27 @@
 		    //上拉加载具体业务实现
 			function pullupRefresh() 
 			{
+				
 				//加载数据
 				setTimeout(function() 
-				{			 	
-//					if(Is_Frist)
-//					{
-//						Is_Frist = false; //解除限制，之后的都可以通过了
-//						//首次加载数据的时候，不必再运行加载。
-//						//计划是初始化10条，如果再次执行这个会变成20条过份冗长
-//						return false;  
-//					}		 
-				
+				{		
 					var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
-												
-																	
 												
 					if(num >= cnt)
 					{		
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 						return false;
 					}		
+				
+					if(Is_Frist)
+					{
+						Is_Frist = false; //解除限制，之后的都可以通过了
+						//首次加载数据的时候，不必再运行加载。
+						//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
+						//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
+						//并且只能通过这个函数来使用才可以的
+						return false;  
+					}		 
 				
 					
 					/* 获取和设置基本参数 */
@@ -391,7 +392,7 @@
 					$(".goto_subpage").bind("tap",function(){
 						show_代寄明细();
 					});
-//					
+					
 					$(".slider-delete").bind("tap",function()
 					{
 						delete_快递员($(this));
@@ -400,6 +401,7 @@
 				});
 				
 				var count = cnt; //数据库总数
+				
 				var num = $(".mui-table-view-cell").size(); //列表总数
 				
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。

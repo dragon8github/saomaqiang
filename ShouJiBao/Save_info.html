@@ -271,13 +271,7 @@
 				//加载数据
 				setTimeout(function() 
 				{			 	
-					if(Is_Frist)
-					{
-						Is_Frist = false; //解除限制，之后的都可以通过了
-						//首次加载数据的时候，不必再运行加载。
-						//计划是初始化10条，如果再次执行这个会变成20条过份冗长
-						return false;  
-					}		
+					
 				
 					var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
 																		
@@ -286,6 +280,16 @@
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 						return false;
 					}
+					
+					if(Is_Frist)
+					{
+						Is_Frist = false; //解除限制，之后的都可以通过了
+						//首次加载数据的时候，不必再运行加载。
+						//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
+						//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
+						//并且只能通过这个函数来使用才可以的
+						return false;  
+					}		
 				
 				
 					/* 获取dipicker的时间参数  */	

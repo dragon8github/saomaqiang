@@ -116,17 +116,14 @@
 		var Operator = localStorage.EmployeeCode;		
 		var opt = {};		  		
 		 
-		opt.retCode = '1';
-		opt.feeBody = '1.此报价重量是按1进位处理。2.此报价为指导价仅供参考，详情请咨询中通通当地营业网点 [网点分布]3.体积重量：如果您不清楚重量，请输入长宽高计算。 ( 注：根据国际航空运输协会（IATA）规定，轻抛货的计费重量按货物长×高×宽（CM）÷6000计算（不规则 货物，包括圆锥、圆柱状物体按长方体计算，为长、宽、高三个方向的最大尺寸相乘）。非航空件轻抛货计费 重量按同等体积的航空件轻抛重量减半计算。计算结果仅供参考！ )';
-		opt.retMessage = '查询成功';
-		 
-		console.log(JSON.stringify(opt));
+	
 		
 		//InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "SetKuaiDiYuan", {"userCode":"7b759a354ea94683ba603019f842c5b5","companyID":"","kuaiDiYuanName":"李钊鸿0.25169260217808187","kuaiDiYuanMobile":"13713332652","method":"add"} , "CYAPI_微信冲正");
 		
-		
-		
-		 /*
+		InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":"2016-01-30","截止时间":"2016-03-30 23:59:59","订单状态":"","业务类型":"002","业务号码":"","每页显示条数":"10","当前页码":"1"}, "CYAPI_微信冲正");
+			
+	
+		/*
 		  * 
 			
  	 	//收寄宝(收包裹)
