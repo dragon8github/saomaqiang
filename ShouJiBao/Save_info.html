@@ -25,7 +25,7 @@
 			.mui-pull-bottom-pocket{margin-bottom:40px}
 			.mui-page,.mui-page-content,.mui-pages,.mui-view,
 			.mui-views{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;background-color:#efeff4}
-			.mui-pages{top:46px;height:auto}
+			.mui-pages{top:55px;height:auto}
 			.mui-page.mui-transitioning{-webkit-transition:-webkit-transform .3s ease;transition:transform .3s ease}
 			.mui-page-left{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
 			.mui-ios .mui-page-left{-webkit-transform:translate3d(-20%,0,0);transform:translate3d(-20%,0,0)}
@@ -34,6 +34,11 @@
 			.mui-page .mui-table-view:first-child{margin-top:15px}
 			.mui-page .mui-table-view:last-child{margin-bottom:30px}
 			.mui-table-view{margin-top:20px}
+			
+			/* 加强 */
+			.mui-bar{height: 55px;}
+			.mui-bar .mui-btn-link{top:5px;}
+			.mui-bar .mui-icon{padding-top:15px}
 		</style>
 
 	</head>
@@ -59,7 +64,7 @@
 						<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 							<span class="mui-icon mui-icon-left-nav"></span>
 						</button>
-						<div id="tapstate" class=" mui-segmented-control" style="width: 70%;position: absolute;left: 2%;">
+						<div id="tapstate" class=" mui-segmented-control" style="width: 70%;position: absolute;left: 2%;top: 13px;">
 							<a href="#" class="mui-control-item mui-active">所有物品</a>
 							<a href="#" class="mui-control-item">未收物品</a>
 							<a href="#" class="mui-control-item">已收物品</a>
@@ -186,13 +191,12 @@
 			
 			var rows = "10";		//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
 		
-			var cnt = 0; 	//数据总条数
+			var cnt = 1; 	//数据总条数
 		
 			var ResultJson = {};	//获取的列表数据
 			
 			var state = "";  //默认业务状态，""为所有	
 			
-			var Is_Frist = true; //这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
 						
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 初始化公共数据  结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
@@ -203,8 +207,7 @@
 			
 		  	//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件  开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 		     $(function() 
-		     {	     			   
-		     		初始化数据(); 	
+		     {	     			 
 		     							
 					 //选择状态事件		   
 				    $("#tapstate .mui-control-item").bind("tap",function()
@@ -214,35 +217,28 @@
 								$("#tapstate .mui-active").removeClass("mui-active");
 								$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
 								初始化数据();
+								mui('#pullrefresh').pullRefresh().pullupLoading(); 
 							}					
 					})
+					
+					
 					
 					//选择时间之后
 					document.getElementById("select_time").addEventListener('tap',function()
 					{				
-				        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
-						var options = JSON.parse(optionsJson);
-						var picker = new mui.DtPicker(options);
+				        var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options')) || '{}';					
+						var picker = new mui.DtPicker(optionsJson);
 						picker.show(function(rs) 
-						{
-							layer.open({type:2,time:1.5});							
+						{		
 							mui.toast('选择结果: ' + rs.text);
-							var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-							var opt = JSON.parse(optionsJson);
-							opt.value = rs.text;
-							$("#dipicker").attr("data-options",JSON.stringify(opt));	
 							
-							/* 渲染数据 */
-							var end = rs.text + " 23:59:59";	 
-							var pass = new Date(end);
-							var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-							var page = 1;	
-							state = Get_State();
-							$("#page").val(page); //分页标识变为1				
-					     	ResultJson = null; //清空		
-					     	$("#mui-table-view").html(""); //清空所有的li
-					     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶					     	
-				         	InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代存列表");
+							初始化数据();
+																			
+							optionsJson.value = rs.text;
+							$("#dipicker").attr("data-options",JSON.stringify(optionsJson));	
+							
+							
+							mui('#pullrefresh').pullRefresh().pullupLoading();  //使用这个之后，自动会加载[下拉刷新]绑定的函数
 						}) 
 					})					  
 		     }) 
@@ -270,9 +266,7 @@
 			{
 				//加载数据
 				setTimeout(function() 
-				{			 	
-					
-				
+				{		
 					var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
 																		
 					if(num >= cnt)
@@ -281,33 +275,32 @@
 						return false;
 					}
 					
-					if(Is_Frist)
-					{
-						Is_Frist = false; //解除限制，之后的都可以通过了
-						//首次加载数据的时候，不必再运行加载。
-						//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
-						//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
-						//并且只能通过这个函数来使用才可以的
-						return false;  
-					}		
 				
+					var end,start;
 				
 					/* 获取dipicker的时间参数  */	
-					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-					var end = JSON.parse(optionsJson).value + " 23:59:59";	
-					var pass = new Date(end);
-					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-					
-					
+					var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options'));
+					if(optionsJson.value != null)
+					{ 
+						end = optionsJson.value + " 23:59:59"; //用户选择的时间
+						var pass = new Date(end);
+					    start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");		
+					}
+					else
+					{
+						 var now = new Date();
+						 end = now.format("yyyy-MM-dd 23:59:59"); //今天 	
+	     				 start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");//两个月前
+					}
 					
 					/* 获取和设置基本参数 */
 					var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
 					$("#page").val(page); //设置分页标识	
-					state = Get_State(); //获取和设置当前状态	
+					state = Get_State(); //获取和设置当前状态
 					 
 				    InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代存列表");
 					 
-				}, 1500);
+				}, 500);
 			}       
 			
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新、下拉加载  结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
@@ -319,45 +312,37 @@
 			 
 			 初始化数据 = function()
 		     {		   
-		     	/*初始化*/
-		     	layer.open({type:2,time:1.5});	//蒙版	
-		     	mui("#pullrefresh").pullRefresh().refresh(true);		     	
-		     	mui("#pullrefresh").pullRefresh().scrollTo(0,0,100); //滚动置顶		     	
-		     	$("#mui-table-view").html(""); //清空所有的数据
-		     	var page = 1;	//分页还原 
-				$("#page").val(page); //分页标识变为1				
-		     	ResultJson = null; //清空返回数据		     	
-		     	state = Get_State(); //获取和设置当前状态
+		     	$("#mui-table-view").html(""); //清空所有的数据	
+		     	cnt = 1;//设置数据库总行数默认为1
+				$("#page").val(0); //分页标识变为0			
+		     	ResultJson = null; //清空返回数据		
+		     	state = Get_State(); //获取和设置当前状态	
 		    
 		     	
 		     	
+		     	
 		     	/* 初始化dipicker时间控制器的默认参数 */
-		     	var opt = {};	//参数是一个json对象
-		     	var now = new Date(); 	//当前时间
+		     	var opt = {};	//参数是一个json对象	
+		     	var now= new Date(); 					//时间对象
 		     	opt.value = now.format("yyyy-MM-dd"); 
 		     	opt.type = "date";
 		     	opt.beginYear =  now.getFullYear() - 1;		     	
 		     	opt.endYear =  now.getFullYear();		     
-		     	var str_json = JSON.stringify(opt);		     			     	
-		     	$("#dipicker").attr("data-options",str_json);			     	
+		     	var str_json = JSON.stringify(opt);	  
+		     	$("#dipicker").attr("data-options",str_json);	     	
 		     	
 		     
 		     	
-		     	/* 初始化时间 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
-		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");			  			 	  	
-			   //alert(JSON.stringify({"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows}));
-			    InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueyCunPackage", {"userCode":CustomerCode,"status":state,"mobile":"","mailNo":"","beginTime":start,"endTime":end,"pageIndex":page,"pageSize":rows} , "CYAPI_代存列表");
+		     	
+		     	mui('#pullrefresh').pullRefresh().refresh(true);	 //恢复滚动
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
 		     }  
 			
 			 
 			  
 			//订单列表
 			CYAPI_代存列表 = function(str)
-			{		
-				
-				layer.closeAll();	
-				
+			{						
 				var jsonobj = Api_filter(str);
 
 				ResultJson = jsonobj["packageList"] || {};	
@@ -428,7 +413,7 @@
 				
 				if(text == "所有物品")
 				{
-					return "0"; 
+					return "-1"; 
 				}
 				else if(text == "未收物品")
 				{
@@ -472,7 +457,7 @@
 					container: '#pullrefresh',
 					down: 
 					{
-						//callback: pulldownRefresh
+						callback: pulldownRefresh
 					},
 					up: 
 					{

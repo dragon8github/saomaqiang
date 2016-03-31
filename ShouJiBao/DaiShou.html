@@ -36,7 +36,8 @@
 			.text-left{text-align:left;text-indent:15px;position:relative;top:10px}
 			.media-heading{padding-bottom:5px}
 			.go_ahref{position: absolute;z-index: 19930710;width: 100%;height: 100%;}
-			
+			 #go_cainiaobaoguo,#go_qitabaoguo{padding-bottom: 25px;padding-top:25px}
+			 .media-middle{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}			
 		</style>
 	</head>
 
@@ -83,7 +84,7 @@
 					                        </div>    
 					                        <div class="media-body text-left">
 					                            <h4 class="media-heading">顾客取包裹</h4>
-					                            <p>顾客取包裹顾客取包裹顾客取包裹顾客取包裹</p>
+					                            <p class="media-middle">顾客取包裹顾客取包裹顾客取包裹顾客取包裹</p>
 					                        </div>
 					                    </div>
 					                </a>    
@@ -96,7 +97,7 @@
 					                        </div>
 					                        <div class="media-body text-left">
 					                                <h4 class="media-heading">商户拒收包裹</h4>
-					                                <p>商户拒收包裹商户拒收包裹商户拒收包裹</p>
+					                                <p class="media-middle">商户拒收包裹商户拒收包裹商户拒收包裹</p>
 					                        </div>
 					                    </div>
 				                    </a>  
@@ -109,7 +110,7 @@
 					                        </div>    
 					                        <div class="media-body text-left">
 					                                <h4 class="media-heading">包裹记录查询</h4>
-					                                <p>包裹记录查询包裹记录查询包裹记录查询</p>				                              
+					                                <p class="media-middle">包裹记录查询包裹记录查询包裹记录查询</p>				                              
 					                        </div>
 					                    </div>
 				                    </a> 
@@ -129,13 +130,41 @@
 		  
 		     
 		   
-		   
-		 
 		<!-- 商户收包裹 开始 -->
 		<div id="set" class="mui-page" style="z-index: 1;">	
-			<div class="mui-page-content">			
-					<a href="#cainiaobaoguo"  ><button type="button" class="mybtn mui-btn mui-btn-block"><i class="iconfont">&#xe615;</i>&nbsp;&nbsp;<span class="xingweiname">菜鸟驿站</span></button></a>
-					<a href="#qitabaoguo" ><button type="button" class="mybtn mui-btn mui-btn-block"><i class="iconfont">&#xe616;</i>&nbsp;&nbsp;<span class="xingweiname">其他包裹</span></button></a>		
+			<div class="mui-page-content">	
+				
+					 <div class="mui-col-xs-10" id="go_cainiaobaoguo">	
+	                	<a href="#cainiaobaoguo" class="go_ahref">
+		                    <div class="media">
+		                        <div class="media-left">
+		                            <a href="#"><img src="../Images/tab1-1.png" width="70px" alt="" /></a>
+		                        </div>
+		                        <div class="media-body text-left">
+		                                <h4 class="media-heading">菜鸟包裹</h4>
+		                                <p class="media-middle">商户收包裹商户收包裹商户收包裹商户收包裹</p>
+		                        </div> 
+		                    </div> 	
+                        </a>
+	                </div>	
+				              
+	                <div class="mui-col-xs-10" id="go_qitabaoguo">
+	                	<a href="#qitabaoguo" class="go_ahref">
+		                    <div class="media">
+		                        <div class="media-right">
+		                            <a href="#"><img src="../Images/tab1-2.png" width="70px" alt="" /></a>
+		                        </div>    
+		                        <div class="media-body text-left">
+		                            <h4 class="media-heading">其他包裹</h4>
+		                            <p class="media-middle">顾客取包裹顾客取包裹顾客取包裹顾客取包裹</p>
+		                        </div>
+		                    </div>
+		                </a>    
+	                </div>	
+				
+				
+					<!--<a href="#cainiaobaoguo"  ><button type="button" class="mybtn mui-btn mui-btn-block"><i class="iconfont">&#xe615;</i>&nbsp;&nbsp;<span class="xingweiname">菜鸟驿站</span></button></a>-->
+					<!--<a href="#qitabaoguo" ><button type="button" class="mybtn mui-btn mui-btn-block"><i class="iconfont">&#xe616;</i>&nbsp;&nbsp;<span class="xingweiname">其他包裹</span></button></a>-->		
 			</div>				
 		</div>  
 		<!--商户收包裹结束--> 

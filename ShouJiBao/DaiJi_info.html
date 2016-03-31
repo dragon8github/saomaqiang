@@ -143,12 +143,12 @@
 				</div>
 
 				<p style="margin:10px 0px 0px 0px;text-align:center;">
-					<a id="Cy_Tp_Agree" onclick="Cy_Tp_cannel()" style="z-index: 9999;margin-right: 10px;color:#fff" class="mui-btn mui-btn-outlined">确 认</a>
-					<a id="Cy_Tp_cannel" onclick="Cy_Tp_cannel()" style="z-index: 9999;color:#fff" class="mui-btn mui-btn-outlined">取 消</a>
+					<a id="Cy_Tp_Agree" onclick="layer.closeAll();" style="z-index: 9999;margin-right: 10px;color:#fff" class="mui-btn mui-btn-outlined">确 认</a>
+					<a id="Cy_Tp_cannel" onclick="layer.closeAll();" style="z-index: 9999;color:#fff" class="mui-btn mui-btn-outlined">取 消</a>
 				</p>
 			</div>
 </div>
-
+ 
 
 
 
@@ -174,18 +174,18 @@
 						<p class="mui-h5 mui-ellipsis Lee_Phone"><i class="mui-icon mui-icon-phone"></i>&nbsp;联系电话：{{d[i].mobile}}</p>
 					</div>
 					<div class="mui-table-cell mui-col-xs-3 mui-text-right Lee_time">
-						<p><img src="../Images/kuaidigongsi/500.jpg" width="60" /></p>
+						<p><img src="../Images/kuaidigongsi/{{d[i].companyName}}.png" width="60" /></p>
 						<span class="mui-h5" style="color:#000">{{d[i].companyName}}</span>
 					</div>
 				</div>
 			</div>
-		</a>
+		</a> 
 	</li> 
 {{# } }}
 </script>
 
-		<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<!--<script src="../js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>-->
+		<!--<script src="../js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="../js/Zepto/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui/mui.min.lee.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui/mui.view.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/layermobile/layer.js" type="text/javascript" charset="utf-8"></script>
@@ -207,29 +207,25 @@
 			
 			var rows = "10";		//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
 		
-			var cnt = 0; 	//数据总条数
+			var cnt = 1; 	//数据总条数
 		
 			var ResultJson = {};	//获取的列表数据
 			
 			var state = "";  //默认业务状态，""为所有	
 			
-			var Is_Frist = true; //这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
-						
 			var companyID =  get_urlpara(); //获取id参数
 			
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 初始化公共数据  结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
 			
 			$(function() 
-			{							
-				初始化数据(); //初始化数据   
-				
-				var companyName = change_companyName(companyID);	
+			{		
+				var companyName = change_companyName(companyID) || "未知";	
 				
 				$("#kuaidiinfo_title,#mui-title").text(companyName);				
 				 
-			})
-			
+			}) 
+			 
 			
 			
 			//添加快递员事件
@@ -248,13 +244,7 @@
 			})
 			
 			
-			
-			/* 这是简单的关闭layer */
-			Cy_Tp_cannel = function() 
-			{
-				layer.closeAll();
-			}
-			
+						
 			
 			
 			/* 快递公司收费明细 */
@@ -297,17 +287,13 @@
 			
 			初始化数据 = function() 
 			{
-				/*初始化*/
-		     	layer.open({type:2,time:1.5});	//蒙版	
-		     	mui("#pullrefresh").pullRefresh().refresh(true);		     	
-		     	mui("#pullrefresh").pullRefresh().scrollTo(0,0,100); //滚动置顶		     	
-		     	$("#mui-table-view").html(""); //清空所有的数据
-		     	var page = 1;	//分页还原 
-				$("#page").val(page); //分页标识变为1						
-		     	ResultJson = null; //清空返回数据		
+				$("#mui-table-view").html(""); //清空所有的数据	
+		     	cnt = 1;//设置数据库总行数默认为1
+				$("#page").val(0); //分页标识变为0			
+		     	ResultJson = null; //清空返回数据	     	
 		     	
-		     	
-			    InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaKuaiDiYuan", {"userCode":CustomerCode,"companyID":companyID} , "CYAPI_获取快递员列表");
+		     	mui('#pullrefresh').pullRefresh().refresh(true);	 //恢复滚动
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶		     			     			     	
 			}
 			
 			
@@ -329,38 +315,29 @@
 		     		 	 
 		    //上拉加载具体业务实现
 			function pullupRefresh() 
-			{
-				
+			{				
 				//加载数据
 				setTimeout(function() 
 				{		
-					var num =  $("#pullrefresh .mui-table-view-cell").size(); //列表总数
-												
+					var num =  $("#pullrefresh .mui-table-view-cell").size(); //当前列表总条数
+
+					
 					if(num >= cnt)
-					{		
+					{	
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 						return false;
-					}		
-				
-					if(Is_Frist)
-					{
-						Is_Frist = false; //解除限制，之后的都可以通过了
-						//首次加载数据的时候，不必再运行加载。
-						//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
-						//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
-						//并且只能通过这个函数来使用才可以的
-						return false;  
-					}		 
-				
-					
-					/* 获取和设置基本参数 */
+					}
+									
+					/* 获取和设置基本参数(暂时没有分页) */
 					var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
 					$("#page").val(page); //设置分页标识	
+				
+				
 				
 					 
 				   InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "ChaKuaiDiYuan", {"userCode":CustomerCode,"companyID":companyID} , "CYAPI_获取快递员列表");
 					 
-				}, 1500);
+				}, 500);
 			}       
 			
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新、下拉加载  结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
@@ -370,12 +347,20 @@
 			
 			//专门用来初始化的函数 
 			CYAPI_获取快递员列表 = function(str) 
-			{				
-				layer.closeAll();
+			{
+				//alert(str);
 				
 				var jsonobj = Api_filter(str);
 				
-				ResultJson = jsonobj["kuiDiYuanList"] || {};				
+				ResultJson = jsonobj["kuiDiYuanList"] || {};	
+				
+				var cnt = ResultJson.length; //数据库总数,因为快递员列表本来就没有打算做分页。	
+				
+				if(cnt.toString() == "0")
+				{						
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);						
+					return false;
+				}
 				 
 				//替换美化文本
 				$.each(ResultJson, function(i, o) 
@@ -384,9 +369,11 @@
 				})
 				
 				var temple_html = $("#temple").html();
-								
+																
 				laytpl(temple_html).render(ResultJson, function(html) 
 				{
+					//alert(html);
+					
 					$("#mui-table-view").append(html); //填充初始化数据     
 					
 					$(".goto_subpage").bind("tap",function(){
@@ -399,12 +386,10 @@
 					});
 					 
 				});
-				
-				var count = cnt; //数据库总数
-				
+			
 				var num = $(".mui-table-view-cell").size(); //列表总数
 				
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 			}
 			
 			//CYAPI_删除快递员
@@ -425,15 +410,13 @@
 					});
 				}
 				
-				
-				
 			}
 			
 			
 			//CYAPI_代寄明细
 			CYAPI_代寄明细 = function(str)
 			{ 
-				alert(str);
+				//alert(str);
 				layer.closeAll();
 				str = str.replace(/\n|\r/g, "");
 				var myjson = Api_filter(str);  

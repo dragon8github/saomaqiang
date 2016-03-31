@@ -471,11 +471,38 @@ QQ_offCanvas = function()
 		})
 	})
 	
+	//扫码支付
+	$("#signsaomazhifu").bind("tap",function()
+	{
+		mui.openWindow({
+			url: "SweepYard.html",
+			id: "SweepYard.html"			
+		});
+	})
+	
+	//微信找零
+	$("#signweixinzhaoling").bind("tap",function()
+	{
+		mui.openWindow({
+			url: "wx.html",
+			id: "wx.html"			
+		});
+	})
+	
+	
+	//收寄宝
+	$("#signshoujibao").bind("tap",function()
+	{
+		mui.openWindow
+		({
+			url:"ShouJiBao.html?new" + Math.random(0,10),
+			id:"ShouJiBao"
+		});
+	})
 	
 	//钱包流水
 	$("#qianbaoliushui").bind("tap",function()
 	{
-		
 		mui.openWindow({
 			url: "QianBao_list.html",
 			id: "QianBao_list.html"			
@@ -730,12 +757,12 @@ function newGuid()
 "												 <i class=\"iconfont\">&#xe61f;</i> 手机充值"+
 "											</a>"+
 "										</li> "+
-"										<li class=\"mui-table-view-cell\">"+
+"										<li id='signsaomazhifu' class=\"mui-table-view-cell\">"+
 "											<a class=\"mui-navigate-right\">"+
 "												<i class=\"iconfont\">&#xe61c;</i> 扫码支付"+
 "											</a>"+
 "										</li>"+
-"										<li class=\"mui-table-view-cell\">"+
+"										<li id='signweixinzhaoling' class=\"mui-table-view-cell\">"+
 "											<a class=\"mui-navigate-right\">"+
 "												<i class=\"iconfont\">&#xe61a;</i> 微信找零"+
 "											</a>"+
@@ -750,12 +777,12 @@ function newGuid()
 "												<i class=\"iconfont\">&#xe619;</i> 火车票"+
 "											</a>"+
 "										</li>"+
-"										<li class=\"mui-table-view-cell\">"+
+"										<li id='signshoujibao' class=\"mui-table-view-cell\">"+
 "											<a class=\"mui-navigate-right\">"+
 "												<i class=\"iconfont\">&#xe61e;</i> 收寄宝"+
 "											</a>"+
 "										</li>"+
-"										<li class=\"mui-table-view-cell\" id=\"qianbaoliushui\">"+
+"										<li id=\"qianbaoliushui\" class=\"mui-table-view-cell\" >"+
 "									<a class=\"mui-navigate-right\">"+
 "										<i class=\"iconfont\">&#xe602;</i> 钱包流水"+
 "									</a>"+

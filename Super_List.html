@@ -289,14 +289,7 @@
 			
 			var bind_绑定事件_lock = false; 			//不知名的原因会发送两次请求，总之加上锁头就没事了		
 						
-			var Is_Frist = true; 					//(已废弃)这个锁是为了限制上拉加载的自动触发。计划是初始化10条会变成20条过份冗长
-			
-			var now= new Date(); 					//时间对象		
-			
-	     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 	
-	     	
-	     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");//两个月前
-			
+					
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 公共数据   结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
 			
 			
@@ -351,6 +344,7 @@
 							$("#tapstate .mui-active").removeClass("mui-active");
 							$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
 							初始化数据();
+							mui('#pullrefresh').pullRefresh().pullupLoading();  //使用这个之后，自动会加载[下拉刷新]绑定的函数
 						}					
 				})
 				 
@@ -363,6 +357,7 @@
 							$("#mui-bar .mui-active").removeClass("mui-active");
 							$(this).addClass("mui-active"); //由于默认的类添加比我的慢，所以我"多此一举"
 							初始化数据();
+							mui('#pullrefresh').pullRefresh().pullupLoading();  //使用这个之后，自动会加载[下拉刷新]绑定的函数
 						}					
 				})
 				
@@ -373,30 +368,16 @@
 			        var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options')) || '{}';					
 					var picker = new mui.DtPicker(optionsJson);
 					picker.show(function(rs) 
-					{						
-						mui.toast('选择结果: ' + rs.text);						
+					{		
+						mui.toast('选择结果: ' + rs.text);
+						
+						初始化数据();
+																		
 						optionsJson.value = rs.text;
 						$("#dipicker").attr("data-options",JSON.stringify(optionsJson));	
 						
-						/* 渲染数据 */
-						var timeend = rs.text + " 23:59:59";	//开始时间（用户选择的时间）	 
-						var timepass = new Date(timeend);		//时间对象
-						var timestart = new Date(timepass.setMonth(timepass.getMonth() - 2)).format("yyyy-MM-dd"); //结束时间（两个月前）
 						
-						
-						var page = 1;	 		//分页						
-						state = Get_State();	//状态
-						type = get_type();		//业务
-						
-						$("#page").val(page); //分页标识变为1				
-				     	ResultJson = null; //清空json		
-				     	$("#mui-table-view").html(""); //清空所有的li
-				     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
-				     	mui('#pullrefresh').pullRefresh().refresh(true);	 //滚动恢复
-				     	
-				     	
-				     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":timestart,"截止时间":timeend,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")
+						mui('#pullrefresh').pullRefresh().pullupLoading();  //使用这个之后，自动会加载[下拉刷新]绑定的函数
 					}) 
 				})					 
 		     }) 
@@ -412,9 +393,8 @@
 			{
 				setTimeout(function() 
 				{								
-					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能,如果要实现，
-										  //可以获取最新的10条，然后删除前10条
-					
+					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能,如果要实现， 可以获取最新的10条，然后删除前10条
+										 
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				
 				}, 1500);
@@ -424,29 +404,32 @@
 		     //上拉加载具体业务实现			 
 			function pullupRefresh() 
 			{
-				//alert(4);
 				//加载数据
 				setTimeout(function() 
 				{							
 					var num =  $("#pullrefresh .mui-table-view-cell").size(); //当前列表总条数
 
-							
 					if(num >= cnt)
 					{	
-						alert("没有更多数据了");
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
 						return false;
 					}
 				
+					var end,start;
 				
 					/* 获取dipicker的时间参数  */	
 					var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options'));
-					
 					if(optionsJson.value != null)
 					{ 
-						end = optionsJson.value + " 23:59:59";
+						end = optionsJson.value + " 23:59:59"; //用户选择的时间
 						var pass = new Date(end);
 					    start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");		
+					}
+					else
+					{
+						 var now = new Date();
+						 end = now.format("yyyy-MM-dd 23:59:59"); //今天 	
+	     				 start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");//两个月前
 					}
 					
 					
@@ -456,10 +439,10 @@
 					state = Get_State(); //获取和设置当前状态
      				type = get_type();	//获取和设置当前业务类型		
 					
-					alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page}));
+					//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page}));
 				   	InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":start,"截止时间":end,"订单状态":state,"业务类型":type,"业务号码":"","每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值");
 						 
-				}, 1500);
+				}, 500);
 			}       
 			
 			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新 、下拉加载    结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
@@ -471,31 +454,28 @@
 			 
 			 初始化数据 = function()
 		     {	 
-		     	
 		     	$("#mui-table-view").html(""); //清空所有的数据	
-		     	
 		     	cnt = 1;//设置数据库总行数默认为1
 				$("#page").val(0); //分页标识变为0			
 		     	ResultJson = null; //清空返回数据		
 		     	state = Get_State(); //获取和设置当前状态		     	
-		     	type = get_type();	//获取和设置当前业务类型
+		     	type = get_type();	//获取和设置当前业务类型		     	
 		     	
+     				
 		     	
 		     	/* 初始化dipicker时间控制器的默认参数 */
-		     	var opt = {};	//参数是一个json对象		     
+		     	var opt = {};	//参数是一个json对象	
+		     	var now= new Date(); 					//时间对象
 		     	opt.value = now.format("yyyy-MM-dd"); 
 		     	opt.type = "date";
 		     	opt.beginYear =  now.getFullYear() - 1;		     	
 		     	opt.endYear =  now.getFullYear();		     
-		     	var str_json = JSON.stringify(opt);	   	
-		     	$("#dipicker").attr("data-options",str_json);			     	
-		     	
+		     	var str_json = JSON.stringify(opt);	  
+		     	$("#dipicker").attr("data-options",str_json);
 		     
 		     			     	
-		     	mui('#pullrefresh').pullRefresh().refresh(true);	//恢复滚动
+		     	mui('#pullrefresh').pullRefresh().refresh(true);	 //恢复滚动
 		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
-	     		//使用这个之后，自动会加载[下拉刷新]绑定的函数
-	     		mui('#pullrefresh').pullRefresh().pullupLoading();  
 		     }
 			
 			 
@@ -562,7 +542,7 @@
 			//订单列表
 			CYAPI_获取返回值 = function(str)
 			{					
-				alert(str);
+				//alert(str);
 				
 				var jsonobj = Api_filter(str);
 
@@ -582,7 +562,7 @@
 					o.OrderStateDescription = replace_ico(o.OrderStateDescription); //将状态更改为图标
 					o.OrderTime = timeFormat(o.OrderTime.replace("T"," "));	//将时间美化
 				})		
-								
+								 
 				var temple_html = $("#temple").html();								
 				
 				laytpl(temple_html).render(ResultJson, function (html)
@@ -683,8 +663,7 @@
 			 //获取当前业务类型
 			 get_type = function()
 			 {
-			 	var text = $("#mui-bar .mui-active .mui-tab-label").text();
-			 	
+			 	var text = $("#mui-bar .mui-active .mui-tab-label").text();			 	
 			 	
 			 	if(text.indexOf("全部业务") >= 0)
 			 	{
@@ -760,7 +739,7 @@
 					container: '#pullrefresh',
 					down: 
 					{
-						//callback: pulldownRefresh
+						callback: pulldownRefresh
 					},
 					up: 
 					{

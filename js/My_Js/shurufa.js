@@ -45,10 +45,11 @@ var shurufa_open = function(e)
 	
 	$("#shurufa_back").bind("click",function()
 	{
-		var v = myinput.val();
-		var value = v.substr(0,v.length - 1);
-	    myinput.val(value); 
-	    $(active_obj).val(value);
+		//var v = myinput.val();
+		//var value = v.substr(0,v.length - 1);
+	   // myinput.val(value); 
+	    //$(active_obj).val(value);
+	    layer.closeAll();
 	})
 	
 	$("#shurufa_clear").bind("click",function(){
@@ -70,9 +71,11 @@ var shurufa_open = function(e)
 /* 打开幽灵键盘数字版  */
 var shurufa_open_num = function(e)
 {
+	var active_obj = e;		//获取子页面的对象
 	$(".shurufa_input_active").removeClass("shurufa_input_active"); 
-	$(e).addClass("shurufa_input_active"); //添加标志.shurufa_input_active
+	$(e).addClass("shurufa_input_active"); //添加标志
 	var val = $(e).val();
+	var placehoder = $(e).attr("placeholder");
 	var myinput = null;
 
 	layer.open
@@ -86,8 +89,8 @@ var shurufa_open_num = function(e)
 			$(".layermcont").css({"padding":"10px 0px"});	
 			$("#shurufa_input_num").val(val);
 			
-			//获取两个核心的input
-			myinput = $("#shurufa_input_num,.shurufa_input_active");			
+			$("#shurufa_input").attr("placeholder",placehoder); //替换placehoder
+			myinput = $("#shurufa_input,.shurufa_input_active");		
 			
 			//兼容扫码枪
 			document.onkeydown=function(event)
@@ -110,17 +113,21 @@ var shurufa_open_num = function(e)
 		var str = $(this).text();	
 		var v = myinput.val() + str;	
 		myinput.val(v);  
+		$(active_obj).val(v);
 	})
 	
 	$("#shurufa_back").bind("click",function(){
 		
-		var v = myinput.val();
-		var value = v.substr(0,v.length - 1);
-	    myinput.val(value); 
+		//var v = myinput.val();
+		//var value = v.substr(0,v.length - 1);
+	   // myinput.val(value); 
+	  // $(active_obj).val(value);
+	   layer.closeAll();
 	})
 	
 	$("#shurufa_clear").bind("click",function()
 	{
+		$(active_obj).val("");
 		myinput.val("");	
 	})
 	
@@ -130,6 +137,7 @@ var shurufa_open_num = function(e)
 		var myinput = $("#shurufa_input_num");
 		var v = myinput.val();
 		$(".shurufa_input_active").val(v);
+		$(active_obj).val(v);
 		layer.closeAll();
 	})
 }

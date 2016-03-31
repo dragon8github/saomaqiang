@@ -173,6 +173,13 @@
 					</ul>
 				</div>
 
+			<!-- 小光球   开始-->
+				<div class="assistive-wrap" id="assistiveTouch">
+					<div class="assistive-touch" id="assistive-touch">
+						<span></span>
+					</div>
+				</div>
+			<!-- 小光球   结束-->
 
 			</div>
 
@@ -220,175 +227,169 @@
 <script src="js/mui/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/global.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/My_Js/API.js" type="text/javascript" charset="utf-8"></script>
-
+<script type="text/javascript" charset="UTF-8">
 		
-		<script type="text/javascript" charset="UTF-8">
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 公共数据   开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			
+			var username = localStorage.登录帐号;		 //登录帐号
+			
+			var 冲正申请人 = localStorage.EmployeeCode; //冲正申请人
+			
+			var 用户编号 = localStorage.CustomerCode;  //用户编号
+			
+			var rows = "10";						//每次加载的行数、可修改、但数据太多容易导致缓慢卡屏等	
 		
-			/* 初始化公共数据 */
-			
-			var username = localStorage.登录帐号;
-			
-			var CustomerCode = localStorage.CustomerCode;
-			
-			var rows = "10";		//每次加载的行数	
+			var cnt = 1; 							//数据总条数,默认为1
 		
-			var ResultJson = null;	//获取的列表数据
+			var ResultJson = {};					//获取的列表数据
 			
-			var cnt = null; 	//数据总条数
-		
-			var Is_Frist = true; //是否第一次加载
+			var state = "";  						//默认业务状态，""为所有	
+						
+		    var type = get_urlpara(); 				//获取页面参数 ，同时作为业务类型的参数，默认是"",表示所有
 			
-		          
-		            
-		            
-		            
-		     $(function()
-		     { 
-		     		
-					/* 初始化数据 */
-		     		初始化数据(); 
-		     		
-		     })
-		     
-		     
-		     
-		     
-		     
-		     
-		     初始化数据 = function()
-		     {
-		     	/*清空数据列表*/
-		     	var page = 1;	
-				$("#page").val(page); //分页标识变为1				
-		     	ResultJson = null; //清空		
-		     	
-		     	/* 初始化dipicker的默认参数 */
-		     	var opt = {};
-		     	var now = new Date(); 	//当前时间
-		     	opt.value = now.format("yyyy-MM-dd"); 
-		     	opt.type = "date";
-		     	opt.beginYear =  now.getFullYear() - 1;		     	
-		     	opt.endYear =  now.getFullYear();		     
-		     	var str_json = JSON.stringify(opt);		     			     	
-		     	$("#dipicker").attr("data-options",str_json);	
-		     	
-		     
-		     	/* 渲染数据 -- 从今天到两个月前的数据  */			     	
-		     	var end = now.format("yyyy-MM-dd 23:59:59"); //今天 		     	
-		     	var start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");
-			    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":start,"截止时间":end,"门店编号":CustomerCode,"每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
-		     
-		     }
-		     
-		     
-		     
-		    /*
-			 * 下拉刷新具体业务实现 
-			 */
+			var bind_绑定事件_lock = false; 			//不知名的原因会发送两次请求，总之加上锁头就没事了		
+						
+					
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 公共数据   结束 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			
+			
+			
+			
+			
+		  //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件  开始 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		  $(function() 
+		  {	     			  		
+	     		//小光点
+				assistive_mTouch();	
+			     
+				
+				//选择时间事件
+				document.getElementById("select_time").addEventListener('tap',function()
+				{				
+			        var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options')) || '{}';					
+					var picker = new mui.DtPicker(optionsJson);
+					picker.show(function(rs) 
+					{		
+						mui.toast('选择结果: ' + rs.text);
+						
+						初始化数据();
+																		
+						optionsJson.value = rs.text;
+						$("#dipicker").attr("data-options",JSON.stringify(optionsJson));	
+						
+						
+						mui('#pullrefresh').pullRefresh().pullupLoading();  //使用这个之后，自动会加载[下拉刷新]绑定的函数
+					}) 
+				})					 
+		     }) 
+		  
+		  	//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 载入事件 结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		  		     
+		       
+		       
+		    //∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新 、下拉加载    开始  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+		   
+		    //下拉刷新具体业务实现
 			function pulldownRefresh() 
 			{
-				//模拟更新数据
 				setTimeout(function() 
-				{											
-					mui.toast("刷新成功");
+				{								
+					mui.toast("刷新成功");  //暂未实现下拉刷新，甚至可能关闭此功能,如果要实现， 可以获取最新的10条，然后删除前10条
+										 
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-		
 				}, 1500);
 			}        
 		    
 		 	 
-		     
-		    /**
-			 * 上拉加载具体业务实现
-			 */
+		     //上拉加载具体业务实现			 
 			function pullupRefresh() 
 			{
 				//加载数据
 				setTimeout(function() 
-				{
-						var count = cnt; //数据库总数
-				 
-						var num =  $(".mui-table-view-cell").size(); //列表总数
-		
-						if(num >= count)
-						{		
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= count); //参数为true代表没有更多数据了。
-							return false;
-						}
-						
-						if(Is_Frist)
-						{
-							Is_Frist = false; //解除限制，之后的都可以通过了
-							//首次加载数据的时候，不必再运行加载。
-							//计划是初始化10条，如果再次执行这个会变成20条过份冗长，
-							//但这个位置不能改变，因为要通过上面的判断来查看是否显示“没有更多数据了”。
-							//并且只能通过这个函数来使用才可以的
-							return false;  
-						}		
-					
-						ResultJson = null; //清空
-						var html = $("#temple").html();			
-						/* 获取dipicker的时间参数  */	
-						var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-						var end = JSON.parse(optionsJson).value + " 23:59:59";	
-						var pass = new Date(end);
-						var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-						var page = parseInt($("#page").val()) + 1;						
-						$("#page").val(page); //分页标识+1						
-					    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":start,"截止时间":end,"门店编号":CustomerCode,"每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
-						
-				}, 1500);
-			}  
-			
-			
-			
-			
-			//选择时间之后
-			document.getElementById("select_time").addEventListener('tap',function()
-			{
+				{							
+					var num =  $("#pullrefresh .mui-table-view-cell").size(); //当前列表总条数
+
+					if(num >= cnt)
+					{	
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
+						return false;
+					}
 				
-		        var optionsJson = document.getElementById("dipicker").getAttribute('data-options') || '{}';
-				var options = JSON.parse(optionsJson);
-				var picker = new mui.DtPicker(options);
-				picker.show(function(rs) 
-				{
-					mui.toast('选择结果: ' + rs.text);
-					var optionsJson = document.getElementById("dipicker").getAttribute('data-options');
-					var opt = JSON.parse(optionsJson);
-					opt.value = rs.text;
-					$("#dipicker").attr("data-options",JSON.stringify(opt));	
+					var end,start;
+				
+					/* 获取dipicker的时间参数  */	
+					var optionsJson = JSON.parse(document.getElementById("dipicker").getAttribute('data-options'));
+					if(optionsJson.value != null)
+					{ 
+						end = optionsJson.value + " 23:59:59"; //用户选择的时间
+						var pass = new Date(end);
+					    start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");		
+					}
+					else
+					{
+						 var now = new Date();
+						 end = now.format("yyyy-MM-dd 23:59:59"); //今天 	
+	     				 start = new Date(now.setMonth(now.getMonth() - 2)).format("yyyy-MM-dd");//两个月前
+					}
 					
-					/* 渲染数据 */
-					var end = rs.text + " 23:59:59";	 
-					var pass = new Date(end);
-					var start = new Date(pass.setMonth(pass.getMonth() - 2)).format("yyyy-MM-dd");						
-					var page = 1;	
-					$("#page").val(page); //分页标识变为1				
-			     	ResultJson = null; //清空		
-			     	$("#mui-table-view").html(""); //清空所有的li	
-			     	//alert(JSON.stringify({"开始时间":start,"截止时间":end,"订单状态":"2","业务类型":"*all","业务号码":"*all","每页显示条数":rows,"当前页码":"1"}));
-				    InvokeApi(GetApiUrl("Global_V0001_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":start,"截止时间":end,"门店编号":CustomerCode,"每页显示条数":rows,"当前页码":page} , "CYAPI_获取返回值")
+					
+					/* 获取和设置基本参数 */
+					var page = parseInt($("#page").val()) + 1; //获取当前分页标识+1
+					$("#page").val(page); //设置分页标识	
 					 
-				}) 
-			})
+					InvokeApi(GetApiUrl("Global_V0001_5un29"), "G003_OrderPay", "OrderPay", {"开始时间":start,"截止时间":end,"门店编号":用户编号,"每页显示条数":rows,"当前页码":"1"} , "CYAPI_获取返回值")					
+				
+				}, 500);
+			}       
+			
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 上拉刷新 、下拉加载    结束  ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			
+			
+			  
+			 初始化数据 = function()
+		     {	 
+		     	$("#mui-table-view").html(""); //清空所有的数据	
+		     	cnt = 1;//设置数据库总行数默认为1
+				$("#page").val(0); //分页标识变为0			
+		     	ResultJson = null; //清空返回数据		     	
+		     	
+     				
+		     	
+		     	/* 初始化dipicker时间控制器的默认参数 */
+		     	var opt = {};	//参数是一个json对象	
+		     	var now= new Date(); 					//时间对象
+		     	opt.value = now.format("yyyy-MM-dd"); 
+		     	opt.type = "date";
+		     	opt.beginYear =  now.getFullYear() - 1;		     	
+		     	opt.endYear =  now.getFullYear();		     
+		     	var str_json = JSON.stringify(opt);	  
+		     	$("#dipicker").attr("data-options",str_json);
+		     
+		     			     	
+		     	mui('#pullrefresh').pullRefresh().refresh(true);	 //恢复滚动
+		     	mui('#pullrefresh').pullRefresh().scrollTo(0,0,100); //滚动置顶
+		     }
+			
 			 
-			
-			
-			
-			
-			
 			 
-			//专门用来初始化的函数 
+			  
+			//订单列表
 			CYAPI_获取返回值 = function(str)
-			{
-//				alert(str);
+			{		
+				//alert(str);
 				
 				var jsonobj = Api_filter(str);			
 
 				ResultJson = jsonobj["dtOrderPay"] || {};
 				
-				cnt = ResultJson[0].cnt; //数据库总数,存放在公共变量中去
+				cnt = ResultJson[0].cnt || 0; //数据库总数,存放在公共变量中去
+				
+				if(cnt.toString() == "0")
+				{						
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);						
+					return false;
+				}
 				
 				//替换美化文本
 				$.each(ResultJson,function(i,o)
@@ -407,23 +408,22 @@
 				var num =  $("#pullrefresh .mui-table-view-cell").size();	//列表总数
 				
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(num >= cnt); //参数为true代表没有更多数据了。
-							      
 			}
 			
-			  
-			  
-			 
-			 
-			 
-			 
+			   
 			
-			
+			 
+			  
+			//∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏ 以下区域不必改动 ∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏
+			 
+			 
 			//初始化单页view
 			var viewApi = mui('#app').view
 			({
 				defaultPage: '#Main'
 			});
-								
+				
+				
 		
 			mui.init
 			({
@@ -437,11 +437,12 @@
 					up: 
 					{
 						contentrefresh: '正在加载...',
+						contentnomore:'没有更多数据了',
+						contentdown:"", //默认值'下拉加载更多'，这里设为空
 						callback: pullupRefresh
 					}
 				}
-			});
-		          
+			}); 
 			  
 			if (mui.os.plus) 
 			{
@@ -458,9 +459,6 @@
 						mui('#pullrefresh').pullRefresh().pullupLoading();
 					});
 			}
-			
-			
-			
 			
 			var view = viewApi.view;
 			(function($) {
@@ -488,7 +486,6 @@
 					//				console.log(e.detail.page.id + ' back');
 				});
 			})(mui);
-			
 			
 			
 			

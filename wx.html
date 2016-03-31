@@ -109,7 +109,7 @@
 
 
 	/* 测试区域 */
-	if(true)  
+	if(false)  
 	{  
 		var v = newGuid(); 
 		var CustomerCode = localStorage.CustomerCode; 
@@ -118,10 +118,7 @@
 		 
 	
 		
-		//InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "SetKuaiDiYuan", {"userCode":"7b759a354ea94683ba603019f842c5b5","companyID":"","kuaiDiYuanName":"李钊鸿0.25169260217808187","kuaiDiYuanMobile":"13713332652","method":"add"} , "CYAPI_微信冲正");
-		
-		InvokeApi(GetApiUrl("Global_V0001_5un29"), "G002_Order", "QueryOrderDetail", {"开始时间":"2016-01-30","截止时间":"2016-03-30 23:59:59","订单状态":"","业务类型":"002","业务号码":"","每页显示条数":"10","当前页码":"1"}, "CYAPI_微信冲正");
-			
+		InvokeApi(GetApiUrl("B003_V0001_5un29"), "ApiClass", "QueryShouPackage", {"userCode":"7b759a354ea94683ba603019f842c5b5","status":"-1","mobile":"","mailNo":"","beginTime":"2016-01-30","endTime":"2016-03-30 23:59:59","pageIndex":"1","pageSize":"10"} , "CYAPI_微信冲正");
 	
 		/*
 		  * 
